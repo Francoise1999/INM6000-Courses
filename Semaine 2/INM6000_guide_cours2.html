@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Guide d'étude · Cours 2 : Sources fiables & recherche documentaire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f2e8;--paper-2:#fffdf8;--ink:#1d1a16;--ink-soft:#46403a;--line:#ddd3c0;
+    --blue:#1f6feb;--blue-deep:#114a9e;--coral:#c8503a;--coral-soft:#fbe7e1;--amber:#c8861f;
+    --green:#2f7d4f;--green-soft:#e4f1e8;--blue-soft:#e3edfb;
+    --shadow:0 1px 2px rgba(29,26,22,.06),0 8px 28px rgba(29,26,22,.07);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .layout{display:grid;grid-template-columns:250px 1fr;gap:48px;align-items:start;}
+
+  header.hero{background:linear-gradient(160deg,#0e2a47 0%,#16487f 55%,#1f6feb 140%);color:#f7f2e8;padding:64px 0 56px;position:relative;overflow:hidden;}
+  header.hero::after{content:"« » ( )";position:absolute;right:24px;top:0;font-family:"Fraunces",serif;font-size:150px;color:rgba(255,255,255,.05);font-weight:600;pointer-events:none;}
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#9ec2ff;margin:0 0 14px;}
+  header.hero h1{font-family:"Fraunces";font-weight:600;font-size:50px;line-height:1.05;margin:0 0 18px;letter-spacing:-.5px;max-width:880px;}
+  header.hero p.sub{font-size:20px;max-width:760px;margin:0;color:#dfe7f5;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:6px 13px;border-radius:999px;}
+
+  nav.toc{position:sticky;top:24px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.5;}
+  nav.toc .toc-title{font-family:"Fraunces";font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--coral);margin:34px 0 14px;font-weight:600;}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid var(--line);transition:.18s;}
+  nav.toc a:hover{color:var(--blue);border-left-color:var(--blue);padding-left:16px;}
+  nav.toc .grp{margin-bottom:18px;}
+  nav.toc .grp > span{display:block;font-weight:600;color:var(--ink);text-transform:uppercase;letter-spacing:1.5px;font-size:11px;margin:0 0 6px;}
+
+  main{padding:46px 0 90px;}
+  section{margin-bottom:54px;scroll-margin-top:24px;}
+  .part-tag{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--blue-deep);font-weight:600;margin-bottom:6px;}
+  h2{font-family:"Fraunces";font-weight:600;font-size:34px;line-height:1.1;margin:0 0 8px;letter-spacing:-.4px;border-bottom:3px solid var(--ink);padding-bottom:14px;}
+  h3{font-family:"Fraunces";font-weight:600;font-size:24px;margin:38px 0 10px;color:var(--ink);}
+  h4{font-family:"Newsreader";font-weight:600;font-size:20px;margin:24px 0 6px;color:var(--blue-deep);}
+  p{margin:0 0 14px;}
+  strong{font-weight:600;color:var(--ink);}
+  .lead{font-size:20px;color:var(--ink-soft);font-style:italic;border-left:4px solid var(--coral);padding-left:18px;margin:0 0 26px;}
+  ul,ol{margin:0 0 16px;padding-left:24px;}
+  li{margin-bottom:8px;}
+
+  .term{font-family:"JetBrains Mono",monospace;background:var(--blue-soft);color:var(--blue-deep);font-size:.85em;padding:1px 7px;border-radius:5px;font-weight:500;}
+  .bool{font-family:"JetBrains Mono",monospace;background:#1d2b3a;color:#9ec2ff;font-size:.82em;padding:2px 8px;border-radius:5px;font-weight:600;letter-spacing:.5px;}
+
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:24px 26px;box-shadow:var(--shadow);margin:18px 0;}
+  .card.def{border-left:5px solid var(--blue);}
+  .lbl{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin:0 0 6px;}
+  .card.def .lbl{color:var(--blue);}
+  .card.risk{border-left:5px solid var(--coral);background:linear-gradient(0deg,var(--coral-soft),var(--paper-2) 60%);}
+  .card.risk .lbl{color:var(--coral);}
+  .card.good{border-left:5px solid var(--green);background:linear-gradient(0deg,var(--green-soft),var(--paper-2) 60%);}
+  .card.good .lbl{color:var(--green);}
+  .card.code{background:#14213d;color:#dfe7f5;border:none;font-family:"JetBrains Mono",monospace;font-size:14.5px;line-height:1.7;}
+  .card.code .lbl{color:#9ec2ff;}
+  .card.code b{color:#ffd479;font-weight:600;}
+
+  .q-callout{background:#fff7ea;border:1px dashed var(--amber);border-radius:12px;padding:18px 22px;margin:18px 0;}
+  .q-callout .qhead{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);font-weight:600;margin:0 0 8px;}
+  .q-callout em{color:var(--ink);font-weight:500;}
+
+  /* steps */
+  .steps{counter-reset:st;margin:18px 0;}
+  .step{position:relative;padding:14px 18px 14px 60px;background:var(--paper-2);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;box-shadow:var(--shadow);}
+  .step::before{counter-increment:st;content:counter(st);position:absolute;left:16px;top:14px;width:30px;height:30px;background:var(--blue);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"JetBrains Mono",monospace;font-weight:600;}
+  .step h4{margin:0 0 4px;color:var(--ink);}
+  .step p{margin:0;font-size:16px;color:var(--ink-soft);}
+  .phase{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--coral);font-weight:600;margin:20px 0 8px;}
+
+  table.cmp{width:100%;border-collapse:collapse;margin:16px 0;font-size:15px;background:var(--paper-2);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
+  table.cmp th{background:var(--ink);color:var(--paper);font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:11px 12px;text-align:left;vertical-align:top;}
+  table.cmp th:first-child{background:#3a342c;}
+  table.cmp td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.cmp td:first-child{font-weight:600;background:#f0e9da;font-size:14px;}
+  table.cmp tr:last-child td{border-bottom:none;}
+  .scroll-x{overflow-x:auto;}
+
+  .flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:16px 0;font-family:"JetBrains Mono",monospace;font-size:13px;}
+  .flow .node{background:var(--blue-soft);color:var(--blue-deep);border:1px solid var(--blue);padding:7px 12px;border-radius:8px;font-weight:500;}
+  .flow .arr{color:var(--coral);font-weight:700;}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0;}
+  .split .card{margin:0;}.split ul{margin-bottom:0;}
+
+  .exam-intro{background:var(--ink);color:var(--paper);border-radius:14px;padding:26px 28px;margin-bottom:24px;}
+  .exam-intro h2{color:var(--paper);border-bottom-color:var(--coral);}
+  details.qa{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:10px;margin:12px 0;box-shadow:var(--shadow);overflow:hidden;}
+  details.qa summary{cursor:pointer;padding:16px 20px;font-weight:600;font-size:18px;list-style:none;display:flex;gap:12px;align-items:flex-start;}
+  details.qa summary::-webkit-details-marker{display:none;}
+  details.qa summary::before{content:"?";font-family:"JetBrains Mono",monospace;background:var(--coral);color:#fff;width:24px;height:24px;min-width:24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px;}
+  details.qa[open] summary::before{content:"✓";background:var(--green);}
+  details.qa .ans{padding:0 20px 20px 56px;color:var(--ink-soft);}
+  details.qa .ans p:last-child{margin-bottom:0;}
+  .qnum{font-family:"JetBrains Mono",monospace;color:var(--blue);font-size:13px;}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--ink-soft);font-size:15px;}
+  .tip{font-size:15.5px;color:var(--ink-soft);font-style:italic;}
+  @media(max-width:900px){.layout{grid-template-columns:1fr;}nav.toc{position:static;}.split{grid-template-columns:1fr;}header.hero h1{font-size:36px;}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">INM6000 · Cours 2 · Conférencier invité : Félix Arseneau (bibliothécaire) · 12 mai 2026</p>
+    <h1>Bâtir sa crédibilité en citant des sources fiables</h1>
+    <p class="sub">Guide d'étude complet : évaluer l'information, distinguer les types de publication, chercher efficacement, citer sans plagier et maîtriser Zotero. Chaque concept expliqué, chaque terme défini, avec des questions d'examen à la fin.</p>
+    <div class="meta-row">
+      <span class="chip">Service des bibliothèques UQAM</span>
+      <span class="chip">Directement utile pour ton projet de session</span>
+      <span class="chip">95 diapositives</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+
+  <nav class="toc">
+    <p class="toc-title">Sommaire</p>
+    <div class="grp">
+      <span>Cadre</span>
+      <a href="#objectifs">Objectifs & plan</a>
+    </div>
+    <div class="grp">
+      <span>1 · Évaluer le web</span>
+      <a href="#fiable">Qu'est-ce qu'une source fiable ?</a>
+      <a href="#criteres">Les 3 critères</a>
+      <a href="#sources">Remonter aux sources</a>
+    </div>
+    <div class="grp">
+      <span>2 · Publications</span>
+      <a href="#types-docs">Types de documents</a>
+      <a href="#cycle">Cycle de l'information</a>
+      <a href="#revues">Types de revues</a>
+      <a href="#processus">Publication d'un article</a>
+    </div>
+    <div class="grp">
+      <span>3 · Trouver</span>
+      <a href="#ressources">Ressources crédibles</a>
+      <a href="#bd">Bases de données & Sofia</a>
+    </div>
+    <div class="grp">
+      <span>4 · Stratégie</span>
+      <a href="#strategie">Les 7 étapes</a>
+      <a href="#booleens">Opérateurs booléens</a>
+      <a href="#analyser">Analyser & optimiser</a>
+      <a href="#complementaires">Méthodes complémentaires</a>
+    </div>
+    <div class="grp">
+      <span>5 · Citer</span>
+      <a href="#pourquoi-citer">Pourquoi & quand citer</a>
+      <a href="#plagiat">Le plagiat & le Règlement 18</a>
+      <a href="#notoriete">Notoriété publique</a>
+      <a href="#comment-citer">Comment citer (UQAM-APA)</a>
+      <a href="#biblio">La bibliographie</a>
+    </div>
+    <div class="grp">
+      <span>6 · Outils</span>
+      <a href="#zotero">Zotero</a>
+      <a href="#scholar">Google Scholar</a>
+    </div>
+    <div class="grp">
+      <span>Réviser</span>
+      <a href="#examen" style="color:var(--coral);border-left-color:var(--coral);">★ Questions d'examen</a>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- OBJECTIFS -->
+  <section id="objectifs">
+    <p class="part-tag">Cadre du cours</p>
+    <h2>Objectifs et plan de match</h2>
+    <p class="lead">Idée centrale : pour bâtir sa crédibilité professionnelle, il faut savoir trouver de bonnes sources, les évaluer, et les citer correctement. Tout repose sur la confiance qu'on peut accorder à l'information.</p>
+    <p>Les quatre objectifs du cours :</p>
+    <ul>
+      <li><strong>Identifier les sources pertinentes et crédibles</strong> sur le web et dans les ressources de l'UQAM.</li>
+      <li><strong>Reconnaître les différents types de documents</strong> utilisés dans les travaux universitaires.</li>
+      <li><strong>Comprendre ce qu'est le plagiat</strong>, ses conséquences, et les moyens de l'éviter.</li>
+      <li><strong>Connaître les services et outils</strong> du Service des bibliothèques.</li>
+    </ul>
+    <p>Le déroulé : évaluer l'information sur le web → distinguer les types de publication → trouver des articles scientifiques → citer ses sources → démonstration de <strong>Zotero</strong> (logiciel de gestion bibliographique).</p>
+  </section>
+
+  <!-- ===== PARTIE 1 ===== -->
+  <section id="fiable">
+    <p class="part-tag">Partie 1 — Évaluer l'information sur le web</p>
+    <h2>Qu'est-ce qu'une source fiable ?</h2>
+    <p>Une <strong>source fiable</strong> est une source à laquelle on peut accorder confiance : son information est exacte, vérifiable, produite par quelqu'un de compétent et sans intention trompeuse. Sur le web, n'importe qui peut publier n'importe quoi — d'où la nécessité d'une méthode d'évaluation. La question à se poser n'est jamais « est-ce vrai ? » dans l'absolu, mais « <em>quelles raisons ai-je de faire confiance à ceci ?</em> ».</p>
+  </section>
+
+  <section id="criteres">
+    <h2>Les trois critères d'évaluation</h2>
+    <p>Pour juger une page web, on examine trois choses : <strong>le site qui héberge</strong>, <strong>la publication</strong> elle-même, et <strong>l'entité autrice</strong>.</p>
+
+    <h3>① Le site qui héberge</h3>
+    <div class="card def">
+      <p class="lbl">Questions à se poser</p>
+      <ul>
+        <li><strong>Quel type de site ?</strong> Journal, magazine, blogue… Indice fort : le <span class="term">nom de domaine</span>. <span class="term">.gov</span> = gouvernemental, <span class="term">.edu</span> = établissement d'enseignement (souvent fiables), <span class="term">.com</span> = commercial (à examiner de plus près), <span class="term">.org</span> = organisme.</li>
+        <li><strong>Quelle réputation ?</strong> Le site est-il reconnu, cité ailleurs ?</li>
+        <li><strong>Les liens internes et externes fonctionnent-ils ?</strong> Des liens morts trahissent un site mal entretenu.</li>
+        <li><strong>Quelles informations trouve-t-on ?</strong> Sections « à propos », coordonnées, services, politiques, équipe — leur présence est un gage de sérieux.</li>
+        <li><strong>Qui héberge le site, et depuis quand ?</strong> On peut le vérifier avec <span class="term">CIRA</span> (registre des .ca) ou <span class="term">Whois</span> (annuaire des noms de domaine).</li>
+      </ul>
+    </div>
+
+    <h3>② La publication</h3>
+    <div class="card def">
+      <p class="lbl">Questions à se poser</p>
+      <ul>
+        <li><strong>Y a-t-il une date ?</strong> L'information est-elle récente et à jour ?</li>
+        <li><strong>Est-elle corroborée</strong> par d'autres sources crédibles ? (recouper = vérifier ailleurs.)</li>
+        <li><strong>Quel vocabulaire ?</strong> Précis ou imprécis, expert ou populaire.</li>
+        <li><strong>Quels arguments ?</strong> Des <strong>faits</strong> (vérifiables) ou des <strong>opinions</strong> (points de vue) ?</li>
+        <li><strong>Présence d'erreurs ou de faussetés ?</strong></li>
+        <li><strong>Quelles sources sont citées ?</strong> Sont-elles de qualité, consultables, vérifiables ?</li>
+        <li><strong>Quel graphisme ?</strong> Sobre ou choquant (le sensationnalisme est un signal d'alerte).</li>
+        <li><strong>À qui s'adresse la publication ?</strong> Experts, public, novices.</li>
+        <li><strong>Quelle est la motivation/intention ?</strong> Informer, promouvoir, vendre ou convaincre. Une intention commerciale ou militante biaise le contenu.</li>
+      </ul>
+    </div>
+
+    <h3>③ L'entité autrice</h3>
+    <p>L'« entité autrice » est la personne, le groupe ou l'organisation qui signe le contenu.</p>
+    <div class="card def">
+      <p class="lbl">Questions à se poser</p>
+      <ul>
+        <li><strong>Est-elle clairement identifiée ?</strong> Un texte anonyme inspire peu confiance.</li>
+        <li><strong>Personne ou organisation ?</strong></li>
+        <li><strong>Quelle réputation dans le domaine ?</strong></li>
+        <li>Si c'est une personne : <strong>chercheuse, journaliste, professionnelle ?</strong></li>
+        <li><strong>Quelles qualifications</strong> pour parler du sujet (diplômes, expertise, expérience) ?</li>
+        <li><strong>A-t-elle déjà écrit sur le sujet ?</strong></li>
+      </ul>
+    </div>
+    <p class="tip">Outil maison : <strong>Infosphère</strong> (infosphere.uqam.ca), le tutoriel de méthodologie documentaire de l'UQAM. Il contient une fiche « Évaluer un site Web » dans le module 3 « Analyser l'information ».</p>
+  </section>
+
+  <section id="sources">
+    <h2>Remonter aux sources</h2>
+    <p>Principe essentiel : un article de presse (source <strong>secondaire</strong>) rapporte souvent une étude scientifique (source <strong>primaire</strong>). Il faut <strong>remonter à la source primaire</strong> pour vérifier ce qui est affirmé, plutôt que se fier au résumé journalistique.</p>
+    <div class="card">
+      <p>Exemple du cours : un article du <em>New York Times</em> (« Les fausses nouvelles se propagent plus vite et plus loin ») renvoie à une <strong>étude publiée dans la revue <em>Science</em></strong> par des chercheurs du MIT, qui ont analysé la diffusion de nouvelles vraies et fausses sur Twitter. Selon l'étude, le faux se diffuse plus loin, plus vite et plus largement que le vrai, et ce sont les humains — non les robots — qui en sont la principale cause. Le journaliste vulgarise ; la source primaire donne la méthode et les chiffres exacts. C'est elle qu'il faut citer dans un travail universitaire.</p>
+    </div>
+  </section>
+
+  <!-- ===== PARTIE 2 ===== -->
+  <section id="types-docs">
+    <p class="part-tag">Partie 2 — Les différents types de publication</p>
+    <h2>Quels types de documents utiliser en informatique ?</h2>
+    <p>Pour un travail de recherche en informatique, les documents pertinents sont :</p>
+    <div class="card">
+      <ul>
+        <li><strong>Livres</strong> et <strong>chapitres de livre</strong> — vision synthétique et approfondie.</li>
+        <li><strong>Articles de périodique</strong> (revue ou journal).</li>
+        <li><strong>Actes de conférence</strong> (« proceedings » : recueil des communications présentées à un colloque) — <em>très importants en informatique</em>, où la conférence est un mode de publication majeur.</li>
+        <li><strong>Rapports techniques.</strong></li>
+        <li><strong>Thèses et mémoires.</strong></li>
+        <li><strong>Articles d'encyclopédie</strong> — utiles pour le vocabulaire et les définitions de départ.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cycle">
+    <h2>Le cycle de l'information (recherche universitaire)</h2>
+    <p>L'information scientifique mûrit dans le temps : elle part d'une idée et devient de plus en plus formelle, validée et synthétique. C'est utile à savoir car <strong>la fraîcheur et le niveau de validation dépendent de l'étape</strong>.</p>
+    <div class="flow">
+      <span class="node">Idée</span><span class="arr">→</span>
+      <span class="node">Communications informelles</span><span class="arr">→</span>
+      <span class="node">Conférences non publiées</span><span class="arr">→</span>
+      <span class="node">Rapports de recherche</span><span class="arr">→</span>
+      <span class="node">Articles & conférences publiées</span><span class="arr">→</span>
+      <span class="node">Livres</span><span class="arr">→</span>
+      <span class="node">Ouvrages de référence</span>
+    </div>
+    <p>Au début (idée, communications informelles), l'information est <strong>fraîche mais peu validée</strong>. À la fin (livres, encyclopédies), elle est <strong>solide et synthétisée mais moins récente</strong>. En informatique, où tout évolue vite, les articles et actes de conférence sont souvent le meilleur compromis fraîcheur/fiabilité.</p>
+  </section>
+
+  <section id="revues">
+    <h2>Les différents types de revues (tableau clé)</h2>
+    <p class="lead">À bien connaître pour l'examen : toutes les « revues » ne se valent pas. La distinction décisive est la <strong>revue par les pairs</strong> (« approuvé par un comité d'experts »), qui caractérise les revues scientifiques.</p>
+    <div class="scroll-x">
+    <table class="cmp">
+      <tr>
+        <th></th>
+        <th>Scientifiques / savantes</th>
+        <th>Professionnelles / de métier</th>
+        <th>Intérêt général / vulgarisation</th>
+        <th>Populaires / magazines</th>
+      </tr>
+      <tr><td>Objectif</td><td>Diffuser le savoir</td><td>Informer les membres de la profession</td><td>Diffuser de l'information à un large public</td><td>Divertir</td></tr>
+      <tr><td>Public cible</td><td>Scientifiques, chercheurs, spécialistes</td><td>Praticiens de la profession</td><td>Public large intéressé par l'actualité</td><td>Monsieur/Madame Tout-le-monde</td></tr>
+      <tr><td>Éditeur</td><td>Université, instituts, associations ou éditeurs reconnus</td><td>Associations ou corporations professionnelles</td><td>Éditeur commercial</td><td>Éditeur commercial</td></tr>
+      <tr><td>Auteurs</td><td>Chercheurs affiliés à des institutions</td><td>Membres de la profession</td><td>Journalistes / pigistes</td><td>Journalistes / pigistes</td></tr>
+      <tr><td>Articles</td><td><strong>Approuvés par un comité d'experts</strong> ; assez longs (2500–10 000 mots)</td><td>Sélectionnés par le comité éditorial ; longueur variable</td><td>Conformes à la politique éditoriale ; courts (250–5000 mots)</td><td>Conformes à la politique éditoriale ; courts (250–3000 mots)</td></tr>
+    </table>
+    </div>
+    <p>Exemples cités : <em>International Journal of Machine Learning and Cybernetics</em> et <em>Communications of the ACM</em> (scientifiques) ; <em>Wired</em> (vulgarisation) ; <em>Reader's Digest</em> (populaire). Voir la fiche « Les revues en revue » sur Infosphère.</p>
+  </section>
+
+  <section id="processus">
+    <h2>De la recherche à la publication d'un article</h2>
+    <p>Comprendre ce circuit explique pourquoi un article publié est plus fiable, et ce que sont un « preprint » et un « postprint ».</p>
+    <div class="flow">
+      <span class="node">Auteur-chercheur</span><span class="arr">→</span>
+      <span class="node">Prépublication (preprint)</span><span class="arr">→</span>
+      <span class="node">Comité de rédaction</span><span class="arr">→</span>
+      <span class="node">Évaluateurs externes</span><span class="arr">→</span>
+      <span class="node">Décision</span><span class="arr">→</span>
+      <span class="node">Postpublication (postprint)</span><span class="arr">→</span>
+      <span class="node">Article publié (version éditeur)</span>
+    </div>
+    <div class="card def">
+      <p class="lbl">Vocabulaire</p>
+      <ul>
+        <li><span class="term">Prépublication / preprint</span> : version soumise par l'auteur <strong>avant</strong> l'évaluation par les pairs. Elle n'a encore été validée par personne.</li>
+        <li><strong>Révision par les pairs (peer review)</strong> : des <strong>évaluateurs externes</strong>, experts du domaine, lisent l'article et recommandent l'acceptation, la révision ou le rejet. C'est le filtre de qualité scientifique.</li>
+        <li><span class="term">Postpublication / postprint</span> : version <strong>après</strong> corrections issues de l'évaluation, mais avant la mise en page finale de l'éditeur.</li>
+        <li><strong>Version de l'éditeur</strong> : la version finale, paginée et mise en forme, publiée dans la revue.</li>
+      </ul>
+    </div>
+    <h4>Article publié vs prépublication</h4>
+    <p>Un <strong>article publié</strong> a passé la révision par les pairs et porte la mise en forme de l'éditeur (date de réception, d'acceptation, DOI, licence). Une <strong>prépublication</strong> contient peut-être les mêmes idées, mais <em>n'a pas encore été validée</em> — à utiliser avec prudence et à signaler comme telle.</p>
+  </section>
+
+  <!-- ===== PARTIE 3 ===== -->
+  <section id="ressources">
+    <p class="part-tag">Partie 3 — Trouver des ressources crédibles</p>
+    <h2>Où chercher (et pourquoi pas seulement Google)</h2>
+    <p>Le Service des bibliothèques donne accès, via l'authentification UQAM (code MS), à des ressources payantes et fiables qu'on ne trouve pas librement sur le web. Deux portails :</p>
+    <ul>
+      <li><strong>infosphere.uqam.ca</strong> — le tutoriel de méthode : Préparer la recherche → Rechercher l'information → Analyser l'information → Rédiger un travail.</li>
+      <li><strong>bibliotheques.uqam.ca</strong> — l'accès aux ressources : <strong>Sofia</strong>, bases de données, périodiques numériques, etc. Il existe un <strong>guide par discipline</strong> (Sciences → Informatique), où le bibliothécaire Félix Arseneau est ta personne-ressource.</li>
+    </ul>
+  </section>
+
+  <section id="bd">
+    <h2>Bases de données spécialisées et Sofia</h2>
+    <h3>Les bases de données : le meilleur outil pour les articles</h3>
+    <p>Selon Infosphère, pour repérer des <strong>articles de périodiques</strong>, l'outil le plus efficace (3 étoiles) est <strong>les bases de données spécialisées</strong>, devant Google Scholar et Sofia (2 étoiles chacun). En informatique, trois éditeurs/bases incontournables :</p>
+    <div class="card">
+      <ul>
+        <li><strong>ACM Digital Library</strong> (Association for Computing Machinery) : texte intégral de 50+ périodiques et 900 comptes-rendus de conférences ; affiche le nombre de citations reçues.</li>
+        <li><strong>IEEE Xplore</strong> : plein texte de 100+ « transactions », ~900 conférences IEEE et 2000+ normes.</li>
+        <li>(Un troisième grand éditeur est aussi mis en valeur dans le guide Informatique.)</li>
+      </ul>
+    </div>
+    <p class="tip">L'accès passe par l'UQAM : en haut de la page d'ACM ou d'IEEE, tu dois voir « Provided by / Access provided by Université du Québec à Montréal » — preuve que l'accès payant est ouvert pour toi.</p>
+
+    <h3>Sofia : l'outil de découverte global</h3>
+    <p><strong>Sofia</strong> est le moteur unique des bibliothèques (livres, articles, vidéos, thèses…). Deux fonctions à maîtriser :</p>
+    <h4>La recherche avancée</h4>
+    <p>On choisit un <strong>index de recherche</strong> (Mot-clé, Titre, Auteur…) et on relie les lignes par un <strong>opérateur</strong> (ET / OU). Exemple : chercher un <strong>titre</strong> contenant « circuit » <span class="bool">ET</span> un <strong>auteur</strong> « pederson » équivaut à la requête <span class="term">ti:(circuit) ET au:(pederson)</span>.</p>
+    <h4>Les filtres (tri et format)</h4>
+    <div class="card">
+      <ul>
+        <li><strong>Meilleure correspondance</strong> = les plus « pertinents ».</li>
+        <li><strong>Récence</strong> = poids supplémentaire sur les documents les plus récents (mais la pertinence compte encore).</li>
+        <li><strong>Date (plus récente en premier)</strong> = les plus récents <em>sans égard à la pertinence</em>.</li>
+        <li>Filtre <strong>Format → Article/Chapitre</strong> pour ne garder que les articles.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== PARTIE 4 ===== -->
+  <section id="strategie">
+    <p class="part-tag">Partie 4 — La stratégie de recherche</p>
+    <h2>Les 7 étapes d'une recherche efficace</h2>
+    <p class="lead">Chercher sans méthode, c'est passer du « Début » à la « Fin » par un gros gribouillis (l'image du cours !). La stratégie en 7 étapes transforme ce chaos en chemin. Elle se regroupe en trois temps : <strong>mots-clés</strong>, <strong>outil</strong>, <strong>analyse</strong>.</p>
+
+    <p class="phase">A · Les mots-clés</p>
+    <div class="steps">
+      <div class="step"><h4>Décomposer le sujet en concepts</h4><p>Exprime le sujet en une phrase, puis isole les concepts importants. Ex. « L'état des connaissances sur l'<strong>intelligence artificielle</strong> et la <strong>manipulation</strong> des <strong>marchés financiers</strong> » → 3 concepts.</p></div>
+      <div class="step"><h4>Enrichir son vocabulaire</h4><p>Trouve synonymes et traductions (l'anglais est indispensable en informatique). Outils : <strong>Vitrine linguistique</strong> de l'OQLF, <strong>Termium Plus</strong> (Gouvernement du Canada), dictionnaires et encyclopédies spécialisés. Ex. : marché financier → <em>financial market, capital market</em>.</p></div>
+      <div class="step"><h4>Comprendre les liens logiques entre les mots-clés</h4><p>On organise le vocabulaire dans un tableau et on relie le tout par des <strong>opérateurs booléens</strong> (voir ci-dessous). Règle d'or : <span class="bool">OU</span> entre les synonymes d'un même concept, <span class="bool">ET</span> entre des concepts différents.</p></div>
+    </div>
+
+    <p class="phase">B · L'outil</p>
+    <div class="steps">
+      <div class="step" style="counter-reset:st 3;"><h4>Identifier l'outil de recherche à consulter</h4><p>Selon le besoin : Sofia (vue d'ensemble), une base spécialisée (ACM, IEEE, ABI/Inform), Google Scholar. On compare les mêmes mots-clés dans différents champs et différents outils.</p></div>
+    </div>
+
+    <p class="phase">C · L'analyse</p>
+    <div class="steps">
+      <div class="step" style="counter-reset:st 4;"><h4>Formuler une première requête</h4></div>
+      <div class="step"><h4>Analyser les résultats</h4><p>Évaluer la pertinence et ajuster (voir la section « Analyser & optimiser »).</p></div>
+      <div class="step"><h4>Optimiser au besoin la requête</h4><p>La recherche est <strong>itérative</strong> : on affine, on recommence, on découvre du nouveau vocabulaire.</p></div>
+    </div>
+  </section>
+
+  <section id="booleens">
+    <h2>Les opérateurs booléens et la troncature</h2>
+    <p>Ce sont les briques de toute requête. Indispensables à l'examen et à ton projet.</p>
+    <div class="card def">
+      <p class="lbl">Les outils</p>
+      <ul>
+        <li><span class="bool">OR / OU</span> : élargit. Reliant des <strong>synonymes</strong>, il trouve l'un <em>ou</em> l'autre. <em>(IA OR « intelligence artificielle » OR AI)</em>.</li>
+        <li><span class="bool">AND / ET</span> : restreint. Reliant des <strong>concepts différents</strong>, il exige leur présence simultanée. <em>(IA AND « marché financier »)</em>.</li>
+        <li><span class="bool">NOT</span> : exclut un terme.</li>
+        <li><strong>Troncature</strong> <span class="term">*</span> : remplace une ou plusieurs lettres pour capter les variantes. <span class="term">ethic*</span> trouve <em>ethic, ethics, ethical, ethique…</em>.</li>
+        <li><strong>Guillemets</strong> <span class="term">"…"</span> : recherche l'expression <strong>exacte</strong>. <em>"high-frequency trading"</em>.</li>
+        <li>(Dans Google : <span class="term">filetype:pdf</span> pour ne trouver que des PDF, utile pour les rapports.)</li>
+      </ul>
+    </div>
+    <p>Exemple complet, tiré du cours, pour le sujet « éthique du trading haute fréquence » :</p>
+    <div class="card code">
+      <p class="lbl">Requête finale</p>
+      <p>(<b>"trading haute fréquence"</b> OR <b>"transactions haute fréquence"</b> OR <b>"transactions à haute fréquence"</b> OR <b>hft</b> OR <b>"high-frequency trading"</b>) AND (<b>ethique*</b> OR <b>ethic*</b>)</p>
+    </div>
+    <p>On reconnaît la structure : un bloc de synonymes reliés par <span class="bool">OR</span> (le concept « HFT »), un autre bloc de synonymes <span class="bool">OR</span> (le concept « éthique », avec troncature), les deux blocs reliés par <span class="bool">AND</span>.</p>
+  </section>
+
+  <section id="analyser">
+    <h2>Analyser les résultats : trop ou pas assez ?</h2>
+    <div class="split">
+      <div class="card risk">
+        <p class="lbl">Trop de résultats ?</p>
+        <ul>
+          <li>Utiliser un vocabulaire plus précis ou ajouter des concepts</li>
+          <li>Chercher les mots-clés uniquement dans le <strong>titre</strong></li>
+          <li>Limiter aux articles les plus <strong>récents</strong></li>
+          <li>Limiter à un <strong>type</strong> de document particulier</li>
+        </ul>
+      </div>
+      <div class="card good">
+        <p class="lbl">Pas assez de résultats ?</p>
+        <ul>
+          <li>Trouver de nouveaux <strong>synonymes</strong></li>
+          <li>Chercher dans <strong>tous les champs</strong> plutôt que titre/résumé</li>
+          <li>Vérifier que la <strong>base</strong> choisie convient au domaine</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="complementaires">
+    <h2>Méthodes complémentaires (recherche en chaîne)</h2>
+    <p>Une fois un article pertinent trouvé, il devient un point de départ pour en trouver d'autres :</p>
+    <div class="card">
+      <ul>
+        <li><strong>Citation en arrière :</strong> consulter la <strong>bibliographie</strong> de l'article (les sources qu'il a utilisées).</li>
+        <li><strong>Citation en avant :</strong> trouver les articles qui <strong>ont cité</strong> cet article (souvent plus récents).</li>
+        <li>Chercher les <strong>autres articles de l'auteur</strong> ou de ses co-auteurs.</li>
+        <li>Identifier les <strong>centres de recherche</strong> et <strong>associations</strong> auxquels les auteurs sont affiliés.</li>
+        <li>Repérer les <strong>revues</strong> où paraissent ces articles, pour les parcourir.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===== PARTIE 5 ===== -->
+  <section id="pourquoi-citer">
+    <p class="part-tag">Partie 5 — Citer ses sources & éviter le plagiat</p>
+    <h2>Pourquoi et quand citer</h2>
+    <h3>Pourquoi citer ?</h3>
+    <div class="card def">
+      <ul>
+        <li><strong>Reconnaître l'apport des autres</strong> à ton travail — ce qui permet d'éviter le <strong>plagiat</strong> (infraction académique grave) et de respecter le <strong>droit d'auteur canadien</strong>.</li>
+        <li><strong>Démontrer une rigueur scientifique.</strong></li>
+        <li><strong>Permettre au lecteur de retracer la source</strong> et de vérifier ce que tu affirmes.</li>
+      </ul>
+    </div>
+    <h3>Quand citer ?</h3>
+    <p>Dès que tu reprends d'autrui une <strong>idée, un concept, une méthode, une théorie, une statistique, une information, des images, tableaux ou données</strong> :</p>
+    <ul>
+      <li>que ce soit <strong>mot à mot</strong> ou <strong>reformulé dans tes propres mots</strong> (paraphrase) ;</li>
+      <li>peu importe que la source soit <strong>publiée ou non, imprimée ou sur internet</strong>.</li>
+    </ul>
+    <p class="tip">Le piège classique : croire qu'on n'a pas à citer parce qu'on a « reformulé ». Faux — paraphraser une idée d'autrui sans en indiquer la source <em>est</em> du plagiat.</p>
+  </section>
+
+  <section id="plagiat">
+    <h2>Le plagiat et le Règlement no 18</h2>
+    <h3>Les situations de plagiat</h3>
+    <div class="card risk">
+      <p class="lbl">Six cas de plagiat</p>
+      <ul>
+        <li>Copier <strong>textuellement</strong> un passage sans guillemets et/ou sans mentionner la source.</li>
+        <li>Insérer <strong>images, graphiques, données</strong> d'une source externe sans autorisation, ou sans en indiquer la provenance.</li>
+        <li><strong>Résumer l'idée d'un auteur dans ses propres mots</strong> en omettant la source.</li>
+        <li><strong>Traduire</strong> un texte (en tout ou partie) sans mentionner sa provenance.</li>
+        <li><strong>Réutiliser un travail produit dans un autre cours</strong> sans l'accord du professeur (« auto-plagiat »).</li>
+        <li>Utiliser le travail d'une autre personne et le présenter comme le sien — <strong>même si cette personne est d'accord</strong>.</li>
+      </ul>
+    </div>
+    <div class="card def">
+      <p class="lbl">Règlement no 18 — UQAM (r18.uqam.ca)</p>
+      <p><strong>Définition :</strong> utilisation totale ou partielle du texte ou de la production d'autrui en le faisant passer pour sien, ou sans indication de référence.</p>
+      <p><strong>Sanctions possibles :</strong> mise en probation (+ mention au dossier), échec du travail, échec au cours, suspension (+ mention au relevé de notes), <strong>expulsion définitive</strong> (+ mention au relevé). Conséquences sérieuses, donc.</p>
+    </div>
+    <p>Le cours rappelle avec bienveillance que plusieurs raisons poussent à tricher (manque de temps, difficulté, peur d'échouer…) et que des <strong>ressources existent</strong> : le bibliothécaire disciplinaire, le Service à la vie étudiante / Bureau de l'inclusion et de la réussite étudiante (BIRE), et Infosphère.</p>
+  </section>
+
+  <section id="notoriete">
+    <h2>L'exception : la notoriété publique</h2>
+    <div class="card def">
+      <p class="lbl">Quand la citation n'est pas nécessaire</p>
+      <p>Ce qui est <strong>connu d'une grande majorité de personnes et facilement repérable dans plusieurs sources</strong> n'a pas à être cité :</p>
+      <ul>
+        <li><strong>Faits et événements importants :</strong> la Terre tourne autour du Soleil, l'eau bout à 100 °C, les attentats du 11 septembre 2001, le krach boursier de 1929.</li>
+        <li><strong>Certaines expressions :</strong> la Grande Noirceur, les Trente Glorieuses.</li>
+      </ul>
+    </div>
+    <p><strong>Règle de sécurité :</strong> en cas de doute, on cite. Mieux vaut une référence de trop qu'une accusation de plagiat.</p>
+  </section>
+
+  <section id="comment-citer">
+    <h2>Comment citer ses sources (style UQAM-APA)</h2>
+    <div class="card def">
+      <p class="lbl">Point de départ</p>
+      <p>« Comment citer ? » → <strong>ça dépend du style bibliographique</strong>. Un <strong>style bibliographique</strong> est un ensemble de règles éditoriales qui précisent comment présenter l'information. À l'UQAM, on utilise le style <strong>UQAM-APA</strong>, qui repose sur la <strong>méthode auteur-date</strong>.</p>
+    </div>
+    <p>La même référence change de forme selon le style :</p>
+    <div class="scroll-x">
+    <table class="cmp">
+      <tr><th>Style</th><th>Forme de la référence (exemple : Orwell, <em>La ferme des animaux</em>)</th></tr>
+      <tr><td>UQAM-APA</td><td>Orwell, G. (1991). <em>La ferme des animaux</em>. Gallimard.</td></tr>
+      <tr><td>MLA 8<sup>e</sup></td><td>Orwell, G. <em>La Ferme Des Animaux</em>. Gallimard, 1991.</td></tr>
+      <tr><td>Vancouver</td><td>1. Orwell G. La ferme des animaux. Paris: Gallimard; 1991.</td></tr>
+      <tr><td>IEEE</td><td>[2] G. Orwell, <em>La ferme des animaux</em>. Paris: Gallimard, 1991.</td></tr>
+    </table>
+    </div>
+
+    <h3>Citer dans le texte (méthode auteur-date)</h3>
+    <h4>Citation courte (moins de 3 lignes) — mot à mot</h4>
+    <p>On met la citation <strong>entre guillemets français « … »</strong> à l'intérieur du texte, suivie de la référence abrégée entre parenthèses : <span class="term">(Nom, année, p. #)</span>. <strong>Toujours indiquer le numéro de page</strong> pour une citation mot à mot.</p>
+    <div class="card">
+      <p>…on questionne l'actualité des normes de transport, « le transport du pétrole extrait des sables bitumineux étant plus risqué que celui du pétrole conventionnel » (Puskas, 2013, p. 4).</p>
+    </div>
+
+    <h4>Citation longue (plus de 3 lignes) — mot à mot</h4>
+    <p>On place la citation <strong>en retrait, sans guillemets</strong>, dans un paragraphe séparé à interligne simple, et la source à la fin.</p>
+
+    <h4>Reformulation (paraphrase)</h4>
+    <p>On indique la source au début ou à la fin de la paraphrase ; le numéro de page n'est pas obligatoire (mais conseillé). Ex. : … (Daudelin, 2012).</p>
+
+    <h4>Particularités utiles</h4>
+    <div class="card def">
+      <ul>
+        <li><strong>Nommer l'auteur dans le texte :</strong> « …l'exemple de Raîche (2002, p. 17) ».</li>
+        <li><strong>Nommer l'auteur et l'année :</strong> « Derrida, en 1965, dans <em>De la grammatologie</em>… ».</li>
+        <li><strong>Deux auteurs :</strong> (Hulin et Drasgow, 1983).</li>
+        <li><strong>Trois auteurs et plus :</strong> (Damasio et al., 2005). « et al. » = <em>et alii</em>, « et les autres » en latin.</li>
+        <li><strong>Plusieurs sources à la fois :</strong> (Brown et Steer, 2005 ; Forman, 2003 ; Wenzel et al., 2009), séparées par des points-virgules.</li>
+      </ul>
+    </div>
+
+    <h4>Faut-il traduire une citation ?</h4>
+    <ul>
+      <li>Si la langue est <strong>comprise par les lecteurs</strong>, ce n'est pas nécessaire.</li>
+      <li>S'il <strong>existe une traduction</strong>, réfère-toi à cette traduction.</li>
+      <li><strong>Sinon</strong>, fais ta propre traduction, place-la entre guillemets et ajoute la mention <strong>[Notre traduction]</strong>. Ex. : « … l'une des adaptations les plus réussies… » [Notre traduction] (Juhnke, 1997, p. 170).</li>
+    </ul>
+  </section>
+
+  <section id="biblio">
+    <h2>Produire la bibliographie (UQAM-APA)</h2>
+    <div class="card def">
+      <p class="lbl">Les 4 éléments d'une référence</p>
+      <p>Toute référence comporte, dans l'ordre : <strong>1) l'auteur — 2) la date — 3) le titre — 4) la source</strong>. Les règles précises varient selon le <strong>type de document</strong> (livre, article, page web…) ; consulter le site <em>style-apa.uqam.ca</em> pour chaque variante.</p>
+    </div>
+    <p><strong>Mise en forme :</strong> chaque référence est <strong>alignée à gauche</strong>, avec un <strong>retrait d'un centimètre à partir de sa deuxième ligne</strong> (ce qu'on appelle un « retrait suspendu » / <em>hanging indent</em>). Elle n'est pas justifiée à droite. Les entrées sont classées par ordre alphabétique d'auteur.</p>
+  </section>
+
+  <!-- ===== PARTIE 6 ===== -->
+  <section id="zotero">
+    <p class="part-tag">Partie 6 — Les outils</p>
+    <h2>Zotero : le logiciel de gestion bibliographique</h2>
+    <p class="lead">Zotero est gratuit et libre. Il t'évite de mettre en forme tes références à la main et garantit la cohérence avec le style UQAM-APA. Pour ton projet de session (minimum 3 ressources), c'est un gain de temps énorme.</p>
+    <h3>À quoi sert un logiciel de gestion bibliographique ? (5 fonctions)</h3>
+    <div class="card def">
+      <ol>
+        <li><strong>Rassembler des références automatiquement</strong> depuis la plupart des bases de données, Sofia et Google Scholar (un clic sur l'icône du navigateur).</li>
+        <li><strong>Produire des bibliographies selon un style donné</strong> (UQAM-APA, par ex.).</li>
+        <li><strong>Gérer ses références par dossiers.</strong></li>
+        <li><strong>Repérer facilement</strong> une référence (recherche, marqueurs).</li>
+        <li><strong>Gérer les documents associés</strong> (PDF) et ses <strong>notes de lecture</strong>.</li>
+      </ol>
+    </div>
+    <h3>Installation, vérifications, paramétrage (l'essentiel)</h3>
+    <ul>
+      <li><strong>Installer</strong> depuis zotero.org/download (instructions UQAM sur le Carrefour Zotero).</li>
+      <li><strong>Vérifier :</strong> l'icône d'importation apparaît dans le navigateur (Firefox/Chrome/Safari) et un onglet « Zotero » apparaît dans Word.</li>
+      <li><strong>Synchronisation :</strong> créer un compte sur zotero.org, puis Édition &gt; Paramètres &gt; Synchronisation, pour retrouver sa bibliothèque sur plusieurs appareils.</li>
+      <li><strong>Ajouter le style UQAM :</strong> Édition &gt; Paramètres &gt; Citer &gt; « Obtenir d'autres styles… » &gt; chercher « UQAM » &gt; <em>Université du Québec à Montréal - APA (Français - Canada)</em>, puis le définir comme style par défaut (onglet Exportation).</li>
+      <li><strong>Lier à la bibliothèque UQAM :</strong> Paramètres &gt; Général &gt; Résolveur de liens → Université du Québec à Montréal (UQAM), pour accéder au texte intégral via les abonnements UQAM.</li>
+    </ul>
+  </section>
+
+  <section id="scholar">
+    <h2>Google Scholar (en le branchant à l'UQAM)</h2>
+    <p>Google Scholar (scholar.google.com) cherche dans la littérature scientifique. Son intérêt décuple quand on le <strong>relie aux abonnements de l'UQAM</strong> : des liens « <strong>Obtenir @ UQAM</strong> » apparaissent alors à côté des résultats et donnent l'accès direct aux PDF payants.</p>
+    <div class="card def">
+      <p class="lbl">Comment le brancher</p>
+      <p>Menu « hamburger » (☰) &gt; <strong>Paramètres</strong> &gt; <strong>Liens vers des bibliothèques</strong> &gt; chercher « uqam » &gt; cocher <em>Université du Québec à Montréal - Obtenir @ UQAM</em> &gt; <strong>Enregistrer</strong> (cookies activés).</p>
+    </div>
+    <p class="tip">Rappel des étoiles d'Infosphère : pour des articles, les <strong>bases spécialisées</strong> (ACM, IEEE) restent l'outil le plus efficace ; Google Scholar et Sofia sont de bons compléments.</p>
+  </section>
+
+  <!-- ===== EXAMEN ===== -->
+  <section id="examen">
+    <div class="exam-intro">
+      <h2>★ Questions d'examen probables</h2>
+      <p style="margin-bottom:0;color:#dfe7f5;">Clique sur chaque question pour révéler une réponse modèle. Même format que l'examen (choix multiple, courte réponse, développement). Essaie de répondre <em>avant</em> d'ouvrir.</p>
+    </div>
+
+    <details class="qa"><summary><span><span class="qnum">Q1 · Court</span> &nbsp; Quels sont les trois grands critères pour évaluer une information sur le web ?</span></summary>
+      <div class="ans"><p>(1) <strong>Le site qui héberge</strong> (type, nom de domaine, réputation, sections à propos/coordonnées, hébergeur via CIRA/Whois) ; (2) <strong>la publication</strong> (date, corroboration, vocabulaire, faits vs opinions, sources citées, intention) ; (3) <strong>l'entité autrice</strong> (identifiée ? réputation, qualifications, déjà publié sur le sujet ?).</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q2 · CM</span> &nbsp; Quel nom de domaine est généralement le plus fiable ?</span></summary>
+      <div class="ans"><p><span class="term">.gov</span> (gouvernemental) et <span class="term">.edu</span> (établissement d'enseignement) sont a priori plus fiables ; <span class="term">.com</span> (commercial) demande davantage de vérification car l'intention peut être de vendre ou promouvoir. Le domaine est un <em>indice</em>, pas une garantie.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q3 · Développement</span> &nbsp; Distingue une revue scientifique d'une revue de vulgarisation.</span></summary>
+      <div class="ans"><p>La <strong>revue scientifique/savante</strong> vise à diffuser le savoir, s'adresse aux chercheurs, est éditée par une université/association, écrite par des chercheurs, et ses articles sont <strong>approuvés par un comité d'experts (révision par les pairs)</strong> et longs (2500–10 000 mots). La revue de <strong>vulgarisation/intérêt général</strong> vise à informer un large public, est éditée commercialement, écrite par des journalistes/pigistes, et ses articles, conformes à une politique éditoriale, sont courts (250–5000 mots) et non révisés par les pairs. Le critère décisif est la <strong>révision par les pairs</strong>.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q4 · Court</span> &nbsp; Différence entre une prépublication (preprint) et un article publié ?</span></summary>
+      <div class="ans"><p>La <strong>prépublication (preprint)</strong> est la version soumise par l'auteur <strong>avant</strong> la révision par les pairs : non validée. L'<strong>article publié</strong> a passé l'évaluation par des <strong>évaluateurs externes</strong> et porte la mise en forme finale de l'éditeur (version de l'éditeur). Le <strong>postprint</strong> est la version corrigée après évaluation mais avant mise en page.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q5 · CM</span> &nbsp; Place dans l'ordre les étapes du cycle de l'information.</span></summary>
+      <div class="ans"><p>Idée → communications informelles → conférences non publiées → rapports de recherche → articles (et conférences publiées) → livres → ouvrages de référence. L'information part de fraîche/peu validée et devient solide/synthétisée mais moins récente.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q6 · Développement</span> &nbsp; Décris les 7 étapes d'une stratégie de recherche.</span></summary>
+      <div class="ans"><p><strong>Mots-clés :</strong> 1) décomposer le sujet en concepts ; 2) enrichir son vocabulaire (synonymes, traductions, Vitrine linguistique, Termium) ; 3) lier les mots-clés logiquement (booléens). <strong>Outil :</strong> 4) identifier le ou les outils. <strong>Analyse :</strong> 5) formuler une première requête ; 6) analyser les résultats ; 7) optimiser au besoin. C'est un processus itératif.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q7 · Court</span> &nbsp; À quoi servent OR et AND dans une requête ? Donne la règle.</span></summary>
+      <div class="ans"><p><span class="bool">OR</span> élargit et relie les <strong>synonymes d'un même concept</strong> (trouve l'un ou l'autre). <span class="bool">AND</span> restreint et relie des <strong>concepts différents</strong> (exige les deux). Règle : OR entre synonymes, AND entre concepts. La <strong>troncature *</strong> capte les variantes (ethic* → ethics, ethical), et les <strong>guillemets "…"</strong> imposent l'expression exacte.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q8 · Court</span> &nbsp; Tu obtiens trop de résultats. Que fais-tu ? Et pas assez ?</span></summary>
+      <div class="ans"><p><strong>Trop :</strong> vocabulaire plus précis / plus de concepts, chercher dans le titre seulement, limiter aux récents, limiter à un type de document. <strong>Pas assez :</strong> ajouter des synonymes, chercher dans tous les champs (pas juste titre/résumé), vérifier que la base convient au domaine.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q9 · Court</span> &nbsp; Pourquoi citer ses sources ? (trois raisons)</span></summary>
+      <div class="ans"><p>(1) <strong>Reconnaître l'apport des autres</strong> — éviter le plagiat et respecter le droit d'auteur ; (2) <strong>démontrer une rigueur scientifique</strong> ; (3) <strong>permettre au lecteur de retracer et vérifier</strong> l'information.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q10 · Développement</span> &nbsp; Quand doit-on citer, et quelles situations constituent du plagiat ?</span></summary>
+      <div class="ans"><p><strong>Quand :</strong> dès qu'on reprend une idée, méthode, statistique, image ou donnée d'autrui — qu'on cite mot à mot OU qu'on paraphrase, peu importe que la source soit publiée ou non. <strong>Plagiat :</strong> copier sans guillemets/source ; insérer images/données sans provenance ; résumer une idée sans citer ; traduire sans mentionner la source ; réutiliser un travail d'un autre cours sans accord (auto-plagiat) ; présenter le travail d'autrui comme le sien, même avec son accord. Encadré par le <strong>Règlement no 18</strong>, avec sanctions allant de l'échec à l'expulsion.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q11 · CM</span> &nbsp; Lequel n'a PAS besoin d'être cité ?</span></summary>
+      <div class="ans"><p>Ce qui relève de la <strong>notoriété publique</strong> : faits connus de tous et repérables dans plusieurs sources (la Terre tourne autour du Soleil, le 11 septembre 2001, le krach de 1929) ou expressions consacrées (la Grande Noirceur, les Trente Glorieuses). En cas de doute, <strong>on cite quand même</strong>.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q12 · Court</span> &nbsp; Qu'est-ce qu'un « style bibliographique » ? Lequel utilise l'UQAM ?</span></summary>
+      <div class="ans"><p>Un <strong>style bibliographique</strong> est un ensemble de règles éditoriales précisant comment présenter l'information (auteur, date, titre, source et leur mise en forme). L'UQAM utilise le style <strong>UQAM-APA</strong>, fondé sur la <strong>méthode auteur-date</strong>.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q13 · Court</span> &nbsp; Comment cite-t-on une citation courte mot à mot dans le texte ?</span></summary>
+      <div class="ans"><p>Entre <strong>guillemets français « … »</strong>, dans le texte, suivie de la référence abrégée <span class="term">(Nom, année, p. #)</span>. Le <strong>numéro de page est obligatoire</strong> pour une citation mot à mot. Pour une citation longue (+3 lignes) : en retrait, sans guillemets, interligne simple, source à la fin.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q14 · CM</span> &nbsp; Comment cite-t-on un ouvrage de trois auteurs ou plus dans le texte ?</span></summary>
+      <div class="ans"><p>(Premier auteur <strong>et al.</strong>, année), par ex. (Damasio et al., 2005). Pour deux auteurs : (Hulin et Drasgow, 1983). « et al. » signifie « et les autres ».</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q15 · Court</span> &nbsp; Cite cinq fonctions d'un logiciel comme Zotero.</span></summary>
+      <div class="ans"><p>(1) Rassembler automatiquement des références depuis les bases/Sofia/Google Scholar ; (2) produire des bibliographies selon un style (UQAM-APA) ; (3) gérer par dossiers ; (4) repérer facilement les références ; (5) gérer les PDF associés et les notes de lecture.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q16 · Court</span> &nbsp; Quel est l'outil le plus efficace pour repérer des articles scientifiques en informatique ?</span></summary>
+      <div class="ans"><p>Les <strong>bases de données spécialisées</strong> (3 étoiles sur Infosphère), comme <strong>ACM Digital Library</strong> et <strong>IEEE Xplore</strong>, devant Google Scholar et Sofia (2 étoiles). L'accès se fait via l'authentification UQAM.</p></div>
+    </details>
+
+    <details class="qa"><summary><span><span class="qnum">Q17 · Application</span> &nbsp; Construis une requête booléenne pour « impact environnemental de l'IA ».</span></summary>
+      <div class="ans"><p>Une réponse possible : <span class="term">("intelligence artificielle" OR IA OR "artificial intelligence" OR AI) AND (environnement* OR écolog* OR "empreinte carbone" OR environment* OR ecolog*)</span>. On reconnaît la structure : synonymes reliés par OR à l'intérieur de chaque concept, concepts reliés par AND, troncatures pour les variantes.</p></div>
+    </details>
+
+  </section>
+
+  <footer>
+    <p><strong>INM6000 — Cours 2 : Bâtir sa crédibilité en citant des sources fiables</strong> (conférencier invité : Félix Arseneau, bibliothécaire). Guide d'étude synthétique tiré des diapositives. Pour ton projet de session, garde en tête : sources fiables (bases UQAM), stratégie booléenne, et citation rigoureuse en style UQAM-APA avec Zotero.</p>
+  </footer>
+
+  </main>
+</div>
+</body>
+</html>

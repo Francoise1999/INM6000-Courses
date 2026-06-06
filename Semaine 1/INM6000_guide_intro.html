@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Guide d'étude · Cours 1 : Introduction</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f7f2e8;
+    --paper-2:#fffdf8;
+    --ink:#1d1a16;
+    --ink-soft:#46403a;
+    --line:#ddd3c0;
+    --blue:#1f6feb;
+    --blue-deep:#114a9e;
+    --coral:#c8503a;
+    --coral-soft:#fbe7e1;
+    --amber:#c8861f;
+    --green:#2f7d4f;
+    --green-soft:#e4f1e8;
+    --blue-soft:#e3edfb;
+    --shadow:0 1px 2px rgba(29,26,22,.06),0 8px 28px rgba(29,26,22,.07);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Newsreader",Georgia,serif;font-size:18px;line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  .layout{display:grid;grid-template-columns:250px 1fr;gap:48px;align-items:start;}
+
+  /* HEADER */
+  header.hero{
+    background:linear-gradient(160deg,#14213d 0%,#1d3461 55%,#1f6feb 140%);
+    color:#f7f2e8;padding:64px 0 56px;position:relative;overflow:hidden;
+  }
+  header.hero::after{
+    content:"01000110";position:absolute;right:-10px;top:10px;font-family:"JetBrains Mono",monospace;
+    font-size:120px;color:rgba(255,255,255,.04);letter-spacing:8px;font-weight:600;pointer-events:none;
+  }
+  .kicker{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:3px;text-transform:uppercase;color:#9ec2ff;margin:0 0 14px;}
+  header.hero h1{font-family:"Fraunces";font-weight:600;font-size:54px;line-height:1.05;margin:0 0 18px;letter-spacing:-.5px;}
+  header.hero p.sub{font-size:20px;max-width:720px;margin:0;color:#dfe7f5;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;}
+  .chip{font-family:"JetBrains Mono",monospace;font-size:12.5px;letter-spacing:.5px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.18);padding:6px 13px;border-radius:999px;}
+
+  /* NAV */
+  nav.toc{position:sticky;top:24px;font-family:"JetBrains Mono",monospace;font-size:12.5px;line-height:1.5;}
+  nav.toc .toc-title{font-family:"Fraunces";font-style:normal;font-size:15px;letter-spacing:1px;text-transform:uppercase;color:var(--coral);margin:34px 0 14px;font-weight:600;}
+  nav.toc a{display:block;color:var(--ink-soft);text-decoration:none;padding:5px 0 5px 12px;border-left:2px solid var(--line);transition:.18s;}
+  nav.toc a:hover{color:var(--blue);border-left-color:var(--blue);padding-left:16px;}
+  nav.toc .grp{margin-bottom:18px;}
+  nav.toc .grp > span{display:block;font-weight:600;color:var(--ink);text-transform:uppercase;letter-spacing:1.5px;font-size:11px;margin:0 0 6px;}
+
+  main{padding:46px 0 90px;}
+  section{margin-bottom:54px;scroll-margin-top:24px;}
+  .part-tag{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--blue-deep);font-weight:600;margin-bottom:6px;}
+  h2{font-family:"Fraunces";font-weight:600;font-size:36px;line-height:1.1;margin:0 0 8px;letter-spacing:-.4px;border-bottom:3px solid var(--ink);padding-bottom:14px;}
+  h3{font-family:"Fraunces";font-weight:600;font-size:25px;margin:38px 0 10px;color:var(--ink);}
+  h4{font-family:"Newsreader";font-weight:600;font-size:20px;margin:24px 0 6px;color:var(--blue-deep);}
+  p{margin:0 0 14px;}
+  strong{font-weight:600;color:var(--ink);}
+  .lead{font-size:20px;color:var(--ink-soft);font-style:italic;border-left:4px solid var(--coral);padding-left:18px;margin:0 0 26px;}
+  ul,ol{margin:0 0 16px;padding-left:24px;}
+  li{margin-bottom:8px;}
+
+  .term{font-family:"JetBrains Mono",monospace;background:var(--blue-soft);color:var(--blue-deep);font-size:.85em;padding:1px 7px;border-radius:5px;font-weight:500;}
+
+  .card{background:var(--paper-2);border:1px solid var(--line);border-radius:14px;padding:24px 26px;box-shadow:var(--shadow);margin:18px 0;}
+  .card.def{border-left:5px solid var(--blue);}
+  .card.def .lbl{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:600;margin:0 0 6px;}
+  .card.risk{border-left:5px solid var(--coral);background:linear-gradient(0deg,var(--coral-soft),var(--paper-2) 60%);}
+  .card.risk .lbl{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--coral);font-weight:600;margin:0 0 6px;}
+  .card.good{border-left:5px solid var(--green);background:linear-gradient(0deg,var(--green-soft),var(--paper-2) 60%);}
+  .card.good .lbl{font-family:"JetBrains Mono",monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--green);font-weight:600;margin:0 0 6px;}
+
+  .q-callout{background:#fff7ea;border:1px dashed var(--amber);border-radius:12px;padding:18px 22px;margin:18px 0;}
+  .q-callout .qhead{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--amber);font-weight:600;margin:0 0 8px;}
+  .q-callout em{color:var(--ink);font-weight:500;}
+
+  /* TIMELINE */
+  .tl{position:relative;margin:24px 0 10px;padding-left:34px;}
+  .tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:3px;background:linear-gradient(var(--blue),var(--coral));border-radius:3px;}
+  .tl-item{position:relative;margin-bottom:22px;}
+  .tl-item::before{content:"";position:absolute;left:-30px;top:7px;width:13px;height:13px;border-radius:50%;background:var(--paper);border:3px solid var(--blue);}
+  .tl-date{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:14px;color:var(--coral);letter-spacing:.5px;}
+  .tl-item h4{margin:2px 0 4px;color:var(--ink);font-size:19px;}
+  .tl-item p{margin:0;font-size:16.5px;color:var(--ink-soft);}
+
+  /* two-col good/bad */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0;}
+  .split .card{margin:0;}
+  .split ul{margin-bottom:0;}
+
+  table.eval{width:100%;border-collapse:collapse;margin:16px 0;font-size:16.5px;background:var(--paper-2);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);}
+  table.eval th{background:var(--ink);color:var(--paper);font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:1px;text-transform:uppercase;padding:11px 14px;text-align:left;}
+  table.eval td{padding:11px 14px;border-bottom:1px solid var(--line);}
+  table.eval tr:last-child td{border-bottom:none;}
+  table.eval td:last-child{font-family:"JetBrains Mono",monospace;font-weight:600;color:var(--blue-deep);}
+
+  /* EXAM */
+  .exam-intro{background:var(--ink);color:var(--paper);border-radius:14px;padding:26px 28px;margin-bottom:24px;}
+  .exam-intro h2{color:var(--paper);border-bottom-color:var(--coral);}
+  details.qa{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--coral);border-radius:10px;margin:12px 0;padding:0;box-shadow:var(--shadow);overflow:hidden;}
+  details.qa summary{cursor:pointer;padding:16px 20px;font-weight:600;font-size:18px;list-style:none;display:flex;gap:12px;align-items:flex-start;}
+  details.qa summary::-webkit-details-marker{display:none;}
+  details.qa summary::before{content:"?";font-family:"JetBrains Mono",monospace;background:var(--coral);color:#fff;width:24px;height:24px;min-width:24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px;}
+  details.qa[open] summary::before{content:"✓";background:var(--green);}
+  details.qa .ans{padding:0 20px 20px 56px;color:var(--ink-soft);}
+  details.qa .ans p:last-child{margin-bottom:0;}
+  .qnum{font-family:"JetBrains Mono",monospace;color:var(--blue);font-size:13px;}
+
+  footer{border-top:1px solid var(--line);padding:30px 0 60px;color:var(--ink-soft);font-size:15px;}
+  .tip{font-size:15.5px;color:var(--ink-soft);font-style:italic;}
+  @media(max-width:900px){
+    .layout{grid-template-columns:1fr;}
+    nav.toc{position:static;}
+    .split{grid-template-columns:1fr;}
+    header.hero h1{font-size:38px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="kicker">INM6000 · Informatique et société · UQAM · Été 2026</p>
+    <h1>Cours 1 — Introduction</h1>
+    <p class="sub">Guide d'étude complet : chaque concept expliqué simplement puis en profondeur, chaque terme défini, chaque question du cours répondue — et des questions d'examen à la fin.</p>
+    <div class="meta-row">
+      <span class="chip">Enseignante : Didem Demirag</span>
+      <span class="chip">1er cours : 5 mai 2026</span>
+      <span class="chip">69 diapositives</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap layout">
+
+  <!-- NAV -->
+  <nav class="toc">
+    <p class="toc-title">Sommaire</p>
+    <div class="grp">
+      <span>Partie 0 · Le cours</span>
+      <a href="#pourquoi">Pourquoi ce cours ?</a>
+      <a href="#objectifs">Objectifs</a>
+      <a href="#sujets">Sujets abordés</a>
+      <a href="#modalites">Modalités & évaluations</a>
+      <a href="#projet">Le projet de session</a>
+    </div>
+    <div class="grp">
+      <span>Partie 1 · Histoire</span>
+      <a href="#histoire-info">Histoire de l'informatique</a>
+      <a href="#besoins">Besoins de départ</a>
+      <a href="#moore">Loi de Moore</a>
+      <a href="#histoire-net">Histoire d'Internet</a>
+    </div>
+    <div class="grp">
+      <span>Partie 2 · Enjeux</span>
+      <a href="#critique">Regard critique</a>
+      <a href="#wikipedia">Accès à la connaissance</a>
+      <a href="#algos">Algorithmes & biais</a>
+      <a href="#perso-disc">Personnalisation/discrimination</a>
+      <a href="#neutralite">Neutralité du net</a>
+      <a href="#soi">Soi quantifié</a>
+      <a href="#ouverture">Ouverture des données</a>
+      <a href="#traces">Traces & vie privée</a>
+      <a href="#inference">Inférence & fuites</a>
+      <a href="#alexa">Automatisation</a>
+      <a href="#bilan">Bon vs moins bon</a>
+      <a href="#durable">Développement durable</a>
+      <a href="#ethique">Éthique & génomique</a>
+    </div>
+    <div class="grp">
+      <span>Réviser</span>
+      <a href="#examen" style="color:var(--coral);border-left-color:var(--coral);">★ Questions d'examen</a>
+    </div>
+  </nav>
+
+  <main>
+
+  <!-- ===================== PARTIE 0 ===================== -->
+  <section id="pourquoi">
+    <p class="part-tag">Partie 0 — Présentation du cours</p>
+    <h2>Pourquoi ce cours existe-t-il ?</h2>
+    <p class="lead">Idée centrale : l'informatique n'est plus une affaire de spécialistes. Elle touche toute la société, donc on doit apprendre à en juger les effets — pas seulement à programmer.</p>
+
+    <p>Le cours s'ouvre sur trois constats qui, ensemble, justifient son existence :</p>
+    <div class="card">
+      <p><strong>1. L'informatique est omniprésente.</strong> « Omniprésent » veut dire « présent partout en même temps ». Téléphone, banque, transport, santé, gouvernement, divertissement : il n'existe presque plus d'activité humaine sans couche logicielle. On ne « choisit » plus d'utiliser l'informatique, on baigne dedans.</p>
+      <p><strong>2. Elle a affecté tous les domaines de la société.</strong> Pas seulement la technique : la politique (vote, désinformation), le droit (propriété des données), la santé (génomique), le travail (télétravail, automatisation), la culture. Chaque domaine a été transformé, pour le meilleur et pour le pire.</p>
+      <p><strong>3. L'usage et la quantité de données générées sont en pleine croissance.</strong> Plus on utilise d'outils numériques, plus on produit de <span class="term">données</span> (traces, mesures, contenus). Cette croissance est exponentielle — d'où des enjeux nouveaux d'analyse, de stockage, de pouvoir et de surveillance.</p>
+    </div>
+    <p>Conclusion implicite : si une technologie a un tel pouvoir sur la société, il faut des gens capables de l'analyser <em>de façon critique</em>, pas seulement de la construire. C'est exactement le but du cours.</p>
+  </section>
+
+  <section id="objectifs">
+    <h2>Les quatre objectifs du cours</h2>
+    <p>Le plan affiche quatre objectifs. Voici ce que chacun signifie concrètement :</p>
+    <ol>
+      <li><strong>Comprendre l'impact de l'informatique sur la société et les enjeux en cause.</strong> Un « enjeu » est ce qu'on peut gagner ou perdre dans une situation. Ici : savoir reconnaître ce qui est en jeu (vie privée, équité, démocratie…) quand on déploie une technologie.</li>
+      <li><strong>Développer un esprit critique sur les technologies de l'information et les valeurs qu'elles véhiculent.</strong> « Véhiculer » = transporter, transmettre. Toute technologie porte des valeurs implicites (un algorithme de recommandation « valorise » l'engagement, par ex.). L'esprit critique consiste à ne pas prendre la technologie pour neutre.</li>
+      <li><strong>Former à l'éthique et à la déontologie pour les informaticiens.</strong> <span class="term">Éthique</span> = réflexion sur le bien et le mal de nos actions. <span class="term">Déontologie</span> = ensemble des règles et devoirs propres à une profession (le « code de conduite »). On apprend à se comporter de façon responsable dans le métier.</li>
+      <li><strong>Rédiger un rapport pour présenter des résultats de recherche.</strong> Compétence transversale : savoir enquêter sur un sujet et le restituer clairement par écrit. C'est l'objet du projet de session.</li>
+    </ol>
+  </section>
+
+  <section id="sujets">
+    <h2>Les sujets abordés pendant la session</h2>
+    <p>La carte des thèmes que le cours parcourra. Garde-la en tête : presque tout l'examen tourne autour de ces idées.</p>
+    <div class="split">
+      <div class="card">
+        <p class="lbl" style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:600;">Bloc 1</p>
+        <ul>
+          <li>Impact de l'informatique sur les individus, <strong>soi quantifié</strong></li>
+          <li>Protection de la <strong>vie privée</strong></li>
+          <li>Introduction à la <strong>sécurité informatique</strong></li>
+          <li>Équilibre entre sécurité et vie privée</li>
+          <li><strong>Éthique</strong> et informatique</li>
+          <li>Impact de l'<strong>intelligence artificielle</strong> sur la société</li>
+          <li>Transparence et responsabilité des <strong>algorithmes</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <p class="lbl" style="font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--blue);font-weight:600;">Bloc 2</p>
+        <ul>
+          <li>La <strong>ville intelligente</strong></li>
+          <li>Données massives, données ouvertes, <strong>anonymisation</strong></li>
+          <li>Éthique de l'informaticien(ne) professionnel(le)</li>
+          <li><strong>Développement durable</strong> et informatique</li>
+          <li>Mouvements collaboratifs (Wikipedia, <strong>crowdsensing</strong>)</li>
+          <li>Politique et informatique : éthique, <strong>vote électronique</strong></li>
+          <li>Droit, propriété intellectuelle, gouvernance des données</li>
+          <li>Santé : génomique et médecine personnalisée</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="modalites">
+    <h2>Modalités pédagogiques & évaluations</h2>
+
+    <h3>Comment se déroule le cours</h3>
+    <p>Cours le <strong>mardi de 18h00 à 21h00</strong>. Quatre responsabilités sont attendues des étudiant·es :</p>
+    <ul>
+      <li><strong>Assister à chaque séance.</strong> Ce n'est pas un détail : une partie du contenu n'est présentée qu'en classe (explications orales, tableau) et <em>n'apparaît pas sur Moodle</em>. Autrement dit, on ne peut pas réussir l'examen uniquement avec les diapos.</li>
+      <li><strong>Lire le matériel</strong>, y compris les <em>lectures supplémentaires</em> (qui sont aussi matière d'examen).</li>
+      <li><strong>Participer activement</strong> aux discussions de classe.</li>
+      <li><strong>Rédiger</strong> les résultats de recherche (le projet).</li>
+    </ul>
+
+    <h3>Les trois évaluations</h3>
+    <table class="eval">
+      <tr><th>Évaluation</th><th>Description</th><th>Poids</th></tr>
+      <tr><td>Cas d'éthique <em>(individuel)</em></td><td>~2000 mots ; étude de cas qui fait une évaluation éthique d'une technologie</td><td>25 %</td></tr>
+      <tr><td>Projet de session <em>(individuel ou équipe)</em></td><td>Plan du projet (5 %) + Rapport final (30 %)</td><td>35 %</td></tr>
+      <tr><td>Examen final</td><td>En personne, 3 h, fiche de notes autorisée ; porte sur toute la matière</td><td>40 %</td></tr>
+    </table>
+
+    <h4>Le cas d'éthique (25 %)</h4>
+    <p>Travail individuel d'environ 2000 mots. Tu choisis une technologie et tu en fais une <strong>évaluation éthique</strong> : quels principes sont en jeu, qui est avantagé/lésé, est-ce justifiable ? Les détails viendront dans les séances suivantes (notamment après le cours sur l'éthique).</p>
+
+    <h4>L'examen final (40 %)</h4>
+    <ul>
+      <li>Tu disposes d'une <strong>fiche de notes</strong> : une seule feuille A4, recto verso. (À préparer intelligemment : c'est ton aide-mémoire.)</li>
+      <li>Format mixte : <strong>questions à choix multiple</strong> + <strong>questions à courte réponse</strong> et à <strong>développement moyen</strong>.</li>
+      <li>Porte sur <strong>l'ensemble de la matière</strong> : diapos, présentations en classe ET lectures supplémentaires.</li>
+      <li><strong>En personne</strong>, pendant le cours, durée <strong>3 h 00</strong>.</li>
+    </ul>
+  </section>
+
+  <section id="projet">
+    <h2>Le plan du projet de session (à bien comprendre)</h2>
+    <p>Le « plan du projet » est un document court qui <strong>lance</strong> le travail : il sert à <em>concevoir</em> et <em>planifier</em> ta recherche avant de la rédiger. Concrètement il répond à deux questions : « que veux-tu dire ? » et « comment vas-tu l'aborder ? ».</p>
+    <div class="card def">
+      <p class="lbl">Contenu obligatoire du plan</p>
+      <ul>
+        <li><strong>Noms et codes permanents</strong> des membres (ou de l'étudiant·e).</li>
+        <li><strong>Titre.</strong></li>
+        <li><strong>Description du sujet</strong> + l'angle choisi pour l'aborder (1 paragraphe).</li>
+        <li><strong>Problématique</strong> : une à quelques questions concrètes auxquelles répondre dans le travail final (1 à 3 phrases).</li>
+        <li><strong>Concepts clés à définir</strong> plus tard (ex. : réseaux sociaux, hackers…) (1 à 3 phrases).</li>
+        <li><strong>Ébauche de méthodologie</strong> : comment tu vas répondre aux questions — comparaison de points de vue, description de cas, synthèse (1 à 2 paragraphes).</li>
+        <li><strong>Ressources</strong> que tu utiliseras (théories du cours, articles scientifiques, articles de journaux…). <strong>Minimum 3 ressources.</strong></li>
+      </ul>
+    </div>
+    <p><strong>Format & dates :</strong> texte de <strong>2 à 4 pages en PDF</strong>, à téléverser sur Moodle le <strong>7 juin 2026 à 23 h 59</strong>. Remise du rapport final en <strong>semaine 14</strong>.</p>
+    <p class="tip">Astuce : une bonne « problématique » est une vraie question, pas un thème. « La reconnaissance faciale » n'est pas une problématique ; « La reconnaissance faciale par la police menace-t-elle la présomption d'innocence ? » en est une.</p>
+  </section>
+
+  <!-- ===================== PARTIE 1 ===================== -->
+  <section id="histoire-info">
+    <p class="part-tag">Partie 1 — Une brève histoire de l'informatique</p>
+    <h2>De l'Antiquité à Turing : la ligne du temps</h2>
+    <p class="lead">Message à retenir : l'idée de « machine qui calcule ou qui imite le vivant » est très ancienne. L'informatique moderne est l'aboutissement d'une longue série d'inventions mécaniques, mathématiques, puis abstraites.</p>
+
+    <div class="tl">
+      <div class="tl-item"><div class="tl-date">~1000 av. J.-C. à ~100 av. J.-C.</div>
+        <h4>Premiers calculateurs et horloges</h4>
+        <p>La <strong>machine d'Anticythère</strong> est un <em>calculateur analogique antique</em> (à engrenages) servant à calculer des <strong>positions astronomiques</strong>. À la même époque, des <strong>horloges hydrauliques chinoises</strong> mesurent le temps grâce à l'eau. « Analogique » = qui représente les grandeurs par des quantités physiques continues (rotation d'engrenages), par opposition à « numérique ».</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">~1495 et ~1734</div>
+        <h4>Les automates</h4>
+        <p>Léonard de Vinci conçoit un <strong>robot (chevalier mécanique)</strong>, un automate humanoïde. Vaucanson crée le <strong>canard « digérateur »</strong> qui simule la digestion — symbole du <em>rationalisme scientifique des Lumières</em> (l'idée qu'on peut tout expliquer mécaniquement, même le vivant). Ces automates ne calculent pas mais montrent l'ambition d'imiter l'humain par la machine.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1410</div>
+        <h4>Horloge astronomique de Prague</h4>
+        <p>Horloge médiévale qui affiche les positions astronomiques. Mécanique de précision = ancêtre conceptuel des machines à calculer.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1623 — Schickard</div>
+        <h4>Première machine à calculer mécanique</h4>
+        <p>Wilhelm Schickard invente une machine capable de faire des <strong>additions et soustractions à 6 chiffres</strong>. C'est la première vraie « calculatrice » mécanique.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1672 — Leibniz</div>
+        <h4>Calcul des quatre opérations + le système binaire</h4>
+        <p>Gottfried Wilhelm Leibniz construit une machine qui <strong>additionne, soustrait, multiplie et divise</strong>. Surtout, il invente le <strong>système binaire</strong> (compter avec seulement 0 et 1) — le langage même de tous les ordinateurs actuels. C'est l'une des dates les plus importantes de la frise.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1821 / 1837 — Babbage &amp; ~1843 — Lovelace</div>
+        <h4>Machine à différences, machine analytique, premier programme</h4>
+        <p>Charles Babbage conçoit la <strong>machine à différences</strong> (1821) puis la <strong>machine analytique</strong> (1837), première machine programmable de l'histoire (jamais entièrement construite de son vivant). <strong>Ada Lovelace</strong> écrit pour cette machine ce qui est considéré comme le <strong>premier véritable programme informatique</strong> — d'où son statut de « première programmeuse ».</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1854 — Boole</div>
+        <h4>L'algèbre de Boole</h4>
+        <p>George Boole crée une <strong>algèbre de la logique</strong> où les variables valent vrai/faux (1/0). C'est un <em>algèbre complet</em> : il respecte l'associativité, la commutativité, la distributivité et l'idempotence. Plus tard, Shannon montre qu'on peut l'implémenter dans les <strong>commutateurs téléphoniques</strong> (circuits) — base de toute la logique numérique, <strong>encore utilisée aujourd'hui</strong> dans chaque processeur.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1890 — Hollerith</div>
+        <h4>La machine à cartes perforées (et la naissance d'IBM)</h4>
+        <p>Herman Hollerith (fondateur de ce qui deviendra <strong>IBM</strong>) gagne le concours du <em>census bureau</em> américain. Sa machine <strong>lit automatiquement des cartes perforées</strong> contenant les données démographiques. Résultat : traiter le recensement en <strong>quelques mois au lieu d'une dizaine d'années</strong>. C'est la première fois qu'une machine automatise le traitement de données à grande échelle.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1936 — Turing</div>
+        <h4>La machine de Turing</h4>
+        <p>Alan Turing définit un <strong>modèle abstrait</strong> d'appareil mécanique de calcul. Ce n'est pas une machine physique mais un <em>concept mathématique</em> : un ruban infini et une tête qui lit/écrit selon des règles. Il fonde l'<strong>informatique théorique</strong> en définissant ce qui est « calculable » par une machine. Modèle encore essentiel aujourd'hui.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="besoins">
+    <h2>Pourquoi l'informatique s'est-elle développée ?</h2>
+    <p>Trois besoins concrets ont poussé son essor :</p>
+    <div class="card">
+      <ul>
+        <li><strong>Calculs scientifiques</strong> de plus en plus complexes et précis (physique, astronomie, ingénierie).</li>
+        <li><strong>Traitement plus rapide des données</strong> comptables ou de recensement (cf. Hollerith).</li>
+        <li><strong>Applications militaires :</strong> décryptage de codes secrets, tables de tir des navires, traque des sous-marins, mise au point de la <strong>bombe atomique</strong>.</li>
+      </ul>
+    </div>
+    <p class="tip">À retenir : la guerre (et particulièrement la Seconde Guerre mondiale) a été un moteur énorme de l'informatique. Turing lui-même a travaillé au décryptage du code Enigma.</p>
+  </section>
+
+  <section id="moore">
+    <h2>L'accélération de la puissance de calcul : la loi de Moore</h2>
+    <div class="card def">
+      <p class="lbl">Définition</p>
+      <p><strong>Loi de Moore (version 1965) :</strong> le nombre de <span class="term">transistors</span> dans les microprocesseurs <strong>double environ tous les deux ans</strong>. Un transistor est le minuscule interrupteur électronique de base ; plus il y en a, plus la puce est puissante. Doubler tous les 2 ans = croissance <em>exponentielle</em> de la puissance.</p>
+    </div>
+    <p><strong>Point crucial souligné dans la diapo :</strong> c'est une loi <strong>« empirique »</strong>. « Empirique » signifie « fondée sur l'observation » et non sur une loi physique fondamentale. Ce n'est donc pas une garantie : elle <strong>« peut un jour ne plus être vérifiée »</strong> — et de fait, on s'en approche aujourd'hui à cause des limites physiques de la miniaturisation. Cette nuance est typiquement le genre de détail qu'un examen aime tester.</p>
+  </section>
+
+  <section id="histoire-net">
+    <h2>Une brève histoire d'Internet</h2>
+    <div class="tl">
+      <div class="tl-item"><div class="tl-date">Années 1970 — ARPANET</div>
+        <h4>Un projet militaire à l'origine</h4>
+        <p>Internet naît d'un projet de l'agence américaine <strong>DARPA</strong> (<em>Defense Advanced Research Projects Agency</em>). But : créer un réseau (<strong>ARPANET</strong>) reliant <strong>point-à-point</strong> différents sites pour échanger des données. Exigence clé : le réseau devait être <strong>résistant aux attaques militaires</strong> et <strong>sans centre névralgique</strong> — c.-à-d. décentralisé, pour qu'aucune frappe ne puisse le détruire d'un seul coup. Il fut ensuite <strong>séparé en deux</strong> : une partie militaire et une partie réservée aux universités.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1973 — TCP/IP</div>
+        <h4>Le langage commun du réseau</h4>
+        <p>Définition du protocole <strong>TCP/IP</strong>. <span class="term">TCP</span> = <em>Transmission Control Protocol</em> (découpe les données en paquets, vérifie leur bonne arrivée et les réassemble). <span class="term">IP</span> = <em>Internet Protocol</em> (donne une adresse à chaque machine et achemine les paquets). Ensemble, ils permettent à des réseaux différents de se parler — c'est le fondement technique d'Internet.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1983 — DNS</div>
+        <h4>Premier serveur de noms de domaine</h4>
+        <p>Le <span class="term">DNS</span> (<em>Domain Name System</em>) traduit un nom lisible (ex. <em>uqam.ca</em>) en adresse <span class="term">IP</span> numérique. C'est l'« annuaire » d'Internet : sans lui, il faudrait retenir des suites de chiffres pour visiter un site.</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">1990 — World Wide Web</div>
+        <h4>ARPANET devient le Web</h4>
+        <p>Le <strong>World Wide Web</strong> (la « toile ») apparaît : un système de pages reliées par des <em>liens hypertextes</em>, accessibles via un navigateur. Attention à la nuance : <strong>le Web n'est pas Internet</strong>. Internet est le réseau (l'infrastructure) ; le Web est un service qui circule dessus (comme le courriel en est un autre).</p>
+      </div>
+      <div class="tl-item"><div class="tl-date">Aujourd'hui — l'Internet des objets</div>
+        <h4>IoT</h4>
+        <p>L'<strong>Internet des objets</strong> (<span class="term">IoT</span>, <em>Internet of Things</em>) : des objets du quotidien (thermostats, montres, voitures, ampoules, frigos) connectés au réseau et capables d'échanger des données. C'est ce qui rend possibles la « maison intelligente », la « ville intelligente »… mais aussi une surveillance bien plus fine.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PARTIE 2 ===================== -->
+  <section id="critique">
+    <p class="part-tag">Partie 2 — Aperçu des enjeux du cours</p>
+    <h2>Adopter un regard critique</h2>
+    <p>Le cours annonce sa posture : on va parcourir <strong>différents points de vue</strong> sur l'informatique dans la société, <strong>au-delà du discours habituel pro-technologique</strong>. Autrement dit, on ne se contente pas de célébrer la technologie : on porte un <strong>regard critique sur ses impacts</strong>. « Critique » ne veut pas dire « négatif » — cela veut dire « qui examine les pour et les contre avec rigueur ».</p>
+  </section>
+
+  <section id="wikipedia">
+    <h2>Une promesse d'Internet : l'accès universel à la connaissance</h2>
+    <p>Une grande promesse du réseau : rendre le savoir <strong>accessible à tous</strong>. L'exemple emblématique est <strong>Wikipedia</strong>.</p>
+    <div class="card">
+      <p><strong>Wikipedia :</strong> encyclopédie universelle et multilingue créée en <strong>2001</strong> par <strong>Jimmy Wales</strong> et <strong>Larry Sanger</strong>. Sa particularité : l'accès est <strong>libre en lecture comme en écriture</strong>. Le contenu évolue « naturellement » au fil des ajouts, suppressions et modifications des contributeurs. C'est l'un des sites <strong>les plus visités au monde</strong>, souvent cité comme référence — <em>malgré</em> le fait que <strong>n'importe qui puisse en modifier le contenu</strong>.</p>
+    </div>
+    <p>L'enjeu sous-jacent : un savoir produit collectivement et ouvert est-il fiable ? Le cas Wikipedia montre qu'un dispositif ouvert peut s'autocorriger et devenir crédible — mais il introduit aussi des questions de qualité, de vandalisme et de biais des contributeurs.</p>
+    <p>On y rattache les <strong>mouvements collaboratifs</strong> et la <strong>collecte collaborative de données</strong> (ex. <strong>crowdsensing</strong> : utiliser les capteurs des téléphones de milliers de citoyens pour mesurer le bruit, la pollution, le trafic…). Même esprit : produire un bien commun grâce à la contribution de tous.</p>
+  </section>
+
+  <section id="algos">
+    <h2>Nos vies régies par des décisions algorithmiques</h2>
+    <p class="lead">De plus en plus de décisions qui nous concernent sont prises par des <strong>algorithmes</strong>, notamment de <strong>prédiction</strong> et de <strong>recommandation</strong>.</p>
+    <p>Un <span class="term">algorithme</span> est une suite finie d'instructions pour résoudre un problème. Un algorithme <em>de prédiction</em> estime un résultat futur (vas-tu rembourser ce prêt ?) ; un algorithme <em>de recommandation</em> suggère un contenu (quelle vidéo regarder ensuite). Ces systèmes orientent le crédit, l'assurance, l'embauche, l'information qu'on voit.</p>
+
+    <div class="q-callout">
+      <p class="qhead">Questions fondamentales posées dans le cours</p>
+      <p><em>Quels sont les biais de ces algorithmes ?</em></p>
+      <p><strong>Réponse :</strong> un <span class="term">biais</span> est une distorsion systématique. Les algorithmes apprennent sur des <strong>données historiques</strong> ; si ces données reflètent des inégalités passées (discrimination à l'embauche, etc.), l'algorithme les <strong>reproduit et amplifie</strong>, en se donnant un air d'objectivité mathématique.</p>
+      <p><em>Comment détecter, quantifier et prévenir la discrimination ?</em></p>
+      <p><strong>Réponse :</strong> c'est un défi technique <em>et</em> social. Détecter = auditer les décisions par groupe ; quantifier = mesurer des écarts (taux d'erreur par sous-population) ; prévenir = corriger les données, contraindre l'algorithme à l'équité, garder un humain dans la boucle.</p>
+      <p><em>Comment demander à l'algorithme de rendre des comptes sur le pourquoi de sa décision ?</em></p>
+      <p><strong>Réponse :</strong> c'est l'enjeu de la <strong>transparence</strong> et de la <strong>responsabilité (reddition de comptes) algorithmique</strong> : l'individu doit pouvoir comprendre, contester et obtenir une explication d'une décision automatisée qui le touche.</p>
+    </div>
+
+    <h3>Deux exemples concrets de tarification opaque</h3>
+    <h4>La flambée des prix sous Uber (« surge pricing »)</h4>
+    <p>Quand la demande explose (pluie, sortie de concert), l'algorithme d'Uber <strong>augmente automatiquement les prix</strong>. C'est présenté comme un simple jeu de l'offre et de la demande, mais cela soulève une question d'<strong>équité</strong> : le prix dépend d'un calcul opaque que l'utilisateur ne maîtrise pas.</p>
+    <h4>La variation des prix chez Staples</h4>
+    <p>Le site de vente en ligne de Staples affichait des <strong>prix différents selon les utilisateurs</strong>. L'<strong>explication plausible</strong> : le prix variait selon la <strong>localisation</strong> du client (sa proximité avec un magasin concurrent, par exemple). Deux personnes voyaient donc des prix différents pour le même produit, sans le savoir.</p>
+  </section>
+
+  <section id="perso-disc">
+    <h2>La frontière floue entre personnalisation et discrimination</h2>
+    <p>Personnaliser (adapter un service à chacun) peut facilement glisser vers <strong>discriminer</strong> (traiter défavorablement certaines personnes). Le cours détaille pourquoi :</p>
+    <div class="card risk">
+      <p class="lbl">Mécanisme du problème</p>
+      <ul>
+        <li>Des décisions sont prises automatiquement sur des individus à partir des <strong>prédictions d'un algorithme d'apprentissage</strong>, <em>plutôt que sur des faits avérés</em>.</li>
+        <li>Exemples de discrimination possible : <strong>crédit limité, taux d'assurance élevé, refus d'emploi ou d'admission scolaire…</strong></li>
+        <li>Une <strong>erreur de prédiction</strong> peut conduire à une <strong>discrimination injuste</strong> — surtout s'il n'existe <strong>aucun recours</strong> pour comprendre le raisonnement (d'où l'importance de la transparence et de la responsabilité algorithmiques).</li>
+        <li>Effet pervers : <strong>refuser de fournir ses données</strong> peut conduire à la <strong>stigmatisation</strong> si la majorité, elle, coopère (« qu'a-t-il à cacher ? »).</li>
+      </ul>
+    </div>
+
+    <h3>Weapons of Math Destruction</h3>
+    <div class="card">
+      <p>Livre de <strong>Cathy O'Neil</strong>, mathématicienne, sur les <strong>impacts sociétaux des algorithmes</strong> et de l'<strong>utilisation des données massives</strong> dans l'assurance, la publicité, l'éducation… Le titre joue sur « <em>weapons of mass destruction</em> » (armes de destruction massive) : certains modèles mathématiques opaques, à grande échelle et incontestables, deviennent de véritables « armes » qui aggravent les inégalités.</p>
+    </div>
+  </section>
+
+  <section id="neutralite">
+    <h2>La neutralité du net</h2>
+    <div class="card def">
+      <p class="lbl">Définition</p>
+      <p>Principe fondamental d'Internet qui garantit un <strong>traitement identique à tous les fournisseurs de contenu</strong>, quels qu'ils soient. C'est un <strong>principe de non-discrimination</strong> : tout le monde doit avoir un accès égal au réseau, et aucun contenu ne doit bénéficier d'un traitement préférentiel ni s'afficher plus vite que les autres.</p>
+    </div>
+    <p>Conséquence : le <strong>fournisseur d'accès Internet (FAI)</strong> ne doit <strong>pas pouvoir influer</strong> sur ce que fait l'internaute, ni sur la <strong>vitesse</strong> à laquelle ses <span class="term">paquets</span> circulent. Sans neutralité, un FAI pourrait ralentir un concurrent ou faire payer un « péage » pour accéder plus vite à certains services — ce qui menacerait la concurrence et la liberté d'expression en ligne.</p>
+  </section>
+
+  <section id="soi">
+    <h2>Le soi quantifié (Quantified Self)</h2>
+    <div class="card def">
+      <p class="lbl">Définition</p>
+      <p>Ensemble de méthodes visant à <strong>collecter et utiliser des variables sur son propre corps ou ses propres comportements</strong> (pas, sommeil, fréquence cardiaque, humeur…). <strong>Objectif principal :</strong> apprendre de son propre corps pour le <strong>comprendre et s'améliorer</strong>.</p>
+    </div>
+    <p>Le cours pose deux observations nuancées :</p>
+    <ul>
+      <li><em>Comment et pourquoi</em> les gens enregistrent-ils et analysent-ils des données sur eux-mêmes ? (motivation : santé, performance, curiosité.)</li>
+      <li>Ces données peuvent être <strong>utiles, puissantes et agréables</strong>, mais aussi <strong>fastidieuses, décevantes ou erronées</strong>. L'auto-mesure n'est donc pas magique : un capteur imprécis ou mal interprété peut induire en erreur.</li>
+    </ul>
+    <div class="card risk">
+      <p class="lbl">Point clé à retenir (schéma de traitement des données)</p>
+      <p>Dans le schéma classique du traitement des données, <strong>la plupart du temps les données sont envoyées à distance plutôt que traitées localement</strong>. Traduction : tes mesures de santé ne restent pas dans ta montre — elles partent sur les serveurs d'une entreprise. C'est là que naissent les risques pour la vie privée.</p>
+    </div>
+  </section>
+
+  <section id="ouverture">
+    <h2>L'ouverture des données (Open Data)</h2>
+    <div class="card def">
+      <p class="lbl">Définition / philosophie</p>
+      <p>Certaines données <strong>devraient être publiquement disponibles</strong> et pouvoir être <strong>réutilisées et recopiées sans aucune restriction</strong>. Exemples : emplacement des arrêts de bus, dénivellation des trottoirs… C'est <strong>proche en esprit des autres mouvements « libres »</strong> (logiciel libre, accès libre à la connaissance).</p>
+    </div>
+    <p><strong>Qui « libère » les données ?</strong> Institutions gouvernementales, collectivités territoriales, fondations à but non lucratif, scientifiques, citoyens.</p>
+    <div class="q-callout">
+      <p class="qhead">Question : pourquoi ouvrir des données ?</p>
+      <ul>
+        <li>Plus de <strong>transparence</strong> vis-à-vis des citoyens.</li>
+        <li><strong>Accès universel à la connaissance.</strong></li>
+        <li>Ce qui est <strong>financé par l'argent public</strong> donne au public le <strong>droit de connaître</strong>.</li>
+        <li>Permet le <strong>développement de nouveaux services</strong> et modèles d'affaires.</li>
+        <li>Favorise une <strong>concurrence plus équitable</strong> → amélioration ou baisse du prix de certains services.</li>
+      </ul>
+    </div>
+    <p class="tip">Ne pas confondre : <strong>données ouvertes</strong> = volontairement publiques et réutilisables. <strong>Données massives (big data)</strong> = très gros volumes de données, pas forcément ouvertes. <strong>Anonymisation</strong> = retirer les identifiants pour qu'une donnée ne soit plus reliable à une personne (mais on verra que ré-identifier est souvent possible).</p>
+    <p>Citation marquante du cours, pour mémoriser l'ampleur du phénomène : <strong>« Les données ne dorment jamais »</strong> — chaque minute, une quantité gigantesque de données est produite en ligne, en continu.</p>
+  </section>
+
+  <section id="traces">
+    <h2>Traces numériques & protection de la vie privée</h2>
+    <h3>Les traces numériques</h3>
+    <p>Dans la société de l'information, chaque personne <strong>laisse constamment des traces numériques</strong> qui peuvent être <strong>reliées à son identité</strong>. Le cours donne des exemples de ce que chaque trace révèle :</p>
+    <div class="card">
+      <ul>
+        <li><strong>Adresse IP</strong> → localisation, identifiant, contenu consulté.</li>
+        <li><strong>Historique des requêtes</strong> → tes centres d'intérêt.</li>
+        <li><strong>Connaissance du réseau social</strong> → inférences sur les opinions politiques, la religion, les loisirs…</li>
+        <li><strong>Consommation électrique</strong> → tes activités à la maison (cf. compteur intelligent ci-dessous).</li>
+      </ul>
+    </div>
+
+    <h3>La protection de la vie privée</h3>
+    <div class="card def">
+      <p class="lbl">Objectif</p>
+      <p>Permettre à un individu de <strong>limiter les traces numériques</strong> de ses actions et d'avoir un <strong>meilleur contrôle sur ses données personnelles</strong>.</p>
+    </div>
+    <p>Le respect de la vie privée est un <strong>droit fondamental</strong>, ancré dans :</p>
+    <ul>
+      <li>La <strong>Déclaration universelle des droits de l'homme</strong> des Nations Unies (<strong>article 12, 1948</strong>).</li>
+      <li>Au Québec, la <strong>Loi sur la protection des données personnelles dans le secteur privé</strong>.</li>
+    </ul>
+    <div class="card risk">
+      <p class="lbl">Le risque</p>
+      <p>Collecte et utilisation des traces ou des données personnelles à des <strong>fins frauduleuses</strong>. Exemples : <strong>pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale</strong>.</p>
+    </div>
+    <h4>Le fournisseur de services comme adversaire potentiel</h4>
+    <p>Idée importante : celui qui te rend service (ta télé intelligente, ton application) est <strong>aussi celui qui te surveille</strong>. Une smart TV peut espionner tes habitudes de visionnage et revendre ces données. Le « service » et la « surveillance » sont les deux faces d'un même appareil.</p>
+  </section>
+
+  <section id="inference">
+    <h2>Le potentiel d'inférence & les fuites de données</h2>
+    <h3>Le potentiel d'inférence</h3>
+    <div class="card">
+      <p>Une fois qu'une donnée est <strong>collectée</strong>, elle risque d'être <strong>réutilisée à d'autres fins sans le consentement</strong> de la personne. Surtout, les <strong>inférences</strong> permises par les <strong>données massives</strong> sont aujourd'hui <strong>bien plus fines et précises</strong> qu'avant. « Inférer » = déduire une information non donnée à partir d'autres données.</p>
+    </div>
+    <p><strong>Exemple célèbre (Target) :</strong> à partir des seuls achats d'une cliente, l'algorithme de l'enseigne Target a <strong>déduit qu'une adolescente était enceinte avant même que son père ne le sache</strong>. Aucune donnée « grossesse » n'avait été fournie : elle a été <em>inférée</em>.</p>
+    <div class="q-callout">
+      <p class="qhead">Question éthique du cours</p>
+      <p><em>Quelles inférences sont acceptables pour la société et lesquelles ne le sont pas ?</em> — Il n'y a pas de réponse unique : c'est précisément le type de débat que le cours veut t'apprendre à mener (peser le bénéfice du service contre l'atteinte à l'autonomie et à la vie privée).</p>
+    </div>
+
+    <h3>Les fuites de données</h3>
+    <div class="card risk">
+      <p class="lbl">Chiffres à retenir</p>
+      <ul>
+        <li><strong>349 221 481</strong> personnes affectées par des brèches de données en <strong>2023</strong>.</li>
+        <li>Conséquences : <strong>fraude, vol d'identité, hameçonnage (phishing)</strong>, accès à des <strong>données sensibles</strong>.</li>
+        <li>Coût total des dommages de la cybercriminalité estimé à <strong>10,5 billions (10 500 milliards) de dollars d'ici 2025</strong>.</li>
+      </ul>
+    </div>
+    <p>(Le cours cite aussi une fuite ayant touché près de <strong>295 000 personnes</strong> au Québec — illustration locale du phénomène.)</p>
+  </section>
+
+  <section id="alexa">
+    <h2>Compteur intelligent & automatisation des tâches</h2>
+    <h3>Le compteur intelligent : un exemple d'inférence troublante</h3>
+    <p>Les compagnies d'électricité <strong>pourraient être tentées de vendre les données</strong> de leurs compteurs intelligents. Pourquoi est-ce sensible ? Parce que ces appareils peuvent <strong>déduire des comportements intimes</strong> : un compteur qui détecte qu'un client <strong>allume souvent la lumière au milieu de la nuit</strong> en infère qu'il <strong>souffre d'insomnie</strong>… ce qui pourrait intéresser des <strong>fabricants de somnifères</strong>. La donnée banale (consommation électrique) devient une donnée de santé.</p>
+
+    <h3>L'automatisation des tâches pénibles… et son revers</h3>
+    <p>Le cours imagine un retour à la maison entièrement automatisé : « Alexa, règle le chauffage », « ouvre la porte », « allume les lumières », « mets du rock », « commande des pizzas ». C'est le <strong>confort</strong> promis par les assistants vocaux.</p>
+    <div class="card risk">
+      <p class="lbl">« Et si… » — le scénario dystopique</p>
+      <p>Mais que se passe-t-il quand ces systèmes sont <strong>interconnectés</strong> et que tes données circulent entre eux ?</p>
+      <ul>
+        <li>« Alexa, commande des pizzas » → ton bracelet Fitbit répond « <strong>pas de gym, pas de pizza</strong> ».</li>
+        <li>« Alexa, commande une pizza » → ton assureur Manuvie réagit : « pizza commandée, <strong>prime d'assurance santé +1 %</strong> ».</li>
+        <li>« Alexa, mets une comédie » → Moodle te met plutôt un documentaire sur Snowden pour le cours INM6000.</li>
+      </ul>
+      <p>Message : le même appareil qui te <strong>sert</strong> peut, en partageant tes données, te <strong>contrôler, te juger et te pénaliser</strong>. Le confort a un prix : la perte d'autonomie.</p>
+    </div>
+  </section>
+
+  <section id="bilan">
+    <h2>Le bilan : du bon et du moins bon</h2>
+    <p>Le cours résume la tension de fond avec deux colonnes. La question finale — <strong>« Comment analyser tout ça ? »</strong> — est précisément ce que la session entière cherche à outiller.</p>
+    <div class="split">
+      <div class="card good">
+        <p class="lbl">😎 Du bon</p>
+        <ul>
+          <li>Automatisation des tâches pénibles</li>
+          <li>Médecine personnalisée</li>
+          <li>Accès rapide à l'information</li>
+          <li>Communication</li>
+          <li>Véhicules autonomes…</li>
+        </ul>
+      </div>
+      <div class="card risk">
+        <p class="lbl">🧐 Du moins bon</p>
+        <ul>
+          <li>Société de la surveillance</li>
+          <li>Fuites de données</li>
+          <li>Apprentissage machine sur données biaisées</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="durable">
+    <h2>Développement durable et informatique</h2>
+    <p>Le numérique a un <strong>coût écologique</strong> bien réel — souvent invisible. Le cours pointe :</p>
+    <ul>
+      <li>Les <strong>impacts écologiques des calculs</strong> et la <strong>consommation d'énergie</strong> de différentes technologies.</li>
+      <li>Le <strong>nuage (cloud)</strong> : <em>(très) énergivore</em> — les centres de données consomment énormément d'électricité et d'eau de refroidissement.</li>
+      <li>La <strong>chaîne de blocs (blockchain)</strong> : sa validation par calcul (preuve de travail) est extrêmement gourmande en énergie.</li>
+      <li>L'<strong>intelligence artificielle</strong> : l'entraînement des grands modèles consomme beaucoup d'énergie.</li>
+      <li>L'<strong>obsolescence programmée</strong> : concevoir des appareils pour qu'ils deviennent vite obsolètes ou irréparables, ce qui multiplie les déchets électroniques.</li>
+    </ul>
+    <p class="tip">« Durabilité numérique » : l'idée qu'on devrait concevoir des technologies réparables, durables et sobres en énergie.</p>
+  </section>
+
+  <section id="ethique">
+    <h2>Éthique et données génomiques</h2>
+    <h3>Les spécificités de l'éthique informatique</h3>
+    <p>L'éthique s'intéresse aux <strong>effets des décisions prises autour de la technologie</strong> : la <strong>gouvernance</strong> (qui décide des règles), les <strong>comportements des utilisateurs</strong> et ceux des <strong>professionnels</strong>.</p>
+    <div class="q-callout">
+      <p class="qhead">Question du cours</p>
+      <p><em>Quelles sont les spécificités de l'éthique informatique ?</em> — Ce qui la rend particulière : l'<strong>échelle</strong> (une décision touche des millions de personnes d'un coup), la <strong>vitesse</strong> et l'<strong>automatisation</strong> (décisions sans humain), l'<strong>opacité</strong> (boîtes noires algorithmiques), la <strong>persistance</strong> et la <strong>réutilisation</strong> des données dans le temps.</p>
+    </div>
+
+    <h3>La vie privée et les données génomiques</h3>
+    <div class="q-callout">
+      <p class="qhead">Question du cours</p>
+      <p><em>Quelles caractéristiques des données génomiques les rendent particulières en matière de protection ?</em></p>
+    </div>
+    <p><strong>Réponse développée :</strong> les données génomiques (ton ADN) sont uniques car :</p>
+    <ul>
+      <li>Elles sont <strong>permanentes et inchangeables</strong> : on ne peut pas « changer de mot de passe » génétique en cas de fuite.</li>
+      <li>Elles t'<strong>identifient de façon quasi unique</strong> et sont donc très difficiles à anonymiser.</li>
+      <li>Elles concernent aussi ta <strong>famille</strong> : partager ton ADN, c'est exposer en partie celui de tes parents, frères, sœurs et enfants, sans leur consentement.</li>
+      <li>Elles peuvent révéler des <strong>prédispositions à des maladies</strong>, sources de discrimination (assurance, emploi).</li>
+    </ul>
+  </section>
+
+  <section id="resume">
+    <h2>Résumé du premier cours</h2>
+    <div class="card">
+      <ul>
+        <li>On parlera de tous ces aspects (impacts, vie privée, sécurité, éthique, IA, écologie, gouvernance…) pendant la session.</li>
+        <li>L'objectif est d'<strong>apprendre à évaluer les atouts ET les risques</strong> de l'informatique.</li>
+        <li>Compétence finale : <strong>rédiger un rapport</strong> présentant des résultats de recherche.</li>
+        <li><strong>Semaine prochaine :</strong> recherche et études bibliographiques (avec l'invité Félix Arseneau).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== EXAMEN ===================== -->
+  <section id="examen">
+    <div class="exam-intro">
+      <h2>★ Questions d'examen probables</h2>
+      <p style="margin-bottom:0;color:#dfe7f5;">Clique sur chaque question pour révéler une réponse modèle. Format calqué sur l'examen : choix multiple + courtes réponses + développement moyen. Entraîne-toi à répondre <em>avant</em> d'ouvrir.</p>
+    </div>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q1 · CM</span> &nbsp; La loi de Moore est… ?</span></summary>
+      <div class="ans">
+        <p>Une loi <strong>empirique</strong> (fondée sur l'observation, pas sur la physique fondamentale) selon laquelle le <strong>nombre de transistors</strong> dans un microprocesseur <strong>double environ tous les deux ans</strong>. Point piège : elle <strong>peut un jour ne plus être vérifiée</strong> — ce n'est pas une garantie.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q2 · Court</span> &nbsp; Quelle est la différence entre Internet et le Web ?</span></summary>
+      <div class="ans">
+        <p><strong>Internet</strong> est l'<em>infrastructure</em> : le réseau mondial de machines interconnectées (né d'ARPANET, reposant sur TCP/IP, 1973). Le <strong>World Wide Web</strong> (1990) est un <em>service</em> qui circule <em>sur</em> Internet : un système de pages reliées par des liens hypertextes. Le courriel est un autre service d'Internet. Donc : le Web ⊂ Internet, ils ne sont pas synonymes.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q3 · Court</span> &nbsp; Que signifient TCP et IP, et à quoi servent-ils ?</span></summary>
+      <div class="ans">
+        <p><strong>TCP</strong> = <em>Transmission Control Protocol</em> : découpe les données en paquets, contrôle leur bonne arrivée et les réassemble. <strong>IP</strong> = <em>Internet Protocol</em> : attribue une adresse à chaque machine et achemine les paquets. Ensemble (1973), ils permettent à des réseaux hétérogènes de communiquer.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q4 · CM</span> &nbsp; Quels étaient les besoins à l'origine du développement de l'informatique ?</span></summary>
+      <div class="ans">
+        <p>Trois grands besoins : (1) des <strong>calculs scientifiques</strong> plus complexes et précis ; (2) un <strong>traitement plus rapide des données</strong> comptables ou de recensement ; (3) des <strong>applications militaires</strong> (décryptage de codes, tables de tir, traque des sous-marins, bombe atomique).</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q5 · Court</span> &nbsp; Définis la neutralité du net.</span></summary>
+      <div class="ans">
+        <p>Principe fondamental d'Internet garantissant un <strong>traitement identique à tous les contenus et fournisseurs</strong> : c'est un principe de <strong>non-discrimination</strong>. Aucun contenu ne doit être privilégié ou ralenti ; le fournisseur d'accès ne doit pas influer sur l'activité de l'internaute ni sur la vitesse de transmission des paquets.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q6 · Développement</span> &nbsp; Explique la frontière floue entre personnalisation et discrimination.</span></summary>
+      <div class="ans">
+        <p>La personnalisation adapte un service à l'individu ; mais quand des décisions reposent sur les <strong>prédictions d'un algorithme</strong> plutôt que sur des faits, elles peuvent virer à la <strong>discrimination</strong> : crédit limité, assurance plus chère, refus d'emploi/d'école. Une <strong>erreur de prédiction</strong> devient une <strong>discrimination injuste</strong>, d'autant plus grave qu'il n'existe souvent <strong>aucun recours</strong> pour comprendre la décision (absence de transparence et de reddition de comptes). Effet pervers supplémentaire : <strong>refuser de donner ses données</strong> peut conduire à la <strong>stigmatisation</strong> si la majorité coopère. À illustrer avec Uber (surge pricing), Staples (prix selon localisation) ou <em>Weapons of Math Destruction</em> de Cathy O'Neil.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q7 · Court</span> &nbsp; Qu'est-ce que le « soi quantifié » ? Donne son objectif et un risque.</span></summary>
+      <div class="ans">
+        <p><strong>Définition :</strong> ensemble de méthodes pour collecter et utiliser des variables sur son propre corps/comportement. <strong>Objectif :</strong> apprendre de son corps pour le comprendre et s'améliorer. <strong>Risque :</strong> dans le schéma classique, les données sont le plus souvent <strong>envoyées à distance</strong> (sur des serveurs d'entreprises) plutôt que traitées localement — d'où une menace pour la vie privée ; les mesures peuvent aussi être <strong>erronées</strong> ou décevantes.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q8 · Développement</span> &nbsp; Qu'est-ce que l'ouverture des données et pourquoi ouvrir des données ?</span></summary>
+      <div class="ans">
+        <p><strong>Philosophie :</strong> certaines données devraient être publiquement disponibles et réutilisables sans restriction (ex. arrêts de bus, dénivellation des trottoirs), dans l'esprit des mouvements « libres ». <strong>Pourquoi :</strong> transparence envers les citoyens ; accès universel à la connaissance ; ce qui est financé par l'argent public relève du droit de savoir ; développement de nouveaux services/modèles d'affaires ; concurrence plus équitable (→ baisse de prix). Principaux libérateurs : gouvernements, collectivités, fondations, scientifiques, citoyens.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q9 · Court</span> &nbsp; Donne deux exemples de traces numériques et ce qu'on peut en inférer.</span></summary>
+      <div class="ans">
+        <p>Au choix : <strong>adresse IP</strong> → localisation et identifiant ; <strong>historique des requêtes</strong> → centres d'intérêt ; <strong>réseau social</strong> → opinions politiques, religion, loisirs ; <strong>consommation électrique</strong> → activités à la maison (ex. : insomnie détectée par un compteur intelligent).</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q10 · Court</span> &nbsp; Qu'est-ce que le « potentiel d'inférence » ? Illustre-le.</span></summary>
+      <div class="ans">
+        <p>C'est la capacité, à partir de données collectées, d'en <strong>déduire</strong> d'autres informations non fournies — d'autant plus finement avec les <strong>données massives</strong>. Une donnée collectée risque d'être <strong>réutilisée à d'autres fins sans consentement</strong>. <strong>Exemple :</strong> Target a inféré la grossesse d'une adolescente à partir de ses seuls achats, avant que sa famille ne le sache.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q11 · Court</span> &nbsp; Sur quels textes repose le droit à la vie privée vu en cours ?</span></summary>
+      <div class="ans">
+        <p>La <strong>Déclaration universelle des droits de l'homme</strong> de l'ONU, <strong>article 12 (1948)</strong>, et au Québec la <strong>Loi sur la protection des données personnelles dans le secteur privé</strong>. Objectif de la protection : limiter ses traces numériques et mieux contrôler ses données personnelles. Risques en cas d'abus : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q12 · Développement</span> &nbsp; En quoi le numérique pose-t-il un problème de développement durable ?</span></summary>
+      <div class="ans">
+        <p>Le numérique a un coût écologique souvent invisible : forte <strong>consommation d'énergie</strong> des calculs, du <strong>nuage</strong> (centres de données très énergivores), de la <strong>chaîne de blocs</strong> et de l'<strong>IA</strong> (entraînement des modèles). S'ajoute l'<strong>obsolescence programmée</strong>, qui multiplie les déchets électroniques. La réponse passe par la <strong>durabilité numérique</strong> : matériel réparable, durable et sobre.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q13 · Développement</span> &nbsp; Pourquoi les données génomiques sont-elles particulières à protéger ?</span></summary>
+      <div class="ans">
+        <p>Parce qu'elles sont <strong>permanentes</strong> (impossible de les « réinitialiser » après une fuite), <strong>quasi uniquement identifiantes</strong> (très difficiles à anonymiser), <strong>partagées avec la famille</strong> (exposer son ADN expose celui de ses proches sans leur accord) et <strong>révélatrices de prédispositions médicales</strong> (risque de discrimination à l'assurance ou à l'emploi).</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q14 · CM</span> &nbsp; Associe l'invention à son auteur (Leibniz, Boole, Lovelace, Turing, Hollerith).</span></summary>
+      <div class="ans">
+        <p><strong>Leibniz</strong> → système binaire + machine aux 4 opérations (1672). <strong>Boole</strong> → algèbre de la logique (1854), base des circuits. <strong>Ada Lovelace</strong> → premier véritable programme (~1843), pour la machine analytique de Babbage. <strong>Turing</strong> → machine de Turing, modèle abstrait du calcul (1936). <strong>Hollerith</strong> → machine à cartes perforées (1890), fondateur d'IBM.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q15 · Court</span> &nbsp; Qu'illustre le scénario « Alexa, commande une pizza » ?</span></summary>
+      <div class="ans">
+        <p>Il illustre le <strong>revers de l'automatisation et de l'interconnexion des données</strong> : le même appareil qui te <strong>sert</strong> peut, en partageant tes données avec d'autres acteurs (assureur, employeur, plateforme de cours), te <strong>juger, contrôler et pénaliser</strong> (prime d'assurance +1 %, « pas de gym pas de pizza »…). Le confort se paie en perte d'autonomie et en surveillance.</p>
+      </div>
+    </details>
+
+    <details class="qa">
+      <summary><span><span class="qnum">Q16 · Méta</span> &nbsp; Modalités d'examen : que dois-tu savoir d'organisationnel ?</span></summary>
+      <div class="ans">
+        <p>Examen <strong>en personne, 3 h</strong>, avec une <strong>fiche de notes</strong> (A4 recto verso) autorisée. Questions à <strong>choix multiple</strong>, à <strong>courte réponse</strong> et à <strong>développement moyen</strong>. Porte sur <strong>toute la matière</strong> : diapositives, <strong>présentations en classe</strong> (parfois absentes de Moodle) et <strong>lectures supplémentaires</strong>. Vaut <strong>40 %</strong> de la note.</p>
+      </div>
+    </details>
+
+  </section>
+
+  <footer>
+    <p><strong>INM6000 — Informatique et société · Cours 1 (Introduction).</strong> Guide d'étude synthétique préparé à partir des diapositives du cours. Pour l'examen, complète-le avec les <em>présentations faites en classe</em> et les <em>lectures supplémentaires</em>, qui ne figurent pas toutes sur Moodle.</p>
+  </footer>
+
+  </main>
+</div>
+
+</body>
+</html>

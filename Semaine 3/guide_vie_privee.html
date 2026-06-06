@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide d'étude — Protection de la vie privée (INM6000)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#13201f;
+    --paper:#f4f0e6;
+    --paper-2:#ece6d6;
+    --accent:#0f5b56;
+    --accent-2:#c2562f;
+    --accent-soft:#d7e6e3;
+    --line:#cdc4ad;
+    --warn-bg:#fbeede;
+    --warn-line:#e3a45f;
+    --def-bg:#e4efed;
+    --def-line:#0f5b56;
+    --q-bg:#1a2b2a;
+    --q-ink:#f4f0e6;
+    --shadow:0 1px 0 rgba(0,0,0,.04), 0 18px 40px -28px rgba(15,91,86,.5);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 12% -5%, #fbf7ee 0%, transparent 40%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader', Georgia, serif;
+    font-size:19px;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{display:flex; max-width:1280px; margin:0 auto; gap:0;}
+
+  /* Sidebar nav */
+  nav{
+    position:sticky; top:0; align-self:flex-start;
+    width:280px; height:100vh; overflow-y:auto;
+    padding:34px 22px 60px 34px;
+    border-right:1px solid var(--line);
+    background:linear-gradient(180deg,var(--paper-2),transparent 60%);
+  }
+  nav .badge{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em;
+    text-transform:uppercase; color:var(--accent); margin-bottom:6px;
+  }
+  nav h2{font-family:'Fraunces',serif; font-size:22px; line-height:1.1; margin:0 0 22px; font-weight:600;}
+  nav a{
+    display:block; color:var(--ink); text-decoration:none; font-size:15px;
+    padding:5px 10px; border-radius:7px; margin:1px 0; opacity:.82; line-height:1.3;
+    transition:all .15s;
+  }
+  nav a:hover{background:var(--accent-soft); opacity:1; color:var(--accent);}
+  nav a.sub{padding-left:22px; font-size:13.5px; opacity:.62;}
+
+  /* Content */
+  main{flex:1; min-width:0; padding:54px 64px 120px;}
+  header.hero{margin-bottom:54px;}
+  header.hero .kicker{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.22em;
+    text-transform:uppercase; color:var(--accent-2);
+  }
+  header.hero h1{
+    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(34px,5vw,58px);
+    line-height:1.02; margin:14px 0 10px; letter-spacing:-.01em;
+  }
+  header.hero p{font-size:20px; max-width:60ch; opacity:.85; margin:0;}
+  header.hero .meta{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--accent);
+    margin-top:18px; padding-top:18px; border-top:1px solid var(--line);
+  }
+
+  section{margin-bottom:64px; scroll-margin-top:24px;}
+  section > h2{
+    font-family:'Fraunces',serif; font-weight:600; font-size:34px; line-height:1.08;
+    margin:0 0 6px; letter-spacing:-.01em; position:relative; padding-bottom:14px;
+  }
+  section > h2::after{
+    content:""; position:absolute; left:0; bottom:0; width:64px; height:4px;
+    background:var(--accent-2); border-radius:3px;
+  }
+  section .lead{font-size:18px; opacity:.78; margin:14px 0 28px; max-width:68ch; font-style:italic;}
+
+  h3{font-family:'Fraunces',serif; font-weight:600; font-size:24px; margin:36px 0 8px;}
+  h4{font-family:'Fraunces',serif; font-weight:600; font-size:19px; margin:24px 0 6px; color:var(--accent);}
+  p{margin:0 0 16px;}
+  strong{font-weight:600; color:#0a3d3a;}
+  em{color:var(--accent-2); font-style:italic;}
+
+  ul,ol{margin:0 0 18px; padding-left:24px;}
+  li{margin:7px 0;}
+  li::marker{color:var(--accent);}
+
+  .term{color:var(--accent-2); font-weight:600; font-style:normal;}
+
+  /* Definition box */
+  .def{
+    background:var(--def-bg); border-left:4px solid var(--def-line);
+    padding:18px 22px; border-radius:0 12px 12px 0; margin:22px 0; box-shadow:var(--shadow);
+  }
+  .def .label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent); display:block; margin-bottom:4px;
+  }
+  .def p:last-child{margin-bottom:0;}
+
+  /* Warning / nuance box */
+  .note{
+    background:var(--warn-bg); border-left:4px solid var(--warn-line);
+    padding:16px 20px; border-radius:0 12px 12px 0; margin:22px 0; font-size:17.5px;
+  }
+  .note .label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent-2); display:block; margin-bottom:4px;
+  }
+
+  /* Example */
+  .ex{border:1px dashed var(--line); padding:14px 20px; border-radius:12px; margin:18px 0; background:rgba(255,255,255,.4);}
+  .ex .label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:4px;}
+
+  /* Case-study question (slide questions) */
+  .qcase{
+    background:var(--q-bg); color:var(--q-ink); padding:24px 28px; border-radius:16px;
+    margin:26px 0; box-shadow:0 24px 50px -30px rgba(0,0,0,.6);
+  }
+  .qcase .label{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:#7fd6cd; display:block; margin-bottom:8px;}
+  .qcase strong{color:#fff;}
+  .qcase h4{color:#7fd6cd; margin-top:18px;}
+  .qcase .answer{background:rgba(127,214,205,.12); border-radius:10px; padding:14px 18px; margin-top:14px; font-size:17px;}
+
+  table{width:100%; border-collapse:collapse; margin:20px 0; font-size:16px; background:rgba(255,255,255,.5); border-radius:10px; overflow:hidden;}
+  th,td{border:1px solid var(--line); padding:9px 13px; text-align:left; vertical-align:top;}
+  th{background:var(--accent); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:12px; letter-spacing:.05em; text-transform:uppercase; font-weight:500;}
+  tr:nth-child(even) td{background:rgba(236,230,214,.5);}
+
+  .pill{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:11px; padding:2px 9px; border-radius:20px; background:var(--accent-soft); color:var(--accent); margin-right:5px; letter-spacing:.04em;}
+
+  /* Exam section */
+  #examen{background:linear-gradient(160deg,#10302d,#1a2b2a); color:var(--paper); border-radius:22px; padding:44px 48px; box-shadow:0 30px 70px -40px rgba(0,0,0,.7);}
+  #examen h2{color:var(--paper);}
+  #examen h2::after{background:var(--accent-2);}
+  #examen .lead{color:#bfe3de;}
+  .qa{border-bottom:1px solid rgba(255,255,255,.13); padding:16px 0;}
+  .qa summary{font-family:'Fraunces',serif; font-size:19px; font-weight:500; cursor:pointer; list-style:none; padding-right:30px; position:relative; color:#fff;}
+  .qa summary::-webkit-details-marker{display:none;}
+  .qa summary::after{content:"+"; position:absolute; right:0; top:-2px; font-size:26px; color:#7fd6cd; font-family:'IBM Plex Mono',monospace; transition:transform .2s;}
+  .qa[open] summary::after{transform:rotate(45deg);}
+  .qa .ans{margin-top:12px; color:#d8e9e6; font-size:17px;}
+  .qa .ans strong{color:#9fe0d8;}
+
+  .tag{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-2); display:block; margin-bottom:2px;}
+
+  @media(max-width:880px){
+    nav{display:none;}
+    main{padding:32px 22px 80px;}
+    #examen{padding:30px 24px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+  <div class="badge">INM6000 · Séance 3</div>
+  <h2>Protection de la vie privée</h2>
+  <a href="#intro">1 · Traces numériques</a>
+  <a href="#concept">2 · Le concept de vie privée</a>
+  <a href="#legal">3 · Cadre légal</a>
+  <a href="#donnees">4 · Données personnelles</a>
+  <a href="#autorite">5 · Autorités & adversaire</a>
+  <a href="#menaces">6 · Les menaces</a>
+  <a href="#cookies">7 · Cookies (témoins)</a>
+  <a href="#paradoxe">8 · Paradoxe & fatigue</a>
+  <a href="#pet">9 · Technologies (PET)</a>
+  <a href="#principes">10 · Principes fondamentaux</a>
+  <a href="#anonymat">11 · Anonymat & PET avancées</a>
+  <a href="#assain">12 · Assainissement & inférence</a>
+  <a href="#kanon">13 · k-anonymité</a>
+  <a href="#intersection" class="sub">→ Attaque par intersection ★</a>
+  <a href="#netflix">14 · Netflix & dé-anonymisation</a>
+  <a href="#genetique">15 · Données génétiques</a>
+  <a href="#projet">16 · Projet de session</a>
+  <a href="#examen">★ Questions d'examen</a>
+</nav>
+
+<main>
+<header class="hero">
+  <div class="kicker">Guide d'étude complet · ligne par ligne</div>
+  <h1>Protection de la vie privée</h1>
+  <p>Tout le cours expliqué simplement et en profondeur : chaque terme défini, chaque exemple décortiqué, chaque question des diapos résolue.</p>
+  <div class="meta">INM6000 — Informatique et société · UQAM Été 2026 · D. Demirag</div>
+</header>
+
+<!-- ============ 1 ============ -->
+<section id="intro">
+  <h2>1 · Les traces numériques</h2>
+  <p class="lead">Point de départ du cours : tout ce que tu fais en ligne laisse une empreinte, et cette empreinte peut remonter jusqu'à toi.</p>
+
+  <p>L'idée fondatrice : <strong>chaque personne laisse constamment des traces numériques qui peuvent être reliées à son identité.</strong> Tu n'as pas besoin de publier ton nom pour être identifiable — les traces techniques suffisent souvent.</p>
+
+  <div class="ex">
+    <span class="label">Exemple du cours</span>
+    <p>Quand tu consultes une page web, ton ordinateur envoie son <span class="term">adresse IP</span> au serveur. On peut alors relier l'adresse IP <em>à cette page précise</em>. Conséquences en chaîne : on associe le <strong>sujet</strong> de la page à ton identité, et on peut <strong>inférer ta localisation</strong> (l'IP donne une approximation géographique). C'est déjà un <span class="term">bris de vie privée</span>.</p>
+  </div>
+
+  <div class="def">
+    <span class="label">Terme clé — Bris de vie privée</span>
+    <p>Atteinte à la vie privée : un acteur obtient ou déduit une information personnelle sur toi sans ton consentement (ton identité, ta localisation, tes intérêts, tes opinions…).</p>
+  </div>
+
+  <h3>Les types de traces numériques</h3>
+  <table>
+    <tr><th>Trace</th><th>Ce que c'est</th><th>Ce qu'elle révèle</th></tr>
+    <tr><td><strong>Adresse IP</strong></td><td>Identifiant numérique de ta connexion sur Internet</td><td>Localisation approximative, fournisseur d'accès, et — combinée — ton identité</td></tr>
+    <tr><td><strong>Géolocalisation</strong></td><td>Position physique (GPS, IP, Wi-Fi, bornes)</td><td>Où tu habites, travailles, tes déplacements, tes habitudes</td></tr>
+    <tr><td><strong>Cookies (témoins)</strong></td><td>Petits fichiers déposés par les sites web</td><td>Tes visites, préférences, sessions de connexion</td></tr>
+    <tr><td><strong>Historique de navigateur</strong></td><td>Liste des pages que tu as visitées</td><td>Tes centres d'intérêt, ta santé, tes opinions</td></tr>
+    <tr><td><strong>Publications sur réseaux sociaux</strong></td><td>Ce que tu postes volontairement</td><td>Opinions, relations, loisirs, mode de vie</td></tr>
+  </table>
+
+  <h3>Deux exemples marquants des diapos</h3>
+
+  <h4>① Le fugitif retrouvé grâce à World of Warcraft (2010)</h4>
+  <p>Un trafiquant de drogue présumé recherché aux États-Unis s'était enfui au Canada. La police a appris qu'il était un <strong>joueur passionné de WoW</strong>. Elle a obtenu une procuration légale pour que <strong>Blizzard</strong> (l'éditeur du jeu) lui transmette les <strong>données d'accès du fugitif</strong>, dont son <span class="term">adresse IP</span>. Grâce à l'IP → <strong>localisation à Ottawa</strong> → arrestation.</p>
+  <div class="note">
+    <span class="label">À retenir</span>
+    Un loisir totalement banal (jouer en ligne) devient une trace numérique exploitable. La trace n'a pas besoin d'être « sensible » pour être dangereuse.
+  </div>
+
+  <h4>② Risques pour la réputation et la crédibilité</h4>
+  <p>Le cours cite : <strong>plus de 75 % des employeurs</strong> recherchent de l'information en ligne sur leurs candidats. Conséquence : une photo postée à l'adolescence peut <em>« revenir te hanter »</em> des années plus tard. La trace numérique est <strong>persistante</strong> — elle ne disparaît pas quand tu l'oublies.</p>
+</section>
+
+<!-- ============ 2 ============ -->
+<section id="concept">
+  <h2>2 · Le concept de protection de la vie privée</h2>
+  <p class="lead">On élargit : pourquoi ces traces sont dangereuses et quel est l'objectif visé.</p>
+
+  <p>Le cours montre comment des données apparemment techniques se transforment en informations <strong>personnelles et sensibles</strong> par <span class="term">inférence</span> (= déduction) :</p>
+  <ul>
+    <li><strong>Adresse IP</strong> ⟹ localisation, identifiant, contenu consulté.</li>
+    <li><strong>Historique de requêtes</strong> ⟹ centres d'intérêt (ce que tu cherches dit qui tu es).</li>
+    <li><strong>Connaissance de ton réseau social</strong> ⟹ inférences sur tes opinions politiques, ta religion, tes hobbies.</li>
+    <li><strong>Consommation électrique</strong> ⟹ tes activités à la maison (quand tu es présent, quand tu dors…).</li>
+  </ul>
+
+  <div class="def">
+    <span class="label">Inférence</span>
+    <p>Déduire une information <em>nouvelle et non fournie</em> à partir de données existantes. C'est le cœur de presque toutes les attaques de vie privée du cours.</p>
+  </div>
+
+  <p><strong>Le danger</strong> : utilisation de ces informations à des fins frauduleuses. Risques cités : <span class="pill">spam ciblé</span><span class="pill">usurpation d'identité</span><span class="pill">profilage</span><span class="pill">discrimination</span>.</p>
+
+  <div class="def">
+    <span class="label">Objectif principal de la protection de la vie privée</span>
+    <p>Permettre à un individu de <strong>minimiser</strong> et de <strong>contrôler</strong> les traces numériques et ses données personnelles. Deux verbes à retenir : <em>minimiser</em> (en laisser moins) et <em>contrôler</em> (décider ce qu'on en fait).</p>
+  </div>
+</section>
+
+<!-- ============ 3 ============ -->
+<section id="legal">
+  <h2>3 · Le cadre légal</h2>
+  <p class="lead">Le droit à la vie privée est un droit fondamental, garanti à plusieurs niveaux : international, européen, national.</p>
+
+  <h3>Niveau international</h3>
+  <div class="def">
+    <span class="label">DUDH — Article 12 (ONU, 1948)</span>
+    <p>« Nul ne sera l'objet d'immixtions arbitraires dans sa vie privée, sa famille, son domicile ou sa correspondance, ni d'atteintes à son honneur et sa réputation. Toute personne a droit à la protection de la loi contre de telles immixtions. »</p>
+  </div>
+  <p>C'est le texte fondateur : la vie privée est un <strong>droit de l'homme</strong>, pas seulement une question technique.</p>
+
+  <h3>Niveau européen</h3>
+  <table>
+    <tr><th>Texte</th><th>Ce qu'il apporte</th></tr>
+    <tr><td><strong>Directive 95/46/CE</strong></td><td>Met en avant 3 principes : <em>proportionnalité</em>, <em>transparence</em>, <em>finalité légitime</em> (on ne collecte que pour un but précis et justifié).</td></tr>
+    <tr><td><strong>RGPD</strong> (Règlement Général sur la Protection des Données)</td><td>Portabilité des données, consentement éclairé, transparence, <strong>droit à l'oubli</strong>, etc. <span class="pill">portée internationale</span> Si une donnée est <strong>générée sur le sol européen</strong>, le RGPD s'applique — même à une entreprise canadienne.</td></tr>
+  </table>
+
+  <h3>Niveau national (Canada / Québec)</h3>
+  <ul>
+    <li><strong>Fédéral : PIPEDA</strong> — loi canadienne sur la protection des renseignements personnels dans le secteur privé.</li>
+    <li><strong>Québec :</strong> Loi sur la protection des données personnelles dans le secteur privé.</li>
+  </ul>
+
+  <h3>Impact du RGPD au Canada (diapo arbre de décision)</h3>
+  <p>Le schéma Deloitte pose une série de questions : si tu réponds <strong>« oui »</strong> à <em>n'importe laquelle</em>, ton entreprise canadienne est <strong>soumise au RGPD</strong> :</p>
+  <ol>
+    <li>As-tu des bureaux et employés dans l'UE ?</li>
+    <li>Offres-tu des biens/services à des personnes dans l'UE via ton site ou app ?</li>
+    <li>Utilises-tu des cookies pour collecter l'IP et d'autres données de personnes dans l'UE ?</li>
+    <li>Traites-tu des données de personnes de l'UE pour le compte de tes clients ?</li>
+  </ol>
+  <div class="note">
+    <span class="label">Idée à retenir</span>
+    Le RGPD a une <strong>portée extraterritoriale</strong> : ce n'est pas <em>où est l'entreprise</em> qui compte, c'est <em>où sont les personnes dont on traite les données</em>.
+  </div>
+</section>
+
+<!-- ============ 4 ============ -->
+<section id="donnees">
+  <h2>4 · Données à caractère personnel</h2>
+  <p class="lead">Que sont précisément les « données personnelles » — et pourquoi la définition classique est insuffisante.</p>
+
+  <div class="def">
+    <span class="label">Données à caractère personnel (ou nominatives)</span>
+    <p>Ensemble d'informations concernant un individu permettant de l'<strong>identifier de manière unique</strong>. Elles sont sensibles précisément parce qu'elles pointent vers une seule personne.</p>
+  </div>
+
+  <p><strong>Exemples :</strong> nom et prénom · numéro d'assurance sociale · date et lieu de naissance · adresse physique et courriel · numéro de téléphone · numéro de carte de paiement · <strong>données biométriques</strong> (empreinte digitale, ADN).</p>
+
+  <h3>Les deux limites de cette définition (très important)</h3>
+  <div class="note">
+    <span class="label">Limite 1 — Les quasi-identificateurs</span>
+    La définition <strong>ne prend pas en compte</strong> le fait que des données qui semblent anodines, <em>combinées ensemble</em>, peuvent identifier quelqu'un.
+  </div>
+  <div class="def">
+    <span class="label">Quasi-identificateur</span>
+    <p>Une donnée qui, seule, n'identifie personne, mais qui combinée à d'autres devient identifiante. Exemple typique : code postal + date de naissance + genre (on y revient avec Sweeney).</p>
+  </div>
+  <div class="note">
+    <span class="label">Limite 2 — Le potentiel d'inférence</span>
+    La définition <strong>ne couvre pas</strong> ce qu'on peut <em>déduire</em> de certaines données : géolocalisation, requêtes, graphe social… Ces données ne sont pas « ton identité », mais elles la trahissent.
+  </div>
+</section>
+
+<!-- ============ 5 ============ -->
+<section id="autorite">
+  <h2>5 · Autorités de protection & l'adversaire</h2>
+
+  <h3>Autorité de protection des données</h3>
+  <div class="def">
+    <span class="label">Définition</span>
+    <p>Entité chargée de <strong>faire respecter la législation</strong> sur la vie privée auprès des entreprises et institutions.</p>
+  </div>
+  <p><strong>Missions principales (à mémoriser) :</strong> <span class="pill">informer</span><span class="pill">garantir le droit d'accès</span><span class="pill">recenser les fichiers</span><span class="pill">contrôler</span><span class="pill">réglementer</span></p>
+
+  <table>
+    <tr><th>Territoire</th><th>Autorité</th></tr>
+    <tr><td>Québec</td><td><strong>Commission d'accès à l'information (CAI)</strong></td></tr>
+    <tr><td>Canada</td><td><strong>Commissariat à la protection de la vie privée</strong></td></tr>
+    <tr><td>France</td><td><strong>CNIL</strong> (Commission Nationale de l'Informatique et des Libertés), depuis 1978</td></tr>
+    <tr><td>UE</td><td>Chaque pays possède sa propre autorité</td></tr>
+  </table>
+
+  <h3>L'adversaire</h3>
+  <div class="def">
+    <span class="label">Adversaire</span>
+    <p>Entité qui <strong>collecte les traces numériques</strong> d'un individu afin de commettre un bris de vie privée. Cela peut être un <em>individu</em>, une <em>organisation</em> ou une <em>compagnie</em>.</p>
+  </div>
+  <p><strong>Comment l'adversaire collecte les données :</strong></p>
+  <ul>
+    <li>Via des <strong>sources publiques</strong> (blogs, réseaux sociaux, agrégateurs de données).</li>
+    <li>En récupérant des traces de manière <strong>passive</strong> (sans que tu t'en aperçoives).</li>
+    <li>En profitant d'une <strong>vulnérabilité</strong> du système d'information (faille de sécurité).</li>
+  </ul>
+</section>
+
+<!-- ============ 6 ============ -->
+<section id="menaces">
+  <h2>6 · Les menaces concrètes</h2>
+  <p class="lead">Tout ce qui peut mal tourner une fois que les traces sont collectées.</p>
+
+  <h3>Publicité ciblée et profilage</h3>
+  <p>En collectant tes traces, on construit un <span class="term">profil</span> de tes intérêts. Tes partages et ton profil sur les réseaux sociaux révèlent loisirs et opinions politiques. Couplé à l'<strong>analyse des données massives</strong>, ça devient très précis.</p>
+  <div class="ex"><span class="label">Exemple</span><p>Requêtes de recherche + adresse e-mail ⟹ <strong>pourriel ciblé</strong> (spam adapté à ce qui t'intéresse).</p></div>
+
+  <h3>Usurpation d'identité</h3>
+  <p>Si un acteur malveillant collecte <strong>assez</strong> d'informations personnelles, il peut <strong>se faire passer pour toi</strong>.</p>
+  <div class="ex"><span class="label">Exemple</span><p>Se présenter à ta banque en ton nom, contracter un prêt, puis disparaître — tu te retrouves avec la dette.</p></div>
+
+  <h3>Cyberchantage</h3>
+  <p>Les informations qu'on poste peuvent se retourner contre nous. Le cyberchantage consiste à <strong>extorquer de l'argent</strong> à une victime en menaçant de <strong>divulguer des infos confidentielles</strong>.</p>
+
+  <h3>Marché noir des données personnelles</h3>
+  <p>Il existe un véritable marché où se <strong>vendent</strong> les fichiers de données personnelles. Point crucial du cours :</p>
+  <div class="note">
+    <span class="label">Insight important</span>
+    <strong>Sécuriser l'accès aux données ne résout pas tous les problèmes.</strong> Exemple : un employé renvoyé et en colère peut <em>partir avec la base de données clients</em>. La menace interne contourne la sécurité technique.
+  </div>
+
+  <h3>Données massives (big data) et vie privée</h3>
+  <ul>
+    <li><strong>Diversité des données + puissance de calcul</strong> → on peut croiser énormément d'informations.</li>
+    <li><strong>Réutilisation</strong> des données <em>au-delà de leur finalité initiale</em> (collectées pour X, réutilisées pour Y).</li>
+    <li>Une fois rendues publiques, <strong>les données sont toujours là</strong> (persistance).</li>
+    <li>Risque de <strong>fuite de données</strong>.</li>
+  </ul>
+
+  <div class="def">
+    <span class="label">Fuite de données (data breach)</span>
+    <p>Divulgation <strong>non autorisée</strong> de données. Touche tous les domaines : médical, réseaux sociaux, téléphonie mobile… Exemples réels cités : Fortinet, 23andMe (règlement de 30 M$).</p>
+  </div>
+</section>
+
+<!-- ============ 7 ============ -->
+<section id="cookies">
+  <h2>7 · Les cookies (témoins)</h2>
+  <p class="lead">Un mécanisme technique central qu'il faut savoir définir précisément.</p>
+
+  <div class="def">
+    <span class="label">Témoin (cookie)</span>
+    <p>Petit bloc de données envoyé par un <strong>serveur HTTP</strong> et <strong>laissé dans ton ordinateur par le navigateur web</strong>. Il sert à : suivre tes activités, mémoriser tes infos de connexion, retenir les pages visitées, sauvegarder ce que tu saisis dans les formulaires. Utilisé pour la <strong>personnalisation</strong>.</p>
+  </div>
+
+  <h3>Cookies de tierce partie</h3>
+  <div class="def">
+    <span class="label">Cookie tierce partie (third-party)</span>
+    <p>Cookie mis en place par un <strong>site externe</strong> à celui que tu visites. Il suit les pages que tu visites <em>à travers plusieurs sites</em> pour deviner tes préférences publicitaires. C'est le grand <strong>problème de vie privée</strong> : tu es pisté de site en site sans le savoir.</p>
+  </div>
+  <table>
+    <tr><th></th><th>Cookie 1ère partie</th><th>Cookie tierce partie</th></tr>
+    <tr><td>Posé par</td><td>Le site que tu visites</td><td>Un autre domaine (régie pub, traceur)</td></tr>
+    <tr><td>But</td><td>Connexion, panier, préférences du site</td><td>Suivi publicitaire entre sites</td></tr>
+    <tr><td>Vie privée</td><td>Plutôt acceptable</td><td>Problématique</td></tr>
+  </table>
+
+  <h3>Le « Cookie apocalypse »</h3>
+  <p>Google avait annoncé vouloir <strong>mettre fin aux cookies tierce partie</strong> (annoncé « pour 2025 »). Implications pour le marketing : un écosystème <strong>moins stable</strong>, obligeant les annonceurs à <strong>tester des alternatives</strong> de ciblage.</p>
+</section>
+
+<!-- ============ 8 ============ -->
+<section id="paradoxe">
+  <h2>8 · Le paradoxe de la vie privée & la « privacy fatigue »</h2>
+  <p class="lead">Deux phénomènes psychologiques/sociaux importants pour la partie « société » du cours.</p>
+
+  <div class="def">
+    <span class="label">Paradoxe de la vie privée</span>
+    <p>Les gens disent accorder une <strong>grande importance</strong> à leur vie privée, <em>mais</em> dans les faits ils <strong>renoncent à leurs données personnelles pour très peu en échange</strong> (un rabais, un service gratuit) et n'utilisent pas de mesures de protection. Il y a une contradiction entre le discours et le comportement.</p>
+  </div>
+  <p>La diapo l'illustre avec un dessin : « On veut t'implanter une puce RFID » → « Ça viole mes droits ! » … mais « C'est aussi un cellulaire, un appareil photo et un lecteur MP3 » → « Cool ! ». L'avantage matériel fait oublier l'atteinte à la vie privée.</p>
+
+  <div class="def">
+    <span class="label">Privacy fatigue (fatigue de la vie privée)</span>
+    <p>« L'utilisateur éprouve de l'<strong>épuisement et du cynisme</strong> par rapport à la préservation de sa vie privée sur une période prolongée. »</p>
+  </div>
+  <p><strong>Manifestations :</strong></p>
+  <ul>
+    <li>Divulgation excessive d'informations personnelles (devenue courante).</li>
+    <li>Réduction des efforts de prise de décision.</li>
+    <li>On ne consacre plus d'efforts à gérer ses informations.</li>
+  </ul>
+  <p><strong>Causes possibles :</strong> sentiment d'<em>impuissance</em> provoqué par les nouvelles constantes de fuites de données (« à quoi bon ? ») ; attitude négative envers les comportements de protection (« c'est trop compliqué »).</p>
+</section>
+
+<!-- ============ 9 ============ -->
+<section id="pet">
+  <h2>9 · Technologies de protection de la vie privée (PET)</h2>
+  <p class="lead">On passe des problèmes aux solutions techniques.</p>
+
+  <h3>Privacy by design</h3>
+  <div class="def">
+    <span class="label">Privacy by design (vie privée dès la conception)</span>
+    <p>Intégrer la question de la vie privée <strong>dès la conception</strong> d'un système, et non après coup. On y pense <em>a priori</em> (avant) plutôt que de réagir <em>a posteriori</em> (après un bris constaté). La protection est considérée <strong>tout au long du cycle de vie</strong> de la technologie.</p>
+  </div>
+
+  <h3>PET — la définition à connaître par cœur</h3>
+  <div class="def">
+    <span class="label">PET — Privacy Enhancing Technologies</span>
+    <p>Ensemble de <strong>techniques et d'applications</strong> permettant à un individu de protéger ses informations personnelles <strong>pendant qu'il est en ligne</strong>.</p>
+  </div>
+  <div class="ex">
+    <span class="label">Exemple de PET — l'anonymiseur</span>
+    <p>Service permettant de naviguer anonymement, qui <strong>masque tes informations personnelles</strong> (adresse IP, système d'exploitation, navigateur…) aux sites que tu visites. Le cours montre le logo <strong>DuckDuckGo</strong> comme exemple de moteur respectueux de la vie privée.</p>
+  </div>
+</section>
+
+<!-- ============ 10 ============ -->
+<section id="principes">
+  <h2>10 · Les principes fondamentaux</h2>
+  <p class="lead">Le cœur conceptuel du cours — souvent matière à question d'examen. Il y a 2 principes « majeurs » + 4 « autres ».</p>
+
+  <h3>Les 2 principes fondamentaux centraux</h3>
+  <div class="def">
+    <span class="label">① Minimisation des données</span>
+    <p><strong>Seule l'information nécessaire</strong> pour accomplir une application précise devrait être collectée/utilisée — <em>et pas plus</em>. C'est l'application directe du critère de <strong>légitimité</strong> de la Directive 95/46/CE.</p>
+  </div>
+  <div class="def">
+    <span class="label">② Souveraineté des données</span>
+    <p>Les données liées à un individu <strong>lui appartiennent</strong> ; il devrait pouvoir contrôler comment elles sont disséminées. Extension donnée en cours : le <strong>dossier médical appartient au patient</strong>, pas au médecin qui le crée ni à l'hôpital qui le stocke. <em>Difficile à réaliser dans un monde ubiquitaire</em> (où l'informatique est partout).</p>
+  </div>
+
+  <h3>Les 4 autres principes fondamentaux</h3>
+  <table>
+    <tr><th>Principe</th><th>Définition</th></tr>
+    <tr><td><strong>Consentement explicite</strong></td><td>Avant de collecter tes données, on doit te <em>demander l'autorisation</em> et t'<em>expliquer l'utilisation</em> qui en sera faite.</td></tr>
+    <tr><td><strong>Droit à l'oubli</strong></td><td>Sur ta demande, tes traces <em>doivent être effacées</em>.</td></tr>
+    <tr><td><strong>Transparence</strong></td><td>Le système ne doit pas être une « boîte noire » dans laquelle tu dois avoir une <em>confiance aveugle</em> ; tu dois comprendre ce qui se passe.</td></tr>
+    <tr><td><strong>Imputabilité</strong> (accountability)</td><td>L'entité qui héberge tes données doit les <em>sécuriser au mieux</em>, et peut être tenue <em>responsable</em> (devant un juge) en cas de bris.</td></tr>
+  </table>
+</section>
+
+<!-- ============ 11 ============ -->
+<section id="anonymat">
+  <h2>11 · Anonymat & PET avancées</h2>
+  <p class="lead">Techniques plus poussées : communiquer sans révéler qui on est, prouver un droit sans révéler son identité, etc.</p>
+
+  <h3>Réseaux de communication anonyme</h3>
+  <p><strong>Le modèle :</strong> chaque <span class="term">nœud</span> du réseau est un individu qui peut être l'envoyeur ou le receveur d'un message. Sur Internet, chaque ordinateur connecté est un nœud avec un identifiant unique (l'<strong>adresse IP</strong>).</p>
+  <div class="def">
+    <span class="label">Réseau de communication anonyme</span>
+    <p>Technologie PET permettant de communiquer de façon <strong>anonyme</strong> dans un réseau, en protégeant l'identité de l'<strong>envoyeur</strong> et/ou du <strong>receveur</strong>.</p>
+  </div>
+  <p><strong>Exemples cités :</strong> <span class="pill">Dîner des cryptographes</span><span class="pill">Mixnet</span><span class="pill">TOR (Onion Routing)</span><span class="pill">Crowds</span> — TOR est le plus connu : il fait passer ton message par plusieurs nœuds en « couches d'oignon » pour cacher l'origine.</p>
+
+  <h3>Les 3 propriétés d'anonymat</h3>
+  <table>
+    <tr><th>Propriété</th><th>Définition</th></tr>
+    <tr><td><strong>Anonymat (envoyeur/receveur)</strong></td><td>Cacher l'identité de l'envoyeur/receveur <em>parmi un groupe</em>. Se mesure par la <strong>taille du groupe d'anonymat</strong> où l'individu est caché, et par l'<strong>entropie</strong> (incertitude moyenne sur l'auteur d'un message).</td></tr>
+    <tr><td><strong>Non-chaînabilité</strong></td><td>Être <em>incapable de relier deux messages à la même identité</em>. Concerne deux messages successifs du même individu, ou le même message vu à deux endroits.</td></tr>
+    <tr><td><strong>Non-observabilité</strong></td><td>Ne pas pouvoir <em>détecter si un message circule ou non</em>. (Encore plus fort : on ne sait même pas qu'il y a communication.)</td></tr>
+  </table>
+  <div class="def">
+    <span class="label">Entropie (mesure d'anonymat)</span>
+    <p>Mesure mathématique de l'<strong>incertitude</strong>. Plus l'entropie est élevée, plus il est difficile de deviner qui est l'auteur d'un message → meilleur anonymat.</p>
+  </div>
+
+  <h3>Accréditations anonymes</h3>
+  <div class="def">
+    <span class="label">Accréditation anonyme</span>
+    <p>Version anonyme d'une accréditation : permet de <strong>prouver une propriété ou un droit</strong> (ex. « je suis majeur ») <strong>sans révéler son identité</strong>. Prend souvent la forme d'un <strong>jeton cryptographique</strong> créé et certifié par une <em>autorité de confiance</em>, et vérifiable par d'autres entités.</p>
+  </div>
+  <p><strong>Exemples :</strong> signature de groupe, signature aveugle, <strong>preuve de connaissance à divulgation nulle</strong> (zero-knowledge proof — prouver qu'on sait quelque chose sans révéler ce quelque chose).</p>
+
+  <h3>Authentification biométrique respectueuse de la vie privée</h3>
+  <p>Tes données biométriques (empreinte, ADN) <strong>font partie de ton identité</strong> au même titre que ton nom. D'où la nécessité d'un <strong>cadre législatif</strong>. Le défi technique : comment <strong>authentifier par biométrie sans stocker les données en clair</strong> ? Peut-on faire mieux qu'une simple version chiffrée ? Réponse du cours : <strong>biométrie révocable</strong> et <strong>extracteurs flous</strong> (fuzzy extractors).</p>
+  <div class="def">
+    <span class="label">Biométrie révocable</span>
+    <p>On transforme la donnée biométrique de façon qu'on puisse l'<em>annuler et la remplacer</em> en cas de fuite (contrairement à une empreinte « brute » qu'on ne peut pas changer).</p>
+  </div>
+
+  <h3>Retrait privé d'information (PIR)</h3>
+  <div class="def">
+    <span class="label">PIR — Private Information Retrieval</span>
+    <p>Un client peut <strong>apprendre un élément</strong> d'une base de données sur un serveur <strong>sans que le serveur n'apprenne quel élément</strong> a été consulté.</p>
+  </div>
+  <div class="note">
+    <span class="label">Nuance cruciale (souvent piégée à l'examen)</span>
+    C'est le <strong>retrait</strong> qui est privé, <strong>pas l'information elle-même</strong> ! L'info peut être publique ; ce qu'on protège, c'est <em>le fait que TU l'as consultée</em>.
+  </div>
+  <p><strong>Exemples :</strong> bibliothèque électronique (le livre consulté révèle tes opinions) · annuaire géolocalisé (la requête révèle ta position) · site médical (la requête révèle une maladie).</p>
+</section>
+
+<!-- ============ 12 ============ -->
+<section id="assain">
+  <h2>12 · Assainissement de données & attaques par inférence</h2>
+  <p class="lead">Comment publier des données « anonymisées »… et pourquoi ça échoue si souvent.</p>
+
+  <h3>Le bris de vie privée d'AOL (Thelma Arnold, 2006)</h3>
+  <p>AOL a publié une liste de requêtes de recherche de <strong>650 000 utilisateurs</strong> sur 3 mois, à des fins de recherche. Mesure de « protection » : remplacer le nom de chaque utilisateur par un <strong>identifiant aléatoire</strong> (ex. « No. 4417749 »).</p>
+  <p><strong>Échec :</strong> en lisant <em>l'ensemble</em> des requêtes de l'utilisatrice n°4417749, le New York Times a pu remonter à son identité — <strong>Thelma Arnold</strong>. Le <strong>contenu</strong> des requêtes et leur <strong>chaînabilité</strong> (toutes reliées au même pseudo) avaient un fort pouvoir d'identification.</p>
+  <div class="note">
+    <span class="label">La leçon centrale</span>
+    Remplacer un nom par un pseudonyme <strong>≠</strong> protéger la vie privée. La pseudonymisation seule est insuffisante. L'évaluation du risque de ré-identification doit tenir compte des <strong>ressources de l'attaquant</strong> et être <strong>refaite régulièrement</strong> (les capacités évoluent).
+  </div>
+
+  <h3>L'assainissement (sanitisation)</h3>
+  <div class="def">
+    <span class="label">Assainissement</span>
+    <p>Processus qui <strong>accroît l'incertitude</strong> dans les données afin de protéger la vie privée. Usage typique : <em>rendre des données publiques</em>.</p>
+  </div>
+  <div class="note">
+    <span class="label">Le compromis fondamental</span>
+    Il existe un <strong>arbitrage inhérent</strong> entre le <em>niveau de protection</em> et l'<em>utilité</em> des données assainies. Plus tu protèges, moins les données sont utiles, et inversement.
+  </div>
+
+  <h3>Les 3 ingrédients d'un bon assainissement</h3>
+  <ol>
+    <li><strong>Modèle de respect de la vie privée</strong> : que signifie « être respectueux de la vie privée » pour des données publiées ? (la cible à atteindre)</li>
+    <li><strong>Algorithme d'assainissement</strong> : comment modifier les données pour atteindre cette cible ?</li>
+    <li><strong>Mesure d'utilité</strong> : comment mesurer si les données restent utiles après modification ?</li>
+  </ol>
+
+  <h3>Les 4 opérateurs d'assainissement</h3>
+  <table>
+    <tr><th>Opérateur</th><th>Ce qu'il fait</th></tr>
+    <tr><td><strong>Agrégation</strong></td><td>Fusionner plusieurs données en une seule donnée représentative (ex. une moyenne).</td></tr>
+    <tr><td><strong>Généralisation</strong></td><td>Perte volontaire de granularité. Ex. : révéler la <em>tranche d'âge</em> (20-30) au lieu de l'âge exact (28).</td></tr>
+    <tr><td><strong>Suppression</strong></td><td>Enlever l'info liée à un attribut. <em>Attention :</em> l'absence d'information peut parfois <strong>elle-même</strong> causer un bris de vie privée.</td></tr>
+    <tr><td><strong>Introduction de fausses données</strong></td><td>Ajouter des enregistrements artificiels pour « noyer » les vrais (bruit).</td></tr>
+  </table>
+
+  <h3>L'attaque par inférence</h3>
+  <div class="def">
+    <span class="label">Attaque par inférence</span>
+    <p>L'adversaire prend en entrée des <strong>données assainies</strong> et tente d'<strong>inférer de nouvelles informations personnelles</strong>.</p>
+  </div>
+  <div class="def">
+    <span class="label">Attaque par chaînage (linkage)</span>
+    <p>L'adversaire tente de <strong>relier les enregistrements de deux jeux de données différents</strong> qui partagent une fraction d'individus en commun. Le <strong>risque de divulgation par chaînage</strong> mesure la probabilité de succès.</p>
+  </div>
+  <div class="note">
+    <span class="label">Défi principal</span>
+    Donner des garanties même contre un adversaire ayant des <strong>connaissances auxiliaires</strong> (infos externes). Problème : ces connaissances <em>a priori</em> ne peuvent pas toujours être modélisées à l'avance.
+  </div>
+</section>
+
+<!-- ============ 13 ============ -->
+<section id="kanon">
+  <h2>13 · La re-identification & la k-anonymité</h2>
+
+  <h3>La ré-identification de Sweeney (2000) — le « 87 % »</h3>
+  <p>Latanya Sweeney a croisé des <strong>données médicales</strong> avec une <strong>liste électorale publique</strong> (données du recensement de 1990). Résultat choc :</p>
+  <div class="def">
+    <span class="label">Le chiffre à retenir absolument</span>
+    <p><strong>87 % de la population américaine</strong> peut être identifiée de façon unique avec <strong>seulement 3 quasi-identificateurs</strong> : le <strong>code postal</strong>, la <strong>date de naissance</strong> et le <strong>genre</strong>.</p>
+  </div>
+  <p>Le mécanisme : les attributs communs aux deux tables (ZIP + date de naissance + sexe) servent de « pont » pour relier le dossier médical anonyme au nom dans la liste électorale.</p>
+
+  <h3>La k-anonymité (Sweeney, 2002)</h3>
+  <div class="def">
+    <span class="label">k-anonymité — la garantie</span>
+    <p>Dans chaque groupe du jeu de données assaini, <strong>chaque individu est identique à au moins k − 1 autres</strong> (sur les quasi-identificateurs). Autrement dit, on ne peut jamais distinguer un individu parmi un groupe d'au moins <strong>k</strong> personnes.</p>
+  </div>
+  <p><strong>Comment on l'atteint :</strong> par une <strong>combinaison de généralisation et de suppression</strong>. Exemple du cours : on transforme un ZIP « 13053 » en « 130** » et un âge « 28 » en « &lt;30 » → plusieurs lignes deviennent identiques (table « 4-anonyme »).</p>
+  <p><strong>Défi principal :</strong> extraire des connaissances utiles tout en préservant la confidentialité (encore le compromis utilité ↔ protection).</p>
+
+  <!-- ===== Slide question 44 ===== -->
+  <div class="qcase" id="intersection">
+    <span class="label">★ Question de la diapo — Attaque par intersection</span>
+    <p><strong>Énoncé :</strong> Le patron d'Alice sait qu'elle a <strong>28 ans</strong>, qu'elle habite dans le quartier de code postal <strong>13012</strong> (donc 130**), et qu'elle a visité <strong>les deux hôpitaux</strong> (elle figure dans la table (a) ET la table (b)). Qu'est-ce qu'il peut apprendre ?</p>
+
+    <h4>Raisonnement</h4>
+    <p>Chaque table prise seule est k-anonyme : Alice est noyée dans un groupe. Mais comme elle est dans les <strong>deux</strong>, le patron peut <strong>intersecter</strong> les ensembles de maladies possibles.</p>
+    <ul>
+      <li>Dans la table (a), groupe « âge &lt; 30, 130** » → conditions possibles : <strong>{AIDS, Heart Disease, Viral Infection}</strong>.</li>
+      <li>Dans la table (b), groupe « âge &lt; 35, 130** » → conditions possibles : <strong>{AIDS, Tuberculosis, Flu, Cancer}</strong>.</li>
+    </ul>
+    <p>Alice étant dans les deux groupes, sa vraie maladie doit appartenir à <strong>l'intersection</strong> des deux ensembles :</p>
+    <div class="answer">
+      <strong>{AIDS, Heart Disease, Viral Infection} ∩ {AIDS, Tuberculosis, Flu, Cancer} = {AIDS}</strong><br><br>
+      → Le patron en déduit qu'Alice est <strong>séropositive (AIDS)</strong>. C'est un bris de vie privée, <em>alors que chaque table était pourtant k-anonyme individuellement.</em>
+    </div>
+    <h4>La leçon de l'attaque par intersection</h4>
+    <p>La k-anonymité <strong>ne compose pas</strong> : publier <em>plusieurs</em> versions k-anonymes des mêmes individus peut détruire la garantie. C'est exactement la motivation pour des modèles plus forts (l-diversité, t-closeness, confidentialité différentielle).</p>
+  </div>
+</section>
+
+<!-- ============ 14 ============ -->
+<section id="netflix">
+  <h2>14 · La compétition Netflix & la dé-anonymisation</h2>
+
+  <p>Netflix a lancé un <strong>défi public d'apprentissage machine</strong> pour améliorer son système de recommandation de films, en publiant un jeu de données : <strong>~35 000 individus (lignes)</strong> × <strong>films (colonnes)</strong>, chaque cellule contenant la <strong>note</strong> donnée par l'individu au film.</p>
+  <p><strong>Caractéristiques :</strong> données de <strong>haute dimensionnalité</strong> (des milliers de films) et <strong>éparses</strong> (chaque personne n'a noté que ~100-200 films).</p>
+  <div class="note">
+    <span class="label">Point clé</span>
+    Dans ce contexte, <strong>la k-anonymité ne fonctionne pas</strong> — il y a trop de colonnes, chaque combinaison de notes est quasi unique.
+  </div>
+
+  <h3>La dé-anonymisation (Narayanan & Shmatikov, 2008)</h3>
+  <p>Netflix n'avait utilisé <strong>aucun identifiant</strong> → cela <em>semblait</em> anonyme. Mais les chercheurs ont réussi à <strong>dé-anonymiser un grand nombre d'enregistrements</strong> par une <strong>attaque par inférence</strong>, en utilisant <strong>IMDb</strong> comme <span class="term">information auxiliaire</span>.</p>
+  <p><strong>Le mécanisme :</strong> certains utilisateurs notent aussi des films <em>publiquement</em> sur IMDb (sous leur vrai nom). En croisant le profil de notes Netflix (anonyme) avec un profil IMDb (nominatif), on relie les deux → identité révélée. C'est encore une <strong>attaque par chaînage</strong>.</p>
+
+  <h3>Quand la recherche a un impact tangible</h3>
+  <p>Conséquences concrètes : la <strong>FTC</strong> a interrogé Netflix, une plainte a été déposée, et Netflix a finalement <strong>annulé la suite du Netflix Prize</strong> (2010). La recherche en vie privée a directement modifié les décisions d'une grande entreprise.</p>
+</section>
+
+<!-- ============ 15 ============ -->
+<section id="genetique">
+  <h2>15 · La confidentialité des données génétiques</h2>
+  <p class="lead">Le cas le plus extrême : un type de donnée qu'on ne peut jamais changer.</p>
+
+  <!-- ===== Slide question 50 ===== -->
+  <div class="qcase">
+    <span class="label">★ Question de la diapo — Lequel est pire ?</span>
+    <p><strong>Une brèche qui affecte ta carte de crédit, ou une brèche qui affecte ton ADN ?</strong></p>
+    <div class="answer">
+      <strong>La brèche ADN est bien pire.</strong> Voici pourquoi, selon le cours :
+      <table style="margin-top:12px; color:#13201f;">
+        <tr><th>Carte de crédit</th><th>ADN</th></tr>
+        <tr><td>On peut la <strong>révoquer</strong></td><td>L'ADN <strong>ne peut pas être modifié</strong></td></tr>
+        <tr><td>On <strong>compense</strong> la perte d'argent</td><td>Divulgue des infos sur ta <strong>famille proche</strong> (partage involontaire)</td></tr>
+        <tr><td>On reçoit une <strong>nouvelle carte</strong></td><td>Avec le progrès de la génomique, on en apprend <strong>toujours plus</strong> sur ton ADN au fil du temps</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h3>Les risques liés à l'ADN</h3>
+  <ul>
+    <li><strong>Rançon</strong> pour les données génétiques.</li>
+    <li><strong>Discrimination génétique</strong> : si tu es susceptible de développer une maladie chronique, ta demande de prêt peut être refusée, ou une compagnie d'assurance peut refuser de t'assurer.</li>
+    <li>Menacer de <strong>révoquer l'accès</strong> et de partager des infos sensibles en ligne.</li>
+  </ul>
+
+  <h3>Pourquoi le problème explose maintenant</h3>
+  <ul>
+    <li><strong>Coût de séquençage :</strong> il s'est <strong>effondré</strong> depuis 2001, beaucoup plus vite que la loi de Moore (de ~100 M$ à quelques milliers de $). → séquencer l'ADN devient accessible à tous.</li>
+    <li><strong>Quantité partagée :</strong> les services de généalogie (23andMe, Ancestry, MyHeritage…) accumulent des bases énormes — MyHeritage : <strong>plus de 8 millions de personnes</strong> ; plus de 26 millions de tests « at-home » au total.</li>
+  </ul>
+
+  <h3>Cas emblématiques</h3>
+  <h4>Henrietta Lacks</h4>
+  <p>Diagnostiquée d'un <strong>cancer du col de l'utérus</strong>. Ses cellules ont donné la lignée <strong>HeLa</strong>, la <strong>première lignée cellulaire immortalisée</strong> (les cellules se reproduisent indéfiniment), utilisée dans d'innombrables recherches. Problème éthique majeur : <strong>sa famille n'était pas au courant</strong> que ses cellules étaient utilisées → enjeu de consentement.</p>
+
+  <h4>Le Golden State Killer</h4>
+  <p>Meurtres en série non résolus pendant des décennies. La police a comparé l'<strong>ADN de la scène de crime</strong> à un site de généalogie <strong>open source (GEDmatch)</strong>. Elle a trouvé une correspondance avec un <strong>probable cousin au 4ᵉ degré</strong>, reconstruit l'arbre généalogique, puis restreint la recherche aux membres de la famille correspondant à l'âge et à la description → suspect identifié.</p>
+  <div class="note">
+    <span class="label">Insight</span>
+    Tu peux être identifié <strong>via l'ADN d'un parent éloigné</strong> que tu ne connais même pas, et qui a partagé son ADN sans penser à toi. C'est le « partage involontaire ».
+  </div>
+
+  <h3>Un peu de génomique (vocabulaire)</h3>
+  <ul>
+    <li>L'ADN humain : <strong>~3 milliards de paires de bases</strong>, réparties sur <strong>23 chromosomes</strong>.</li>
+    <li><strong>SNP (Single Nucleotide Polymorphism)</strong> = polymorphisme nucléotidique : une <strong>variation génétique</strong> à une position précise de l'ADN. On calcule le <strong>risque de maladie</strong> en analysant des SNP particuliers.</li>
+  </ul>
+
+  <h3>Médecine personnalisée préservant la vie privée</h3>
+  <p>Scénario : un centre médical veut effectuer un test génomique sur un patient, tout en <strong>protégeant la confidentialité</strong> des données — à la fois celles du patient <em>et</em> celles du centre médical. Solutions du cours : techniques cryptographiques, notamment le <strong>chiffrement</strong> (y compris homomorphe) et le <strong>calcul multipartite sécurisé</strong>.</p>
+  <div class="def">
+    <span class="label">Calcul multipartite sécurisé (MPC)</span>
+    <p>Plusieurs parties calculent ensemble un résultat à partir de leurs données respectives <strong>sans qu'aucune ne révèle ses données aux autres</strong>. Ici : on obtient le résultat du test sans que le centre voie l'ADN en clair.</p>
+  </div>
+</section>
+
+<!-- ============ 16 ============ -->
+<section id="projet">
+  <h2>16 · Le projet de session (rappel administratif)</h2>
+  <p class="lead">Pas de la matière d'examen, mais à ne pas rater : l'échéance du plan.</p>
+
+  <div class="note">
+    <span class="label">Échéance</span>
+    <strong>Plan du projet</strong> — texte de <strong>2 à 4 pages au format PDF</strong>, à téléverser sur Moodle le <strong>7 juin 2026, 23h59</strong>.
+  </div>
+
+  <h3>Le plan doit contenir</h3>
+  <ol>
+    <li>Noms et codes permanents des membres de l'équipe (ou de l'étudiant·e seul·e).</li>
+    <li><strong>Titre.</strong></li>
+    <li><strong>Description du sujet</strong> + l'angle d'approche (1 paragraphe).</li>
+    <li><strong>Problématique</strong> : 1 à quelques questions concrètes (1 à 3 phrases).</li>
+    <li><strong>Concepts clés</strong> à définir plus tard (1 à 3 phrases).</li>
+    <li><strong>Ébauche de méthodologie</strong> : comparaison de points de vue, description de cas, synthèse… (1-2 paragraphes).</li>
+    <li><strong>Ressources</strong> : minimum 3 (théories vues en classe, articles scientifiques, articles de journaux, données).</li>
+  </ol>
+  <p><strong>Sujets potentiels</strong> (parmi beaucoup) : propriété des données personnelles, reconnaissance faciale, vidéosurveillance, ville/maison intelligente, génomique, crédit social chinois, crypto-monnaies, désinformation, outils de traçage de contacts, etc. <em>Note : « génomique » est dans la liste — tu maîtrises déjà la partie ADN de ce cours, ce serait un sujet naturel pour toi.</em></p>
+</section>
+
+<!-- ============ EXAM ============ -->
+<section id="examen">
+  <h2>★ Questions susceptibles de sortir à l'examen</h2>
+  <p class="lead">Réponds d'abord dans ta tête, puis clique pour vérifier. Mélange de définitions, de mécanismes et de cas.</p>
+
+  <div class="qa"><details><summary>1. Donne la définition exacte d'une <em>donnée à caractère personnel</em> et nomme ses deux limites.</summary>
+  <div class="ans">Ensemble d'informations concernant un individu permettant de l'<strong>identifier de manière unique</strong>. <strong>Limite 1 :</strong> elle ignore les <strong>quasi-identificateurs</strong> (données anodines identifiantes une fois combinées). <strong>Limite 2 :</strong> elle ne couvre pas le <strong>potentiel d'inférence</strong> (géolocalisation, requêtes, graphe social).</div></details></div>
+
+  <div class="qa"><details><summary>2. Qu'est-ce qu'un quasi-identificateur ? Illustre avec le résultat de Sweeney.</summary>
+  <div class="ans">Une donnée qui n'identifie pas seule mais devient identifiante combinée à d'autres. Sweeney (2000) : <strong>87 %</strong> des Américains identifiables avec seulement <strong>code postal + date de naissance + genre</strong>, en croisant données médicales et liste électorale.</div></details></div>
+
+  <div class="qa"><details><summary>3. Énonce les 2 principes fondamentaux centraux + les 4 autres principes.</summary>
+  <div class="ans"><strong>Centraux :</strong> ① Minimisation des données (ne collecter que le nécessaire) ; ② Souveraineté des données (elles appartiennent à l'individu qui les contrôle). <strong>Autres :</strong> consentement explicite, droit à l'oubli, transparence, imputabilité.</div></details></div>
+
+  <div class="qa"><details><summary>4. Définis une PET et donne un exemple. Qu'est-ce que le « privacy by design » ?</summary>
+  <div class="ans"><strong>PET</strong> (Privacy Enhancing Technologies) : ensemble de techniques/applications protégeant les infos personnelles en ligne. Ex. : l'<strong>anonymiseur</strong> (masque IP, OS, navigateur). <strong>Privacy by design :</strong> intégrer la vie privée <em>dès la conception</em> (a priori, sur tout le cycle de vie) plutôt que de réagir après un bris.</div></details></div>
+
+  <div class="qa"><details><summary>5. Explique l'affaire AOL / Thelma Arnold. Quelle leçon en tirer ?</summary>
+  <div class="ans">AOL a publié les requêtes de 650 000 utilisateurs en remplaçant les noms par des identifiants aléatoires. On a ré-identifié l'utilisatrice n°4417749 (Thelma Arnold) grâce au <strong>contenu</strong> et à la <strong>chaînabilité</strong> de ses requêtes. <strong>Leçon : pseudonymisation ≠ protection de la vie privée.</strong></div></details></div>
+
+  <div class="qa"><details><summary>6. Qu'est-ce que la k-anonymité ? Comment l'atteint-on ?</summary>
+  <div class="ans">Garantie : dans chaque groupe du jeu assaini, chaque individu est <strong>identique à au moins k − 1 autres</strong> sur les quasi-identificateurs. On l'atteint par <strong>généralisation + suppression</strong> (ex. âge 28 → &lt;30, ZIP 13053 → 130**).</div></details></div>
+
+  <div class="qa"><details><summary>7. ★ Reprends l'attaque par intersection : pourquoi le patron d'Alice apprend-il sa maladie ?</summary>
+  <div class="ans">Alice (28 ans, 130**, dans les deux tables) appartient au groupe « &lt;30 » → {AIDS, Heart Disease, Viral Infection} dans la table (a), et au groupe « &lt;35 » → {AIDS, Tuberculosis, Flu, Cancer} dans la table (b). L'<strong>intersection = {AIDS}</strong>. Donc le patron déduit qu'elle a le SIDA. Morale : <strong>la k-anonymité ne compose pas</strong> — publier plusieurs versions k-anonymes peut détruire la garantie.</div></details></div>
+
+  <div class="qa"><details><summary>8. Décris la dé-anonymisation du jeu de données Netflix (Narayanan & Shmatikov, 2008).</summary>
+  <div class="ans">Netflix a publié des notes de films <strong>sans identifiant</strong>. Données de <strong>haute dimensionnalité et éparses</strong> → la k-anonymité ne s'applique pas. En croisant avec <strong>IMDb</strong> (information auxiliaire publique et nominative), une <strong>attaque par chaînage</strong> a ré-identifié de nombreux utilisateurs.</div></details></div>
+
+  <div class="qa"><details><summary>9. Cite les 4 opérateurs d'assainissement et explique le compromis fondamental.</summary>
+  <div class="ans">Agrégation, généralisation, suppression, introduction de fausses données. <strong>Compromis :</strong> arbitrage inhérent entre <em>niveau de protection</em> et <em>utilité</em> des données — plus on protège, moins c'est utile.</div></details></div>
+
+  <div class="qa"><details><summary>10. Définis le PIR. Quel est le piège classique ?</summary>
+  <div class="ans"><strong>PIR (Private Information Retrieval) :</strong> un client récupère un élément d'une base sans que le serveur sache lequel. <strong>Piège :</strong> c'est le <em>retrait</em> qui est privé, <strong>pas l'information elle-même</strong> (qui peut être publique).</div></details></div>
+
+  <div class="qa"><details><summary>11. Nomme les 3 propriétés d'anonymat et comment l'anonymat se mesure.</summary>
+  <div class="ans"><strong>Anonymat</strong> (envoyeur/receveur), <strong>non-chaînabilité</strong>, <strong>non-observabilité</strong>. Mesure : <strong>taille du groupe d'anonymat</strong> et <strong>entropie</strong> (incertitude moyenne sur l'auteur).</div></details></div>
+
+  <div class="qa"><details><summary>12. Pourquoi une brèche ADN est-elle pire qu'une brèche de carte de crédit ?</summary>
+  <div class="ans">La carte se révoque/remplace et la perte se compense. L'ADN <strong>ne peut pas être modifié</strong>, il révèle des infos sur la <strong>famille proche</strong> (partage involontaire), et la génomique en révèle <strong>toujours plus</strong> avec le temps.</div></details></div>
+
+  <div class="qa"><details><summary>13. Explique l'affaire du Golden State Killer en termes de vie privée.</summary>
+  <div class="ans">ADN de scène de crime comparé à <strong>GEDmatch</strong> (généalogie open source) → correspondance avec un cousin au 4ᵉ degré → reconstruction de l'arbre généalogique → suspect identifié. Montre qu'on peut être identifié <strong>via l'ADN de parents</strong> qu'on ne connaît pas.</div></details></div>
+
+  <div class="qa"><details><summary>14. Cookie de 1ère partie vs cookie de tierce partie : différence et enjeu de vie privée.</summary>
+  <div class="ans">1ʳᵉ partie : posé par le site visité (connexion, panier) — acceptable. <strong>Tierce partie :</strong> posé par un domaine externe, suit l'utilisateur <strong>entre les sites</strong> pour la pub — c'est le problème de vie privée (le « cookie apocalypse » = la fin annoncée des cookies tierce partie par Google).</div></details></div>
+
+  <div class="qa"><details><summary>15. Définis le paradoxe de la vie privée et la privacy fatigue.</summary>
+  <div class="ans"><strong>Paradoxe :</strong> on dit valoriser sa vie privée mais on cède ses données pour très peu et sans se protéger. <strong>Privacy fatigue :</strong> épuisement et cynisme face à la protection de sa vie privée, dus au sentiment d'impuissance (fuites constantes) et à une attitude négative envers la protection.</div></details></div>
+
+  <div class="qa"><details><summary>16. Qu'est-ce qu'une attaque par chaînage et quel est le défi principal de la protection ?</summary>
+  <div class="ans"><strong>Chaînage :</strong> relier les enregistrements de deux jeux de données partageant des individus communs. <strong>Défi :</strong> garantir la protection même face à un adversaire ayant des <strong>connaissances auxiliaires</strong>, qui ne peuvent pas toujours être modélisées à l'avance.</div></details></div>
+
+  <div class="qa"><details><summary>17. Quelles sont les missions d'une autorité de protection des données, et qui joue ce rôle au Québec / Canada / France ?</summary>
+  <div class="ans"><strong>Missions :</strong> informer, garantir le droit d'accès, recenser les fichiers, contrôler, réglementer. <strong>Québec :</strong> Commission d'accès à l'information (CAI). <strong>Canada :</strong> Commissariat à la protection de la vie privée. <strong>France :</strong> CNIL (depuis 1978).</div></details></div>
+
+  <div class="qa"><details><summary>18. Pourquoi le RGPD concerne-t-il les entreprises canadiennes ?</summary>
+  <div class="ans">Le RGPD a une <strong>portée extraterritoriale</strong> : dès qu'une donnée est générée par/sur une personne <strong>dans l'UE</strong> (employés, clients, cookies collectant des IP, traitement pour des clients UE), l'entreprise y est soumise, peu importe où elle se trouve.</div></details></div>
+</section>
+
+</main>
+</div>
+</body>
+</html>
