@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Séance 4 : Éthique (Guide d'étude)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --ink:#1c2b2d;
+    --ink-soft:#3a4a4c;
+    --paper:#f6f1e7;
+    --paper-2:#fbf7ef;
+    --teal:#0f7d8c;
+    --teal-deep:#0a4d57;
+    --coral:#e0653f;
+    --gold:#c79a3a;
+    --line:#d8cfbd;
+    --shadow:rgba(10,77,87,.10);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 600px at 80% -10%, rgba(15,125,140,.08), transparent 60%),
+      radial-gradient(900px 500px at -10% 20%, rgba(224,101,63,.06), transparent 55%),
+      var(--paper);
+    color:var(--ink);
+    font-family:'Newsreader', Georgia, serif;
+    font-size:19px;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .wrap{max-width:920px;margin:0 auto;padding:0 26px 120px;}
+
+  /* ---------- En-tête ---------- */
+  header.hero{
+    padding:78px 0 38px;
+    border-bottom:2px solid var(--ink);
+    margin-bottom:14px;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    color:var(--teal-deep);
+    display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  }
+  .kicker::after{content:"";flex:1;height:1px;background:var(--line);min-width:30px;}
+  h1.title{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2.6rem,7vw,4.4rem);
+    line-height:.98;
+    margin:.28em 0 .12em;
+    letter-spacing:-.015em;
+  }
+  h1.title em{font-style:italic;color:var(--teal);}
+  .subtitle{
+    font-size:1.18rem;color:var(--ink-soft);font-style:italic;max-width:60ch;margin:.2em 0 0;
+  }
+  .meta-row{
+    margin-top:26px;display:flex;gap:10px;flex-wrap:wrap;
+    font-family:'IBM Plex Mono',monospace;font-size:.74rem;
+  }
+  .chip{
+    background:var(--paper-2);border:1px solid var(--line);
+    padding:6px 13px;border-radius:30px;color:var(--teal-deep);
+  }
+
+  /* ---------- Table des matières ---------- */
+  nav.toc{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:26px 30px;
+    margin:34px 0 52px;
+    box-shadow:0 18px 40px -28px var(--shadow);
+  }
+  nav.toc h2{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--coral);margin:0 0 16px;font-weight:500;
+  }
+  nav.toc ol{margin:0;padding:0;list-style:none;counter-reset:toc;
+    columns:2;column-gap:42px;}
+  nav.toc li{counter-increment:toc;margin:0 0 9px;break-inside:avoid;font-size:.98rem;}
+  nav.toc li::before{
+    content:counter(toc,decimal-leading-zero);
+    font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--teal);
+    margin-right:10px;
+  }
+  nav.toc a{color:var(--ink);text-decoration:none;border-bottom:1px solid transparent;transition:.2s;}
+  nav.toc a:hover{color:var(--teal);border-bottom-color:var(--teal);}
+
+  /* ---------- Sections ---------- */
+  section{margin:0 0 18px;padding:40px 0 8px;border-top:1px solid var(--line);}
+  section:first-of-type{border-top:none;}
+  .sec-num{
+    font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.22em;
+    color:var(--coral);text-transform:uppercase;
+  }
+  h2.sec{
+    font-family:'Fraunces',serif;font-weight:600;
+    font-size:clamp(1.7rem,3.6vw,2.5rem);line-height:1.05;
+    margin:.18em 0 .6em;letter-spacing:-.01em;color:var(--teal-deep);
+  }
+  h3{
+    font-family:'Fraunces',serif;font-weight:600;font-size:1.32rem;
+    margin:1.7em 0 .35em;color:var(--ink);
+  }
+  h4{
+    font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:.84rem;
+    letter-spacing:.12em;text-transform:uppercase;color:var(--teal);
+    margin:1.5em 0 .4em;
+  }
+  p{margin:.7em 0;}
+  strong{font-weight:600;color:var(--ink);}
+  em.lead{font-style:italic;color:var(--teal-deep);}
+
+  ul,ol.norm{padding-left:1.3em;margin:.6em 0;}
+  li{margin:.34em 0;}
+
+  /* ---------- Encadrés ---------- */
+  .def{
+    background:var(--paper-2);
+    border-left:4px solid var(--teal);
+    border-radius:0 10px 10px 0;
+    padding:16px 22px;margin:18px 0;
+    box-shadow:0 12px 30px -26px var(--shadow);
+  }
+  .def .term{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--teal);display:block;margin-bottom:4px;
+  }
+  .def b{font-family:'Fraunces',serif;font-weight:600;font-size:1.08rem;}
+
+  .qbox{
+    background:linear-gradient(180deg,#fff8f4,#fdf4ee);
+    border:1px solid #f0d4c5;
+    border-radius:12px;padding:18px 22px;margin:20px 0;
+  }
+  .qbox .qlabel{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--coral);font-weight:500;
+  }
+  .qbox .qtext{font-style:italic;color:var(--ink);margin:.3em 0 .7em;font-size:1.05rem;}
+  .qbox .alabel{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--teal);font-weight:500;
+  }
+
+  .compare{
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0;
+  }
+  .compare .card{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:12px;
+    padding:18px 20px;
+  }
+  .compare .card.a{border-top:4px solid var(--teal);}
+  .compare .card.b{border-top:4px solid var(--coral);}
+  .compare h4{margin-top:0;color:var(--ink);}
+
+  .callout{
+    background:var(--teal-deep);color:#eaf4f4;border-radius:14px;
+    padding:22px 26px;margin:24px 0;
+  }
+  .callout .ctitle{
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;
+  }
+  .callout strong{color:#fff;}
+  .callout a{color:#9fe3ec;}
+
+  blockquote{
+    margin:20px 0;padding:14px 24px;border-left:3px solid var(--gold);
+    font-style:italic;color:var(--ink-soft);background:rgba(199,154,58,.06);
+    border-radius:0 8px 8px 0;
+  }
+  blockquote cite{display:block;font-style:normal;font-size:.82rem;
+    font-family:'IBM Plex Mono',monospace;color:var(--teal-deep);margin-top:8px;}
+
+  table.tbl{width:100%;border-collapse:collapse;margin:20px 0;font-size:.94rem;}
+  table.tbl th,table.tbl td{border:1px solid var(--line);padding:9px 13px;text-align:left;}
+  table.tbl th{background:var(--teal-deep);color:#fff;font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;font-weight:500;}
+  table.tbl tr:nth-child(even) td{background:var(--paper-2);}
+
+  code{font-family:'IBM Plex Mono',monospace;font-size:.86em;background:rgba(15,125,140,.1);
+    padding:1px 6px;border-radius:5px;color:var(--teal-deep);}
+
+  /* ---------- Examen ---------- */
+  .exam-head{
+    background:var(--ink);color:var(--paper);border-radius:18px;
+    padding:34px 34px 30px;margin:60px 0 10px;
+  }
+  .exam-head .kicker{color:var(--gold);}
+  .exam-head .kicker::after{background:rgba(255,255,255,.25);}
+  .exam-head h2{font-family:'Fraunces',serif;color:#fff;font-size:2.2rem;margin:.2em 0 .1em;}
+  .exam-head p{color:#cdd9d9;margin:.3em 0 0;}
+
+  details.q{
+    background:var(--paper-2);border:1px solid var(--line);border-radius:12px;
+    margin:14px 0;padding:0;overflow:hidden;transition:.2s;
+  }
+  details.q[open]{box-shadow:0 18px 40px -30px var(--shadow);border-color:var(--teal);}
+  details.q summary{
+    cursor:pointer;padding:18px 22px;list-style:none;font-weight:500;
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  details.q summary::-webkit-details-marker{display:none;}
+  details.q summary .qn{
+    font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--teal);
+    background:rgba(15,125,140,.12);border-radius:8px;padding:2px 9px;flex-shrink:0;margin-top:2px;
+  }
+  details.q summary .qq{flex:1;}
+  details.q summary::after{content:"+";font-family:'IBM Plex Mono',monospace;color:var(--coral);
+    font-size:1.3rem;line-height:1;flex-shrink:0;transition:.2s;}
+  details.q[open] summary::after{content:"−";transform:rotate(0);}
+  details.q .ans{padding:0 22px 20px 22px;border-top:1px dashed var(--line);margin-top:0;}
+  details.q .ans p:first-child{margin-top:14px;}
+
+  footer{margin-top:70px;padding-top:24px;border-top:2px solid var(--ink);
+    font-family:'IBM Plex Mono',monospace;font-size:.74rem;color:var(--ink-soft);
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  @media (max-width:680px){
+    body{font-size:18px;}
+    nav.toc ol{columns:1;}
+    .compare{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="kicker">INM6000 · Informatique et société · Été 2026</div>
+  <h1 class="title">L'<em>éthique</em> en informatique</h1>
+  <p class="subtitle">Guide d'étude complet de la séance 4 — chaque concept, chaque terme et chaque question expliqués en profondeur.</p>
+  <div class="meta-row">
+    <span class="chip">Séance 4</span>
+    <span class="chip">Didem Demirag</span>
+    <span class="chip">26 mai 2026</span>
+    <span class="chip">65 diapositives → 1 guide</span>
+  </div>
+</header>
+
+<nav class="toc">
+  <h2>Plan du guide</h2>
+  <ol>
+    <li><a href="#intro">Qu'est-ce que l'éthique ?</a></li>
+    <li><a href="#kant">Kant vs utilitarisme</a></li>
+    <li><a href="#codes">Les 3 types de codes</a></li>
+    <li><a href="#commandements">Les 10 commandements</a></li>
+    <li><a href="#deonto">Codes de déontologie au Québec</a></li>
+    <li><a href="#acm">Code de l'ACM</a></li>
+    <li><a href="#procedures">Éthique des procédures</a></li>
+    <li><a href="#recherche-sujets">Sujets de recherche éthique</a></li>
+    <li><a href="#cybernetique">La cybernétique (Wiener)</a></li>
+    <li><a href="#agents">Éthique des agents artificiels</a></li>
+    <li><a href="#asimov">Les lois d'Asimov</a></li>
+    <li><a href="#formalisation">Formaliser l'éthique</a></li>
+    <li><a href="#robot-futur">Le robot du futur</a></li>
+    <li><a href="#responsabilite-penale">Responsabilité des robots</a></li>
+    <li><a href="#voiture">Cas : la voiture autonome</a></li>
+    <li><a href="#augmente">L'homme augmenté</a></li>
+    <li><a href="#artefacts">Responsabilité morale (5 règles)</a></li>
+    <li><a href="#donnees">Données massives & prédiction</a></li>
+    <li><a href="#iot">Internet des objets</a></li>
+    <li><a href="#recherche-info">Éthique de la recherche (IRB)</a></li>
+    <li><a href="#phishing">Le dilemme du hameçonnage</a></li>
+    <li><a href="#blanchiment">Blanchiment éthique</a></li>
+    <li><a href="#dp">Confidentialité différentielle</a></li>
+    <li><a href="#article">Analyser un article scientifique</a></li>
+    <li><a href="#absentia">Exemple : Absentia</a></li>
+    <li><a href="#projet">Le projet de session</a></li>
+    <li><a href="#examen">★ Questions d'examen</a></li>
+  </ol>
+</nav>
+
+<!-- ===================== 1 ===================== -->
+<section id="intro">
+  <span class="sec-num">Section 01</span>
+  <h2 class="sec">Qu'est-ce que l'éthique ?</h2>
+
+  <div class="def">
+    <span class="term">Définition centrale</span>
+    <p><b>Éthique</b> : c'est la branche de la philosophie qui cherche à <strong>systématiser, défendre et recommander</strong> des jugements de valeur sur ce qui est « bien » et « mal ».</p>
+  </div>
+
+  <p>Décortiquons les trois verbes, parce qu'ils résument tout :</p>
+  <ul>
+    <li><strong>Systématiser</strong> : ne pas juger au cas par cas selon l'humeur, mais bâtir un système cohérent de règles et de principes.</li>
+    <li><strong>Défendre</strong> : être capable de <em>justifier</em> pourquoi une chose est bien ou mal, avec des arguments rationnels (pas seulement « parce que c'est comme ça »).</li>
+    <li><strong>Recommander</strong> : proposer une ligne de conduite, dire comment on <em>devrait</em> agir.</li>
+  </ul>
+
+  <h4>Éthique, morale et droit : trois choses différentes</h4>
+  <p>Le cours dit que l'éthique « <em>précède souvent et complémente les notions de la morale et du droit</em> ». Voici la nuance, qui revient souvent à l'examen :</p>
+  <table class="tbl">
+    <tr><th>Notion</th><th>Ce que c'est</th><th>Exemple</th></tr>
+    <tr><td><strong>Éthique</strong></td><td>La réflexion <em>rationnelle</em> sur ce qui est bien/mal. On se demande « pourquoi ? »</td><td>« Est-il juste de collecter des données sans prévenir l'utilisateur ? »</td></tr>
+    <tr><td><strong>Morale</strong></td><td>L'ensemble des <em>valeurs admises</em> par un groupe ou une culture (ce qui « se fait » ou non).</td><td>« Mentir, c'est mal. »</td></tr>
+    <tr><td><strong>Droit</strong></td><td>Les <em>règles écrites et obligatoires</em>, sanctionnées par l'État.</td><td>La Loi 25 sur la protection des renseignements personnels.</td></tr>
+  </table>
+  <p>« <strong>Précède</strong> » veut dire que l'éthique vient souvent <em>avant</em> la loi : on réfléchit d'abord à ce qui est juste, puis la société transforme parfois cette réflexion en loi. « <strong>Complémente</strong> » : même quand une loi existe, l'éthique continue de poser des questions que la loi ne couvre pas.</p>
+
+  <h4>Pourquoi parler d'éthique « informatique » ?</h4>
+  <p><em class="lead">Question fondamentale du cours : quelles sont les spécificités de l'éthique informatique ?</em></p>
+  <p>L'idée clé : des domaines comme la <strong>médecine</strong> ou la <strong>biologie</strong> ont une tradition éthique <strong>beaucoup plus mature</strong> que l'informatique. Les médecins ont le serment d'Hippocrate depuis l'Antiquité, des comités d'éthique solides, des règles bien rodées. L'informatique, elle, est jeune : ses dilemmes (IA, vie privée, données massives) sont récents et la réflexion éthique est encore en train de se construire. C'est exactement le sujet de ce cours : combler ce retard.</p>
+</section>
+
+<!-- ===================== 2 ===================== -->
+<section id="kant">
+  <span class="sec-num">Section 02</span>
+  <h2 class="sec">Deux grandes éthiques qui s'opposent</h2>
+  <p>Le cours présente deux écoles de pensée opposées. C'est <strong>le</strong> contraste fondamental à connaître, et il revient dans presque tous les cas pratiques (voiture autonome, robots, etc.).</p>
+
+  <div class="compare">
+    <div class="card a">
+      <h4>Éthique du devoir — Kant</h4>
+      <p><strong>« Il faut agir en fonction de ce qu'on croit être juste de faire. »</strong></p>
+      <p>On juge l'<strong>action elle-même</strong>, pas ses résultats. Certaines choses sont bonnes ou mauvaises <em>en soi</em>, peu importe ce qui en découle. On parle d'éthique <strong>déontologique</strong> (du grec <em>deon</em> = le devoir).</p>
+      <p><em>Exemple :</em> mentir est mal, même si le mensonge produit un bon résultat.</p>
+    </div>
+    <div class="card b">
+      <h4>Éthique du bien — Utilitarisme</h4>
+      <p><strong>« On ne doit juger un acte qu'en fonction de ses conséquences. »</strong></p>
+      <p>Si les <strong>conséquences</strong> sont bonnes, alors l'acte est justifié. On parle d'éthique <strong>conséquentialiste</strong>. L'utilitarisme classique vise « le plus grand bonheur pour le plus grand nombre ».</p>
+      <p><em>Exemple :</em> mentir devient acceptable s'il sauve une vie.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <span class="ctitle">Pourquoi c'est crucial</span>
+    <p>Garde ces deux lunettes en tête : devant n'importe quel dilemme du cours, demande-toi <strong>« Que dirait Kant ? »</strong> (l'action est-elle juste en soi ?) et <strong>« Que dirait l'utilitariste ? »</strong> (le bilan des conséquences est-il positif ?). La voiture autonome qui sacrifie 1 personne pour en sauver 4 est un raisonnement <strong>utilitariste</strong> typique.</p>
+  </div>
+</section>
+
+<!-- ===================== 3 ===================== -->
+<section id="codes">
+  <span class="sec-num">Section 03</span>
+  <h2 class="sec">Les trois types de codes</h2>
+  <p>Le cours distingue trois documents qui se ressemblent mais ne sont pas pareils. Bien les distinguer est un classique d'examen.</p>
+
+  <div class="def">
+    <span class="term">Code d'éthique</span>
+    <p>Énonce les <strong>valeurs et principes</strong> à connotation morale ou civique auxquels adhère une organisation, et qui servent de <strong>guide</strong> à un individu ou un groupe pour juger de la justesse de ses comportements.</p>
+    <p style="margin-bottom:0;font-size:.92rem;color:var(--ink-soft);">→ Plutôt <em>général et inspirant</em> : « Voici nos valeurs. »</p>
+  </div>
+
+  <div class="def">
+    <span class="term">Code de déontologie</span>
+    <p>Texte <strong>réglementaire</strong> (donc à valeur juridique) énonçant les <strong>règles de conduite professionnelle</strong> qui régissent l'exercice d'une profession, et décrivant les <strong>devoirs, obligations et responsabilités</strong> de ceux qui l'exercent.</p>
+    <p style="margin-bottom:0;font-size:.92rem;color:var(--ink-soft);">→ Plutôt <em>détaillé, contraignant et orienté pratique</em> : « Voici ce que tu dois faire, sous peine de sanction. »</p>
+  </div>
+
+  <div class="def">
+    <span class="term">Code de conduite</span>
+    <p>Ensemble de <strong>règles écrites</strong> qu'une entreprise ou un organisme s'engage à observer et qui régissent la conduite de son <strong>personnel et de ses dirigeants</strong>.</p>
+    <p style="margin-bottom:0;font-size:.92rem;color:var(--ink-soft);">→ Exemple donné : la <em>Charte des droits et responsabilités des étudiant·e·s de l'UQAM</em>.</p>
+  </div>
+
+  <p><strong>Le moyen mnémotechnique :</strong> éthique = <em>valeurs</em> (le « pourquoi »), déontologie = <em>règles d'une profession</em> (le « comment professionnel », avec sanctions), conduite = <em>règles internes d'une organisation</em>.</p>
+</section>
+
+<!-- ===================== 4 ===================== -->
+<section id="commandements">
+  <span class="sec-num">Section 04</span>
+  <h2 class="sec">Les dix commandements de l'éthique informatique</h2>
+  <p>Proposés par le <strong>Computer Ethics Institute</strong>. Ce sont des principes simples, formulés en « tu ne… » (ton biblique volontaire). Tu n'as pas à les réciter mot pour mot, mais à comprendre l'esprit. Voici les 10 reformulés clairement :</p>
+
+  <ol class="norm">
+    <li><strong>Ne pas nuire à autrui</strong> avec l'ordinateur (le principe de base).</li>
+    <li><strong>Ne pas interférer</strong> avec le travail informatique des autres (ex. : ne pas saboter leur système).</li>
+    <li><strong>Ne pas espionner</strong> les fichiers d'autrui (respect de la vie privée).</li>
+    <li><strong>Ne pas voler</strong> à l'aide d'un ordinateur (fraude, détournement).</li>
+    <li><strong>Ne pas propager de fausses rumeurs</strong> (désinformation).</li>
+    <li><strong>Ne pas copier/utiliser des logiciels non payés</strong> (piratage, respect des licences).</li>
+    <li><strong>Ne pas utiliser les ressources d'autrui sans autorisation</strong> ni compensation (ex. : voler de la puissance de calcul, du réseau).</li>
+    <li><strong>Ne pas s'approprier les acquis intellectuels d'autrui</strong> (plagiat, propriété intellectuelle).</li>
+    <li><strong>Penser aux conséquences sociales</strong> des programmes qu'on écrit (responsabilité du développeur).</li>
+    <li><strong>Toujours utiliser l'ordinateur avec considération et respect</strong> pour autrui.</li>
+  </ol>
+  <p>On reconnaît un mélange des deux éthiques : les commandements 1 et 9 sont <em>conséquentialistes</em> (penser aux effets), tandis que d'autres (3, 8) ressemblent à des <em>devoirs</em> absolus.</p>
+</section>
+
+<!-- ===================== 5 ===================== -->
+<section id="deonto">
+  <span class="sec-num">Section 05</span>
+  <h2 class="sec">Les codes de déontologie au Québec</h2>
+
+  <div class="def">
+    <span class="term">Code de déontologie (définition étendue)</span>
+    <p>Ensemble de <strong>droits et de devoirs</strong> qui régissent une profession, la conduite de ceux qui l'exercent, ainsi que les <strong>rapports</strong> entre ces personnes et leurs clients ou le public.</p>
+  </div>
+
+  <p><strong>Professions qui ont un code de déontologie :</strong> policiers, avocats, psychologues, médecins, experts-comptables… et, en informatique, certaines associations.</p>
+
+  <h4>Le contexte québécois</h4>
+  <ul>
+    <li>Il existe au Québec un <strong>code de déontologie des informaticiens·ne·s datant de 1994</strong>, porté par l'<strong>APIIQ</strong> (Association professionnelle des informaticiens et informaticiennes du Québec).</li>
+    <li>Ce code décrit les <strong>devoirs et obligations envers le public, le client et les collègues</strong>.</li>
+    <li>Point important : un code de déontologie est <strong>plus détaillé et plus orienté vers la pratique</strong> qu'un code éthique (ça rejoint la distinction de la section 3).</li>
+  </ul>
+
+  <h4>Exemples officiels montrés en classe</h4>
+  <table class="tbl">
+    <tr><th>Code</th><th>Référence légale</th><th>À retenir</th></tr>
+    <tr><td>Technologues professionnels</td><td>C-26, r. 258 (LégisQuébec)</td><td>Structure type : Chapitre I = définitions ; II = devoirs envers le public ; III = devoirs envers le client et la profession (compétence, indépendance, secret professionnel, publicité…).</td></tr>
+    <tr><td>Ingénieurs</td><td>I-9, r. 6 (LégisQuébec)</td><td>Même logique : dispositions générales, devoirs envers le public, le client, la profession. Encadré par l'<strong>OIQ</strong>.</td></tr>
+  </table>
+
+  <div class="def">
+    <span class="term">OIQ — Ordre des ingénieurs du Québec</span>
+    <p>La déontologie y est définie comme « <strong>tous les devoirs et obligations qui régissent la conduite des membres d'une profession</strong> ». Son objectif premier est la <strong>protection du public</strong>, mais elle vise aussi à <strong>préserver l'honneur de la profession</strong>. En 2010, l'OIQ a même créé une <strong>ligne éthique</strong> (1-877-ETHIQUE) pour conseiller le public et les ingénieurs.</p>
+  </div>
+
+  <div class="def">
+    <span class="term">AQIII</span>
+    <p>Association québécoise des informaticiennes et informaticiens <strong>indépendants</strong> (les pigistes/consultants). Son code d'éthique est « un ensemble de règles guidant les comportements et les actions des membres ». Il insiste notamment sur la <strong>transparence</strong> dans les situations susceptibles de générer des <strong>conflits d'intérêts</strong>.</p>
+  </div>
+
+  <p><strong>L'idée à retenir de toute la section :</strong> en informatique, contrairement à la médecine, il n'y a pas <em>un</em> ordre professionnel unique et obligatoire — il y a plutôt plusieurs associations (APIIQ, AQIII…) et les informaticiens peuvent relever de l'ordre des ingénieurs ou des technologues selon leur titre.</p>
+</section>
+
+<!-- ===================== 6 ===================== -->
+<section id="acm">
+  <span class="sec-num">Section 06</span>
+  <h2 class="sec">Le code de l'ACM</h2>
+  <div class="def">
+    <span class="term">ACM</span>
+    <p><strong>Association for Computing Machinery</strong> — la grande association internationale des professionnels de l'informatique.</p>
+  </div>
+  <p>Elle publie deux codes :</p>
+  <ul>
+    <li><strong>Code of Ethics and Professional Conduct</strong> — général, pour tous les informaticiens.</li>
+    <li><strong>Software Engineering Code</strong> — plus spécifique, pour le génie logiciel. (Tous deux disponibles en français.)</li>
+  </ul>
+  <p>Le code est organisé en <strong>8 sections</strong> correspondant aux différentes relations du professionnel :</p>
+  <p style="text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.9rem;background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:14px;">
+    public &nbsp;·&nbsp; clients et employeurs &nbsp;·&nbsp; produits &nbsp;·&nbsp; jugement &nbsp;·&nbsp; gestion &nbsp;·&nbsp; profession &nbsp;·&nbsp; collègues &nbsp;·&nbsp; soi-même
+  </p>
+  <p>Son but : <strong>formaliser la morale</strong> que les membres doivent adopter dans l'exercice de leurs fonctions.</p>
+</section>
+
+<!-- ===================== 7 ===================== -->
+<section id="procedures">
+  <span class="sec-num">Section 07</span>
+  <h2 class="sec">L'éthique des procédures</h2>
+  <p>Plutôt que de fixer une liste de bonnes/mauvaises actions, cette approche définit <strong>comment on décide</strong> de ce qui est bien dans le cyberespace. C'est une éthique du <em>processus de décision</em>.</p>
+  <div class="def">
+    <span class="term">Éthique des procédures</span>
+    <p>Elle définit les <strong>règles permettant d'agir et de décider</strong> dans le cyberespace.</p>
+  </div>
+  <p>Comment l'implémenter ? Par une <strong>discussion « libre et éclairée »</strong>, sur le modèle d'une <strong>communauté de savants</strong> :</p>
+  <ul>
+    <li>Chaque décision doit se fonder sur un <strong>dialogue qui respecte toutes les opinions et tous les arguments</strong>.</li>
+    <li>Il est essentiel de définir des procédures qui <strong>garantissent l'égalité d'accès à la discussion</strong> (personne n'est exclu du débat).</li>
+  </ul>
+  <p>En clair : on ne décrète pas la bonne réponse d'en haut ; on l'obtient par un débat ouvert, rationnel et équitable. (C'est une idée proche de l'éthique de la discussion d'Habermas, si tu veux un nom à citer.)</p>
+</section>
+
+<!-- ===================== 8 ===================== -->
+<section id="recherche-sujets">
+  <span class="sec-num">Section 08</span>
+  <h2 class="sec">Les grands sujets de recherche éthique en informatique</h2>
+  <p>Le cours liste les chantiers actuels. Chacun pose une <strong>tension</strong> à comprendre :</p>
+
+  <div class="qbox">
+    <span class="qlabel">Chiffrement</span>
+    <p class="qtext">Doit-on favoriser un chiffrement sûr pour <em>tout le monde</em>, ou permettre des « portes dérobées » (<em>backdoors</em>) pour que les États accèdent aux données au nom de la sécurité ?</p>
+    <span class="alabel">Tension</span> : vie privée/sécurité individuelle &nbsp;⇄&nbsp; sécurité nationale. Le problème, c'est qu'une porte dérobée « pour les bons » peut aussi être exploitée par « les méchants ».
+  </div>
+
+  <div class="qbox">
+    <span class="qlabel">Vie privée et personnalisation</span>
+    <p class="qtext">Comment réconcilier la protection de la vie privée avec l'utilisation de services personnalisés ?</p>
+    <span class="alabel">Tension</span> : pour personnaliser (recommandations, pub ciblée), il faut des données ; or collecter ces données menace la vie privée.
+  </div>
+
+  <div class="qbox">
+    <span class="qlabel">Vie privée et données massives</span>
+    <p class="qtext">Parmi toutes les inférences rendues possibles par les données massives, lesquelles sont éthiques ?</p>
+    <span class="alabel">Tension</span> : croiser des données anodines peut révéler des informations très sensibles (orientation, santé, opinions). Toutes les inférences <em>possibles</em> ne sont pas <em>acceptables</em>.
+  </div>
+
+  <p>Et enfin un sujet transversal : l'<strong>éthique des robots</strong>, qu'ils soient réels (physiques) ou virtuels (logiciels) — c'est le fil rouge des sections suivantes.</p>
+</section>
+
+<!-- ===================== 9 ===================== -->
+<section id="cybernetique">
+  <span class="sec-num">Section 09</span>
+  <h2 class="sec">L'apparition de la cybernétique</h2>
+  <div class="def">
+    <span class="term">Cybernétique</span>
+    <p>La <strong>science des mécanismes autogouvernés et du contrôle</strong>. Autrement dit, l'étude de la façon dont un système (machine, organisme, société) se <strong>régule lui-même</strong> grâce à l'information et à la rétroaction (<em>feedback</em>).</p>
+  </div>
+  <p>Le fondateur : <strong>Norbert Wiener</strong>, mathématicien américain, qui a posé les bases de la théorie en <strong>1947</strong>. Pourquoi est-il important pour un cours d'éthique ? Parce que dès le départ, il a réfléchi aux <strong>conséquences sociales</strong> des machines intelligentes. Ses réflexions :</p>
+  <ul>
+    <li>Le <strong>rôle de l'information</strong> dans l'organisation sociale.</li>
+    <li>L'<strong>entropie de l'information</strong> (notion empruntée à la physique : la tendance au désordre / à la perte d'information).</li>
+    <li>Les <strong>entités autonomes capables d'apprentissage</strong> (l'ancêtre conceptuel de l'IA actuelle).</li>
+    <li>La <strong>question du travail et du chômage</strong> : déjà en 1947, il anticipait que l'automatisation détruirait des emplois — un débat brûlant encore aujourd'hui.</li>
+  </ul>
+</section>
+
+<!-- ===================== 10 ===================== -->
+<section id="agents">
+  <span class="sec-num">Section 10</span>
+  <h2 class="sec">L'éthique des agents artificiels</h2>
+  <div class="def">
+    <span class="term">Agent artificiel</span>
+    <p>Une entité logicielle ou robotique capable de <strong>percevoir son environnement et d'agir</strong> de façon autonome pour atteindre des buts (un robot, un assistant IA, un véhicule autonome…).</p>
+  </div>
+  <p><em class="lead">Question centrale : comment faire pour que les agents artificiels agissent de manière éthique ?</em></p>
+
+  <p>Le cours pose des sous-questions concrètes :</p>
+  <div class="qbox">
+    <span class="qlabel">Question</span>
+    <p class="qtext">Est-ce que les agents artificiels doivent pouvoir mentir ?</p>
+    <span class="alabel">Enjeu</span> : un mensonge « bienveillant » peut parfois protéger (ne pas révéler une info dangereuse), mais autoriser le mensonge mine la confiance. C'est exactement le clivage Kant (mentir = mal en soi) vs utilitarisme (cela dépend des conséquences).
+  </div>
+  <div class="qbox">
+    <span class="qlabel">Question</span>
+    <p class="qtext">Doivent-ils donner toute l'information dont ils disposent à quiconque la demande ?</p>
+    <span class="alabel">Enjeu</span> : non, pas forcément — divulguer certaines infos peut nuire (vie privée d'autrui, sécurité). La transparence totale n'est pas toujours éthique.
+  </div>
+
+  <h4>Trois approches pour rendre un agent « éthique »</h4>
+  <ul>
+    <li><strong>Moralité des agents</strong> : doit-on leur imposer des règles de comportement social, comme à un humain ?</li>
+    <li><strong>Apprentissage</strong> : l'agent <em>apprend</em> les règles éthiques par l'expérience (mais il peut alors apprendre de mauvais comportements à partir de mauvaises données).</li>
+    <li><strong>Principe d'éthique calculatrice</strong> : on code des <strong>critères formels</strong> explicites — l'exemple type étant les <strong>lois d'Asimov</strong> (section suivante).</li>
+  </ul>
+</section>
+
+<!-- ===================== 11 ===================== -->
+<section id="asimov">
+  <span class="sec-num">Section 11</span>
+  <h2 class="sec">Les lois de la robotique (Isaac Asimov)</h2>
+  <p>Imaginées par l'écrivain de science-fiction <strong>Isaac Asimov</strong>. Elles sont l'exemple le plus célèbre d'« éthique calculatrice » : des règles formelles, hiérarchisées, qu'un robot devrait suivre. Attention à l'ordre — il est <strong>strictement prioritaire</strong> (la loi 1 l'emporte sur la 2, qui l'emporte sur la 3) :</p>
+  <ol class="norm">
+    <li><strong>Loi 1</strong> — Un robot ne peut porter atteinte à un être humain, ni, restant passif, permettre qu'un être humain soit exposé au danger.</li>
+    <li><strong>Loi 2</strong> — Un robot doit obéir aux ordres d'un être humain, <em>sauf</em> si ces ordres entrent en conflit avec la Loi 1.</li>
+    <li><strong>Loi 3</strong> — Un robot doit protéger sa propre existence, <em>tant que</em> cela n'entre pas en conflit avec la Loi 1 ou la Loi 2.</li>
+  </ol>
+  <div class="callout">
+    <span class="ctitle">Le piège à comprendre</span>
+    <p>Ces lois semblent parfaites, mais Asimov lui-même a écrit des histoires montrant qu'elles <strong>se contredisent</strong> en pratique. Que faire si un robot doit choisir <em>quel</em> humain protéger ? Comment définir « danger » ? C'est précisément la <strong>limite de l'éthique calculatrice</strong> : on ne peut pas tout réduire à quelques règles formelles. C'est un excellent point à mentionner à l'examen.</p>
+  </div>
+</section>
+
+<!-- ===================== 12 ===================== -->
+<section id="formalisation">
+  <span class="sec-num">Section 12</span>
+  <h2 class="sec">Formaliser l'éthique (la rendre calculable)</h2>
+  <p><strong>Objectifs :</strong> implémenter une « éthique computationnelle » (rendre l'éthique exécutable par une machine) et, au passage, <strong>clarifier nos propres conceptions éthiques</strong> (en essayant de coder une règle, on découvre ses ambiguïtés).</p>
+  <p>Les cinq approches mentionnées — tu dois savoir reconnaître chacune :</p>
+  <table class="tbl">
+    <tr><th>Approche</th><th>Idée en une phrase</th></tr>
+    <tr><td><strong>Formalisation mathématique / théorie des jeux</strong></td><td>Modéliser les décisions comme des « jeux » avec gains et stratégies optimales — approche purement formelle.</td></tr>
+    <tr><td><strong>Logiques déontiques</strong></td><td>Une logique spéciale qui manipule les notions d'<strong>obligation, interdiction et permission</strong> (du grec <em>deon</em>, le devoir).</td></tr>
+    <tr><td><strong>Raisonnement à base de cas</strong></td><td>Décider par analogie avec des <strong>cas passés</strong> (comme la jurisprudence en droit).</td></tr>
+    <tr><td><strong>Apprentissage statistique</strong></td><td>La machine <strong>apprend</strong> le bon comportement à partir d'exemples, via un algorithme d'apprentissage.</td></tr>
+    <tr><td><strong>Logiques non-monotones</strong></td><td>Logiques qui permettent de <strong>réviser une conclusion</strong> quand de nouveaux faits apparaissent (le contraire de la logique classique, où une vérité reste vraie pour toujours).</td></tr>
+  </table>
+  <div class="def">
+    <span class="term">À comprendre : « non-monotone »</span>
+    <p>En logique classique (monotone), ajouter une info ne peut jamais annuler une conclusion. Dans la vie réelle, si : « Les oiseaux volent → Titi est un oiseau → Titi vole », et qu'on apprend ensuite « Titi est un pingouin », il faut <strong>réviser</strong> la conclusion. Les logiques non-monotones modélisent ce bon sens.</p>
+  </div>
+</section>
+
+<!-- ===================== 13 ===================== -->
+<section id="robot-futur">
+  <span class="sec-num">Section 13</span>
+  <h2 class="sec">À quoi ressemblera le robot du futur ?</h2>
+  <p><em class="lead">Le robot sera-t-il un auxiliaire de l'homme, son égal, ou supérieur à l'homme ?</em></p>
+  <p>La crainte exprimée : grâce aux progrès de l'IA, la machine pourrait devenir <strong>plus intelligente que l'homme</strong>. Le cours cite <strong>Stephen Hawking</strong> :</p>
+  <blockquote>
+    Les formes primitives d'intelligence artificielle se sont déjà montrées très utiles, mais le développement d'une IA complète pourrait mettre fin à l'humanité. Une fois développée, elle se redéfinirait d'elle-même de plus en plus vite, et les humains — limités par une lente évolution biologique — ne pourraient pas rivaliser et seraient dépassés.
+    <cite>— Reformulation de la citation de Stephen Hawking citée en cours</cite>
+  </blockquote>
+  <p>Autres questions ouvertes : les robots du futur seront-ils « humains », capables d'<strong>avoir des émotions</strong>, de <strong>percevoir celles des autres</strong> et d'<strong>exprimer des sentiments</strong> ? Et sur le plan social :</p>
+  <div class="qbox">
+    <span class="qlabel">Question (art et IA)</span>
+    <p class="qtext">À qui appartient l'œuvre réalisée par un robot artiste capable de créer des œuvres originales grâce à son autonomie ?</p>
+    <span class="alabel">Enjeu</span> : le droit d'auteur suppose un <em>auteur humain</em>. Si la machine crée seule, est-ce l'œuvre du programmeur ? du propriétaire ? de personne ? Question juridique non résolue.
+  </div>
+  <div class="qbox">
+    <span class="qlabel">Question (emploi)</span>
+    <p class="qtext">Les robots vont-ils remplacer les humains dans de nombreux emplois ?</p>
+    <span class="alabel">Enjeu</span> : c'est la question du chômage technologique déjà soulevée par Wiener en 1947 (section 9). Le débat reste vif.
+  </div>
+</section>
+
+<!-- ===================== 14 ===================== -->
+<section id="responsabilite-penale">
+  <span class="sec-num">Section 14</span>
+  <h2 class="sec">La responsabilité pénale des robots</h2>
+  <p><em class="lead">Qui est responsable, civilement ou pénalement, en cas de dysfonctionnement d'un robot ? Le créateur, le possesseur, ou l'utilisateur ?</em></p>
+  <div class="def">
+    <span class="term">Civil vs pénal</span>
+    <p>Responsabilité <strong>civile</strong> = devoir de <em>réparer/indemniser</em> un dommage (payer). Responsabilité <strong>pénale</strong> = être <em>puni</em> pour une infraction (amende, prison). La grande question : une machine peut-elle être « coupable » ?</p>
+  </div>
+  <p><strong>L'exemple du cours :</strong> le robot domestique de votre grand-mère se trompe dans le dosage de son médicament et aggrave son état. Qui est responsable — le fabricant qui a conçu le robot, le propriétaire qui l'a acheté, ou la personne qui l'utilisait ?</p>
+  <p><strong>Une proposition de certains chercheurs :</strong> accorder une <strong>personnalité juridique au robot</strong> — c'est-à-dire en faire une « personne » au sens du droit, capable d'être tenue responsable —, en particulier pour les robots dotés d'une forme d'intelligence ou de perception. (C'est très débattu : cela pourrait aussi servir de paravent pour déresponsabiliser les fabricants.)</p>
+</section>
+
+<!-- ===================== 15 ===================== -->
+<section id="voiture">
+  <span class="sec-num">Section 15</span>
+  <h2 class="sec">Cas pratique : la voiture autonome</h2>
+  <p>C'est <strong>le</strong> cas vedette du cours — apprends-le bien, il a toutes les chances d'apparaître à l'examen.</p>
+
+  <h4>Le scénario</h4>
+  <ol class="norm">
+    <li>Une voiture <strong>A</strong> tente de dépasser une voiture <strong>B</strong> par la gauche.</li>
+    <li>Elle se retrouve soudain <strong>face à une voiture C</strong> qui arrive en sens inverse.</li>
+    <li>La voiture A se déporte brusquement à droite pour éviter C, et <strong>percute B</strong>.</li>
+    <li>Pourquoi ce choix ? Le capteur de A a détecté <strong>4 passagers dans C</strong> et <strong>1 seul dans B</strong>.</li>
+    <li>L'algorithme de A a donc <strong>minimisé le nombre de morts potentiels</strong> : il a sacrifié 1 personne (dans B) pour en sauver 4 (dans C).</li>
+  </ol>
+
+  <div class="callout">
+    <span class="ctitle">L'analyse éthique</span>
+    <p>Ce raisonnement « 1 mort vaut mieux que 4 » est de l'<strong>utilitarisme pur</strong> (section 2) : on juge l'acte par ses conséquences. Mais un <strong>kantien</strong> objecterait que <em>choisir activement</em> de sacrifier la personne dans B la traite comme un simple moyen, ce qui est inacceptable en soi. C'est la version moderne du fameux <em>« dilemme du tramway »</em>.</p>
+  </div>
+
+  <div class="qbox">
+    <span class="qlabel">La question du cours</span>
+    <p class="qtext">Qui est le responsable ? La personne dans la voiture A (qui était en retard) ? L'algorithme de l'IA ? Le concepteur de l'algorithme ? Le capteur qui a compté les passagers ?</p>
+    <span class="alabel">Comment répondre</span> : il n'y a pas <em>une</em> bonne réponse — c'est le but de la question. La responsabilité est <strong>diluée</strong> entre plusieurs acteurs. C'est exactement ce que les « 5 règles » de la section 17 essaient de clarifier : chacun (concepteur, déployeur, utilisateur) garde une part de responsabilité pour les effets <em>raisonnablement prévisibles</em>.
+  </div>
+</section>
+
+<!-- ===================== 16 ===================== -->
+<section id="augmente">
+  <span class="sec-num">Section 16</span>
+  <h2 class="sec">Vers un homme augmenté</h2>
+  <div class="def">
+    <span class="term">Transhumanisme</span>
+    <p>Mouvement qui prône l'<strong>augmentation des capacités humaines</strong> (physiques et mentales) grâce aux technologies — jusqu'à transformer la condition humaine elle-même.</p>
+  </div>
+  <p>Exemples d'« augmentation » cités : <strong>allonger la durée de vie, réparer des organes défaillants, faciliter la mobilité</strong> (prothèses, implants…).</p>
+  <div class="callout">
+    <span class="ctitle">Le risque éthique principal</span>
+    <p>Une <strong>« humanité à deux vitesses »</strong> : un fossé entre ceux qui <em>peuvent se payer</em> ces améliorations et ceux qui ne le peuvent pas. C'est un problème d'<strong>équité et d'accès</strong>.</p>
+  </div>
+  <p>Le cours illustre justement l'inégalité d'accès avec un graphique du <strong>Pew Research Center (2019)</strong> : aux États-Unis, l'adoption des technologies (téléphone intelligent, ordinateur, Internet à domicile, tablette) est <strong>nettement plus faible chez les ménages à faible revenu</strong>. Par exemple, posséder « tout ce qui précède » concernait 18 % des moins de 30 000 $ contre 64 % des 100 000 $ et plus. Conclusion : si l'accès aux technologies de base est déjà inégal, l'accès aux technologies d'<em>augmentation</em> risque de l'être encore plus.</p>
+</section>
+
+<!-- ===================== 17 ===================== -->
+<section id="artefacts">
+  <span class="sec-num">Section 17</span>
+  <h2 class="sec">La responsabilité morale pour les artefacts computationnels</h2>
+  <p>C'est une section dense mais importante. Elle propose un cadre formel (issu d'un article IEEE) avec <strong>5 règles</strong>. D'abord, deux notions à distinguer :</p>
+  <div class="compare">
+    <div class="card a">
+      <h4>Artefact computationnel</h4>
+      <p>L'objet technique <strong>isolé</strong> : un logiciel, un algorithme, un système informatique pris en lui-même.</p>
+    </div>
+    <div class="card b">
+      <h4>Système socio-technique</h4>
+      <p>L'ensemble plus <strong>global</strong> : l'artefact <em>plus</em> les humains, les organisations, les usages et le contexte social autour de lui.</p>
+    </div>
+  </div>
+  <p>L'objectif est de définir la responsabilité morale dans ces <strong>deux contextes</strong>. Voici les 5 règles, simplifiées :</p>
+
+  <h4>Règles 1 à 3 — l'artefact isolé</h4>
+  <ul>
+    <li><strong>Règle 1</strong> : ceux qui <strong>conçoivent, développent ou déploient</strong> un artefact sont moralement responsables de cet artefact et de ses <strong>effets prévisibles</strong>. Cette responsabilité est <strong>partagée</strong> avec les autres acteurs qui l'utilisent sciemment dans un système socio-technique.</li>
+    <li><strong>Règle 2</strong> : la responsabilité partagée <strong>n'est pas un jeu à somme nulle</strong>. Autrement dit, le fait que d'autres soient impliqués <strong>ne réduit PAS</strong> ta propre responsabilité. (Tu ne peux pas dire « ce n'est pas ma faute, il y avait d'autres gens. ») Chacun répond des comportements de l'artefact <strong>dans la mesure où ils étaient raisonnablement prévisibles</strong> par lui.</li>
+    <li><strong>Règle 3</strong> : ceux qui <strong>utilisent sciemment</strong> un artefact sont moralement responsables de cette utilisation.</li>
+  </ul>
+
+  <div class="def">
+    <span class="term">« Jeu à somme nulle » — à comprendre</span>
+    <p>Un jeu à somme nulle, c'est quand ce que l'un gagne, l'autre le perd (le total reste constant). Dire que la responsabilité <strong>n'est PAS</strong> à somme nulle signifie : la responsabilité ne se « divise » pas en parts qui s'amenuisent quand il y a plus de monde — chacun en porte une part <strong>pleine et entière</strong>.</p>
+  </div>
+
+  <h4>Règles 4 et 5 — le système socio-technique</h4>
+  <ul>
+    <li><strong>Règle 4</strong> : on ne peut concevoir/déployer/utiliser un artefact de façon responsable <strong>sans faire un effort raisonnable</strong> pour prendre en compte le <strong>système socio-technique</strong> dans lequel il s'insère (penser au contexte réel, pas seulement à la technique).</li>
+    <li><strong>Règle 5</strong> : ceux qui conçoivent, déploient, promeuvent ou évaluent un artefact <strong>ne doivent pas tromper</strong> les utilisateurs (explicitement ou implicitement) sur l'artefact, ses effets prévisibles ou son contexte. → C'est le principe d'<strong>honnêteté/non-tromperie</strong>, qui prépare directement la section sur le « blanchiment éthique ».</li>
+  </ul>
+</section>
+
+<!-- ===================== 18 ===================== -->
+<section id="donnees">
+  <span class="sec-num">Section 18</span>
+  <h2 class="sec">Données massives et algorithmes prédictifs</h2>
+  <div class="qbox">
+    <span class="qlabel">Assurances & santé</span>
+    <p class="qtext">Les assureurs devraient-ils avoir accès aux données personnelles de leurs clients (notamment de santé) pour personnaliser en temps réel les primes des contrats ?</p>
+    <span class="alabel">Enjeu</span> : cela pourrait rendre l'assurance « plus juste » au sens du risque réel… mais aussi <strong>exclure</strong> ou faire payer cher les personnes malades ou à risque — l'inverse du principe de mutualisation de l'assurance.
+  </div>
+
+  <h4>L'exemple génétique (à retenir)</h4>
+  <p>Aux États-Unis, le <strong>Genetic Information Nondiscrimination Act (GINA, 2008)</strong> :</p>
+  <ul>
+    <li><strong>Autorise</strong> l'usage des données génétiques par les assurances vie, dépendance et invalidité ;</li>
+    <li><strong>Interdit</strong> leur usage par l'assurance maladie et par les employeurs.</li>
+  </ul>
+  <p>→ Une même donnée (l'ADN) est encadrée <strong>différemment selon l'usage</strong> : c'est un bel exemple de la façon dont le droit tente de poser des limites éthiques fines.</p>
+
+  <div class="qbox">
+    <span class="qlabel">Sécurité & preuve</span>
+    <p class="qtext">Quels usages des données pour les services de sécurité ? Le résultat d'un algorithme peut-il servir de preuve pénale ?</p>
+    <span class="alabel">Enjeu</span> : un algorithme peut se tromper (faux positifs) et reste souvent une « boîte noire » difficile à contester devant un tribunal.
+  </div>
+
+  <p><em class="lead">Question centrale de la section : comment préserver l'autonomie de la décision humaine et éviter le déterminisme ?</em> Le « déterminisme » ici, c'est le risque qu'un algorithme prédise (ou décide) votre avenir à votre place — qu'on vous traite selon ce qu'un modèle <em>prédit</em> que vous ferez, et non selon ce que vous choisissez réellement.</p>
+</section>
+
+<!-- ===================== 19 ===================== -->
+<section id="iot">
+  <span class="sec-num">Section 19</span>
+  <h2 class="sec">L'Internet des objets (IoT)</h2>
+  <div class="def">
+    <span class="term">Internet des objets</span>
+    <p>Le réseau des <strong>objets du quotidien connectés</strong> (fourchette, brosse à dents, voiture, frigo…) qui collectent et échangent des données.</p>
+  </div>
+  <p><em class="lead">Question centrale : quelle sphère d'autonomie et de vie privée reste-t-il à un être humain immergé dans l'Internet des objets ?</em></p>
+  <p>Le cours cite <strong>Evgueny Morozov</strong> pour illustrer le danger : à mesure qu'elles deviennent plus intrusives, les technologies « intelligentes » risquent de <strong>toucher à notre autonomie en supprimant des comportements que quelqu'un, quelque part, a désignés comme indésirables</strong>. Ses exemples : la fourchette intelligente nous reproche de manger trop vite, la brosse à dents nous pousse à brosser plus longtemps, les capteurs de la voiture signalent qu'on roule ou freine mal.</p>
+  <div class="callout">
+    <span class="ctitle">Le vrai problème, selon Morozov</span>
+    <p>Ce n'est pas seulement la <em>surveillance</em>, mais le <strong>nudging permanent</strong> : la technologie nous pousse en douceur à nous conformer à une norme de « bon comportement » décidée par d'autres. C'est une menace pour la <strong>liberté et l'autonomie</strong>, pas seulement pour la vie privée.</p>
+  </div>
+</section>
+
+<!-- ===================== 20 ===================== -->
+<section id="recherche-info">
+  <span class="sec-num">Section 20</span>
+  <h2 class="sec">L'éthique de la recherche en informatique</h2>
+  <div class="def">
+    <span class="term">IRB — Institutional Review Board</span>
+    <p>Aux États-Unis, la plupart des institutions de recherche ont un <strong>« comité de protection des personnes »</strong>. Son rôle : <strong>valider, superviser et évaluer</strong> toute recherche impliquant des <strong>« sujets humains »</strong>.</p>
+  </div>
+  <p>Important : ça ne concerne pas que la médecine. Ça couvre aussi les recherches <strong>« non médicales »</strong> : étude du comportement humain, sécurité informatique, mesures et expérimentations sur des réseaux impliquant des humains.</p>
+
+  <h4>Le rapport Belmont (1978) et ses 3 principes</h4>
+  <p>Le comité s'appuie sur le <strong>rapport Belmont</strong> (1978), texte fondateur de la bioéthique. Ses trois principes — <strong>à connaître par cœur</strong> :</p>
+  <table class="tbl">
+    <tr><th>Principe</th><th>Signification</th></tr>
+    <tr><td><strong>Respect de la personne</strong></td><td>Les participants doivent être <strong>libres</strong> de participer ou non, et être <strong>informés en détail</strong> sur la nature de l'étude.</td></tr>
+    <tr><td><strong>Bienveillance</strong> <em>(beneficence)</em></td><td>Les <strong>risques</strong> doivent être <strong>inférieurs aux bénéfices</strong> attendus ; les chercheurs doivent minimiser et gérer les risques.</td></tr>
+    <tr><td><strong>Équité</strong> <em>(justice)</em></td><td>Les risques <strong>et</strong> les bénéfices doivent être <strong>distribués équitablement</strong> (on ne fait pas porter les risques à un groupe vulnérable pendant que d'autres récoltent les bénéfices).</td></tr>
+  </table>
+
+  <h4>Le consentement éclairé</h4>
+  <div class="def">
+    <span class="term">Consentement libre et éclairé</span>
+    <p>Avant toute collecte de données personnelles, il faut normalement obtenir l'accord d'une personne qui <strong>comprend pleinement</strong> ce à quoi elle consent. L'usage de la <strong>tromperie</strong> (ex. : mentir sur le but de la collecte) viole le principe de respect de la personne.</p>
+  </div>
+  <p><strong>Le dilemme :</strong> certaines expériences sont <em>impossibles</em> sans un peu de tromperie. L'exemple parfait → le hameçonnage (section suivante).</p>
+</section>
+
+<!-- ===================== 21 ===================== -->
+<section id="phishing">
+  <span class="sec-num">Section 21</span>
+  <h2 class="sec">Le dilemme du hameçonnage (phishing)</h2>
+  <div class="def">
+    <span class="term">Hameçonnage</span>
+    <p>Technique d'attaque où on se fait passer pour une source de confiance (banque, employeur…) afin de tromper la victime et lui soutirer des informations (mots de passe, etc.).</p>
+  </div>
+  <p><strong>Le problème de recherche :</strong> pour étudier le hameçonnage de façon valide, les chercheurs doivent envoyer de <strong>fausses attaques que la victime ne peut pas distinguer des vraies</strong>. Or cela exige de <strong>tromper</strong> les sujets et donc de renoncer (partiellement) au consentement éclairé. Le cours souligne que ces questions sont <strong>controversées</strong> et qu'il y a <strong>peu de consensus</strong> chez les membres des IRB et les éthiciens, d'autant que la recherche en ligne (et le phishing en particulier) est relativement nouvelle pour eux.</p>
+
+  <h4>Comment atteindre un juste milieu</h4>
+  <p>Un IRB peut <strong>autoriser la tromperie</strong> et accorder une <strong>dispense ou une modification</strong> du consentement éclairé, mais seulement si <strong>toutes</strong> ces conditions sont réunies — mémorise-les comme une checklist :</p>
+  <ol class="norm">
+    <li>La recherche ne comporte qu'un <strong>risque minimal</strong> pour les participants.</li>
+    <li>La dispense ne portera <strong>pas atteinte aux droits ni au bien-être</strong> des sujets.</li>
+    <li>La recherche <strong>ne peut pas être menée</strong> sans cette dispense ou modification.</li>
+    <li>Le cas échéant, on fournit aux sujets des <strong>informations supplémentaires après</strong> leur participation (c'est le <em>débriefing</em>).</li>
+  </ol>
+</section>
+
+<!-- ===================== 22 ===================== -->
+<section id="blanchiment">
+  <span class="sec-num">Section 22</span>
+  <h2 class="sec">Le blanchiment éthique (ethics washing)</h2>
+  <p>Le cours présente une famille de « tromperies marketing ». Tu dois bien distinguer les trois :</p>
+  <table class="tbl">
+    <tr><th>Terme</th><th>La tromperie consiste à faire croire que…</th></tr>
+    <tr><td><strong>Écoblanchiment</strong> <em>(greenwashing)</em></td><td>…les produits d'une organisation sont <strong>écologiquement responsables</strong>, alors que non.</td></tr>
+    <tr><td><strong>Privacy washing</strong></td><td>…il existe des <strong>mesures pour protéger les données</strong> des utilisateurs, alors qu'elles sont faibles ou absentes.</td></tr>
+    <tr><td><strong>Blanchiment éthique</strong> <em>(ethics washing)</em></td><td>…l'IA de l'organisation est <strong>éthique</strong>, alors qu'aucune théorie, argument ou application éthique sérieuse n'est en place et qu'aucun éthicien n'est impliqué.</td></tr>
+  </table>
+  <div class="def">
+    <span class="term">Blanchiment éthique (définition du cours)</span>
+    <p>« Instrumentalisation de l'éthique par une <strong>communication trompeuse</strong>, créant l'impression d'une IA éthique, alors qu'aucune théorie, argument ou application éthique substantielle n'est en place et qu'<strong>aucun éthicien n'est impliqué</strong>. »</p>
+  </div>
+  <h4>Comment les entreprises pratiquent le blanchiment éthique</h4>
+  <ul>
+    <li>Elles <strong>définissent leur propre cadre</strong> éthique sur mesure et <strong>font semblant</strong> de respecter des valeurs comme l'équité, la vie privée, l'explicabilité.</li>
+    <li>Le levier est souvent <strong>la façon dont elles communiquent</strong> leurs choix (beaucoup d'affichage, peu de substance).</li>
+    <li>Le cas de <strong>l'équité</strong> est révélateur : il n'existe <strong>pas de consensus</strong> sur la définition de l'« équité ». Une entreprise peut donc <strong>choisir au hasard</strong> une notion d'équité (parmi plusieurs définitions mathématiques incompatibles) <strong>jusqu'à en trouver une qui « passe »</strong> — et se déclarer « équitable » de façon trompeuse.</li>
+  </ul>
+  <p>→ Ce lien avec la Règle 5 (section 17, non-tromperie) est direct : le blanchiment éthique est précisément une violation du principe de non-tromperie.</p>
+</section>
+
+<!-- ===================== 23 ===================== -->
+<section id="dp">
+  <span class="sec-num">Section 23</span>
+  <h2 class="sec">La confidentialité différentielle</h2>
+  <div class="def">
+    <span class="term">Confidentialité différentielle <em>(differential privacy)</em></span>
+    <p>Technique mathématique qui permet d'analyser un jeu de données <strong>sans révéler d'information sur un individu précis</strong>, typiquement en ajoutant un <strong>bruit aléatoire contrôlé</strong> aux résultats. Le paramètre <strong>ε (epsilon)</strong> mesure la « perte de confidentialité » qu'on accepte.</p>
+  </div>
+  <p>Le point éthique soulevé : <strong>et si les paramètres de perte de confidentialité dépassent les niveaux acceptables pour pouvoir offrir une protection ?</strong> La règle clé à retenir :</p>
+  <div class="callout">
+    <span class="ctitle">La relation à connaître</span>
+    <p>Quand <strong>ε augmente</strong> ⟶ on ajoute <strong>moins de bruit</strong> ⟶ les résultats sont plus précis, <strong>mais le risque de ré-identifier les données d'un individu augmente</strong>. <br>Donc : <strong>petit ε = plus de vie privée</strong> (mais résultats plus flous) ; <strong>grand ε = moins de vie privée</strong> (mais résultats plus utiles). Choisir ε est donc un <strong>arbitrage éthique</strong> entre utilité et protection.</p>
+  </div>
+</section>
+
+<!-- ===================== 24 ===================== -->
+<section id="article">
+  <span class="sec-num">Section 24</span>
+  <h2 class="sec">Comment analyser un article scientifique</h2>
+  <p>Cette partie est <strong>méthodologique</strong> : elle te servira pour ton travail de session. À l'examen, on peut te demander ce qui distingue un article scientifique, ou la structure d'une analyse.</p>
+
+  <div class="def">
+    <span class="term">Qu'est-ce qu'un article scientifique ?</span>
+    <p>Un article publié dans un <strong>atelier (workshop), une conférence ou un journal scientifique</strong>, et <strong>relu par les pairs</strong> (<em>peer-reviewed</em>). Ce <strong>n'est PAS</strong> : un article de journal (les nouvelles), un magazine, un blogue, un rapport, un mémoire de maîtrise ou une thèse.</p>
+  </div>
+  <p><strong>Pourquoi « relu par les pairs » est important :</strong> d'autres experts du domaine ont évalué et validé le travail avant publication — c'est un gage de sérieux.</p>
+
+  <p>Analyser un article, c'est de la <strong>communication scientifique</strong> : il faut <strong>comprendre l'article dans les grandes lignes</strong> et le <strong>rendre intelligible à un public qui ne l'a pas lu</strong>. La grille à suivre :</p>
+
+  <h4>1. Identification de l'article</h4>
+  <p>Titre · auteurs et leurs <strong>affiliations</strong> (université/entreprise) · nom de la <strong>conférence ou du journal</strong> · <strong>forum</strong> (brève description du journal et de sa spécialité) · <strong>année</strong> de publication · <strong>thème</strong>.</p>
+
+  <h4>2. Problématique</h4>
+  <p>Quel est le problème, et pourquoi ? En quoi est-ce un problème <strong>intéressant</strong> ? Quelle est l'<strong>approche</strong> proposée ?</p>
+
+  <h4>3. Contribution</h4>
+  <p>Quelles sont les <strong>contributions principales</strong> ? (Exemples possibles : une méthode d'évaluation générale, une méthode théorique parfaite mais trop coûteuse, une heuristique, ou l'évaluation de l'approche.) Quels sont les <strong>résultats principaux</strong> ?</p>
+
+  <h4>4. Conclusion</h4>
+  <p>Pourquoi cet article et ses résultats sont-ils intéressants — <strong>en général et pour ton travail de session</strong> ? L'approche peut-elle se <strong>généraliser</strong> à d'autres problèmes ? Quelles sont les <strong>pistes futures</strong> ?</p>
+</section>
+
+<!-- ===================== 25 ===================== -->
+<section id="absentia">
+  <span class="sec-num">Section 25</span>
+  <h2 class="sec">Exemple appliqué : l'article « Absentia »</h2>
+  <p>La professeure analyse <strong>son propre article</strong> pour illustrer la grille ci-dessus. C'est un excellent modèle d'analyse réussie.</p>
+
+  <h4>Identification</h4>
+  <ul>
+    <li><strong>Titre :</strong> <em>Absentia: Secure Multiparty Computation on Ethereum</em></li>
+    <li><strong>Auteurs :</strong> Didem Demirag et Jeremy Clark, Université Concordia, Montréal.</li>
+    <li><strong>Forum :</strong> FC 2021 Workshops — WTSC 2021 (la conférence <em>Financial Cryptography and Data Security</em>, qui couvre la sécurisation des transactions et des systèmes).</li>
+    <li><strong>Thème :</strong> le calcul multipartite sécurisé (MPC) sur Ethereum.</li>
+  </ul>
+
+  <div class="def">
+    <span class="term">MPC — Secure Multiparty Computation</span>
+    <p>Plusieurs personnes veulent <strong>calculer ensemble une fonction sur leurs données</strong> tout en gardant ces données <strong>secrètes</strong> les unes des autres. Exemple : Alice et Bob veulent connaître le résultat de <code>f(x, y)</code> sans qu'Alice révèle son <code>x</code> ni Bob son <code>y</code>.</p>
+  </div>
+
+  <h4>Problématique</h4>
+  <p>Alice et Bob veulent connaître le résultat d'une fonction sur leurs données <strong>en les gardant confidentielles</strong>. Idéalement, ils veulent juste <strong>soumettre leurs données à un système fiable et revenir plus tard chercher un résultat correct</strong> (le fameux <em>« submit-and-go »</em>). L'idée : utiliser les propriétés de la <strong>chaîne de blocs</strong> pour renforcer le MPC en fournissant un <strong>point de coordination</strong>, un moyen de <strong>payer les « trustees »</strong> (les serveurs qui calculent) et un <strong>vérificateur public</strong>.</p>
+
+  <h4>Contribution</h4>
+  <ul>
+    <li>Un système qui combine <strong>MPC + fonctionnalité « submit-and-go »</strong>.</li>
+    <li>Protocole MPC utilisé : <strong>Mix-and-Match</strong>.</li>
+    <li>Chaîne de blocs utilisée : <strong>Ethereum</strong>.</li>
+  </ul>
+
+  <h4>Résultats</h4>
+  <p>Les auteurs mesurent le <strong>coût en « gas »</strong> (les frais de transaction sur Ethereum) par opération et par participant. L'opération la plus coûteuse est « Create Row » (≈ 469 $). Au total, un trustee peut dépenser plusieurs milliers de dollars — ce qui mène droit à la conclusion.</p>
+
+  <h4>Conclusion</h4>
+  <ul>
+    <li>Le système est <strong>entièrement fonctionnel</strong>…</li>
+    <li>…mais <strong>trop cher pour être pratique sur Ethereum aujourd'hui</strong>.</li>
+    <li><strong>Pistes futures :</strong> déployer sur des alternatives (les <em>rollups « Layer 2 »</em> sont les plus adaptés), appliquer les dernières techniques MPC, et remplacer les protocoles Σ (sigma) par des <strong>preuves succinctes à connaissance nulle</strong> (zk-SNARKs).</li>
+  </ul>
+  <p style="font-size:.92rem;color:var(--ink-soft);">Note : tu n'as pas besoin de maîtriser la cryptographie d'Absentia. Ce qui compte pour ce cours, c'est de voir <strong>comment la grille d'analyse (identification → problématique → contribution → résultats → conclusion) s'applique</strong> à un vrai article.</p>
+</section>
+
+<!-- ===================== 26 ===================== -->
+<section id="projet">
+  <span class="sec-num">Section 26</span>
+  <h2 class="sec">Le projet de session (très important pour toi)</h2>
+  <div class="callout">
+    <span class="ctitle">⚠ Échéance</span>
+    <p>Le <strong>plan du projet de session</strong> est à téléverser sur Moodle au format <strong>PDF (2 à 4 pages)</strong> pour le <strong>7 juin 2026, 23 h 59</strong>.</p>
+  </div>
+  <h4>Le plan doit contenir, dans l'ordre :</h4>
+  <ol class="norm">
+    <li><strong>Noms et codes permanents</strong> des membres de l'équipe (ou de l'étudiant·e seul·e).</li>
+    <li><strong>Titre.</strong></li>
+    <li><strong>Description du sujet</strong>, en expliquant l'<em>angle</em> par lequel tu veux l'aborder — <em>1 paragraphe</em>.</li>
+    <li><strong>Problématique</strong> : une ou quelques <strong>questions concrètes</strong> auxquelles tu veux répondre dans le travail final — <em>1 à 3 phrases</em>.</li>
+    <li><strong>Concepts clés</strong> qu'il faudra définir plus tard (ex. : réseaux sociaux, hackers…) — <em>1 à 3 phrases</em>.</li>
+    <li><strong>Ébauche de méthodologie</strong> : comment tu vas répondre aux questions, et quelle approche (comparaison de points de vue, description de cas, synthèse) — <em>1 à 2 paragraphes</em>.</li>
+    <li><strong>Ressources</strong> : théories/concepts du cours, articles scientifiques, articles de journaux, autres données — <strong>minimum 3 ressources listées</strong>.</li>
+  </ol>
+  <p><strong>L'objectif</strong> du plan : lancer le travail par sa <em>conception</em> et te permettre de le <em>planifier</em> — autrement dit clarifier <strong>ce que tu veux dire</strong> et <strong>comment tu vas l'aborder</strong>.</p>
+  <h4>Quelques sujets potentiels proposés</h4>
+  <p style="font-size:.95rem;">Propriété des données personnelles · Police et IA · Justice et IA · Art et IA · Robotisation de la société · Reconnaissance faciale · Vidéosurveillance · Ville/maison intelligente · Publicité ciblée · Paiement électronique · Génomique · Obsolescence programmée et durabilité numérique · Impact environnemental du numérique · Infrastructures critiques et cybersécurité · Algorithmes et perception de la réalité · Représentation de soi en ligne · Technologies et pédagogie · Désinformation et modération · Crédit social chinois · Modèle économique d'Internet · Crypto-monnaies · Télétravail · Éducation à distance · Traçage de contacts · e-Démocratie.</p>
+  <p style="font-size:.92rem;color:var(--ink-soft);">💡 Vu ton profil (cybersécurité en INF4471, Loi 25, micro-services communautaires en INF6150), des sujets comme « <strong>Infrastructures critiques et cybersécurité</strong> », « <strong>Propriété des données personnelles</strong> » ou « <strong>Reconnaissance faciale</strong> » s'aligneraient bien avec ce que tu maîtrises déjà.</p>
+</section>
+
+<!-- ===================== EXAMEN ===================== -->
+<div class="exam-head" id="examen">
+  <div class="kicker">Préparation à l'examen</div>
+  <h2>Questions susceptibles de tomber</h2>
+  <p>Clique sur chaque question pour révéler une réponse-modèle. Essaie d'abord de répondre de mémoire — c'est là que l'apprentissage se fait.</p>
+</div>
+
+<details class="q">
+  <summary><span class="qn">Q1</span><span class="qq">Définissez l'éthique et distinguez-la de la morale et du droit.</span></summary>
+  <div class="ans">
+    <p>L'<strong>éthique</strong> est la branche de la philosophie qui systématise, défend et recommande des jugements de valeur sur le bien et le mal — c'est la réflexion rationnelle sur « pourquoi » une chose est juste. La <strong>morale</strong> est l'ensemble des valeurs admises par un groupe ou une culture. Le <strong>droit</strong> est l'ensemble des règles écrites et obligatoires sanctionnées par l'État. L'éthique <em>précède</em> souvent la loi (on réfléchit avant de légiférer) et la <em>complémente</em> (elle pose des questions que la loi ne couvre pas).</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q2</span><span class="qq">Opposez l'éthique du devoir (Kant) et l'éthique du bien (utilitarisme). Appliquez-les au cas de la voiture autonome.</span></summary>
+  <div class="ans">
+    <p><strong>Kant (déontologique)</strong> : on juge l'action en elle-même ; certaines actions sont bonnes ou mauvaises peu importe les conséquences. <strong>Utilitarisme (conséquentialiste)</strong> : on juge l'acte uniquement par ses conséquences ; si elles sont bonnes, l'acte est justifié.</p>
+    <p><strong>Application :</strong> la voiture A qui se déporte pour tuer 1 personne (dans B) plutôt que 4 (dans C) applique un raisonnement <strong>utilitariste</strong> (minimiser le nombre de morts). Un <strong>kantien</strong> objecterait qu'on n'a pas le droit de <em>choisir activement</em> de sacrifier une personne, car cela la traite comme un simple moyen.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q3</span><span class="qq">Quelle est la différence entre un code d'éthique, un code de déontologie et un code de conduite ?</span></summary>
+  <div class="ans">
+    <p>Le <strong>code d'éthique</strong> énonce des <em>valeurs et principes</em> servant de guide (général, inspirant). Le <strong>code de déontologie</strong> est un texte <em>réglementaire</em> énonçant les règles, devoirs et obligations d'une <em>profession</em> (détaillé, contraignant, orienté pratique, avec sanctions). Le <strong>code de conduite</strong> est l'ensemble des règles écrites qu'une <em>organisation</em> impose à son personnel et ses dirigeants (ex. : la Charte des droits et responsabilités des étudiant·e·s de l'UQAM).</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q4</span><span class="qq">Énoncez les trois lois de la robotique d'Asimov et expliquez leur principale limite.</span></summary>
+  <div class="ans">
+    <p><strong>Loi 1</strong> : ne pas blesser un humain ni, par inaction, le laisser être blessé. <strong>Loi 2</strong> : obéir aux humains, sauf si cela viole la Loi 1. <strong>Loi 3</strong> : protéger sa propre existence, sauf si cela viole la Loi 1 ou 2. Elles sont strictement hiérarchisées.</p>
+    <p><strong>Limite :</strong> ces règles formelles se <em>contredisent</em> dans les situations réelles complexes (quel humain protéger ? comment définir « danger » ?). C'est l'illustration des limites de l'« éthique calculatrice » : on ne peut pas réduire toute l'éthique à quelques règles formelles.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q5</span><span class="qq">Énoncez les 5 règles de la responsabilité morale pour les artefacts computationnels. Pourquoi dit-on qu'elle n'est « pas un jeu à somme nulle » ?</span></summary>
+  <div class="ans">
+    <p><strong>R1</strong> : concepteurs/développeurs/déployeurs sont responsables de l'artefact et de ses effets prévisibles (responsabilité partagée). <strong>R2</strong> : cette responsabilité n'est pas à somme nulle. <strong>R3</strong> : ceux qui utilisent sciemment l'artefact sont responsables de cet usage. <strong>R4</strong> : on doit considérer le système socio-technique dans lequel l'artefact s'insère. <strong>R5</strong> : on ne doit pas tromper les utilisateurs sur l'artefact et ses effets.</p>
+    <p><strong>« Pas à somme nulle »</strong> signifie que la présence d'autres responsables ne <em>réduit pas</em> ta propre part de responsabilité : chacun en porte une part pleine et entière. On ne peut pas se dédouaner en disant « d'autres étaient impliqués ».</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q6</span><span class="qq">Citez les trois principes du rapport Belmont (1978).</span></summary>
+  <div class="ans">
+    <p><strong>1. Respect de la personne</strong> : liberté de participer + information détaillée (consentement éclairé). <strong>2. Bienveillance</strong> : risques inférieurs aux bénéfices, et minimisation des risques. <strong>3. Équité</strong> : distribution juste des risques et des bénéfices entre les participants. Le rapport Belmont est le texte fondateur de la bioéthique et la base du travail des comités de protection des personnes (IRB).</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q7</span><span class="qq">Pourquoi la recherche sur le hameçonnage pose-t-elle un dilemme éthique, et à quelles conditions un comité peut-il autoriser la tromperie ?</span></summary>
+  <div class="ans">
+    <p><strong>Le dilemme :</strong> pour être valide, l'étude doit utiliser de fausses attaques indiscernables des vraies, ce qui exige de <em>tromper</em> les sujets et de renoncer au consentement éclairé — en tension avec le principe de respect de la personne.</p>
+    <p><strong>Conditions pour autoriser la tromperie :</strong> (1) risque minimal pour les participants ; (2) aucune atteinte à leurs droits et leur bien-être ; (3) la recherche est impossible autrement ; (4) un débriefing fournit les informations pertinentes après la participation.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q8</span><span class="qq">Qu'est-ce que le « blanchiment éthique » ? Différenciez-le de l'écoblanchiment et du privacy washing.</span></summary>
+  <div class="ans">
+    <p>Le <strong>blanchiment éthique (ethics washing)</strong> est l'instrumentalisation de l'éthique par une communication trompeuse, créant l'illusion d'une IA éthique sans qu'aucune théorie, application ou éthicien réels soient impliqués. L'<strong>écoblanchiment</strong> fait croire qu'un produit est écologiquement responsable ; le <strong>privacy washing</strong> fait croire que des mesures protègent les données des utilisateurs. Exemple de blanchiment éthique : exploiter l'absence de consensus sur la définition de l'« équité » pour choisir, au hasard ou de façon opportuniste, une définition qui « passe ».</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q9</span><span class="qq">En confidentialité différentielle, qu'arrive-t-il quand le paramètre ε augmente ?</span></summary>
+  <div class="ans">
+    <p>Quand <strong>ε augmente</strong>, on ajoute moins de bruit : les résultats sont plus précis et plus utiles, <strong>mais le risque de ré-identifier les données d'un individu augmente</strong>. Un petit ε protège mieux la vie privée (au prix de résultats plus flous). Choisir ε est donc un arbitrage éthique entre utilité et protection.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q10</span><span class="qq">Qu'est-ce qui caractérise un article scientifique, et quelles sont les quatre grandes parties d'une analyse d'article ?</span></summary>
+  <div class="ans">
+    <p>Un <strong>article scientifique</strong> est publié dans un atelier, une conférence ou un journal scientifique et <strong>relu par les pairs</strong> ; ce n'est ni un article de journal, ni un blogue, ni un mémoire/thèse. Les <strong>quatre parties</strong> d'une analyse : (1) <strong>Identification</strong> (titre, auteurs/affiliations, forum, année, thème) ; (2) <strong>Problématique</strong> (quel problème, pourquoi, quelle approche) ; (3) <strong>Contribution</strong> (apports et résultats principaux) ; (4) <strong>Conclusion</strong> (intérêt, généralisation, pistes futures).</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q11</span><span class="qq">Expliquez le débat sur les portes dérobées (backdoors) dans le chiffrement.</span></summary>
+  <div class="ans">
+    <p>La tension oppose la <strong>sécurité individuelle / vie privée</strong> (chiffrement fort pour tous) à la <strong>sécurité nationale</strong> (permettre aux États d'accéder aux communications). Le problème central : une porte dérobée conçue « pour les bons » constitue une faille qui peut aussi être exploitée par des acteurs malveillants — affaiblir le chiffrement pour tout le monde.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q12</span><span class="qq">Selon Morozov, quel est le danger des objets connectés au-delà de la simple surveillance ?</span></summary>
+  <div class="ans">
+    <p>Au-delà de la collecte de données, le danger est l'atteinte à l'<strong>autonomie</strong> : les technologies « intelligentes » <em>poussent</em> en permanence l'individu à se conformer à une norme de « bon comportement » décidée par d'autres (manger moins vite, se brosser les dents plus longtemps, conduire « mieux »). Elles risquent de supprimer des comportements que « quelqu'un, quelque part » a jugés indésirables — une menace pour la liberté.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q13</span><span class="qq">Qui peut être tenu responsable en cas de dommage causé par un robot, et quelle proposition existe pour résoudre ce flou ?</span></summary>
+  <div class="ans">
+    <p>La responsabilité (civile = indemniser ; pénale = punir) pourrait revenir au <strong>créateur, au possesseur ou à l'utilisateur</strong> du robot — c'est précisément flou. Une proposition de certains chercheurs : accorder une <strong>personnalité juridique au robot</strong> (surtout aux robots dotés d'intelligence ou de perception), pour qu'il puisse être tenu responsable. Cette idée est débattue, notamment parce qu'elle risque de déresponsabiliser les fabricants.</p>
+  </div>
+</details>
+
+<details class="q">
+  <summary><span class="qn">Q14</span><span class="qq">Qu'est-ce que le transhumanisme et quel est son principal risque éthique ?</span></summary>
+  <div class="ans">
+    <p>Le <strong>transhumanisme</strong> vise l'augmentation des capacités humaines par la technologie (allonger la vie, réparer des organes, faciliter la mobilité). Son risque principal : une <strong>« humanité à deux vitesses »</strong> entre ceux qui peuvent s'offrir ces augmentations et ceux qui ne le peuvent pas — un problème d'équité et d'accès, déjà visible dans les inégalités d'adoption des technologies de base selon le revenu (données Pew).</p>
+  </div>
+</details>
+
+<footer>
+  <span>INM6000 · Séance 4 — Éthique · Guide d'étude</span>
+  <span>Bon courage pour l'examen, Marie-Françoise ✦</span>
+</footer>
+
+</div>
+</body>
+</html>
