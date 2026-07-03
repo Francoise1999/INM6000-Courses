@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>INM6000 - Informatique et Écologie - Guide d'étude</title>
+<style>
+  :root {
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --blue: #1565c0;
+    --blue-light: #e3f2fd;
+    --orange: #e65100;
+    --orange-light: #fff3e0;
+    --purple: #6a1b9a;
+    --purple-light: #f3e5f5;
+    --gray: #37474f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    color: #263238;
+    background: #f4f6f7;
+    margin: 0;
+    padding: 0;
+  }
+  header {
+    background: linear-gradient(135deg, #1a5276, #148f77);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  header h1 { margin: 0 0 10px 0; font-size: 2em; }
+  header p { margin: 0; opacity: 0.9; }
+  .container { max-width: 950px; margin: 0 auto; padding: 20px; }
+  nav {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  nav h2 { margin-top: 0; color: var(--gray); }
+  nav ul { columns: 2; padding-left: 20px; }
+  nav a { color: var(--blue); text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+
+  section.block {
+    background: white;
+    border-radius: 10px;
+    padding: 25px 30px;
+    margin: 20px 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  h2.titre {
+    color: white;
+    background: var(--green);
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-top: 0;
+  }
+  h3 { color: var(--green); border-bottom: 2px solid var(--green-light); padding-bottom: 5px; }
+
+  .def {
+    background: var(--blue-light);
+    border-left: 5px solid var(--blue);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+  }
+  .def b { color: var(--blue); }
+
+  .exemple {
+    background: var(--green-light);
+    border-left: 5px solid var(--green);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+  }
+  .exemple b { color: var(--green); }
+
+  .chiffre {
+    background: var(--orange-light);
+    border-left: 5px solid var(--orange);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+  }
+  .chiffre b { color: var(--orange); }
+
+  .attention {
+    background: #ffebee;
+    border-left: 5px solid #c62828;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+  }
+  .attention b { color: #c62828; }
+
+  .analogie {
+    background: var(--purple-light);
+    border-left: 5px solid var(--purple);
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 6px;
+    font-style: italic;
+  }
+  .analogie b { color: var(--purple); font-style: normal; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px 10px;
+    text-align: left;
+  }
+  th { background: var(--green); color: white; }
+  tr:nth-child(even) { background: #f7f7f7; }
+
+  .glossaire-terme {
+    cursor: pointer;
+    border-bottom: 1px dotted var(--blue);
+    color: var(--blue);
+    font-weight: 600;
+  }
+
+  details {
+    background: #fafafa;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin: 10px 0;
+  }
+  details summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--green);
+  }
+  details[open] summary { margin-bottom: 8px; }
+
+  .quiz-question {
+    background: #fff;
+    border: 2px solid var(--green);
+    border-radius: 8px;
+    padding: 15px 20px;
+    margin: 15px 0;
+  }
+  .quiz-question p.q { font-weight: bold; margin-top: 0; }
+  .quiz-reponse {
+    background: var(--green-light);
+    padding: 10px 15px;
+    border-radius: 6px;
+    margin-top: 8px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #78909c;
+    font-size: 0.9em;
+  }
+
+  .badge {
+    display: inline-block;
+    background: var(--green);
+    color: white;
+    border-radius: 12px;
+    padding: 2px 10px;
+    font-size: 0.75em;
+    margin-left: 8px;
+  }
+
+  ul li, ol li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>INM6000 — Informatique et Société</h1>
+  <p>Séance 8 : Informatique et Écologie — Guide d'étude détaillé</p>
+  <p><em>Didem Demirag — UQAM, Été 2026</em></p>
+</header>
+
+<div class="container">
+
+<nav>
+  <h2>📑 Table des matières</h2>
+  <ul>
+    <li><a href="#indicateurs">1. Indicateurs environnementaux</a></li>
+    <li><a href="#equipements">2. Équipements numériques</a></li>
+    <li><a href="#mesure">3. Mesurer la consommation</a></li>
+    <li><a href="#lowtech">4. Low Tech</a></li>
+    <li><a href="#responsable">5. Numérique responsable</a></li>
+    <li><a href="#datacentre">6. Datacentres</a></li>
+    <li><a href="#modeles-num">7. Modèles numériques environnementaux</a></li>
+    <li><a href="#ecoconception">8. Éco-conception d'un service numérique</a></li>
+    <li><a href="#ia">9. Modèles de l'IA</a></li>
+    <li><a href="#dechets">10. E-déchets</a></li>
+    <li><a href="#obsolescence">11. Obsolescence programmée</a></li>
+    <li><a href="#blockchain">12. Chaîne de blocs (Blockchain) et ESG</a></li>
+    <li><a href="#quiz">🎯 Questions d'examen</a></li>
+  </ul>
+</nav>
+
+<!-- SECTION 1 -->
+<section class="block" id="indicateurs">
+  <h2 class="titre">1. Indicateurs environnementaux</h2>
+  <p>Le cours commence par poser les <b>outils de mesure</b> qu'on utilise pour parler de l'impact du numérique sur l'environnement. On ne peut pas dire "le numérique pollue" sans avoir une façon de le quantifier — c'est le rôle de ces indicateurs.</p>
+
+  <p>Les indicateurs sont classés selon 4 grands <b>enjeux écologiques</b> :</p>
+  <ol>
+    <li><b>Le changement climatique</b> — le réchauffement global dû aux gaz à effet de serre</li>
+    <li><b>La perte de biodiversité</b> — la disparition d'espèces animales/végétales</li>
+    <li><b>La raréfaction des ressources</b> — l'épuisement de matières premières (métaux, eau, énergies fossiles)</li>
+    <li><b>La multiplication des risques sanitaires et environnementaux</b> — pollution qui affecte la santé humaine</li>
+  </ol>
+
+  <h3>🌡️ Gaz à effet de serre (GES)</h3>
+  <div class="def">
+    <b>Définition :</b> Ce sont des composants gazeux qui absorbent le rayonnement infrarouge émis par la Terre et le renvoient vers le sol — c'est ce qui cause l'effet de serre (comme une couverture qui garde la chaleur).
+  </div>
+  <p><b>Exemples de GES :</b></p>
+  <ul>
+    <li>CO2 — dioxyde de carbone (le plus connu, vient de la combustion)</li>
+    <li>CH4 — méthane (vient de l'élevage, des décharges)</li>
+    <li>N2O — protoxyde d'azote (agriculture)</li>
+    <li>O3 — ozone troposphérique</li>
+    <li>Halocarbures industriels — utilisés dans la réfrigération/climatisation</li>
+  </ul>
+  <div class="analogie">
+    <b>Pourquoi "équivalent CO2" ?</b> Chaque gaz ne réchauffe pas la planète de la même façon. Le méthane, par exemple, a un pouvoir réchauffant bien plus fort que le CO2. Pour comparer facilement, on "pondère" (convertit) tous les gaz en une seule unité commune : l'<b>équivalent CO2 (CO2e)</b>. C'est comme convertir toutes les devises du monde en dollars pour pouvoir les comparer.
+  </div>
+  <div class="def">
+    <b>Bilan Carbone :</b> C'est l'exercice qui consiste à comptabiliser toutes les émissions de GES — directes (ex: le camion de l'entreprise) et indirectes (ex: l'électricité achetée, les déplacements des employés) — d'une organisation ou d'un territoire.
+  </div>
+
+  <h3>💧 Empreinte en eau</h3>
+  <div class="def">
+    Mesure la quantité d'eau douce <b>consommée</b> ou <b>polluée</b> par une entité. Cette "entité" peut être : l'humanité entière, un pays, une entreprise, un ménage, ou même un seul produit (ex: combien d'eau faut-il pour fabriquer un smartphone ?).
+  </div>
+
+  <h3>🌍 Empreinte Écologique (EE)</h3>
+  <div class="def">
+    Un indicateur développé par le <b>Global Footprint Network</b>. Il mesure la <b>surface bioproductive</b> (surface de terre/mer capable de produire des ressources ou d'absorber des déchets) nécessaire pour :
+    <ul>
+      <li>fournir à une population les ressources de biomasse qu'elle consomme (nourriture, bois...)</li>
+      <li>absorber ses émissions de CO2</li>
+    </ul>
+  </div>
+  <p>L'empreinte écologique combine plusieurs sous-empreintes :</p>
+  <table>
+    <tr><th>Type d'empreinte</th><th>Ce qu'elle mesure</th></tr>
+    <tr><td>Empreinte carbone</td><td>Surface nécessaire pour absorber le CO2 émis</td></tr>
+    <tr><td>Empreinte forêt</td><td>Bois et produits forestiers consommés</td></tr>
+    <tr><td>Empreinte terres cultivées</td><td>Nourriture végétale, fibres, huiles...</td></tr>
+    <tr><td>Empreinte pâturages</td><td>Élevage animal</td></tr>
+    <tr><td>Empreinte pêche</td><td>Ressources marines</td></tr>
+    <tr><td>Empreinte terrains bâtis</td><td>Infrastructures, routes, villes</td></tr>
+  </table>
+  <div class="analogie">
+    <b>Pense à ça comme :</b> "Combien de planètes Terre faudrait-il si tout le monde vivait comme moi ?" — c'est littéralement la question à laquelle répond l'empreinte écologique.
+  </div>
+</section>
+
+<!-- SECTION 2 -->
+<section class="block" id="equipements">
+  <h2 class="titre">2. Les équipements numériques</h2>
+  <p>Avant de parler d'impact, il faut comprendre <b>de quoi est fait</b> le numérique physiquement. Le cours divise les équipements en 3 grandes catégories :</p>
+  <table>
+    <tr><th>Catégorie</th><th>Exemples</th></tr>
+    <tr><td><b>Terminaux</b> (ce que l'utilisateur touche)</td><td>Smartphones, téléphones mobiles/filaires, tablettes, ordinateurs portables/bureau, écrans, vidéo-projecteurs, boîtiers TV, TVs, consoles de jeu, imprimantes, objets connectés</td></tr>
+    <tr><td><b>Réseau</b> (ce qui transporte les données)</td><td>Box internet (particuliers/entreprises), points d'accès WIFI, routeurs, "core network" (le cœur du réseau des opérateurs), boîtiers CPL (courant porteur en ligne)</td></tr>
+    <tr><td><b>Datacentre</b> (où les données sont stockées/traitées)</td><td>Serveurs et autres équipements informatiques</td></tr>
+  </table>
+  <div class="analogie">
+    <b>Analogie simple :</b> Imagine internet comme un système postal. Les <b>terminaux</b> sont les boîtes aux lettres chez toi, le <b>réseau</b> ce sont les routes et camions qui transportent le courrier, et le <b>datacentre</b> c'est l'entrepôt géant où tout est trié et stocké.
+  </div>
+
+  <h3>📊 Chiffres mondiaux (2019)</h3>
+  <div class="chiffre">
+    <b>34 milliards</b> d'équipements numériques dans le monde, pour <b>4,1 milliards</b> d'utilisateurs — soit environ <b>8 équipements par utilisateur</b>.
+  </div>
+  <ul>
+    <li><b>Terminaux utilisateurs :</b> 3,5 milliards de smartphones + 3,8 milliards d'autres téléphones + 3,1 milliards d'écrans/TV/vidéo-projecteurs + 19 milliards d'objets connectés (estimations variant entre 3 et 30 milliards selon les études — ce qui montre que c'est difficile à mesurer précisément)</li>
+    <li><b>Réseaux :</b> 1,1 milliard de box DSL/fibre + 10 millions d'antennes relais (2G à 5G) + 200 millions d'équipements réseau WAN/LAN</li>
+    <li><b>Datacentre :</b> 67 millions de serveurs</li>
+  </ul>
+
+  <h3>🇫🇷 Usage quotidien en France (2019)</h3>
+  <p>En moyenne, par jour, les Français passent :</p>
+  <ul>
+    <li><b>4h38</b> sur internet</li>
+    <li><b>1h17</b> sur les réseaux sociaux</li>
+    <li><b>2h59</b> à consommer de la vidéo (TV, streaming, VOD)</li>
+    <li><b>0h37</b> à écouter de la musique en streaming</li>
+  </ul>
+  <p><em>Point clé à retenir : ces chiffres montrent que l'usage numérique fait maintenant partie intégrante de la vie quotidienne, ce qui justifie qu'on s'intéresse à son impact environnemental.</em></p>
+</section>
+
+<!-- SECTION 3 -->
+<section class="block" id="mesure">
+  <h2 class="titre">3. Mesurer la consommation d'un équipement numérique</h2>
+
+  <h3>🔌 Comment mesurer ?</h3>
+  <ul>
+    <li><b>Wattmètre :</b> un appareil physique qu'on branche entre la prise électrique et l'équipement, qui mesure directement la consommation réelle en watts.</li>
+    <li><b>Outils logiciels :</b> des programmes qui <em>estiment</em> (n'observent pas directement) la consommation électrique en se basant sur l'usage des ressources internes (CPU, RAM, disque...).</li>
+  </ul>
+
+  <h3>📈 Le graphique de consommation (page 10)</h3>
+  <p>Le graphique montre la consommation électrique (en watts) d'un ordinateur de bureau pendant un appel Zoom, sur environ 60 secondes :</p>
+  <ul>
+    <li>Au repos/démarrage : ~155-190 watts</li>
+    <li>Une fois l'application bien lancée (vers 10 secondes) : ça monte et se stabilise autour de <b>235-240 watts</b></li>
+    <li>À la fin de l'appel (vers 52 secondes) : la consommation redescend progressivement vers 170 watts</li>
+  </ul>
+  <div class="analogie">
+    <b>Ce que ça montre :</b> la consommation n'est pas constante ! Elle dépend directement de ce que fait la machine à un instant donné. C'est le lien direct entre "usage" et "consommation dynamique" qu'on va voir juste après.
+  </div>
+
+  <h3>⚡ Les 3 types de consommation électrique</h3>
+  <table>
+    <tr><th>Type</th><th>Définition</th><th>Exemple</th></tr>
+    <tr><td><b>Statique</b></td><td>Alimentée de manière fixe, peu importe l'usage</td><td>Carte mère, ventilateurs, disques durs magnétiques</td></tr>
+    <tr><td><b>Dynamique</b></td><td>Dépend de l'usage des logiciels exécutés</td><td>Système d'exploitation, protocoles, services, applications</td></tr>
+    <tr><td><b>Quasi-constante</b></td><td>Reste presque toujours pareille</td><td>Équipements réseau filaires, commutateurs réseau (switches)</td></tr>
+  </table>
+  <div class="analogie">
+    <b>Analogie :</b> C'est comme une voiture. La consommation "statique" c'est l'énergie que ça prend juste pour que le moteur tourne au ralenti. La "dynamique" c'est l'essence en plus que tu brûles quand tu accélères fort. La "quasi-constante" c'est comme les phares : allumés ou pas, ils consomment à peu près pareil tant qu'ils sont en marche.
+  </div>
+
+  <h3>🎯 Efficacité énergétique</h3>
+  <div class="def">
+    On ne regarde jamais la consommation énergétique <b>seule</b> — il faut toujours la mettre en relation avec le <b>service applicatif rendu</b>. Un équipement qui consomme beaucoup mais rend énormément de services peut être plus "efficace" qu'un équipement qui consomme peu mais ne fait presque rien.
+  </div>
+  <div class="analogie">
+    C'est comme comparer des voitures : ce n'est pas juste "combien de litres à 100km" qui compte, mais "combien de litres par personne transportée" ou "par kilo de marchandise livrée".
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="block" id="lowtech">
+  <h2 class="titre">4. « Low Tech »</h2>
+  <div class="def">
+    Les <b>basses technologies</b> (ou "technologies appropriées") sont une philosophie qui vise :
+    <ul>
+      <li>La <b>sobriété énergétique et matérielle</b> — contre le suréquipement et la surconsommation</li>
+      <li>La <b>durabilité forte</b> — des objets qui durent longtemps</li>
+      <li>La <b>résilience collective</b> — la capacité d'une société à continuer de fonctionner même en cas de crise</li>
+    </ul>
+  </div>
+  <p>Les low-tech doivent être : <b>utiles</b>, <b>durables</b>, <b>accessibles à tous</b>, et répondre à des <b>besoins essentiels</b>. Elles doivent aussi être <b>robustes</b> et <b>réparables</b>, à l'opposé de l'obsolescence programmée (qu'on verra plus loin).</p>
+  <div class="attention">
+    <b>Attention, piège classique :</b> Low tech ne veut PAS dire "revenir à l'âge de pierre" ou rejeter tout confort technologique ! C'est une philosophie de sobriété raisonnée, pas d'austérité totale.
+  </div>
+  <div class="exemple">
+    <b>Exemples donnés dans le cours :</b> le SMS et le courriel — des technologies simples, qui consomment peu, et qui répondent à un besoin réel (communiquer) sans superflu.
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="block" id="responsable">
+  <h2 class="titre">5. Numérique responsable</h2>
+  <div class="def">
+    Objectif général : <b>améliorer l'empreinte écologique ET sociale</b> du numérique. C'est un terme parapluie qui regroupe plusieurs sous-concepts :
+  </div>
+
+  <h3>🟢 Green IT</h3>
+  <p>Réduire l'empreinte environnementale des équipements et services numériques eux-mêmes :</p>
+  <ul>
+    <li>Réduire l'empreinte carbone du numérique</li>
+    <li>Utiliser des technologies et matériaux éco-responsables</li>
+    <li>Améliorer l'impact environnemental global</li>
+  </ul>
+
+  <h3>🌿 IT for Green / IT for Good</h3>
+  <div class="def">
+    C'est l'inverse du Green IT dans le sens de la direction : au lieu de réduire l'impact <em>du</em> numérique, on utilise le numérique <b>comme outil</b> pour aider le développement durable — d'un point de vue environnemental ET social.
+  </div>
+  <div class="analogie">
+    <b>Différence clé à retenir pour l'examen :</b><br>
+    • <b>Green IT</b> = rendre le numérique lui-même plus vert (réduire SON impact)<br>
+    • <b>IT for Green</b> = utiliser le numérique pour rendre AUTRE CHOSE plus vert (ex: une appli qui optimise les trajets de camions pour réduire les émissions)
+  </div>
+
+  <p>Le numérique responsable inclut aussi :</p>
+  <ul>
+    <li><b>L'accessibilité numérique</b> — s'assurer que tout le monde (y compris personnes en situation de handicap) peut utiliser les outils numériques</li>
+    <li><b>Les achats responsables</b> — choisir des fournisseurs/matériaux respectueux de critères environnementaux et sociaux</li>
+  </ul>
+
+  <h3>♻️ Écologie numérique — leviers d'action concrets</h3>
+  <ul>
+    <li>Améliorer les performances des matériels/logiciels pour qu'ils consomment moins d'énergie</li>
+    <li>Adapter l'éclairage public aux usages réels (capteurs, gradation)</li>
+    <li>Rendre les flux de transport et réseaux énergétiques plus robustes et efficaces</li>
+    <li>Utiliser des énergies renouvelables</li>
+    <li>Optimiser l'usage des objets (éviter le gaspillage, prolonger la durée de vie)</li>
+  </ul>
+</section>
+
+<!-- SECTION 6 -->
+<section class="block" id="datacentre">
+  <h2 class="titre">6. Les Datacentres — zoom en profondeur</h2>
+  <p>Les datacentres reviennent souvent dans ce cours — c'est un sujet à bien maîtriser.</p>
+
+  <h3>🏗️ Composants d'un datacentre</h3>
+  <ul>
+    <li>Unités de climatisation (garder les serveurs frais)</li>
+    <li>Tableaux de distribution électrique de forte puissance</li>
+    <li>Batteries de secours en cas de panne de courant</li>
+    <li>Générateurs pour produire de l'électricité en cas de panne prolongée</li>
+    <li>Centrales de détection et d'extinction incendie</li>
+    <li>Mécanismes de régulation automatiques pour piloter le tout</li>
+  </ul>
+
+  <h3>⚙️ Caractéristiques des serveurs</h3>
+  <p>Les serveurs ont besoin de : peu de consommation électrique (idéalement), un environnement <b>froid ou tiède</b>, et posent des enjeux de <b>bruit</b>.</p>
+
+  <h3>📐 Chiffres de consommation à retenir</h3>
+  <div class="chiffre">
+    <b>10 serveurs standards</b> (500 watts chacun) = la consommation d'un <b>appartement de 40m²</b>.
+  </div>
+  <div class="chiffre">
+    Un <b>grand datacentre commercial</b> peut mobiliser plusieurs milliers de m² et consommer environ <b>120 MW</b> — l'équivalent de <b>20 000 logements</b> !
+  </div>
+
+  <h3>🌍 Poids environnemental global (2015)</h3>
+  <div class="chiffre">
+    Le numérique représentait <b>4%</b> des émissions mondiales de GES. Sur ces 4%, <b>25% étaient liés aux datacentres</b>.<br>
+    Comparaison : l'<b>aviation</b> représentait <b>2,5%</b> — donc le numérique dans son ensemble polluait déjà plus que l'aviation en 2015 !<br>
+    La consommation électrique des datacentres représentait environ <b>3%</b> de la consommation électrique mondiale.
+  </div>
+  <div class="attention">
+    <b>Question piège possible à l'examen :</b> "Le numérique pollue-t-il plus ou moins que l'aviation ?" → Réponse : <b>Plus</b> (4% vs 2,5% en 2015).
+  </div>
+
+  <h3>📋 Réduire les impacts des datacentres</h3>
+  <ul>
+    <li><b>Le Code de Conduite Européen</b> sur l'efficacité énergétique des datacentres : environ 200 bonnes pratiques, avec un <b>audit interne par la Commission européenne</b> et une <b>mise à jour annuelle</b> des données.</li>
+    <li>La chaleur générée par les serveurs contribue au réchauffement local — une solution est la <b>réutilisation de la chaleur</b> (ex : chauffer des bâtiments voisins avec la chaleur des serveurs).</li>
+  </ul>
+</section>
+
+<!-- SECTION 7 -->
+<section class="block" id="modeles-num">
+  <h2 class="titre">7. Modèles numériques appliqués à l'environnement</h2>
+  <p>Ici on change de perspective : le numérique n'est pas seulement un <em>problème</em> environnemental, il est aussi un <b>outil</b> qu'on utilise pour étudier et gérer l'environnement. On distingue 3 usages :</p>
+  <table>
+    <tr><th>Type de modèle</th><th>Horizon</th><th>Exemple</th></tr>
+    <tr><td>Prévision à courte échéance</td><td>Court terme</td><td>Météorologie, qualité de l'air, risque d'inondation</td></tr>
+    <tr><td>Prévision à moyen/long terme</td><td>Saisons, décennies</td><td>Prévision saisonnière de la mousson, projections climatiques</td></tr>
+    <tr><td>Étude d'impact</td><td>Scénario hypothétique</td><td>Quelles zones seraient à risque si un barrage se rompait</td></tr>
+  </table>
+</section>
+
+<!-- SECTION 8 -->
+<section class="block" id="ecoconception">
+  <h2 class="titre">8. Éco-conception d'un service numérique</h2>
+
+  <h3>🧩 Qu'est-ce qu'un service numérique ?</h3>
+  <div class="def">
+    Un service numérique est composé de :
+    <ul>
+      <li><b>L'information</b> : les données</li>
+      <li><b>Des traitements</b> : algorithmes, filtrage, simulation</li>
+      <li><b>Des échanges d'informations</b></li>
+      <li><b>Des interfaces utilisateurs</b></li>
+    </ul>
+    Et il repose sur 3 piliers : <b>infrastructures logicielles</b>, <b>infrastructures matérielles</b>, et <b>des personnes</b> (les gens qui le conçoivent, le maintiennent, l'utilisent).
+  </div>
+
+  <h3>❓ Pourquoi réduire les impacts ?</h3>
+  <div class="chiffre">
+    L'écosystème numérique mondial représente <b>2% à 4%</b> des émissions de GES de la planète — jusqu'à <b>deux fois plus que le transport aérien</b>.
+  </div>
+  <p>La fabrication du matériel numérique et le traitement des déchets causent : pollution des sols, diminution des ressources en eau, impact sur la santé et la biodiversité.</p>
+
+  <div class="exemple">
+    <b>Le graphique comparatif (page 26) — à bien comprendre :</b><br>
+    Sur la durée de vie complète du matériel, un <b>laptop</b> émet environ 414 kg éq. CO2, un <b>écran 24"</b> environ 507 kg, mais un <b>serveur de calcul</b> (Dell C6420) atteint <b>4164 kg</b> et un <b>serveur de stockage</b> (Dell R740XD) atteint <b>4974 kg</b> !<br><br>
+    Comparaison avec le transport : un aller-retour Paris-New York en avion émet <b>1046 kg</b>. <b>Un seul serveur de stockage sur sa durée de vie pollue presque autant que 5 allers-retours Paris-New York !</b>
+  </div>
+
+  <h3>🔧 Comment réduire les impacts ? (leviers généraux)</h3>
+  <ul>
+    <li>Limiter les transferts de données</li>
+    <li>Limiter l'obsolescence des équipements</li>
+    <li>Limiter les données d'entrée et/ou de sortie</li>
+    <li>Bien choisir la plateforme de calcul, de pré- et post-traitement</li>
+    <li>Post-traiter les données au plus proche du lieu de création (éviter de déplacer inutilement des données)</li>
+    <li>Choisir judicieusement entre briques logicielles externes (déjà existantes) ou à redévelopper en interne</li>
+  </ul>
+
+  <h3>🔄 Le cycle de vie d'un service numérique</h3>
+  <p>L'éco-conception, c'est intégrer les aspects environnementaux <b>à chaque étape</b> du cycle de vie. Le cours divise ce cycle en 3 grandes phases : <b>Avant</b> → <b>Pendant</b> → <b>Après</b>.</p>
+
+  <details open>
+    <summary>🟡 AVANT (Collecte des besoins, Conception, Implémentation)</summary>
+    <p><b>4 principes d'éco-conception :</b></p>
+    <ul>
+      <li><b>Simplicité</b> — ne pas complexifier inutilement</li>
+      <li><b>Frugalité et sobriété</b> — utiliser le minimum de ressources nécessaires</li>
+      <li><b>Pertinence</b> — ne développer que ce qui est utile</li>
+      <li><b>Durabilité</b> — penser à la longévité dès la conception</li>
+    </ul>
+    <div class="def">
+      <b>Obésiciel</b> (mot-valise "obésité" + "logiciel") : un logiciel qui utilise des ressources excessives (mémoire, espace disque, puissance de traitement) parce qu'il a plus de fonctionnalités que nécessaire ou trop de fonctionnalités disparates non liées entre elles.
+    </div>
+    <p><b>Le triangle du développement durable (schéma "Avant") :</b> Les 3 cercles Écologique / Social / Économique se recoupent pour donner : <em>Vivable</em> (Écologique+Social), <em>Viable</em> (Écologique+Économique), <em>Équitable</em> (Social+Économique), et au centre : <b>Durable</b> (les trois ensemble).</p>
+    <p><b>Autres leviers "avant" :</b> accroître la durée de vie du matériel, s'adapter au contexte d'usage, penser la sécurité du service, viser la sobriété numérique, penser la durabilité, et — point important — <b>bien choisir le langage de programmation</b>.</p>
+    <div class="exemple">
+      <b>Le graphique des langages (page 33) :</b> Il compare les langages selon leur consommation d'énergie, temps d'exécution et mémoire utilisée. <b>C, Rust, C++, Ada</b> sont parmi les plus économes en énergie et rapides. À l'inverse, des langages comme <b>Python</b> ou <b>Ruby</b> consomment beaucoup plus (jusqu'à des dizaines de fois plus de CO2 pour la même tâche) car ils sont interprétés et moins optimisés à l'exécution.
+    </div>
+    <div class="analogie">
+      <b>Lien avec ton cours INF3105 (C++) :</b> C'est exactement pour ça que le C++ est enseigné pour les structures de données — un code optimisé en C++ consomme littéralement moins d'énergie qu'un équivalent en Python !
+    </div>
+  </details>
+
+  <details open>
+    <summary>🔵 PENDANT (Intégration & Tests, usage courant)</summary>
+    <ul>
+      <li>Analyser le code</li>
+      <li>Déterminer la maintenance nécessaire</li>
+      <li>Observer l'usage des ressources et le fonctionnement (ex : temps d'exécution, consommation électrique, taille des données, émissions de carbone mesurées)</li>
+      <li>Surveiller l'usage électrique</li>
+    </ul>
+    <p><b>Optimiser le code</b> : l'optimisation ne devrait pas introduire plus d'opérations ou traiter plus de données, et ne devrait pas nuire à la qualité du code. Il y a souvent un <b>compromis efficacité vs stockage</b> (ex : mettre en cache des résultats prend de l'espace disque mais réduit le calcul répété).</p>
+    <p>L'<b>intégration continue</b> (CI) permet de tester et vérifier ces aspects à chaque changement de code.</p>
+  </details>
+
+  <details open>
+    <summary>🟢 APRÈS (Déploiement, opération, fin de vie)</summary>
+    <ul>
+      <li>Préférer la <b>virtualisation</b> (moins de serveurs physiques nécessaires)</li>
+      <li>Éviter la multiplication inutile de machines virtuelles</li>
+      <li>Amélioration continue en production, basée sur les usages réels observés</li>
+      <li>Réduire la fréquence et le volume des sauvegardes</li>
+      <li>Éviter le gaspillage énergétique</li>
+      <li>Limiter le nombre de services déployés</li>
+    </ul>
+    <p><b>Outils d'exemple pour l'amélioration continue (schéma DevOps, page 37) :</b> Git, Docker, GNU Make (développement/build) ; GitLab, GitHub, Kubernetes, Puppet, Ansible (release/opération) ; Grafana, Prometheus, PowerAPI (mesure) ; Rocket.Chat, Wekan (planification/communication).</p>
+    <div class="analogie">
+      <b>Lien avec tes cours :</b> Tu retrouves ici exactement les outils de ton cours INF6150 (gestion de projet) et tes intérêts DevOps — Docker, CI/CD, Kubernetes ne sont pas juste des outils de productivité, ils ont aussi un rôle dans la sobriété numérique !
+    </div>
+    <p><b>Fin de vie :</b> favoriser la durabilité, éviter les <b>logiciels et données "zombies"</b> (des choses qu'on garde "au cas où" mais qui ne servent plus à rien et consomment des ressources pour rien). Il faut supprimer : l'installation du logiciel inutilisé, les données stockées après archivage, et les références au logiciel dans les outils de supervision.</p>
+  </details>
+</section>
+
+<!-- SECTION 9 -->
+<section class="block" id="ia">
+  <h2 class="titre">9. Modèles de l'IA — coûts environnementaux</h2>
+  <p>Cette section montre à quel point la demande énergétique de l'IA générative explose.</p>
+
+  <h3>📈 Projections de consommation électrique de l'IA (source Morgan Stanley)</h3>
+  <table>
+    <tr><th>Année</th><th>4 puces/serveur</th><th>8 puces/serveur</th></tr>
+    <tr><td>2023E</td><td>13,9 TWh</td><td>12,5 TWh</td></tr>
+    <tr><td>2024E</td><td>49,3 TWh</td><td>45,8 TWh</td></tr>
+    <tr><td>2025E</td><td>100,0 TWh</td><td>92,4 TWh</td></tr>
+    <tr><td>2026E</td><td>163,4 TWh</td><td>147,9 TWh</td></tr>
+    <tr><td>2027E</td><td>236,6 TWh</td><td>212,0 TWh</td></tr>
+  </table>
+  <div class="chiffre">
+    Morgan Stanley prévoit une augmentation de <b>presque 5x</b> de la demande énergétique de l'IA générative sur 3 ans.
+  </div>
+
+  <h3>📊 Training vs Inference (source Wells Fargo)</h3>
+  <div class="def">
+    <b>Training (entraînement)</b> = la phase où on "apprend" au modèle en lui montrant énormément de données (très gourmande en énergie, ponctuelle).<br>
+    <b>Inference</b> = la phase où le modèle déjà entraîné répond réellement aux utilisateurs (moins gourmande par requête, mais répétée des milliards de fois).
+  </div>
+  <div class="chiffre">
+    Wells Fargo prévoit que la demande d'énergie de l'IA va augmenter de <b>550% d'ici 2026</b> (de 8 TWh en 2024 à 52 TWh), puis encore de <b>1150%</b> pour atteindre <b>652 TWh en 2030</b>.
+  </div>
+
+  <h3>🌐 Demande électrique globale (Datacentres + IA + Cryptomonnaies), source IEA</h3>
+  <div class="chiffre">
+    L'Agence Internationale de l'Énergie (IEA) projette que la demande mondiale d'électricité liée aux datacentres, à l'IA et aux cryptomonnaies pourrait atteindre <b>800 TWh en 2026</b> (scénario de base) — une hausse de près de <b>75%</b> par rapport aux 460 TWh de 2022.
+  </div>
+  <div class="analogie">
+    <b>À retenir pour l'examen :</b> Toutes ces sources (Morgan Stanley, Wells Fargo, IEA) pointent dans la même direction : la croissance de l'IA génère une explosion rapide et continue de la demande énergétique mondiale, bien au-delà de ce que les infrastructures actuelles peuvent absorber facilement.
+  </div>
+</section>
+
+<!-- SECTION 10 -->
+<section class="block" id="dechets">
+  <h2 class="titre">10. E-déchets</h2>
+  <div class="def">
+    Les <b>déchets électroniques</b> (e-déchets) sont les équipements électriques/électroniques en fin de vie : ordinateurs, téléphones, gros électroménagers, équipements médicaux.
+  </div>
+  <div class="attention">
+    S'ils ne sont pas correctement recyclés, ils peuvent libérer jusqu'à <b>1000 substances chimiques différentes</b> dans l'environnement, y compris des <b>substances neurotoxiques</b> (qui attaquent le système nerveux).
+  </div>
+  <div class="chiffre">
+    En 2022, <b>moins d'un quart</b> des déchets électroniques mondiaux étaient officiellement recyclés (source : OMS).
+  </div>
+
+  <h3>📦 Chiffres UNITAR (2022)</h3>
+  <ul>
+    <li><b>62 millions de tonnes</b> de déchets électroniques produits en 2022 — une hausse de <b>82%</b> par rapport à 2010</li>
+    <li>Ces 62 millions de tonnes rempliraient <b>1,55 million de camions de 40 tonnes</b> — mis bout à bout, ça ferait le tour de la Terre !</li>
+    <li>Projection : <b>82 millions de tonnes en 2030</b> (+32%)</li>
+    <li>Des milliards de dollars de ressources précieuses gaspillées</li>
+    <li>Seulement <b>1%</b> de la demande mondiale en <b>éléments de terres rares</b> est satisfaite par le recyclage des e-déchets</li>
+  </ul>
+
+  <h3>🔧 Prévention et gestion (recommandations OMS)</h3>
+  <ul>
+    <li>Adoption d'accords internationaux</li>
+    <li>Législation sur la gestion des déchets électroniques</li>
+    <li>Intégration de mesures de protection de la santé dans les lois</li>
+    <li>Surveillance des sites de déchets électroniques</li>
+    <li>Suivi des interventions de recyclage</li>
+  </ul>
+
+  <h3>🏠 Recyclage local (Montréal / UQAM)</h3>
+  <p>La Ville de Montréal invite les citoyens à recycler leurs produits électroniques (ordinateurs, écrans, imprimantes) dans les <b>écocentres</b> ou <b>points de dépôt</b>. À l'UQAM, la <b>COOP UQAM</b> (succursale Berri-UQAM) accepte les petits matériels informatiques et consommables.</p>
+
+  <h3>🔒 E-déchets et vie privée</h3>
+  <div class="attention">
+    <b>Important :</b> avant de recycler, vendre ou donner un appareil, il faut effacer ses renseignements personnels. Attention : <b>appuyer sur "effacer" ne suffit PAS</b>, il faut vraiment "épurer" les données (effacement sécurisé) et retirer la carte SIM. Il faut consulter le site du fabricant ou le manuel pour savoir comment épurer de façon permanente.
+  </div>
+  <div class="analogie">
+    <b>Lien avec ton cours INF4471 (cybersécurité) :</b> Ce point rejoint directement les notions de suppression sécurisée de données que tu as probablement vues — "supprimer" un fichier ne l'efface pas physiquement du disque, il faut un vrai effacement sécurisé (wipe).
+  </div>
+</section>
+
+<!-- SECTION 11 -->
+<section class="block" id="obsolescence">
+  <h2 class="titre">11. Obsolescence programmée</h2>
+  <div class="def">
+    <b>« L'obsolescence programmée est la réduction volontaire de la durée de vie d'un produit afin d'en accélérer le renouvellement. »</b>
+  </div>
+  <p>Elle peut prendre plusieurs formes :</p>
+  <ul>
+    <li><b>Technique</b> — une pièce conçue pour lâcher après un certain temps</li>
+    <li><b>Logicielle</b> — une mise à jour qui ralentit volontairement un vieil appareil, ou qui arrête le support</li>
+    <li><b>Esthétique</b> — faire percevoir un produit comme "démodé" pour inciter au rachat</li>
+  </ul>
+
+  <h3>🇫🇷 En France</h3>
+  <div class="chiffre">
+    La France a été le <b>premier pays au monde</b> à interdire l'obsolescence programmée, en <b>2015</b>. Sanctions possibles : jusqu'à <b>2 ans de prison</b>, <b>300 000 €</b> d'amende, et jusqu'à <b>5% du chiffre d'affaires annuel moyen</b> de l'entreprise.
+  </div>
+
+  <h3>🇨🇦 Au Québec</h3>
+  <div class="def">
+    « Dès la sanction de la loi, il sera interdit au Québec de vendre des biens dont la durée normale de fonctionnement a été délibérément limitée. »
+  </div>
+  <div class="chiffre">
+    Le Québec est la <b>deuxième juridiction au monde</b> (après la France) à interdire l'obsolescence programmée.
+  </div>
+  <p>Points intéressants soulevés :</p>
+  <ul>
+    <li>Les consommateurs préfèrent souvent la <b>durabilité</b> plutôt que la <b>réparabilité</b> (ils veulent que ça ne brise pas, plus que pouvoir le réparer facilement)</li>
+    <li>L'<b>empreinte écologique du produit</b> prend en compte tout le cycle de vie, pas seulement l'usage</li>
+    <li>La <b>sensibilisation du grand public</b> reste un enjeu central</li>
+  </ul>
+  <div class="analogie">
+    <b>À retenir pour l'examen :</b> Ordre chronologique — 1) France interdit en premier (2015), 2) Québec devient la 2e juridiction au monde à le faire.
+  </div>
+</section>
+
+<!-- SECTION 12 -->
+<section class="block" id="blockchain">
+  <h2 class="titre">12. Chaîne de blocs (Blockchain) et critères ESG</h2>
+
+  <h3>🌐 ESG — Critères Environnementaux, Sociaux et de Gouvernance</h3>
+  <table>
+    <tr><th>Environnemental</th><th>Social</th><th>Gouvernance</th></tr>
+    <tr><td>Carburants renouvelables, risques climatiques, émissions GES, efficacité énergétique, gestion de l'eau, recyclage, croissance démographique, préparation aux urgences</td>
+    <td>Santé/sécurité, droits humains, conditions de travail, relations employés, inclusion/diversité, impact communautés locales</td>
+    <td>Normes éthiques, diversité du conseil, engagement des parties prenantes, rémunération dirigeants, droits des actionnaires</td></tr>
+  </table>
+
+  <h3>⛏️ Preuve de Travail (Proof of Work — PoW)</h3>
+  <div class="def">
+    Un "puzzle" mathématique que les mineurs doivent résoudre. Le calcul est <b>modérément difficile</b> pour celui qui le fait, mais <b>facile à vérifier</b> pour les autres. La difficulté est ajustée périodiquement pour garder un rythme constant de création de blocs.
+  </div>
+  <div class="chiffre">
+    Au 31 décembre 2022, le réseau Bitcoin nécessitait environ <b>2,53 × 10²⁰ hachages</b> avant qu'un mineur crée un bloc (~10 minutes) — une quantité de calcul astronomique, ce qui explique la très grande consommation d'énergie.
+  </div>
+
+  <h3>🪙 Preuve d'Enjeu (Proof of Stake — PoS)</h3>
+  <div class="def">
+    Ici, pas de "mineurs" qui font des calculs — des <b>validateurs</b> sont sélectionnés proportionnellement à la quantité de jetons ("stake") qu'ils possèdent. Cela évite le coût de calcul massif du PoW. Exemples : Cardano, Avalanche, Solana, Algorand, Cosmos, Polkadot, Tezos.
+  </div>
+
+  <h3>⚖️ PoW vs PoS — tableau comparatif</h3>
+  <table>
+    <tr><th>Proof of Work</th><th>Proof of Stake</th></tr>
+    <tr><td>Capacité minière = puissance de calcul</td><td>Capacité de validation = participation au réseau (jetons détenus)</td></tr>
+    <tr><td>Récompense pour résoudre un casse-tête cryptographique</td><td>Collecte des frais de transaction</td></tr>
+    <tr><td>Attaque à 51% = besoin d'un ordinateur plus puissant que 51% du réseau</td><td>Attaque = besoin de posséder 51% de toutes les cryptomonnaies (quasi impossible)</td></tr>
+  </table>
+
+  <h3>💰 ESG pour Bitcoin</h3>
+  <ul>
+    <li><b>Environnemental :</b> les émissions de BTC pourraient à elles seules contribuer significativement au réchauffement climatique ; BTC consommerait autant d'électricité qu'un pays européen de taille moyenne</li>
+    <li><b>Social :</b> fournit des services financiers aux populations non bancarisées (transfert de fonds peu coûteux)</li>
+    <li><b>Gouvernance :</b> intégrité et transparence comptables, rémunération</li>
+  </ul>
+
+  <h3>📊 Chiffres clés de consommation Bitcoin</h3>
+  <div class="chiffre">
+    Le BTC consomme environ <b>100 TWh par an</b> (environ <b>0,16%</b> de la consommation électrique mondiale). Cette consommation est suivie en continu par le <b>Cambridge Bitcoin Electricity Consumption Index (CBECI)</b>, basé sur le taux de hachage, l'efficacité énergétique, et le coût de production.
+  </div>
+
+  <h3>🔋 Comparaison d'énergie par transaction</h3>
+  <table>
+    <tr><th>Système</th><th>Énergie par transaction</th></tr>
+    <tr><td>Bitcoin (PoW)</td><td><b>814,95 kWh</b></td></tr>
+    <tr><td>Visa</td><td>0,00092 kWh</td></tr>
+    <tr><td>Stellar (PoS)</td><td>0,00022 kWh</td></tr>
+    <tr><td>Bitcoin avec Lightning Network</td><td>0,0057 kWh (grâce au traitement hors-chaîne, jusqu'à 1 million de transactions/seconde)</td></tr>
+  </table>
+  <div class="analogie">
+    <b>Ordre de grandeur à retenir :</b> Une transaction Bitcoin classique consomme environ <b>900 000 fois plus d'énergie</b> qu'une transaction Visa ! C'est LE chiffre le plus souvent cité pour critiquer le Bitcoin PoW.
+  </div>
+
+  <h3>🖥️ Nœuds complets (Full Nodes)</h3>
+  <div class="def">
+    Les <b>nœuds complets</b> conservent une copie à jour de toute la blockchain et fonctionnent en continu, 24h/24, 7j/7, 365j/an.
+  </div>
+  <div class="chiffre">
+    Au 5 juin 2023 : <b>45 452 nœuds complets</b> mondiaux, consommant environ <b>3 782 MWh</b> — soit l'équivalent d'environ <b>73 succursales de banques commerciales</b>.
+  </div>
+  <p><b>Comparaison FMI :</b> une banque commerciale sert en moyenne ~9 000 adultes, donc 73 succursales serviraient environ <b>650 000 adultes</b>. Or le réseau Bitcoin a une portée d'environ <b>47 millions d'adresses</b> à solde non nul !</p>
+  <div class="analogie">
+    <b>Point subtil important :</b> Le réseau Bitcoin peut augmenter son nombre d'adresses (utilisateurs) <b>sans avoir besoin d'augmenter le nombre de nœuds ni la consommation d'énergie</b> — ce qui n'est pas possible pour les banques traditionnelles (qui doivent ouvrir plus de succursales pour servir plus de clients). C'est un argument utilisé en faveur du Bitcoin sur ce point précis.
+  </div>
+
+  <h3>🌊 Autres enjeux environnementaux du Bitcoin</h3>
+  <ul>
+    <li>Impacts sur les ressources en eau (refroidissement des machines de minage)</li>
+    <li>Pollution thermique</li>
+    <li>Au Québec, <b>Hydro-Québec a arrêté les nouveaux projets miniers</b> (crypto) pour économiser l'électricité</li>
+    <li>Le BTC nécessite du matériel minier spécialisé, dont la production consomme ressources et énergie</li>
+    <li>Contributeur additionnel aux déchets électroniques (le matériel de minage devient vite obsolète)</li>
+  </ul>
+</section>
+
+<!-- QUIZ -->
+<section class="block" id="quiz">
+  <h2 class="titre">🎯 Questions probables à l'examen</h2>
+  <p>Essaie de répondre par toi-même avant de cliquer pour révéler la réponse !</p>
+
+  <div class="quiz-question">
+    <p class="q">1. Qu'est-ce que l'équivalent CO2 (CO2e) et pourquoi l'utilise-t-on ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">C'est une unité commune permettant de convertir tous les gaz à effet de serre (CH4, N2O, etc.) selon leur pouvoir de réchauffement, pour pouvoir les comparer et les additionner facilement — comme convertir toutes les devises en dollars.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">2. Quelle est la différence entre consommation électrique statique et dynamique ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">La statique est fixe peu importe l'usage (carte mère, ventilateurs). La dynamique dépend directement de l'usage des logiciels exécutés (OS, applications, protocoles).</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">3. En 2015, quel pourcentage des émissions mondiales de GES le numérique représentait-il, et comment ça se compare à l'aviation ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Le numérique représentait 4% (dont 25% liés aux datacentres), contre 2,5% pour l'aviation — le numérique polluait déjà plus que l'aviation.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">4. Quelle est la différence entre Green IT et IT for Green ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Green IT = réduire l'empreinte environnementale du numérique lui-même. IT for Green (ou IT for Good) = utiliser le numérique comme outil pour réduire l'impact d'autres secteurs (environnemental et social).</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">5. Qu'est-ce qu'un "obésiciel" ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Un logiciel qui utilise des ressources excessives (mémoire, disque, puissance de traitement) parce qu'il a plus de fonctionnalités que nécessaire ou trop de fonctionnalités disparates.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">6. Nomme les 4 principes d'éco-conception vus dans la phase "Avant" du cycle de vie.</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Simplicité, frugalité et sobriété, pertinence, durabilité.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">7. Pourquoi le choix du langage de programmation a-t-il un impact environnemental ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Les langages compilés et optimisés comme C, Rust, C++, Ada consomment beaucoup moins d'énergie et de temps d'exécution pour une même tâche que des langages interprétés comme Python ou Ruby, ce qui a un impact direct sur les émissions de CO2.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">8. Quel pays a interdit l'obsolescence programmée en premier, et quel est le deuxième ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">La France en premier (2015), le Québec en deuxième au monde.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">9. Combien de tonnes de déchets électroniques ont été produites en 2022, et quel pourcentage était officiellement recyclé ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">62 millions de tonnes en 2022 (+82% depuis 2010), et moins d'un quart (moins de 25%) était officiellement recyclé.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">10. Quelle est la différence fondamentale entre Proof of Work et Proof of Stake ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">PoW : la capacité de "miner" dépend de la puissance de calcul (résoudre un puzzle cryptographique difficile). PoS : la capacité de "valider" dépend de la quantité de jetons détenus (mise en jeu), ce qui évite le coût de calcul énorme du PoW.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">11. Environ combien de fois plus d'énergie une transaction Bitcoin (PoW) consomme-t-elle par rapport à une transaction Visa ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Environ 900 000 fois plus (814,95 kWh vs 0,00092 kWh).</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">12. Que fait le Lightning Network pour réduire la consommation d'énergie de Bitcoin ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Il permet de traiter les transactions hors-chaîne (jusqu'à 1 million de transactions/seconde), réduisant la consommation par transaction de 814,95 kWh à environ 0,0057 kWh.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">13. Pourquoi Hydro-Québec a-t-elle arrêté les nouveaux projets miniers de cryptomonnaie ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Pour économiser l'électricité, étant donné la très forte consommation énergétique des opérations de minage de cryptomonnaies.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">14. Que signifie l'expression "logiciels et données zombies" et pourquoi faut-il les éviter ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Ce sont des logiciels installés ou des données stockées qui ne sont plus utilisés mais qu'on garde "au cas où". Ils consomment des ressources (stockage, supervision, énergie) pour rien — il faut les supprimer en fin de vie.</div>
+    </details>
+  </div>
+
+  <div class="quiz-question">
+    <p class="q">15. Sur la durée de vie complète du matériel, comparé à un aller-retour Paris–New York en avion (1046 kg CO2e), qu'est-ce qui émet le plus : un laptop ou un serveur de stockage Dell R740XD ?</p>
+    <details><summary>Voir la réponse</summary>
+      <div class="quiz-reponse">Le serveur de stockage (4974 kg CO2e) émet nettement plus — presque 5 fois plus qu'un aller-retour Paris-New York — alors qu'un laptop (414 kg) émet moins qu'un seul aller-retour.</div>
+    </details>
+  </div>
+
+</section>
+
+</div>
+
+<footer>
+  Guide d'étude généré pour INM6000 — Séance 8 — Informatique et Écologie<br>
+  Basé sur le contenu du cours de Didem Demirag, UQAM, Été 2026
+</footer>
+
+</body>
+</html>

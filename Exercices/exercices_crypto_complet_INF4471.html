@@ -1,0 +1,1725 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercices Crypto — INF4471</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg:     #08080e;
+  --bg2:    #0e0e1c;
+  --bg3:    #14142a;
+  --bord:   #1e1e38;
+  --cyan:   #22d3ee;
+  --lime:   #a3e635;
+  --amber:  #fbbf24;
+  --violet: #a78bfa;
+  --rose:   #fb7185;
+  --green:  #34d399;
+  --text:   #e2e8f0;
+  --muted:  #4b5580;
+  --mono:   'JetBrains Mono', monospace;
+  --sans:   'Inter', sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.75; }
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(8,8,14,0.95); backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--bord);
+  display: flex; align-items: center; height: 48px;
+  padding: 0 1.5rem; gap: 0; overflow-x: auto;
+}
+.nbrand { font-family: var(--mono); font-size: 0.68rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.12em; white-space: nowrap; margin-right: 1.5rem; flex-shrink: 0; }
+nav a { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); text-decoration: none; white-space: nowrap; padding: 0 0.8rem; height: 48px; display: flex; align-items: center; border-right: 1px solid var(--bord); transition: color 0.15s; }
+nav a:hover { color: var(--cyan); }
+
+/* ── HERO ── */
+.hero { padding: 4rem 2rem 3rem; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34,211,238,0.1) 0%, transparent 70%); pointer-events: none; }
+.htag { display: inline-block; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lime); border: 1px solid rgba(163,230,53,0.35); padding: 0.25rem 0.8rem; border-radius: 2px; margin-bottom: 1.2rem; }
+.hero h1 { font-size: clamp(1.9rem, 4.5vw, 3rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; background: linear-gradient(135deg, #22d3ee 0%, #a78bfa 50%, #a3e635 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero p { color: var(--muted); font-size: 0.95rem; max-width: 600px; margin: 0 auto 1.5rem; }
+
+/* TOC */
+.toc { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 0.5rem; }
+.toc a { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); border: 1px solid var(--bord); padding: 0.3rem 0.7rem; border-radius: 3px; text-decoration: none; transition: all 0.15s; }
+.toc a:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* ── LAYOUT ── */
+.wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem 6rem; }
+
+/* ── CHAPTER HEADERS ── */
+.chapter { margin: 3rem 0 2rem; }
+.ch-label { font-family: var(--mono); font-size: 0.63rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.4rem; }
+.chapter h2 { font-size: 1.5rem; font-weight: 700; padding-left: 0.9rem; border-left: 3px solid var(--cyan); color: #f8fafc; margin-bottom: 0.5rem; }
+.chapter p { color: #94a3b8; font-size: 0.9rem; }
+
+hr.div { border: none; border-top: 1px solid var(--bord); margin: 2.5rem 0; }
+
+/* ── EXERCISE CARD ── */
+.excard {
+  background: var(--bg2); border: 1px solid var(--bord);
+  border-radius: 10px; margin-bottom: 1.5rem; overflow: hidden;
+}
+.excard-head {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 1rem 1.4rem; border-bottom: 1px solid var(--bord);
+  cursor: pointer; user-select: none;
+  transition: background 0.15s;
+}
+.excard-head:hover { background: rgba(34,211,238,0.03); }
+.ex-badge {
+  font-family: var(--mono); font-size: 0.68rem; font-weight: 700;
+  padding: 0.25rem 0.6rem; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+}
+.badge-dh     { background: rgba(34,211,238,0.12);  color: var(--cyan);   border: 1px solid rgba(34,211,238,0.3); }
+.badge-rsa    { background: rgba(167,139,250,0.12); color: var(--violet); border: 1px solid rgba(167,139,250,0.3); }
+.badge-inv    { background: rgba(251,191,36,0.12);  color: var(--amber);  border: 1px solid rgba(251,191,36,0.3); }
+.badge-mod    { background: rgba(163,230,53,0.1);   color: var(--lime);   border: 1px solid rgba(163,230,53,0.3); }
+.badge-hmac   { background: rgba(52,211,153,0.1);   color: var(--green);  border: 1px solid rgba(52,211,153,0.3); }
+.badge-pratiq { background: rgba(251,113,133,0.1);  color: var(--rose);   border: 1px solid rgba(251,113,133,0.3); }
+.badge-fermat { background: rgba(251,191,36,0.1);   color: var(--amber);  border: 1px solid rgba(251,191,36,0.3); }
+
+.ex-title { font-weight: 600; font-size: 0.95rem; color: #f1f5f9; flex: 1; }
+.ex-diff { font-family: var(--mono); font-size: 0.65rem; }
+.diff-easy { color: var(--green); }
+.diff-med  { color: var(--amber); }
+.diff-hard { color: var(--rose);  }
+.ex-arrow { color: var(--muted); font-size: 0.8rem; transition: transform 0.2s; }
+.excard-head.open .ex-arrow { transform: rotate(90deg); }
+
+.excard-body { padding: 1.4rem; display: none; }
+.excard-body.open { display: block; }
+
+/* ── PROBLEM TEXT ── */
+.prob { background: var(--bg3); border-left: 3px solid var(--cyan); border-radius: 0 6px 6px 0; padding: 1rem 1.2rem; margin-bottom: 1.2rem; color: #cbd5e1; font-size: 0.92rem; }
+.prob strong { color: #f1f5f9; }
+.prob.violet { border-left-color: var(--violet); }
+.prob.amber  { border-left-color: var(--amber); }
+.prob.green  { border-left-color: var(--green); }
+.prob.rose   { border-left-color: var(--rose); }
+
+/* ── SOLUTION ── */
+.sol-toggle-btn {
+  background: var(--bg3); border: 1px solid var(--bord);
+  color: var(--muted); font-family: var(--mono); font-size: 0.75rem;
+  padding: 0.45rem 1rem; border-radius: 4px; cursor: pointer;
+  transition: all 0.15s; margin-bottom: 0.8rem;
+}
+.sol-toggle-btn:hover { border-color: var(--lime); color: var(--lime); }
+.sol-toggle-btn.shown { border-color: var(--lime); color: var(--lime); }
+
+.solution { display: none; }
+.solution.open { display: block; }
+
+.sol-step {
+  display: flex; gap: 0.9rem; margin-bottom: 0.8rem; align-items: flex-start;
+}
+.sol-num {
+  min-width: 24px; height: 24px; border-radius: 4px;
+  background: var(--cyan); color: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--mono); font-size: 0.7rem; font-weight: 700; flex-shrink: 0; margin-top: 0.2rem;
+}
+.sol-num.v { background: var(--violet); }
+.sol-num.a { background: var(--amber); color: #000; }
+.sol-num.g { background: var(--green); color: #000; }
+.sol-num.r { background: var(--rose); }
+
+.sol-content { flex: 1; }
+.sol-content strong { color: var(--cyan); font-family: var(--mono); font-size: 0.82rem; display: block; margin-bottom: 0.2rem; }
+.sol-content strong.v { color: var(--violet); }
+.sol-content strong.a { color: var(--amber); }
+.sol-content strong.g { color: var(--green); }
+.sol-content strong.r { color: var(--rose); }
+.sol-content p { color: #94a3b8; font-size: 0.88rem; margin: 0; line-height: 1.6; }
+
+/* ── CODE BLOCK ── */
+.code {
+  background: #050508; border: 1px solid var(--bord);
+  border-radius: 6px; padding: 1rem 1.2rem;
+  font-family: var(--mono); font-size: 0.8rem; line-height: 1.9;
+  color: #7c8db5; overflow-x: auto; margin: 0.8rem 0;
+}
+.code .c  { color: var(--cyan);   font-weight: 700; }
+.code .v  { color: var(--violet); font-weight: 700; }
+.code .a  { color: var(--amber);  font-weight: 700; }
+.code .g  { color: var(--green);  font-weight: 700; }
+.code .r  { color: var(--rose);   font-weight: 700; }
+.code .cm { color: var(--muted);  font-style: italic; }
+
+/* ── RESULT BOX ── */
+.result {
+  display: inline-block; background: rgba(34,211,238,0.07);
+  border: 1px solid rgba(34,211,238,0.3); border-radius: 5px;
+  padding: 0.4rem 1rem; font-family: var(--mono); font-size: 0.9rem;
+  color: var(--cyan); margin: 0.4rem 0;
+}
+.result.v { background: rgba(167,139,250,0.07); border-color: rgba(167,139,250,0.3); color: var(--violet); }
+.result.a { background: rgba(251,191,36,0.07);  border-color: rgba(251,191,36,0.3);  color: var(--amber); }
+.result.g { background: rgba(52,211,153,0.07);  border-color: rgba(52,211,153,0.3);  color: var(--green); }
+.result.r { background: rgba(251,113,133,0.07); border-color: rgba(251,113,133,0.3); color: var(--rose); }
+
+/* ── KEY INSIGHT ── */
+.insight {
+  background: linear-gradient(135deg, rgba(34,211,238,0.05), rgba(167,139,250,0.05));
+  border: 1px solid rgba(34,211,238,0.2); border-radius: 7px;
+  padding: 1rem 1.3rem; margin: 1rem 0; font-size: 0.88rem; color: #94a3b8;
+}
+.insight::before { content: '💡 À retenir'; display: block; font-family: var(--mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cyan); margin-bottom: 0.4rem; }
+
+/* ── WARN ── */
+.warn {
+  background: rgba(251,191,36,0.05); border: 1px solid rgba(251,191,36,0.2);
+  border-radius: 7px; padding: 1rem 1.3rem; margin: 1rem 0; font-size: 0.88rem; color: #94a3b8;
+}
+.warn::before { content: '⚠️ Attention'; display: block; font-family: var(--mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.4rem; }
+
+/* ── TABLE ── */
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 0.8rem 0; }
+th { background: var(--bg3); color: var(--cyan); text-align: left; padding: 0.5rem 0.9rem; border: 1px solid var(--bord); font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+td { padding: 0.5rem 0.9rem; border: 1px solid var(--bord); color: #94a3b8; }
+tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+
+/* ── PRACTICE SECTION ── */
+.practice-banner {
+  background: linear-gradient(135deg, rgba(251,113,133,0.08), rgba(163,230,53,0.06));
+  border: 1px solid rgba(251,113,133,0.25); border-radius: 10px;
+  padding: 1.5rem 1.8rem; margin: 2rem 0;
+}
+.practice-banner h3 { color: var(--rose); font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.5rem; }
+
+/* ── SCROLLTOP ── */
+#top { position: fixed; bottom: 2rem; right: 2rem; background: var(--cyan); color: var(--bg); border: none; border-radius: 50%; width: 38px; height: 38px; font-size: 0.9rem; cursor: pointer; display: none; align-items: center; justify-content: center; z-index: 200; font-weight: 700; }
+#top.show { display: flex; }
+
+/* ── QUIZ INTERACTIVE ── */
+.quiz-input { background: #050508; border: 1px solid var(--bord); border-radius: 4px; padding: 0.4rem 0.8rem; color: var(--lime); font-family: var(--mono); font-size: 0.85rem; width: 100%; max-width: 300px; outline: none; transition: border-color 0.15s; margin-top: 0.5rem; }
+.quiz-input:focus { border-color: var(--lime); }
+.qbtn { margin-top: 0.5rem; background: var(--lime); color: #000; border: none; border-radius: 4px; padding: 0.4rem 1rem; font-family: var(--mono); font-size: 0.75rem; font-weight: 700; cursor: pointer; transition: opacity 0.15s; }
+.qbtn:hover { opacity: 0.85; }
+.qfb { display: none; margin-top: 0.4rem; font-family: var(--mono); font-size: 0.8rem; padding: 0.35rem 0.7rem; border-radius: 4px; }
+.qfb.ok  { display: block; color: var(--green); background: rgba(52,211,153,0.08); }
+.qfb.err { display: block; color: var(--rose);  background: rgba(251,113,133,0.08); }
+
+.subq { margin: 0.7rem 0 0.3rem; font-size: 0.88rem; color: #cbd5e1; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nbrand">INF4471 // EXERCICES</span>
+  <a href="#pgcd">PGCD</a>
+  <a href="#inv">Inverse mod</a>
+  <a href="#arith">Arithmétique</a>
+  <a href="#expo">Exponentiation</a>
+  <a href="#fermat">Fermat</a>
+  <a href="#dh">Diffie-Hellman</a>
+  <a href="#rsa">RSA</a>
+  <a href="#hmac">HMAC</a>
+  <a href="#pratique">Pratique +</a>
+</nav>
+
+<div class="hero">
+  <span class="htag">INF4471 — Exercices complets</span>
+  <h1>Cryptographie<br>Exercices & Solutions détaillées</h1>
+  <p>Tous les exercices du prof + exercices supplémentaires typiques, avec solutions pas à pas. Clique sur un exercice pour voir la solution.</p>
+  <div class="toc">
+    <a href="#pgcd">PGCD</a>
+    <a href="#inv">Inverse modulaire</a>
+    <a href="#arith">Arithmétique mod</a>
+    <a href="#expo">Exponentiation</a>
+    <a href="#fermat">Fermat</a>
+    <a href="#dh">Diffie-Hellman</a>
+    <a href="#rsa">RSA</a>
+    <a href="#hmac">HMAC</a>
+    <a href="#pratique">Exercices supplémentaires</a>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ═══════════════════════════════════════════════ PGCD -->
+<div class="chapter" id="pgcd">
+  <div class="ch-label">Section 01 — Du cours</div>
+  <h2>PGCD & Division euclidienne</h2>
+  <p>Rappel : PGCD(a, b) = PGCD(b, a mod b). On s'arrête quand le reste = 0. Le PGCD est le dernier reste non nul.</p>
+</div>
+
+<!-- EX 1 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">PGCD</span>
+    <span class="ex-title">Division euclidienne de 682 par 51</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Effectue la division euclidienne de <strong>682 par 51</strong>. Donne le quotient q et le reste r.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step">
+        <div class="sol-num">1</div>
+        <div class="sol-content">
+          <strong>Formule</strong>
+          <p>a = b × q + r, avec 0 ≤ r &lt; b. Ici a=682, b=51.</p>
+        </div>
+      </div>
+      <div class="sol-step">
+        <div class="sol-num">2</div>
+        <div class="sol-content">
+          <strong>Trouver le quotient q</strong>
+          <p>682 ÷ 51 ≈ 13.37… → q = 13 (partie entière)</p>
+        </div>
+      </div>
+      <div class="sol-step">
+        <div class="sol-num">3</div>
+        <div class="sol-content">
+          <strong>Calculer le reste r</strong>
+          <p>r = 682 − 51 × 13 = 682 − 663 = <strong style="color:var(--cyan)">19</strong></p>
+        </div>
+      </div>
+      <div class="code">
+682 = 51 × <span class="c">13</span> + <span class="a">19</span>
+<span class="cm">Vérification : 51×13 = 663, et 663+19 = 682 ✓</span>
+      </div>
+      <div class="result">Quotient q = 13, Reste r = 19</div>
+    </div>
+  </div>
+</div>
+
+<!-- EX 2 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">PGCD</span>
+    <span class="ex-title">PGCD(2348, 128) par l'algorithme d'Euclide</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">En utilisant l'algorithme d'Euclide, calcule <strong>PGCD(2348, 128)</strong>.<br>Rappel : PGCD(a,b) = PGCD(b, a mod b).</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+Étape 1 : <span class="c">2348</span> = 128 × 18 + <span class="a">44</span>   <span class="cm">→ 128×18=2304, reste=2348−2304=44</span>
+          PGCD(2348,128) = PGCD(128, 44)
+
+Étape 2 : <span class="c">128</span>  = 44  × 2  + <span class="a">40</span>   <span class="cm">→ 44×2=88,   reste=128−88=40</span>
+          PGCD(128,44) = PGCD(44, 40)
+
+Étape 3 : <span class="c">44</span>   = 40  × 1  + <span class="a">4</span>    <span class="cm">→ 40×1=40,   reste=44−40=4</span>
+          PGCD(44,40) = PGCD(40, 4)
+
+Étape 4 : <span class="c">40</span>   = 4   × 10 + <span class="a">0</span>    <span class="cm">→ reste=0 → STOP</span>
+          PGCD(40,4) = 4
+      </div>
+      <div class="result">PGCD(2348, 128) = 4</div>
+      <div class="insight">Le dernier reste NON NUL est toujours le PGCD. Quand le reste devient 0, l'étape précédente donne le PGCD.</div>
+    </div>
+  </div>
+</div>
+
+<!-- EX 3 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">PGCD</span>
+    <span class="ex-title">PGCD(12336628, 12336629)</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>PGCD(12336628, 12336629)</strong> sans faire tous les calculs.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step">
+        <div class="sol-num">1</div>
+        <div class="sol-content">
+          <strong>Propriété clé</strong>
+          <p>Deux entiers consécutifs n et n+1 ont toujours PGCD = 1. Leur différence vaut 1, et tout diviseur commun d doit diviser leur différence. Or d | 1 implique d = 1.</p>
+        </div>
+      </div>
+      <div class="code">
+PGCD(12336629, 12336628)
+  = PGCD(12336628, <span class="c">12336629 mod 12336628</span>)
+  = PGCD(12336628, <span class="c">1</span>)
+  = PGCD(1, 0) = <span class="g">1</span>
+      </div>
+      <div class="result">PGCD(12336628, 12336629) = 1</div>
+      <div class="insight">Règle générale : PGCD(n, n+1) = 1 <em>toujours</em>. Donc ces deux nombres sont premiers entre eux.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ INVERSE -->
+<div class="chapter" id="inv">
+  <div class="ch-label">Section 02 — Du cours + document prof</div>
+  <h2>Inverse modulaire — Euclide étendu</h2>
+  <p>L'inverse de a mod n est u tel que a×u ≡ 1 (mod n). Existe ssi PGCD(a,n)=1. Méthode : remonter les équations d'Euclide.</p>
+</div>
+
+<!-- EX inv 1 : 17 mod 50 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">17⁻¹ mod 50</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule l'inverse de <strong>17 modulo 50</strong>, c'est-à-dire u tel que 17×u ≡ 1 (mod 50).</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num">1</div><div class="sol-content"><strong>Vérifier que l'inverse existe</strong><p>PGCD(17, 50) = ? On applique Euclide : 50=17×2+16, 17=16×1+1, 16=1×16+0 → PGCD=1. ✓ L'inverse existe.</p></div></div>
+      <div class="sol-step"><div class="sol-num">2</div><div class="sol-content"><strong>Divisions successives</strong><p>50 = 17×2 + 16 … (Eq. I)<br>17 = 16×1 + 1  … (Eq. II)<br>16 = 1×16 + 0  → STOP</p></div></div>
+      <div class="sol-step"><div class="sol-num">3</div><div class="sol-content"><strong>Remontée (back-substitution)</strong>
+      <div class="code">
+D'après (Eq. II) : <span class="c">1 = 17 − 16×1</span>
+D'après (Eq. I)  : <span class="a">16 = 50 − 17×2</span>
+
+Substitution :
+1 = 17 − (50 − 17×2)×1
+1 = 17 − 50 + 17×2
+1 = <span class="g">17×3</span> − 50×1
+
+Donc : 17 × <span class="g">3</span> ≡ 1 (mod 50)
+      </div>
+      </div></div>
+      <div class="result">17⁻¹ mod 50 = 3</div>
+      <div class="insight">Vérification rapide : 17 × 3 = 51 = 50 + 1 ≡ 1 (mod 50) ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- EX inv 2 : 3 mod 11 (doc prof) -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">3⁻¹ mod 11 (exemple 1 du prof)</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>3⁻¹ mod 11</strong> par l'algorithme d'Euclide étendu.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── Divisions (algorithme d'Euclide) ────────────────</span>
+11 = (3 × 3) + 2    <span class="cm">… (Eq. I)</span>
+ 3 = (2 × 1) + 1    <span class="cm">… (Eq. II)</span>
+ 2 = (2 × 1) + 0    <span class="cm">→ PGCD(3,11) = 1 ✓</span>
+
+<span class="cm">─── Remontée ─────────────────────────────────────────</span>
+D'après (Eq. II) : <span class="c">1 = 3 − (2 × 1)</span>
+D'après (Eq. I)  : <span class="a">2 = 11 − (3 × 3)</span>
+
+1 = 3 − (11 − 3×3) × 1
+1 = 3 − 11 + 3×3
+1 = <span class="g">−11 + 4×3</span>
+1 = 4×3 − 1×11
+
+Donc 3 × <span class="g">4</span> ≡ 1 (mod 11)
+      </div>
+      <div class="result">3⁻¹ mod 11 = 4</div>
+      <div class="insight">Vérif : 3×4 = 12 = 11+1 ≡ 1 (mod 11) ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- EX inv 3 : 7 mod 26 (doc prof) -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">7⁻¹ mod 26 (exemple 2 du prof)</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>7⁻¹ mod 26</strong> par l'algorithme d'Euclide étendu.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── Divisions ───────────────────────────────────────</span>
+26 = (3 × 7) + 5    <span class="cm">… (Eq. I)</span>
+ 7 = (5 × 1) + 2    <span class="cm">… (Eq. II)</span>
+ 5 = (2 × 2) + 1    <span class="cm">… (Eq. III)</span>
+ 2 = (2 × 1) + 0    <span class="cm">→ PGCD(7,26) = 1 ✓</span>
+
+<span class="cm">─── Remontée ─────────────────────────────────────────</span>
+(Eq. III) : <span class="c">1 = 5 − (2 × 2)</span>
+(Eq. II)  : <span class="a">2 = 7 − (5 × 1)</span>
+
+1 = 5 − (7 − 5)×2
+1 = 5 − 7×2 + 5×2
+1 = <span class="v">5×3 − 7×2</span>
+
+(Eq. I)  : <span class="g">5 = 26 − (3 × 7)</span>
+
+1 = (26 − 3×7)×3 − 7×2
+1 = 3×26 − 9×7 − 2×7
+1 = <span class="r">3×26 − 11×7</span>
+
+Donc 7 × (−11) ≡ 1 (mod 26)
+−11 mod 26 = −11 + 26 = <span class="g">15</span>
+      </div>
+      <div class="result">7⁻¹ mod 26 = 15</div>
+      <div class="insight">Vérif : 7×15 = 105 = 4×26 + 1 ≡ 1 (mod 26) ✓<br>Quand on obtient un u négatif, on ajoute n : −11 + 26 = 15.</div>
+    </div>
+  </div>
+</div>
+
+<!-- EX inv 4 : 17 mod 43 (exercice du prof) -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">17⁻¹ mod 43 (exemple 3 du prof — résultat : 38)</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>17⁻¹ mod 43</strong>. Le prof donne le résultat = 38, refais tous les calculs.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── Divisions ───────────────────────────────────────</span>
+43 = (2 × 17) + 9    <span class="cm">… (Eq. I)  43−34=9</span>
+17 = (1 × 9)  + 8    <span class="cm">… (Eq. II) 17−9=8</span>
+ 9 = (1 × 8)  + 1    <span class="cm">… (Eq. III)</span>
+ 8 = (8 × 1)  + 0    <span class="cm">→ PGCD=1 ✓</span>
+
+<span class="cm">─── Remontée ─────────────────────────────────────────</span>
+(Eq. III) : <span class="c">1 = 9 − (1 × 8)</span>
+(Eq. II)  : <span class="a">8 = 17 − (1 × 9)</span>
+
+1 = 9 − (17 − 9)
+1 = <span class="v">2×9 − 17</span>
+
+(Eq. I)   : <span class="g">9 = 43 − 2×17</span>
+
+1 = 2×(43 − 2×17) − 17
+1 = 2×43 − 4×17 − 17
+1 = <span class="r">2×43 − 5×17</span>
+
+Donc 17 × (−5) ≡ 1 (mod 43)
+−5 mod 43 = −5 + 43 = <span class="g">38</span>
+      </div>
+      <div class="result">17⁻¹ mod 43 = 38</div>
+      <div class="insight">Vérif : 17×38 = 646 = 15×43 + 1 = 645+1 ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- EX inv 5 : 12 mod 18 (pas d'inverse) -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">12⁻¹ mod 18 — cas particulier (exemple 5 du prof)</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Essaie de trouver <strong>12⁻¹ mod 18</strong>. Que se passe-t-il ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num a">!</div><div class="sol-content"><strong class="a">Vérifier d'abord le PGCD</strong><p>PGCD(12, 18) : 18=12×1+6, 12=6×2+0 → PGCD(12,18) = <strong style="color:var(--rose)">6 ≠ 1</strong></p></div></div>
+      <div class="warn">L'inverse modulaire de 12 mod 18 <strong>n'existe pas</strong>, car PGCD(12, 18) = 6 ≠ 1. La condition nécessaire et suffisante est que a et n soient <em>premiers entre eux</em> (PGCD = 1).</div>
+      <div class="result r">Pas d'inverse — PGCD(12,18) = 6 ≠ 1</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ ARITHMETIQUE -->
+<div class="chapter" id="arith">
+  <div class="ch-label">Section 03 — Exercices des slides</div>
+  <h2>Arithmétique modulaire</h2>
+  <p>Addition, soustraction et multiplication modulo n. La règle : calculer normalement, puis prendre le reste.</p>
+</div>
+
+<!-- addition -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">Arithm. mod</span>
+    <span class="ex-title">175 + 181 mod 33</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>175 + 181 mod 33</strong>.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+175 + 181 = <span class="a">356</span>
+356 ÷ 33 = 10.78... → quotient = 10
+356 − 33×10 = 356 − 330 = <span class="g">26</span>
+      </div>
+      <div class="result">175 + 181 mod 33 = 26</div>
+      <div class="insight">Astuce : on peut aussi réduire avant : 175 mod 33 = 175−5×33=175−165=10. 181 mod 33 = 181−5×33=181−165=16. 10+16=26. Même résultat !</div>
+    </div>
+  </div>
+</div>
+
+<!-- soustraction -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">Arithm. mod</span>
+    <span class="ex-title">235 − 350 mod 45</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>235 − 350 mod 45</strong>.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+235 − 350 = <span class="r">−115</span>   <span class="cm">← résultat négatif !</span>
+
+−115 ÷ 45 = −2.55... → quotient plancher = −3
+−115 − 45×(−3) = −115 + 135 = <span class="g">20</span>
+
+<span class="cm">Vérification : −115 = 45×(−3) + 20, et 0 ≤ 20 &lt; 45 ✓</span>
+
+<span class="cm">Méthode alternative :</span>
+235 mod 45 = 235 − 5×45 = 235−225 = 10
+350 mod 45 = 350 − 7×45 = 350−315 = 35
+10 − 35 = −25 → −25 + 45 = <span class="g">20</span>
+      </div>
+      <div class="result">235 − 350 mod 45 = 20</div>
+      <div class="insight">Quand le résultat est négatif, ajoute n jusqu'à tomber dans [0, n[. Ici −115 + 45 = −70, +45 = −25, +45 = 20 ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- multiplication -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">Arithm. mod</span>
+    <span class="ex-title">132 × 253 mod 37</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>132 × 253 mod 37</strong>.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">Méthode directe :</span>
+132 × 253 = <span class="a">33396</span>
+33396 ÷ 37 = 902.59... → quotient = 902
+33396 − 37×902 = 33396 − 33374 = <span class="g">22</span>
+
+<span class="cm">Méthode avec réduction préalable (plus rapide) :</span>
+132 mod 37 = 132 − 3×37 = 132−111 = <span class="c">21</span>
+253 mod 37 = 253 − 6×37 = 253−222 = <span class="v">31</span>
+21 × 31 = 651
+651 mod 37 = 651 − 17×37 = 651−629 = <span class="g">22</span>
+      </div>
+      <div class="result">132 × 253 mod 37 = 22</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ EXPO -->
+<div class="chapter" id="expo">
+  <div class="ch-label">Section 04 — Exercices des slides</div>
+  <h2>Exponentiation modulaire rapide</h2>
+  <p>Principe : calculer b^e mod m en réutilisant les carrés successifs. b^(2k) = (b^k)². Complexité O(log e) au lieu de O(e).</p>
+</div>
+
+<!-- 10^7, 10^15, 10^31, 10^62 mod 257 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">Expo. rapide</span>
+    <span class="ex-title">10^7, 10^15, 10^31, 10^62 mod 257</span>
+    <span class="ex-diff diff-hard">● Difficile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule dans l'ordre : <strong>10^7 mod 257</strong>, <strong>10^15 mod 257</strong>, <strong>10^31 mod 257</strong>, <strong>10^62 mod 257</strong>.<br>Réutilise chaque résultat pour calculer le suivant.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── Construire les puissances de base ───────────────</span>
+10^1  mod 257 = 10
+10^2  mod 257 = 100
+10^4  mod 257 = 100² mod 257 = 10000 mod 257
+               10000 ÷ 257 = 38.91 → 38×257=9766
+               10000−9766 = <span class="c">234</span>
+
+<span class="cm">─── 10^7 mod 257 ────────────────────────────────────</span>
+7 = 4 + 2 + 1
+10^7 = 10^4 × 10^2 × 10^1
+     = 234 × 100 × 10  (mod 257)
+234 × 100 = 23400 mod 257
+           23400 ÷ 257 = 91.08 → 91×257 = 23387
+           23400 − 23387 = 13
+13 × 10 = 130 mod 257 = <span class="a">130</span>
+
+<span class="cm">─── 10^15 mod 257 ───────────────────────────────────</span>
+15 = 8 + 4 + 2 + 1
+10^8 mod 257 = (10^4)² mod 257 = 234² mod 257
+             234² = 54756
+             54756 ÷ 257 = 213.06 → 213×257 = 54741
+             54756 − 54741 = <span class="c">15</span>
+10^15 = 10^8 × 10^4 × 10^2 × 10^1
+      = 15 × 234 × 100 × 10 (mod 257)
+15 × 234 = 3510 mod 257 : 3510÷257=13.66→13×257=3341 → <span class="v">169</span>
+169 × 100 = 16900 mod 257 : 16900÷257=65.76→65×257=16705 → <span class="v">195</span>
+195 × 10 = 1950 mod 257 : 1950÷257=7.59→7×257=1799 → <span class="a">151</span>
+
+<span class="cm">─── 10^31 mod 257 ───────────────────────────────────</span>
+31 = 16 + 8 + 4 + 2 + 1
+10^16 = (10^8)² mod 257 = 15² mod 257 = 225 mod 257 = <span class="c">225</span>
+10^31 = 10^16 × 10^8 × 10^4 × 10^2 × 10^1
+      = 225 × 15 × 234 × 100 × 10 (mod 257)
+225×15 = 3375 mod 257 : 3375÷257=13.13→13×257=3341 → <span class="v">34</span>
+34×234 = 7956 mod 257 : 7956÷257=30.96→30×257=7710 → <span class="v">246</span>
+246×100 = 24600 mod 257 : 24600÷257=95.72→95×257=24415 → <span class="v">185</span>
+185×10 = 1850 mod 257 : 1850÷257=7.2→7×257=1799 → <span class="a">51</span>
+
+<span class="cm">─── 10^62 mod 257 ───────────────────────────────────</span>
+62 = 2 × 31   →  10^62 = (10^31)² mod 257
+= 51² mod 257 = 2601 mod 257
+2601 ÷ 257 = 10.12 → 10×257 = 2570
+2601 − 2570 = <span class="a">31</span>
+      </div>
+      <table>
+        <tr><th>Expression</th><th>Résultat mod 257</th></tr>
+        <tr><td>10^7</td><td style="color:var(--cyan)">130</td></tr>
+        <tr><td>10^15</td><td style="color:var(--cyan)">151</td></tr>
+        <tr><td>10^31</td><td style="color:var(--cyan)">51</td></tr>
+        <tr><td>10^62</td><td style="color:var(--cyan)">31</td></tr>
+      </table>
+      <div class="insight">La clé : 10^62 = (10^31)² — pas besoin de recalculer depuis zéro, on réutilise 10^31 = 51.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ FERMAT -->
+<div class="chapter" id="fermat">
+  <div class="ch-label">Section 05 — Exercices des slides</div>
+  <h2>Petit théorème de Fermat</h2>
+  <p>Si p est premier et PGCD(a,p)=1 → a^(p−1) ≡ 1 (mod p). Réduire l'exposant : a^e ≡ a^(e mod (p−1)) (mod p).</p>
+</div>
+
+<!-- 4^14 mod 5 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-fermat">Fermat</span>
+    <span class="ex-title">4^14 mod 5 — par Fermat ET par exponentiation</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>4^14 mod 5</strong> de deux façons : (1) par exponentiation rapide, (2) par le petit théorème de Fermat. Existe-t-il une méthode encore plus rapide ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num">1</div><div class="sol-content"><strong>Méthode 1 — Exponentiation rapide</strong>
+        <div class="code">
+4^1  mod 5 = 4
+4^2  mod 5 = 16 mod 5 = 1
+4^4  mod 5 = 1² mod 5 = 1
+4^8  mod 5 = 1² mod 5 = 1
+4^14 = 4^8 × 4^4 × 4^2
+     = 1 × 1 × 1 = <span class="g">1</span>
+        </div>
+      </div></div>
+      <div class="sol-step"><div class="sol-num">2</div><div class="sol-content"><strong>Méthode 2 — Petit théorème de Fermat</strong>
+        <div class="code">
+p = 5 (premier), PGCD(4,5) = 1 ✓
+Fermat : 4^(p−1) = 4^4 ≡ 1 (mod 5)
+
+Réduire l'exposant :
+r = 14 mod (p−1) = 14 mod 4 = 2
+  (14 = 4×3 + 2)
+
+4^14 ≡ 4^2 mod 5 = 16 mod 5 = <span class="g">1</span>
+        </div>
+      </div></div>
+      <div class="sol-step"><div class="sol-num g">3</div><div class="sol-content"><strong class="g">Méthode 3 — Encore plus rapide : observer le cycle</strong>
+        <div class="code">
+4^1 mod 5 = 4
+4^2 mod 5 = 1   ← le cycle redémarre ici !
+4^3 mod 5 = 4
+4^4 mod 5 = 1
+...
+Cycle de longueur 2 : {4, 1, 4, 1, ...}
+14 est pair → 4^14 mod 5 = <span class="g">1</span>
+        </div>
+      </div></div>
+      <div class="result">4^14 mod 5 = 1</div>
+    </div>
+  </div>
+</div>
+
+<!-- 122^445 mod 10 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-fermat">Fermat</span>
+    <span class="ex-title">122^445 mod 10 — dernier chiffre</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>122^445 mod 10</strong>. Indice : réduis 122 avant d'appliquer l'exponentiation modulaire.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">Étape 1 : réduire la base</span>
+122 mod 10 = <span class="c">2</span>
+Donc 122^445 ≡ 2^445 (mod 10)
+
+<span class="cm">Étape 2 : observer le cycle de 2 mod 10</span>
+2^1 = 2
+2^2 = 4
+2^3 = 8
+2^4 = 16 mod 10 = 6
+2^5 = 32 mod 10 = 2   <span class="cm">← retour à 2 ! Cycle de longueur 4</span>
+Cycle : {2, 4, 8, 6, 2, 4, 8, 6, ...}
+
+<span class="cm">Étape 3 : trouver la position dans le cycle</span>
+445 mod 4 = 1  (445 = 4×111 + 1)
+Position 1 dans le cycle → <span class="g">2</span>
+      </div>
+      <div class="result">122^445 mod 10 = 2</div>
+    </div>
+  </div>
+</div>
+
+<!-- 3^2020 dernier chiffre -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-fermat">Fermat</span>
+    <span class="ex-title">Dernier chiffre de 3^2020</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Quel est le <strong>dernier chiffre dans l'écriture décimale de 3^2020</strong> ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">Dernier chiffre = 3^2020 mod 10</span>
+
+<span class="cm">Cycle de 3 mod 10 :</span>
+3^1 = 3
+3^2 = 9
+3^3 = 27 → 7
+3^4 = 81 → 1
+3^5 = 243 → 3   <span class="cm">← cycle de longueur 4 : {3, 9, 7, 1}</span>
+
+2020 mod 4 = 0  (2020 = 4×505 + 0)
+<span class="cm">Exposant divisible par 4 → position 4 dans le cycle → 1</span>
+<span class="cm">(Comme 3^4=81 → dernier chiffre = 1)</span>
+      </div>
+      <div class="result">Dernier chiffre de 3^2020 = 1</div>
+    </div>
+  </div>
+</div>
+
+<!-- 1557^2021 mod 5 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-fermat">Fermat</span>
+    <span class="ex-title">1557^2021 mod 5</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>1557^2021 mod 5</strong>.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">Étape 1 : réduire la base</span>
+1557 mod 5 = 1557 − 311×5 = 1557 − 1555 = <span class="c">2</span>
+Donc 1557^2021 ≡ 2^2021 (mod 5)
+
+<span class="cm">Étape 2 : Fermat avec p=5</span>
+5 est premier, PGCD(2,5)=1 ✓
+Fermat : 2^(5−1) = 2^4 ≡ 1 (mod 5)
+
+<span class="cm">Étape 3 : réduire l'exposant</span>
+r = 2021 mod 4
+2021 = 4×505 + 1  →  r = <span class="a">1</span>
+
+2^2021 ≡ 2^1 = <span class="g">2</span> (mod 5)
+      </div>
+      <div class="result">1557^2021 mod 5 = 2</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ DIFFIE-HELLMAN -->
+<div class="chapter" id="dh">
+  <div class="ch-label">Section 06 — Exercices DH du prof</div>
+  <h2>Diffie-Hellman</h2>
+  <p>Rappel : A = g^a mod p, B = g^b mod p, K = B^a mod p = A^b mod p.</p>
+</div>
+
+<!-- DH Ex 1 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-dh">Diffie-Hellman</span>
+    <span class="ex-title">DH complet — p=23, g=5, a=6, b=15</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec <strong>p=23, g=5, a=6 (Alice), b=15 (Bob)</strong> :<br>1. Calculez A (valeur publique d'Alice).<br>2. Calculez B (valeur publique de Bob).<br>3. Calculez la clé secrète partagée K.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── A = g^a mod p = 5^6 mod 23 ─────────────────────</span>
+5^1 mod 23 = 5
+5^2 mod 23 = 25 mod 23 = 2
+5^4 mod 23 = 2² mod 23 = 4
+6 = 4+2 → 5^6 = 5^4 × 5^2 = 4×2 mod 23 = 8
+<span class="c">A = 8</span>
+
+<span class="cm">─── B = g^b mod p = 5^15 mod 23 ────────────────────</span>
+5^8 mod 23 = 4² mod 23 = 16
+5^15 = 5^8 × 5^4 × 5^2 × 5^1
+     = 16 × 4 × 2 × 5 (mod 23)
+16×4 = 64 mod 23 = 64−2×23=18
+18×2 = 36 mod 23 = 13
+13×5 = 65 mod 23 = 65−2×23=19
+<span class="v">B = 19</span>
+
+<span class="cm">─── K = B^a mod p = 19^6 mod 23 (Alice) ────────────</span>
+19^2 mod 23 = 361 mod 23 = 361−15×23=361−345=16
+19^4 mod 23 = 16² mod 23 = 256 mod 23 = 256−11×23=256−253=3
+19^6 = 19^4 × 19^2 = 3×16 mod 23 = 48 mod 23 = 48−2×23=2
+<span class="g">K = 2</span>
+
+<span class="cm">─── Vérif : K = A^b mod p = 8^15 mod 23 (Bob) ──────</span>
+8^2 mod 23 = 64 mod 23 = 18
+8^4 mod 23 = 18² mod 23 = 324 mod 23 = 324−14×23=2
+8^8 mod 23 = 2² mod 23 = 4
+8^15 = 8^8 × 8^4 × 8^2 × 8^1
+     = 4×2×18×8 (mod 23)
+4×2=8, 8×18=144 mod 23=144−6×23=6, 6×8=48 mod 23=2
+<span class="g">K = 2 ✓ Même résultat des deux côtés !</span>
+      </div>
+      <div class="result">A = 8 &nbsp;|&nbsp; B = 19 &nbsp;|&nbsp; K = 2</div>
+    </div>
+  </div>
+</div>
+
+<!-- DH Ex 2 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-dh">Diffie-Hellman</span>
+    <span class="ex-title">DH vérification — p=29, g=2, a=11, b=7</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec <strong>p=29, g=2, a=11, b=7</strong>. Calculez A, B, et vérifiez que les deux côtés donnent la même clé K.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── A = 2^11 mod 29 ────────────────────────────────</span>
+2^1=2, 2^2=4, 2^4=16, 2^8=256 mod 29
+256÷29=8.82→8×29=232 → 256−232=<span class="c">24</span>
+2^11 = 2^8 × 2^2 × 2^1 = 24×4×2 (mod 29)
+24×4=96 mod 29=96−3×29=9
+9×2=18
+<span class="c">A = 18</span>
+
+<span class="cm">─── B = 2^7 mod 29 ─────────────────────────────────</span>
+2^7 = 2^4 × 2^2 × 2^1 = 16×4×2 (mod 29)
+16×4=64 mod 29=64−2×29=6
+6×2=12
+<span class="v">B = 12</span>
+
+<span class="cm">─── K côté Alice = B^a = 12^11 mod 29 ──────────────</span>
+12^2=144 mod 29=144−4×29=28
+12^4=28² mod 29=784 mod 29=784−27×29=784−783=1
+12^8=1²=1
+12^11=12^8×12^2×12^1=1×28×12 mod 29
+28×12=336 mod 29=336−11×29=336−319=<span class="g">17</span>
+
+<span class="cm">─── K côté Bob = A^b = 18^7 mod 29 ─────────────────</span>
+18^2=324 mod 29=324−11×29=324−319=5
+18^4=25 mod 29=25
+18^7=18^4×18^2×18^1=25×5×18 mod 29
+25×5=125 mod 29=125−4×29=9
+9×18=162 mod 29=162−5×29=162−145=<span class="g">17</span>
+      </div>
+      <div class="result">A = 18 &nbsp;|&nbsp; B = 12 &nbsp;|&nbsp; K = 17 (des deux côtés ✓)</div>
+    </div>
+  </div>
+</div>
+
+<!-- DH Ex 3 force brute -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-dh">Diffie-Hellman</span>
+    <span class="ex-title">DH force brute — p=23, g=5, A=8, B=19</span>
+    <span class="ex-diff diff-hard">● Difficile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Dans un échange DH avec p=23, g=5, on observe A=8 et B=19.<br>1. Retrouvez a et b par force brute.<br>2. Retrouvez K.<br>3. Expliquez pourquoi ce n'est pas sécurisé.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num">1</div><div class="sol-content"><strong>Retrouver a : tester 5^x mod 23 = 8</strong>
+        <div class="code">
+5^1 mod 23 = 5
+5^2 mod 23 = 2
+5^3 mod 23 = 10
+5^4 mod 23 = 4
+5^5 mod 23 = 20
+5^6 mod 23 = <span class="c">8</span>  ← a = 6 ✓
+
+Retrouver b : 5^x mod 23 = 19
+5^7 mod 23 = 17
+5^8 mod 23 = 16
+5^9 mod 23 = 11
+5^10 mod 23 = 9
+5^11 mod 23 = 22
+5^12 mod 23 = 18
+5^13 mod 23 = 21
+5^14 mod 23 = 13
+5^15 mod 23 = <span class="v">19</span>  ← b = 15 ✓
+        </div>
+      </div></div>
+      <div class="sol-step"><div class="sol-num">2</div><div class="sol-content"><strong>Clé K = 8^15 mod 23 = 2</strong><p>(Calculé dans l'exercice précédent)</p></div></div>
+      <div class="sol-step"><div class="sol-num a">!</div><div class="sol-content"><strong class="a">Pourquoi pas sécurisé ?</strong>
+        <p>p=23 est trop petit. Il n'y a que 22 valeurs possibles pour a et b. Un ordinateur essaie toutes les combinaisons en une fraction de seconde. En pratique, p doit faire <strong>au moins 2048 bits</strong> (environ 600 chiffres décimaux) pour être sécurisé — la force brute devient alors impossible.</p>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ RSA -->
+<div class="chapter" id="rsa">
+  <div class="ch-label">Section 07 — Exercices RSA du prof</div>
+  <h2>RSA — Chiffrement asymétrique</h2>
+  <p>n=p×q, φ(n)=(p−1)(q−1), choisir e premier avec φ(n), calculer d=e⁻¹ mod φ(n). Chiffrer : c=m^e mod n. Déchiffrer : m=c^d mod n.</p>
+</div>
+
+<!-- RSA Ex 4 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-rsa">RSA</span>
+    <span class="ex-title">Génération de clés — p=11, q=17, e=7</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec <strong>p=11, q=17</strong> :<br>1. Calcule n et φ(n).<br>2. Vérifie que e=7 est valide.<br>3. Trouve d (inverse de 7 mod φ(n)).</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── Étape 1 : n et φ(n) ─────────────────────────────</span>
+n = p × q = 11 × 17 = <span class="c">187</span>
+φ(n) = (p−1)(q−1) = 10 × 16 = <span class="c">160</span>
+
+<span class="cm">─── Étape 2 : vérifier e=7 ──────────────────────────</span>
+PGCD(7, 160) = ?
+160 = 7×22 + 6  (7×22=154, 160−154=6)
+  7 = 6×1 + 1
+  6 = 1×6 + 0  → PGCD(7,160) = <span class="g">1 ✓</span>  e=7 est valide !
+
+<span class="cm">─── Étape 3 : d = 7⁻¹ mod 160 ──────────────────────</span>
+Euclide étendu : on remonte les équations.
+160 = 7×22 + 6   … (I)
+  7 = 6×1 + 1    … (II)
+
+(II): 1 = 7 − 6×1
+(I) : 6 = 160 − 7×22
+
+1 = 7 − (160 − 7×22)
+1 = 7 + 7×22 − 160
+1 = 7×23 − 160×1
+
+Donc d = <span class="a">23</span>
+
+<span class="cm">Vérification : 7×23 = 161 = 160+1 ≡ 1 (mod 160) ✓</span>
+      </div>
+      <div class="result">n = 187 &nbsp;|&nbsp; φ(n) = 160 &nbsp;|&nbsp; Clé publique (187, 7) &nbsp;|&nbsp; Clé privée d = 23</div>
+    </div>
+  </div>
+</div>
+
+<!-- RSA Ex 5 chiffrement -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-rsa">RSA</span>
+    <span class="ex-title">Chiffrement RSA — c = 9^7 mod 187</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec la clé publique <strong>n=187, e=7</strong>, chiffre le message <strong>m=9</strong>. Calcule c = m^e mod n = 9^7 mod 187.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+9^1 mod 187 = 9
+9^2 mod 187 = 81
+9^4 mod 187 = 81² mod 187 = 6561 mod 187
+             6561 ÷ 187 = 35.08 → 35×187=6545
+             6561−6545 = <span class="c">16</span>
+
+7 = 4+2+1 → 9^7 = 9^4 × 9^2 × 9^1
+
+9^4 × 9^2 = 16 × 81 mod 187
+           = 1296 mod 187
+           1296 ÷ 187 = 6.93 → 6×187=1122
+           1296−1122 = <span class="v">174</span>
+
+174 × 9^1 = 174 × 9 mod 187
+           = 1566 mod 187
+           1566 ÷ 187 = 8.37 → 8×187=1496
+           1566−1496 = <span class="a">70</span>
+      </div>
+      <div class="result">c = 9^7 mod 187 = 70</div>
+    </div>
+  </div>
+</div>
+
+<!-- RSA Ex 6 déchiffrement -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-rsa">RSA</span>
+    <span class="ex-title">Déchiffrement RSA — m = 70^23 mod 187</span>
+    <span class="ex-diff diff-hard">● Difficile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec la clé privée <strong>d=23, n=187</strong>, déchiffre <strong>c=70</strong>. Calcule m = c^d mod n = 70^23 mod 187.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">23 en binaire = 10111 → 16+4+2+1</span>
+
+70^1  mod 187 = 70
+70^2  mod 187 = 4900 mod 187
+               4900 ÷ 187 = 26.20 → 26×187=4862
+               4900−4862 = <span class="c">38</span>
+70^4  mod 187 = 38² mod 187 = 1444 mod 187
+               1444 ÷ 187 = 7.72 → 7×187=1309
+               1444−1309 = <span class="c">135</span>
+70^8  mod 187 = 135² mod 187 = 18225 mod 187
+               18225 ÷ 187 = 97.46 → 97×187=18139
+               18225−18139 = <span class="c">86</span>
+70^16 mod 187 = 86² mod 187 = 7396 mod 187
+               7396 ÷ 187 = 39.55 → 39×187=7293
+               7396−7293 = <span class="c">103</span>
+
+23 = 16+4+2+1
+70^23 = 70^16 × 70^4 × 70^2 × 70^1
+      = 103 × 135 × 38 × 70 (mod 187)
+
+103×135 = 13905 mod 187 : 13905÷187=74.36→74×187=13838→67
+67×38   = 2546 mod 187  : 2546÷187=13.61→13×187=2431→115
+115×70  = 8050 mod 187  : 8050÷187=43.04→43×187=8041→<span class="g">9</span>
+      </div>
+      <div class="result">m = 70^23 mod 187 = 9 ✓ (on retrouve le message original !)</div>
+      <div class="insight">RSA fonctionne : Bob envoie m=9, chiffré en c=70, Alice déchiffre et retrouve 9. La boucle est bouclée.</div>
+    </div>
+  </div>
+</div>
+
+<!-- RSA Ex 7 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-rsa">RSA</span>
+    <span class="ex-title">Génération — p=13, q=19, e=5</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec <strong>p=13, q=19, e=5</strong> : calcule n, φ(n), et trouve d (inverse de 5 mod φ(n)).</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+n = 13 × 19 = <span class="c">247</span>
+φ(n) = 12 × 18 = <span class="c">216</span>
+
+PGCD(5, 216) :
+216 = 5×43 + 1  (5×43=215)
+  5 = 1×5 + 0  → PGCD = <span class="g">1</span> ✓
+
+d = 5⁻¹ mod 216 :
+(Eq. I) : 216 = 5×43 + 1
+→ 1 = 216 − 5×43
+
+Donc 5×(−43) ≡ 1 (mod 216)
+d = −43 mod 216 = −43 + 216 = <span class="a">173</span>
+
+Vérif : 5×173 = 865 = 4×216 + 1 = 864+1 ✓
+      </div>
+      <div class="result">n = 247 &nbsp;|&nbsp; φ(n) = 216 &nbsp;|&nbsp; d = 173</div>
+    </div>
+  </div>
+</div>
+
+<!-- RSA Ex 8 conceptuel -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-rsa">RSA</span>
+    <span class="ex-title">Questions conceptuelles RSA</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">1. Pourquoi ne pas choisir des p et q trop petits ?<br>2. Pourquoi faut-il garder d secret ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num">1</div><div class="sol-content"><strong>p et q trop petits → factorisation facile</strong><p>Toute la sécurité de RSA repose sur l'impossibilité de factoriser n=p×q. Si p et q sont petits (ex: p=11, q=17 → n=187), un attaquant peut tester tous les facteurs premiers jusqu'à √n et retrouver p et q. Avec p,q connus, il calcule φ(n)=(p−1)(q−1) et d=e⁻¹ mod φ(n) → clé privée compromise. Les clés actuelles font 2048 ou 4096 bits pour rendre la factorisation infaisable.</p></div></div>
+      <div class="sol-step"><div class="sol-num">2</div><div class="sol-content"><strong>d secret = clé de déchiffrement</strong><p>d est la clé privée. Connaître d permet de déchiffrer n'importe quel message chiffré avec la clé publique correspondante. Si d est compromis, toute la sécurité de RSA s'effondre — l'attaquant peut lire tous les messages passés et futurs chiffrés avec cette paire de clés.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ HMAC -->
+<div class="chapter" id="hmac">
+  <div class="ch-label">Section 08 — Exercices HMAC du prof</div>
+  <h2>HMAC — Authenticité des messages</h2>
+  <p>HMAC (Hash-based Message Authentication Code) garantit l'<strong>intégrité</strong> et l'<strong>authenticité</strong> d'un message — pas sa confidentialité.</p>
+</div>
+
+<!-- HMAC Ex 1 -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-hmac">HMAC</span>
+    <span class="ex-title">Définition — À quoi sert HMAC ?</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">À quoi sert HMAC dans la sécurité des messages ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+HMAC(clé, message) = Hash(clé ‖ Hash(clé ‖ message))
+<span class="cm">(‖ = concaténation)</span>
+      </div>
+      <p style="color:#94a3b8; font-size:0.9rem; margin: 0.8rem 0">HMAC sert à <strong style="color:var(--cyan)">vérifier l'intégrité et l'authenticité</strong> d'un message :</p>
+      <table>
+        <tr><th>Propriété</th><th>HMAC garantit ?</th></tr>
+        <tr><td>Intégrité</td><td style="color:var(--green)">✓ Si le message est modifié, le HMAC change</td></tr>
+        <tr><td>Authenticité</td><td style="color:var(--green)">✓ Seul quelqu'un connaissant la clé peut générer le bon HMAC</td></tr>
+        <tr><td>Confidentialité</td><td style="color:var(--rose)">✗ Le message reste lisible — HMAC ne chiffre pas</td></tr>
+      </table>
+      <div class="insight">HMAC c'est comme un sceau de cire sur une lettre : il ne cache pas le contenu, mais prouve qu'elle n'a pas été ouverte et vient bien de l'expéditeur légitime.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HMAC Ex 2 Vrai/Faux -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-hmac">HMAC</span>
+    <span class="ex-title">Vrai ou Faux — 4 propositions</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">a) HMAC permet de cacher le contenu du message.<br>b) HMAC utilise une clé secrète.<br>c) Si le message change, le HMAC change aussi.<br>d) HMAC garantit la confidentialité.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <table>
+        <tr><th>Proposition</th><th>Réponse</th><th>Explication</th></tr>
+        <tr><td>a) HMAC cache le contenu</td><td style="color:var(--rose)">FAUX</td><td>HMAC ne chiffre rien — le message reste en clair.</td></tr>
+        <tr><td>b) HMAC utilise une clé</td><td style="color:var(--green)">VRAI</td><td>Sans la clé secrète, impossible de générer ou vérifier un HMAC valide.</td></tr>
+        <tr><td>c) Message change → HMAC change</td><td style="color:var(--green)">VRAI</td><td>Propriété des fonctions de hachage : résistance aux collisions.</td></tr>
+        <tr><td>d) HMAC garantit confidentialité</td><td style="color:var(--rose)">FAUX</td><td>HMAC garantit intégrité + authenticité, pas la confidentialité.</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- HMAC Ex 3 attaque -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-hmac">HMAC</span>
+    <span class="ex-title">Attaque — modifier le message sans toucher au HMAC</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Alice envoie : message='payer 100 euros' avec un HMAC valide. Un attaquant modifie le message en 'payer 1000 euros'. Peut-il garder le même HMAC ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="result r">Non — l'attaquant ne peut PAS garder le même HMAC.</div>
+      <p style="color:#94a3b8; margin-top:0.8rem; font-size:0.9rem">Pour générer un HMAC valide pour 'payer 1000 euros', l'attaquant a besoin de la <strong style="color:var(--cyan)">clé secrète</strong> qu'Alice seule possède. Sans cette clé, il peut modifier le message mais ne peut pas recalculer un HMAC valide. Le destinataire verra immédiatement que le HMAC ne correspond pas au message reçu → message rejeté.</p>
+      <div class="insight">C'est exactement pour ça que HMAC utilise une <em>clé</em>, contrairement à un simple hash SHA256(message) que n'importe qui pourrait recalculer après modification.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HMAC Ex 4 hash vs hmac -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-hmac">HMAC</span>
+    <span class="ex-title">Hash vs HMAC — SHA256 contre HMAC-SHA256</span>
+    <span class="ex-diff diff-easy">● Facile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Quelle est la différence entre SHA256(message) et HMAC-SHA256(clé, message) ?</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <table>
+        <tr><th>Critère</th><th>SHA256(message)</th><th>HMAC-SHA256(clé, message)</th></tr>
+        <tr><td>Clé secrète</td><td style="color:var(--rose)">Non</td><td style="color:var(--green)">Oui</td></tr>
+        <tr><td>Authenticité</td><td style="color:var(--rose)">Non — n'importe qui peut recalculer</td><td style="color:var(--green)">Oui — seulement avec la clé</td></tr>
+        <tr><td>Intégrité</td><td style="color:var(--amber)">Partielle — détecte la modification mais ne prouve pas l'auteur</td><td style="color:var(--green)">Complète</td></tr>
+        <tr><td>Résistance attaque</td><td style="color:var(--rose)">Vulnérable à "length extension"</td><td style="color:var(--green)">Résistant</td></tr>
+      </table>
+      <div class="insight">SHA256 simple : si un attaquant modifie le message, il peut recalculer un nouveau hash valide → aucune protection réelle. HMAC : sans la clé, impossible de forger un tag valide.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HMAC Ex 5 Python -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-hmac">HMAC</span>
+    <span class="ex-title">Vérification Python — compléter le code</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Complète le programme Python pour vérifier un HMAC reçu de façon sécurisée.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+import hmac
+import hashlib
+
+cle = b"secret"
+message = b"bonjour"
+mac = hmac.<span class="c">new</span>(cle, message, hashlib.sha256).hexdigest()
+
+message_recu = b"bonjour"
+mac_recu = mac
+
+<span class="cm"># Vérification SÉCURISÉE (résistante aux timing attacks) :</span>
+mac_calcule = hmac.<span class="c">new</span>(cle, message_recu, hashlib.sha256).hexdigest()
+
+if hmac.<span class="g">compare_digest</span>(mac_calcule, mac_recu):
+    print(<span class="a">"✓ Message authentique - HMAC valide"</span>)
+else:
+    print(<span class="r">"✗ HMAC invalide - message altéré ou clé incorrecte"</span>)
+      </div>
+      <div class="warn">Ne jamais utiliser <code>mac_calcule == mac_recu</code> (opérateur ==). Il est vulnérable aux <em>timing attacks</em> : un attaquant peut mesurer le temps de comparaison pour deviner le HMAC caractère par caractère. <code>hmac.compare_digest()</code> prend toujours le même temps.</div>
+    </div>
+  </div>
+</div>
+
+<hr class="div">
+
+<!-- ═══════════════════════════════════════════════ PRATIQUE SUPP -->
+<div class="chapter" id="pratique">
+  <div class="ch-label">Section 09 — Exercices supplémentaires</div>
+  <h2>Exercices supplémentaires typiques</h2>
+  <p>Exercices additionnels couvrant tous les types vus en cours, pour s'entraîner jusqu'à la maîtrise. Solutions incluses.</p>
+</div>
+
+<div class="practice-banner">
+  <h3>Entraînement — tous les types d'exercices</h3>
+  <p style="color:#94a3b8; font-size:0.9rem">Ces exercices reproduisent exactement les types qu'on peut trouver à l'examen. Essaie de les résoudre seule avant d'ouvrir la solution.</p>
+</div>
+
+<!-- SUPP 1 : PGCD et inverse enchaînés -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">35⁻¹ mod 64 (exemple 4 du prof — résultat : 11)</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>35⁻¹ mod 64</strong> par l'algorithme d'Euclide étendu.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── Divisions ───────────────────────────────────────</span>
+64 = (1 × 35) + 29   <span class="cm">… (I)</span>
+35 = (1 × 29) + 6    <span class="cm">… (II)</span>
+29 = (4 × 6)  + 5    <span class="cm">… (III)</span>
+ 6 = (1 × 5)  + 1    <span class="cm">… (IV)</span>
+ 5 = (5 × 1)  + 0    <span class="cm">→ PGCD=1 ✓</span>
+
+<span class="cm">─── Remontée ─────────────────────────────────────────</span>
+(IV): <span class="c">1 = 6 − 5×1</span>
+(III): <span class="a">5 = 29 − 6×4</span>
+1 = 6 − (29 − 6×4) = 5×6 − 29
+
+(II): <span class="v">6 = 35 − 29×1</span>
+1 = 5×(35−29) − 29 = 5×35 − 6×29
+
+(I): <span class="g">29 = 64 − 35×1</span>
+1 = 5×35 − 6×(64−35) = 5×35 − 6×64 + 6×35
+1 = <span class="g">11×35</span> − 6×64
+
+Donc 35 × <span class="g">11</span> ≡ 1 (mod 64)
+      </div>
+      <div class="result">35⁻¹ mod 64 = 11</div>
+      <div class="insight">Vérif : 35×11 = 385 = 6×64 + 1 = 384+1 ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 2 : RSA complet de A à Z -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-rsa">RSA</span>
+    <span class="ex-title">RSA complet de A à Z — p=7, q=11, e=13, m=5</span>
+    <span class="ex-diff diff-hard">● Difficile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Effectue le processus RSA <strong>complet</strong> avec p=7, q=11, e=13, message m=5 :<br>1. Génère les clés.<br>2. Chiffre m=5.<br>3. Déchiffre le chiffré pour retrouver m.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── GÉNÉRATION DES CLÉS ────────────────────────────</span>
+n = 7 × 11 = <span class="c">77</span>
+φ(n) = 6 × 10 = <span class="c">60</span>
+e = 13 → PGCD(13, 60) ?
+60 = 13×4 + 8, 13 = 8×1 + 5, 8 = 5×1 + 3, 5 = 3×1 + 2, 3 = 2×1 + 1 → PGCD=<span class="g">1 ✓</span>
+
+d = 13⁻¹ mod 60 (Euclide étendu) :
+60=13×4+8 (I), 13=8×1+5 (II), 8=5×1+3 (III), 5=3×1+2 (IV), 3=2×1+1 (V)
+(V): 1=3−2
+(IV): 2=5−3 → 1=3−(5−3)=2×3−5
+(III): 3=8−5 → 1=2×(8−5)−5=2×8−3×5
+(II): 5=13−8 → 1=2×8−3×(13−8)=5×8−3×13
+(I): 8=60−13×4 → 1=5×(60−13×4)−3×13=5×60−23×13
+d = −23 mod 60 = 37
+
+Vérif : 13×37 = 481 = 8×60+1 ✓
+<span class="c">Clé publique : (77, 13) | Clé privée : d=37</span>
+
+<span class="cm">─── CHIFFREMENT : c = 5^13 mod 77 ─────────────────</span>
+5^1=5, 5^2=25, 5^4=625 mod 77=625−8×77=9
+5^8=9² mod 77=81 mod 77=4
+5^13=5^8×5^4×5^1=4×9×5 (mod 77)
+4×9=36, 36×5=180 mod 77=180−2×77=<span class="a">26</span>
+c = 26
+
+<span class="cm">─── DÉCHIFFREMENT : m = 26^37 mod 77 ──────────────</span>
+37 = 32+4+1
+26^2=676 mod 77=676−8×77=60
+26^4=60² mod 77=3600 mod 77=3600−46×77=3600−3542=58
+26^8=58² mod 77=3364 mod 77=3364−43×77=3364−3311=53
+26^16=53² mod 77=2809 mod 77=2809−36×77=2809−2772=37
+26^32=37² mod 77=1369 mod 77=1369−17×77=1369−1309=60
+26^37=26^32×26^4×26^1=60×58×26 (mod 77)
+60×58=3480 mod 77=3480−45×77=3480−3465=15
+15×26=390 mod 77=390−5×77=390−385=<span class="g">5</span>
+      </div>
+      <div class="result">c = 26 &nbsp;|&nbsp; m retrouvé = 5 ✓</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 3 : Fermat tricky -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-fermat">Fermat</span>
+    <span class="ex-title">7^200 mod 11 — Fermat avec réduction d'exposant</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>7^200 mod 11</strong> en utilisant le petit théorème de Fermat.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+p = 11 (premier), PGCD(7,11) = 1 ✓
+Fermat : 7^(11−1) = 7^10 ≡ 1 (mod 11)
+
+Réduire l'exposant :
+r = 200 mod 10 = 0
+(200 = 10×20 + 0)
+
+7^200 = (7^10)^20 ≡ 1^20 = <span class="g">1</span> (mod 11)
+
+<span class="cm">Vérif rapide : 7^2=49≡5, 7^4=25≡3, 7^5=21≡10≡−1,</span>
+<span class="cm">7^10=(7^5)²=(−1)²=1 ✓</span>
+      </div>
+      <div class="result">7^200 mod 11 = 1</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 4 : DH nouveau -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-dh">Diffie-Hellman</span>
+    <span class="ex-title">DH — p=31, g=3, a=9, b=14</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Effectue un échange Diffie-Hellman complet avec <strong>p=31, g=3, a=9, b=14</strong>. Calcule A, B, et K.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+<span class="cm">─── A = 3^9 mod 31 ─────────────────────────────────</span>
+3^1=3, 3^2=9, 3^4=81 mod 31=81−2×31=19
+3^8=19² mod 31=361 mod 31=361−11×31=361−341=20
+3^9=3^8×3^1=20×3=60 mod 31=60−31=<span class="c">29</span>
+A = 29
+
+<span class="cm">─── B = 3^14 mod 31 ────────────────────────────────</span>
+14 = 8+4+2
+3^14=3^8×3^4×3^2=20×19×9 (mod 31)
+20×19=380 mod 31=380−12×31=380−372=8
+8×9=72 mod 31=72−2×31=<span class="v">10</span>
+B = 10
+
+<span class="cm">─── K = B^a = 10^9 mod 31 (Alice) ──────────────────</span>
+10^2=100 mod 31=100−3×31=7
+10^4=7² mod 31=49 mod 31=18
+10^8=18² mod 31=324 mod 31=324−10×31=14
+10^9=10^8×10=14×10=140 mod 31=140−4×31=<span class="g">16</span>
+
+<span class="cm">─── Vérif : K = A^b = 29^14 mod 31 (Bob) ───────────</span>
+29 ≡ −2 (mod 31)  ← astuce !
+(−2)^14 = 2^14 (exposant pair)
+2^1=2, 2^2=4, 2^4=16, 2^8=256 mod 31=256−8×31=8
+2^14=2^8×2^4×2^2=8×16×4 (mod 31)
+8×16=128 mod 31=128−4×31=4
+4×4=16 mod 31=<span class="g">16</span> ✓
+      </div>
+      <div class="result">A = 29 &nbsp;|&nbsp; B = 10 &nbsp;|&nbsp; K = 16 (des deux côtés ✓)</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 5 : HMAC avancé -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-hmac">HMAC</span>
+    <span class="ex-title">Scénario complet — Alice, Bob et Ève</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Alice et Bob partagent la clé secrète k="INF4471". Alice envoie : message="virement 500$", HMAC="a3f9...". En transit, Ève modifie le message en "virement 5000$" mais garde le même HMAC. Bob vérifie. Décris ce qui se passe et pourquoi.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num">1</div><div class="sol-content"><strong>Ce qu'Ève peut faire</strong><p>Ève voit le message en clair et le HMAC. Elle peut modifier le message (ajouter un zéro). Mais elle n'a pas la clé k="INF4471".</p></div></div>
+      <div class="sol-step"><div class="sol-num">2</div><div class="sol-content"><strong>Ce qu'Ève ne peut pas faire</strong><p>Recalculer HMAC(k, "virement 5000$") sans connaître k. Donc le HMAC qu'elle envoie ("a3f9...") correspond au message original, pas au message modifié.</p></div></div>
+      <div class="sol-step"><div class="sol-num">3</div><div class="sol-content"><strong>Vérification de Bob</strong>
+        <div class="code">
+Bob reçoit : message="virement 5000$", HMAC="a3f9..."
+Bob calcule : HMAC(k="INF4471", "virement 5000$") = "7b2c..."
+Compare     : "7b2c..." ≠ "a3f9..."
+→ <span class="r">HMAC invalide → message rejeté !</span>
+        </div>
+      </div></div>
+      <div class="result g">HMAC protège Bob : la modification d'Ève est détectée.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 6 : inverse mod pour RSA -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-inv">Inverse mod</span>
+    <span class="ex-title">11⁻¹ mod 120 — pour RSA avec p=11,q=13,e=11</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Avec p=11, q=13 : calcule n, φ(n), et trouve la clé privée d = 11⁻¹ mod φ(n).</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+n = 11×13 = <span class="c">143</span>
+φ(n) = 10×12 = <span class="c">120</span>
+e = 11, PGCD(11,120)=1 ✓ (11 est premier, ne divise pas 120)
+
+d = 11⁻¹ mod 120 :
+120 = 11×10 + 10   (I)  <span class="cm">→ 11×10=110, reste=10</span>
+ 11 = 10×1  + 1    (II)
+ 10 = 1×10  + 0    → PGCD=1
+
+(II): <span class="c">1 = 11 − 10×1</span>
+(I) : <span class="a">10 = 120 − 11×10</span>
+1 = 11 − (120 − 11×10) = 11 + 11×10 − 120
+1 = <span class="g">11×11</span> − 120
+
+d = 11
+
+Vérif : 11×11 = 121 = 120+1 ≡ 1 (mod 120) ✓
+      </div>
+      <div class="result">d = 11 (par coïncidence d = e ici !)</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 7 : expo modulaire classique -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">Expo. rapide</span>
+    <span class="ex-title">3^100 mod 7 — Fermat + réduction</span>
+    <span class="ex-diff diff-med">● Moyen</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Calcule <strong>3^100 mod 7</strong>.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="code">
+p=7 premier, PGCD(3,7)=1 ✓
+Fermat : 3^6 ≡ 1 (mod 7)
+
+r = 100 mod 6 = 4   (100 = 6×16 + 4)
+
+3^100 ≡ 3^4 (mod 7)
+3^2 = 9 mod 7 = 2
+3^4 = 2² mod 7 = 4 mod 7 = <span class="g">4</span>
+      </div>
+      <div class="result">3^100 mod 7 = 4</div>
+    </div>
+  </div>
+</div>
+
+<!-- SUPP 8 : DH attaque man in the middle conceptuel -->
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-dh">Diffie-Hellman</span>
+    <span class="ex-title">Attaque Man-in-the-Middle sur DH — conceptuel</span>
+    <span class="ex-diff diff-hard">● Difficile</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="prob">Diffie-Hellman permet d'établir une clé secrète sur un canal public. Mais est-il invulnérable ? Décris l'attaque "Man in the Middle" (homme du milieu) sur DH et comment s'en protéger.</div>
+    <button class="sol-toggle-btn" onclick="toggleSol(this)">▶ Voir la solution</button>
+    <div class="solution">
+      <div class="sol-step"><div class="sol-num">1</div><div class="sol-content"><strong>L'attaque</strong>
+        <div class="code">
+Alice                   Ève (attaquant)              Bob
+  |                          |                         |
+  |--- A = g^a mod p ------->|                         |
+  |                          |--- A' = g^e mod p ----->|
+  |                          |                         |
+  |<-- B' = g^e mod p -------|<-- B = g^b mod p -------|
+  |                          |                         |
+  Alice calcule K1=B'^a      Ève calcule K1=A^e        Bob calcule K2=A'^b
+                             et K2=B^e
+        </div>
+        <p style="color:#94a3b8;font-size:0.88rem">Ève intercepte A et B et les remplace par ses propres valeurs. Elle partage K1 avec Alice et K2 avec Bob. Les deux pensent communiquer ensemble, mais Ève déchiffre et rechiffre tout !</p>
+      </div></div>
+      <div class="sol-step"><div class="sol-num">2</div><div class="sol-content"><strong>DH seul ne protège pas contre MITM</strong><p>DH garantit la confidentialité vis-à-vis d'un observateur passif (Ève qui écoute). Mais pas contre un attaquant actif (Ève qui peut modifier les messages).</p></div></div>
+      <div class="sol-step"><div class="sol-num g">3</div><div class="sol-content"><strong class="g">Solutions</strong><p>• <strong>Certificats numériques</strong> : lier les clés publiques à des identités via une autorité de certification (CA). C'est ce que fait HTTPS/TLS.<br>• <strong>Authentification RSA</strong> : les valeurs A et B sont signées numériquement — Ève ne peut pas forger des signatures sans les clés privées.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ INTERACTIF RAPIDE -->
+<hr class="div">
+<div class="chapter">
+  <div class="ch-label">Section 10 — Auto-évaluation</div>
+  <h2>Quiz rapide — sans regarder les solutions</h2>
+  <p>Teste tes connaissances. Ces questions couvrent les types d'erreurs les plus fréquents.</p>
+</div>
+
+<div class="excard">
+  <div class="excard-head" onclick="toggle(this)">
+    <span class="ex-badge badge-mod">Quiz</span>
+    <span class="ex-title">5 questions express — réponds avant de voir</span>
+    <span class="ex-diff diff-med">● Mixte</span>
+    <span class="ex-arrow">▶</span>
+  </div>
+  <div class="excard-body">
+    <div class="subq">Q1 — PGCD(15, 25) = ?</div>
+    <input class="quiz-input" id="q1" placeholder="Réponse..." maxlength="3">
+    <button class="qbtn" onclick="qchk('q1','5','qf1')">Vérifier</button>
+    <div class="qfb" id="qf1"></div>
+
+    <div class="subq">Q2 — L'inverse de 3 mod 7 = ?</div>
+    <input class="quiz-input" id="q2" placeholder="Réponse..." maxlength="3">
+    <button class="qbtn" onclick="qchk('q2','5','qf2')">Vérifier</button>
+    <div class="qfb" id="qf2"></div>
+
+    <div class="subq">Q3 — 2^10 mod 11 = ? (utilise Fermat, p=11)</div>
+    <input class="quiz-input" id="q3" placeholder="Réponse..." maxlength="3">
+    <button class="qbtn" onclick="qchk('q3','1','qf3')">Vérifier</button>
+    <div class="qfb" id="qf3"></div>
+
+    <div class="subq">Q4 — Dans RSA avec p=5, q=11 : φ(n) = ?</div>
+    <input class="quiz-input" id="q4" placeholder="Réponse..." maxlength="4">
+    <button class="qbtn" onclick="qchk('q4','40','qf4')">Vérifier</button>
+    <div class="qfb" id="qf4"></div>
+
+    <div class="subq">Q5 — HMAC garantit-il la confidentialité ? (oui/non)</div>
+    <input class="quiz-input" id="q5" placeholder="oui ou non..." maxlength="4" style="text-transform:lowercase">
+    <button class="qbtn" onclick="qchkFlex('q5',['non','no'],'qf5','FAUX. HMAC garantit intégrité + authenticité, pas la confidentialité. Pour chiffrer, il faut AES.')">Vérifier</button>
+    <div class="qfb" id="qf5"></div>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+
+<button id="top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+function toggle(head) {
+  head.classList.toggle('open');
+  head.nextElementSibling.classList.toggle('open');
+}
+
+function toggleSol(btn) {
+  btn.classList.toggle('shown');
+  btn.textContent = btn.classList.contains('shown') ? '▼ Masquer la solution' : '▶ Voir la solution';
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+window.addEventListener('scroll', () => {
+  document.getElementById('top').classList.toggle('show', window.scrollY > 400);
+});
+
+function qchk(id, correct, fbId) {
+  const val = document.getElementById(id).value.trim();
+  const fb = document.getElementById(fbId);
+  if (val === correct) {
+    fb.className = 'qfb ok'; fb.textContent = '✅ Correct !';
+  } else if (!val) {
+    fb.className = 'qfb err'; fb.textContent = '⚠️ Entre une réponse.';
+  } else {
+    fb.className = 'qfb err'; fb.textContent = '❌ Pas encore — réessaie !';
+  }
+}
+
+function qchkFlex(id, accepted, fbId, explanation) {
+  const val = document.getElementById(id).value.trim().toLowerCase();
+  const fb = document.getElementById(fbId);
+  if (accepted.includes(val)) {
+    fb.className = 'qfb ok'; fb.textContent = '✅ Correct ! ' + explanation;
+  } else if (!val) {
+    fb.className = 'qfb err'; fb.textContent = '⚠️ Entre une réponse.';
+  } else {
+    fb.className = 'qfb err'; fb.textContent = '❌ ' + explanation;
+  }
+}
+</script>
+</body>
+</html>

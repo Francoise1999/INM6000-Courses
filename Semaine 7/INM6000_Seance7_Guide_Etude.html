@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Séance 7 : Intelligence Artificielle — Dossier d'étude</title>
+<style>
+:root{
+  --ink:#1B1F3B;
+  --ink-soft:#2C3159;
+  --paper:#F3EFE6;
+  --paper-dim:#EAE4D6;
+  --brick:#B23A48;
+  --brick-dim:#e7c9cc;
+  --teal:#2F6F6E;
+  --teal-dim:#cfe3e2;
+  --gold:#B8863B;
+  --line:#d9d2bf;
+  --ok:#2F6F6E;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Literata', 'Iowan Old Style', Georgia, serif;
+  line-height:1.65;
+}
+::selection{background:var(--gold); color:var(--paper);}
+
+/* ---------- Layout shell ---------- */
+.shell{
+  display:grid;
+  grid-template-columns: 280px 1fr;
+  max-width:1400px;
+  margin:0 auto;
+}
+@media (max-width: 960px){
+  .shell{grid-template-columns: 1fr;}
+  nav.toc{position:relative; height:auto; top:0; border-right:none; border-bottom:3px solid var(--ink);}
+}
+
+/* ---------- Sidebar TOC ---------- */
+nav.toc{
+  position:sticky; top:0; align-self:start; height:100vh; overflow-y:auto;
+  background:var(--ink); color:var(--paper-dim);
+  padding:28px 20px 40px;
+  border-right:3px solid var(--ink);
+  font-family:'IBM Plex Mono', monospace;
+}
+nav.toc .brand{
+  font-family:'Fraunces', Georgia, serif;
+  font-weight:600; font-size:1.05rem; color:var(--paper);
+  letter-spacing:0.02em; margin-bottom:2px;
+}
+nav.toc .brand small{display:block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--gold); letter-spacing:0.12em; margin-top:6px; text-transform:uppercase;}
+nav.toc ul{list-style:none; padding:0; margin:24px 0 0;}
+nav.toc li{margin:0;}
+nav.toc a{
+  display:block; color:#c8cbe0; text-decoration:none; font-size:0.78rem;
+  padding:7px 8px; border-left:2px solid transparent; letter-spacing:0.01em;
+  transition:all .15s ease;
+}
+nav.toc a:hover, nav.toc a.active{color:var(--paper); border-left-color:var(--brick); background:rgba(255,255,255,0.04); padding-left:14px;}
+nav.toc .grp{margin-top:18px; font-size:0.65rem; text-transform:uppercase; color:var(--gold); letter-spacing:0.14em; padding:0 8px;}
+
+/* ---------- Main content ---------- */
+main{padding:0 0 100px;}
+.hero{
+  padding:70px 64px 50px;
+  border-bottom:3px solid var(--ink);
+  position:relative;
+  overflow:hidden;
+}
+.hero::after{
+  content:"";
+  position:absolute; right:-60px; top:-60px; width:280px; height:280px;
+  border-radius:50%; background:radial-gradient(circle, var(--brick-dim) 0%, transparent 70%);
+  opacity:0.6;
+}
+.hero .eyebrow{
+  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.16em;
+  text-transform:uppercase; color:var(--brick); margin-bottom:14px;
+}
+.hero h1{
+  font-family:'Fraunces', Georgia, serif; font-size:3.1rem; font-weight:600;
+  margin:0 0 18px; line-height:1.05; max-width:14ch;
+}
+.hero p.lead{max-width:62ch; font-size:1.12rem; color:var(--ink-soft);}
+.hero .meta{
+  margin-top:26px; display:flex; gap:28px; flex-wrap:wrap;
+  font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--ink-soft);
+}
+.hero .meta span b{color:var(--ink); display:block; font-family:'Fraunces',serif; font-size:1rem; font-weight:600;}
+
+section{
+  padding:56px 64px;
+  border-bottom:1px solid var(--line);
+  scroll-margin-top:20px;
+}
+@media (max-width:700px){ section{padding:40px 22px;} .hero{padding:50px 22px 36px;} .hero h1{font-size:2.2rem;}}
+
+.section-tag{
+  font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.14em;
+  text-transform:uppercase; color:var(--teal); margin-bottom:8px;
+}
+h2{
+  font-family:'Fraunces', Georgia, serif; font-size:2rem; font-weight:600;
+  margin:0 0 22px; color:var(--ink); border-bottom:2px solid var(--ink); padding-bottom:14px;
+}
+h3{
+  font-family:'Fraunces', Georgia, serif; font-size:1.35rem; font-weight:600;
+  margin:34px 0 12px; color:var(--ink);
+}
+h4{font-family:'IBM Plex Mono', monospace; font-size:0.85rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--brick); margin:20px 0 8px;}
+p{margin:0 0 14px; max-width:78ch;}
+ul,ol{max-width:76ch; padding-left:22px;}
+li{margin-bottom:8px;}
+strong{color:var(--ink); font-weight:700;}
+a.src{color:var(--teal); word-break:break-all;}
+
+/* term card / fiche */
+.fiche{
+  background:var(--paper-dim); border:1px solid var(--line); border-left:4px solid var(--teal);
+  border-radius:2px; padding:18px 22px; margin:18px 0;
+}
+.fiche .fiche-label{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--teal); margin-bottom:6px;}
+.fiche.brick{border-left-color:var(--brick);}
+.fiche.brick .fiche-label{color:var(--brick);}
+.fiche.gold{border-left-color:var(--gold);}
+.fiche.gold .fiche-label{color:var(--gold);}
+
+/* quote */
+blockquote{
+  margin:22px 0; padding:18px 24px; background:var(--ink); color:var(--paper);
+  border-radius:2px; font-family:'Fraunces', Georgia, serif; font-style:italic; font-size:1.08rem;
+  position:relative;
+}
+blockquote cite{display:block; margin-top:10px; font-family:'IBM Plex Mono',monospace; font-style:normal; font-size:0.72rem; color:var(--gold); letter-spacing:0.04em;}
+
+/* reflexion box (questions posed in slides, answered) */
+.reflexion{
+  background:#fff; border:1px dashed var(--brick); border-radius:2px; padding:20px 24px; margin:22px 0;
+}
+.reflexion .q{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--brick); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:10px;}
+.reflexion .q::before{content:"? "; }
+
+/* two-col grid */
+.grid2{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin:20px 0;}
+@media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+.card{background:#fff; border:1px solid var(--line); border-radius:3px; padding:18px 20px;}
+.card h4{margin-top:0;}
+
+/* timeline */
+.timeline-wrap{overflow-x:auto; padding:24px 0 10px;}
+.timeline{position:relative; min-width:900px; height:140px; margin:40px 20px 0;}
+.timeline .bar{position:absolute; left:0; right:0; top:60px; height:4px; background:linear-gradient(90deg, var(--brick) 0%, var(--brick) 78%, var(--teal) 78%, var(--teal) 100%);}
+.timeline .pt{position:absolute; top:52px; width:12px; height:12px; border-radius:50%; background:var(--ink); transform:translate(-50%,-50%);}
+.timeline .lbl{position:absolute; width:180px; font-size:0.74rem; font-family:'IBM Plex Mono',monospace; transform:translateX(-50%); text-align:center; color:var(--ink-soft);}
+.timeline .lbl b{display:block; font-family:'Fraunces',serif; font-size:0.95rem; color:var(--ink);}
+.timeline .yr{position:absolute; top:80px; font-size:0.72rem; color:#8b8570; transform:translateX(-50%);}
+
+/* attack diagram boxes */
+.attack-diagram{display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:#fff; border:1px solid var(--line); padding:20px; border-radius:3px; margin:16px 0;}
+.attack-diagram .box{background:var(--paper-dim); border:1px solid var(--line); border-radius:3px; padding:10px 14px; font-family:'IBM Plex Mono',monospace; font-size:0.78rem; text-align:center;}
+.attack-diagram .arrow{font-size:1.4rem; color:var(--brick);}
+
+/* toggle / accordion */
+details{
+  background:#fff; border:1px solid var(--line); border-radius:3px; margin:14px 0; padding:0;
+  overflow:hidden;
+}
+details summary{
+  cursor:pointer; padding:14px 20px; font-family:'IBM Plex Mono',monospace; font-size:0.82rem;
+  font-weight:600; color:var(--ink); list-style:none; display:flex; justify-content:space-between; align-items:center;
+  background:var(--paper-dim);
+}
+details summary::-webkit-details-marker{display:none;}
+details summary::after{content:"+"; font-size:1.3rem; color:var(--brick); font-family:sans-serif;}
+details[open] summary::after{content:"–";}
+details .inner{padding:16px 20px 20px;}
+
+/* quiz */
+.quiz-item{background:#fff; border:1px solid var(--line); border-radius:4px; margin:16px 0; padding:20px 24px;}
+.quiz-item .num{font-family:'IBM Plex Mono',monospace; color:var(--brick); font-size:0.78rem;}
+.quiz-item .question{font-family:'Fraunces',serif; font-size:1.15rem; margin:8px 0 12px; color:var(--ink);}
+.reveal-btn{
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.08em;
+  background:var(--ink); color:var(--paper); border:none; padding:8px 16px; border-radius:20px; cursor:pointer;
+}
+.reveal-btn:hover{background:var(--brick);}
+.answer{display:none; margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); color:var(--ink-soft);}
+.answer.show{display:block;}
+
+table{border-collapse:collapse; width:100%; margin:16px 0; font-size:0.92rem;}
+th,td{border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top;}
+th{background:var(--ink); color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase;}
+tr:nth-child(even) td{background:var(--paper-dim);}
+
+.footer-note{padding:40px 64px; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--ink-soft); text-align:center;}
+.progress-badge{
+  position:fixed; bottom:20px; right:20px; background:var(--ink); color:var(--paper);
+  font-family:'IBM Plex Mono',monospace; font-size:0.7rem; padding:8px 14px; border-radius:20px;
+  z-index:50; opacity:0.9;
+}
+</style>
+</head>
+<body>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=Literata:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<div class="shell">
+  <nav class="toc" id="toc">
+    <div class="brand">INM6000 — Séance 7<small>Dossier d'étude · Été 2026</small></div>
+    <div class="grp">Partie I — Histoire</div>
+    <ul>
+      <li><a href="#histoire">Rêve ancien &amp; mythes</a></li>
+      <li><a href="#turing">Turing &amp; la machine</a></li>
+      <li><a href="#chrono">Chronologie de l'IA</a></li>
+    </ul>
+    <div class="grp">Partie II — IA en société</div>
+    <ul>
+      <li><a href="#domaines">Domaines critiques</a></li>
+      <li><a href="#biais">Biais algorithmique</a></li>
+      <li><a href="#medecine">Médecine &amp; IA</a></li>
+      <li><a href="#blanchiment">Blanchiment éthique</a></li>
+    </ul>
+    <div class="grp">Partie III — Cadres &amp; principes</div>
+    <ul>
+      <li><a href="#confdiff">Confidentialité différentielle</a></li>
+      <li><a href="#montreal">Déclaration de Montréal</a></li>
+      <li><a href="#ue">Loi européenne (AI Act)</a></li>
+      <li><a href="#rgpd">RGPD — Article 22</a></li>
+      <li><a href="#equite">Équité</a></li>
+      <li><a href="#explicabilite">Explicabilité (XAI)</a></li>
+    </ul>
+    <div class="grp">Partie IV — Vie privée</div>
+    <ul>
+      <li><a href="#anonymisation">Anonymisation</a></li>
+      <li><a href="#federe">Apprentissage fédéré</a></li>
+      <li><a href="#attaques">Attaques d'inférence</a></li>
+      <li><a href="#adversarial">ML adversarial</a></li>
+      <li><a href="#wmd">Weapons of Math Destruction</a></li>
+    </ul>
+    <div class="grp">Partie V — Logistique</div>
+    <ul>
+      <li><a href="#cas-ethique">Cas d'éthique</a></li>
+      <li><a href="#rapport-final">Rapport final</a></li>
+    </ul>
+    <div class="grp">Révision</div>
+    <ul>
+      <li><a href="#quiz">Quiz d'examen</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="hero">
+      <div class="eyebrow">Fiche de cours · Vulgarisation intégrale</div>
+      <h1>Intelligence Artificielle : histoire, éthique &amp; vie privée</h1>
+      <p class="lead">Guide détaillé, ligne par ligne, du cours magistral de la Séance 7. Chaque terme est défini, chaque diapositive est expliquée, chaque question posée en classe est répondue — pour que tu maîtrises complètement la matière avant l'examen.</p>
+      <div class="meta">
+        <span>Cours<b>INM6000 — Informatique et société</b></span>
+        <span>Professeure<b>Didem Demirag</b></span>
+        <span>Session<b>UQAM — Été 2026</b></span>
+        <span>Date<b>16 juin 2026</b></span>
+      </div>
+    </div>
+
+    <!-- ============ HISTOIRE ============ -->
+    <section id="histoire">
+      <div class="section-tag">01 — Brève histoire de l'IA</div>
+      <h2>Le rêve ancien des machines pensantes</h2>
+      <p>La diapositive d'ouverture pose une idée centrale : l'idée d'une machine qui « pense » n'est pas née avec ChatGPT. Elle traverse toute l'histoire humaine, depuis l'Antiquité, sous forme de mythes, de folklore et de fiction. Ce que <strong>GPT</strong> (les grands modèles de langage) représente, c'est l'aboutissement technique d'un très vieux fantasme culturel : créer un être artificiel capable de raisonner.</p>
+
+      <h3>Talos — le premier robot de la mythologie</h3>
+      <p>Dans la <strong>mythologie grecque</strong>, Talos est un géant de bronze — un <strong>automate</strong> (une machine capable d'exécuter des mouvements de façon autonome selon un mécanisme interne, sans intervention humaine directe) — créé par <strong>Héphaïstos</strong>, le dieu forgeron. Talos patrouille l'île de Crète pour la protéger des envahisseurs et suit des « instructions » programmées : faire le tour de l'île trois fois par jour.</p>
+      <div class="fiche">
+        <div class="fiche-label">Pourquoi c'est important</div>
+        Talos illustre déjà, il y a plus de 2000 ans, l'idée d'un agent artificiel <strong>programmé</strong> pour exécuter une tâche répétitive et protectrice. C'est une préfiguration très ancienne du concept d'algorithme : une suite d'instructions fixes que la machine suit sans dévier.
+      </div>
+
+      <h3>Frankenstein — la responsabilité morale du créateur</h3>
+      <p><strong>Mary Shelley</strong> publie <em>Frankenstein</em> en <strong>1818</strong>. La créature y est assemblée à partir de matière morte et dotée d'une forme de « conscience ». Le roman est souvent considéré comme la première réflexion moderne sur la <strong>« vie artificielle »</strong>.</p>
+      <div class="fiche brick">
+        <div class="fiche-label">Concept clé à retenir pour l'examen</div>
+        Frankenstein introduit le thème de la <strong>responsabilité morale du créateur</strong> envers sa création — un thème encore aujourd'hui au cœur de l'éthique de l'IA (qui est responsable quand un système d'IA cause du tort : le développeur, l'entreprise, l'utilisateur ?).
+      </div>
+
+      <div class="reflexion">
+        <div class="q">Réflexion posée en classe</div>
+        <p><strong>Pourquoi les humains imaginent-ils des machines intelligentes depuis si longtemps ?</strong></p>
+        <p>Plusieurs pistes de réponse à connaître : (1) le désir de <strong>dépasser les limites humaines</strong> — force, mémoire, rapidité, immortalité ; (2) le besoin de <strong>comprendre notre propre esprit</strong> en essayant de le reproduire artificiellement (« si je peux le construire, je le comprends ») ; (3) une <strong>fonction utilitaire</strong> — déléguer les tâches pénibles, dangereuses ou répétitives à un serviteur artificiel (Talos protège l'île, un golem protège une communauté) ; (4) une dimension <strong>quasi religieuse</strong> — le fantasme de créer la vie, de jouer un rôle démiurgique.</p>
+        <div class="q" style="margin-top:16px;">Réflexion posée en classe</div>
+        <p><strong>Quelles peurs ou espoirs ces mythes révèlent-ils ?</strong></p>
+        <p><strong>Espoirs :</strong> une aide infatigable, la résolution de problèmes complexes, la libération du travail pénible, l'extension du savoir humain. <strong>Peurs :</strong> la perte de contrôle sur la création (Frankenstein se retourne contre son créateur), la question de savoir qui est responsable des actes de la machine, la crainte que l'artificiel remplace ou menace l'humain, et l'angoisse de créer quelque chose qu'on ne comprend ou ne maîtrise plus entièrement — une peur qui résonne directement avec les débats actuels sur l'IA « boîte noire » et le contrôle des systèmes autonomes.</p>
+      </div>
+    </section>
+
+    <!-- ============ TURING ============ -->
+    <section id="turing">
+      <div class="section-tag">01 — Brève histoire de l'IA (suite)</div>
+      <h2>1936 : la machine de Turing</h2>
+      <p><strong>Alan Turing</strong> propose en <strong>1936</strong> la <strong>machine de Turing</strong> : un <strong>modèle abstrait</strong> (c'est-à-dire théorique, mathématique — pas un objet physique) d'un appareil mécanique de calcul. Ce modèle est aujourd'hui encore un pilier essentiel de l'informatique théorique.</p>
+
+      <h4>Comment fonctionne une machine de Turing ?</h4>
+      <ul>
+        <li>Une <strong>mémoire illimitée</strong> (représentée classiquement comme un ruban infini divisé en cases).</li>
+        <li>Un <strong>scanner</strong> (ou « tête de lecture/écriture ») qui se déplace le long de cette mémoire, case par case.</li>
+        <li>Les actions du scanner (lire, écrire, se déplacer à gauche/droite) sont définies par un <strong>programme d'instructions</strong>.</li>
+      </ul>
+
+      <div class="fiche gold">
+        <div class="fiche-label">Le concept le plus important de cette section</div>
+        Le <strong>concept de programme stocké</strong> (« stored program ») de Turing : une machine qui opère sur son propre programme, et qui peut le <strong>modifier</strong> ou l'<strong>améliorer</strong> elle-même. C'est l'idée fondatrice qui distingue une machine figée (comme une calculatrice à câblage fixe) d'un véritable ordinateur reprogrammable. <strong>Les ordinateurs modernes sont, par essence, des « machines de Turing universelles »</strong> — une seule machine physique capable de simuler n'importe quel algorithme, à condition de recevoir le bon programme.
+      </div>
+
+      <blockquote>
+        Ce que nous voulons, c'est une machine capable d'apprendre de l'expérience — et la possibilité de laisser la machine modifier ses propres instructions fournit le mécanisme pour cela.
+        <cite>Alan Turing, Londres, 1947</cite>
+      </blockquote>
+      <p>En <strong>1948</strong>, dans son texte <em>Intelligent Machinery</em>, Turing pose déjà des concepts fondateurs de l'IA moderne, notamment l'idée d'<strong>entraîner un réseau de neurones artificiels</strong> à effectuer des tâches spécifiques — soit près de 40 ans avant que le deep learning ne devienne pratique.</p>
+
+      <h3>Deep Blue (1997) : la prédiction de Turing se réalise</h3>
+      <p>Dès <strong>1945</strong>, Turing prédisait que les ordinateurs joueraient un jour aux échecs. En <strong>1997</strong>, <strong>Deep Blue</strong>, un ordinateur d'échecs construit par <strong>IBM</strong>, bat le champion du monde <strong>Garry Kasparov</strong>.</p>
+      <div class="fiche">
+        <div class="fiche-label">Chiffre à retenir</div>
+        Deep Blue utilisait <strong>256 processeurs parallèles</strong>, capables d'examiner <strong>200 millions de coups possibles par seconde</strong> et d'anticiper jusqu'à <strong>14 tours de jeu</strong> à l'avance. C'est un exemple d'<strong>IA symbolique / force brute</strong> (recherche exhaustive dans un arbre de possibilités), très différente des réseaux de neurones profonds utilisés aujourd'hui.
+      </div>
+
+      <h3>Le Perceptron (Machine Perceptron Mark I)</h3>
+      <p>Le Perceptron Mark I est considéré comme la <strong>première implémentation de l'algorithme du perceptron</strong> — un algorithme d'<strong>apprentissage supervisé</strong> pour des <strong>classificateurs binaires</strong> (c.-à-d. un modèle qui apprend, à partir d'exemples étiquetés, à trancher entre deux catégories — par exemple « oui/non », « chat/pas chat »). C'est l'ancêtre direct des réseaux de neurones artificiels modernes.</p>
+    </section>
+
+    <!-- ============ CHRONO ============ -->
+    <section id="chrono">
+      <div class="section-tag">01 — Brève histoire de l'IA (suite)</div>
+      <h2>Chronologie visuelle de l'IA</h2>
+      <p>Le cours présente une frise temporelle (source : Our World in Data) qui situe les grandes étapes techniques entre 1950 et 2050 :</p>
+      <div class="timeline-wrap">
+        <div class="timeline">
+          <div class="bar"></div>
+          <div class="pt" style="left:8%"></div>
+          <div class="lbl" style="left:8%; top:-14px;"><b>Théseus</b>≈1950 — souris robotique naviguant un labyrinthe simple et mémorisant son trajet</div>
+          <div class="pt" style="left:16%"></div>
+          <div class="lbl" style="left:20%; top:70px;"><b>Perceptron Mark I</b>1957 — 1er réseau de neurones artificiel : distingue visuellement des cartes marquées à gauche/droite</div>
+          <div class="pt" style="left:56%"></div>
+          <div class="lbl" style="left:56%; top:-30px;"><b>TD-Gammon</b>≈1992 — apprend le backgammon à un niveau proche des meilleurs joueurs humains</div>
+          <div class="pt" style="left:72%"></div>
+          <div class="lbl" style="left:76%; top:70px;"><b>AlexNet</b>2012 — réseau de neurones profond reconnaissant des objets (chiens, voitures) quasi au niveau humain</div>
+          <div class="pt" style="left:80%"></div>
+          <div class="lbl" style="left:88%; top:-14px;"><b>IA générative</b>≈2022+ — langage &amp; image comparables aux capacités humaines</div>
+          <div class="yr" style="left:5%">1950</div>
+          <div class="yr" style="left:38%">2000</div>
+          <div class="yr" style="left:72%">2020</div>
+          <div class="yr" style="left:90%">2050</div>
+        </div>
+      </div>
+      <p style="font-size:0.85rem;color:var(--ink-soft);">Source citée dans le cours : ourworldindata.org/brief-history-of-ai</p>
+
+      <h3>2021 → aujourd'hui : IA appliquée et intégrations grand public</h3>
+      <div class="grid2">
+        <div class="card">
+          <h4>IA appliquée &amp; santé (2024)</h4>
+          <ul>
+            <li><strong>DeepMind</strong> étend <strong>AlphaFold</strong> (prédiction de structures de protéines) au diagnostic génétique.</li>
+            <li><strong>IBM Granite</strong> : modèles open source pour le code, les documents et les prévisions.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Intégrations grand public</h4>
+          <ul>
+            <li><strong>Apple Intelligence</strong> : Siri combiné à ChatGPT pour des interactions plus naturelles.</li>
+            <li><strong>NotebookLM DeepDive</strong> : transformation multimodale de documents en contenus audio structurés.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="fiche">
+        <div class="fiche-label">Tendances identifiées par le cours</div>
+        <ul style="margin-bottom:0;">
+          <li>Des <strong>modèles plus petits et plus efficaces</strong> (moins coûteux à faire tourner).</li>
+          <li>Montée de l'<strong>IA agentique</strong> (des systèmes qui agissent de façon autonome pour accomplir des tâches, pas seulement qui répondent).</li>
+          <li><strong>Autonomie accrue</strong> (véhicules autonomes), <strong>création multimodale complète</strong> (texte + image + audio + vidéo), et des <strong>assistants IA omniprésents</strong>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ DOMAINES ============ -->
+    <section id="domaines">
+      <div class="section-tag">02 — IA en société</div>
+      <h2>Utilisation de l'IA dans différents domaines</h2>
+
+      <h3>Apprentissage profond (deep learning)</h3>
+      <p>Le <strong>deep learning</strong> se définit comme un modèle utilisant <strong>plusieurs couches de traitement</strong> afin d'apprendre des représentations de données avec plusieurs niveaux d'abstraction (chaque couche apprend des motifs de plus en plus complexes, en s'appuyant sur les couches précédentes).</p>
+      <p>Il a permis d'améliorer l'état de l'art dans :</p>
+      <ul>
+        <li>la <strong>reconnaissance vocale</strong> ;</li>
+        <li>la <strong>reconnaissance visuelle d'objets</strong> et la <strong>détection d'objets</strong> ;</li>
+        <li>la <strong>découverte de médicaments</strong> et la <strong>génomique</strong>.</li>
+      </ul>
+      <p>Deux facteurs ont rendu ces progrès possibles : <strong>l'augmentation de la puissance de calcul</strong> et <strong>l'augmentation de la quantité de données</strong> disponibles.</p>
+
+      <h3>Données massives (big data) et IA</h3>
+      <p>Les données massives sont définies comme des « bases de données trop grandes et complexes pour être étudiées avec les méthodes statistiques traditionnelles ».</p>
+      <div class="fiche brick">
+        <div class="fiche-label">À mémoriser — les 5V</div>
+        <strong>Volume</strong> (quantité de données), <strong>Vélocité</strong> (vitesse à laquelle elles sont générées/traitées), <strong>Variété</strong> (diversité des formats — texte, image, capteurs...), <strong>Valeur</strong> (utilité extraite des données), <strong>Véracité</strong> (fiabilité/qualité des données).
+      </div>
+      <p>Ces caractéristiques permettent une <strong>inférence</strong> (déduction d'informations) avec un haut niveau de détail et de précision — ce qui est puissant, mais qui est aussi la source de plusieurs risques abordés plus loin (ré-identification, biais, etc.).</p>
+
+      <h3 id="domaines-critiques-h">IA dans des domaines critiques</h3>
+      <p>Le cours identifie cinq domaines où les décisions automatisées ont un impact humain direct et significatif :</p>
+      <div class="grid2">
+        <div class="card"><h4>Domaine médical</h4>Diagnostic, plans de traitement.</div>
+        <div class="card"><h4>Évaluations des risques criminels</h4>Systèmes utilisés en justice pénale pour estimer la récidive.</div>
+        <div class="card"><h4>Évaluations des enseignants publics</h4>Notation algorithmique de la performance enseignante.</div>
+        <div class="card"><h4>Trading automatisé</h4>Décisions financières prises en microsecondes par des algorithmes.</div>
+        <div class="card"><h4>Évaluation des risques-clients</h4>Scoring de crédit, assurance.</div>
+      </div>
+      <p>Le point commun de ces domaines : une <strong>erreur ou un biais algorithmique</strong> y a des conséquences graves et souvent <strong>irréversibles</strong> sur la vie des personnes concernées.</p>
+    </section>
+
+    <!-- ============ BIAIS ============ -->
+    <section id="biais">
+      <div class="section-tag">02 — IA en société</div>
+      <h2>Biais algorithmique</h2>
+      <p>Le <strong>biais algorithmique</strong> consiste à <strong>désavantager systématiquement certains groupes de personnes</strong>. Le cours en identifie deux causes principales :</p>
+      <ul>
+        <li><strong>Sous-représentation de ces groupes</strong> dans les données d'entraînement (le modèle « voit » peu d'exemples de ce groupe, donc apprend mal à le traiter équitablement).</li>
+        <li><strong>Préjugés intégrés dans l'algorithme</strong> — les biais présents dans les données historiques (ex. décisions humaines passées discriminatoires) sont reproduits, voire amplifiés, par le modèle.</li>
+      </ul>
+      <p>Domaines clés mentionnés : les <strong>soins de santé</strong>, la <strong>justice pénale</strong> et l'<strong>évaluation du crédit</strong>.</p>
+    </section>
+
+    <!-- ============ MEDECINE ============ -->
+    <section id="medecine">
+      <div class="section-tag">02 — IA en société</div>
+      <h2>Médecine et IA</h2>
+      <p>L'IA en médecine promet une meilleure <strong>précision diagnostique</strong>, des <strong>plans de traitement personnalisés</strong> et des <strong>expériences financières améliorées</strong> pour les patients. Mais un chiffre marquant du cours : <strong>plus de 60 % des patients ne font pas confiance à l'IA dans les soins de santé</strong>.</p>
+      <p>Les enjeux identifiés : la <strong>confidentialité des données</strong>, et la nécessité de collecter des <strong>données médicales précises et de haute qualité</strong>. La réponse à ces enjeux passe par l'<strong>atténuation des risques</strong> et le <strong>renforcement de la confiance</strong>.</p>
+
+      <div class="grid2">
+        <div class="card">
+          <h4>Défis éthiques</h4>
+          <ul>
+            <li>Le <strong>consentement éclairé</strong> à l'utilisation de l'IA</li>
+            <li>La <strong>sécurité</strong> et la <strong>transparence</strong></li>
+            <li>L'<strong>équité</strong> et les <strong>biais algorithmiques</strong></li>
+            <li>La <strong>confidentialité des données</strong></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h4>Défis juridiques</h4>
+          <ul>
+            <li>La <strong>sécurité</strong> et l'<strong>efficacité</strong> (du dispositif médical)</li>
+            <li>La <strong>responsabilité</strong> (qui répond des erreurs ?)</li>
+            <li>La <strong>protection des données</strong> et la confidentialité</li>
+            <li>La <strong>cybersécurité</strong></li>
+            <li>Le <strong>droit de la propriété intellectuelle</strong></li>
+          </ul>
+        </div>
+      </div>
+
+      <h3>Étude de cas : greffe de foie (discussion en classe)</h3>
+      <p>Le cours renvoie à un cas réel concernant un système d'appariement algorithmique pour les <strong>greffes de foie au Royaume-Uni</strong> (source citée : normaltech.ai). Ce cas sert de point de départ pour une discussion sur la manière dont un algorithme de priorisation médicale peut introduire ou masquer des biais dans une décision qui engage littéralement la vie ou la mort des patients en attente de greffe. Pour l'examen, retiens l'idée générale : même un système « objectif » et mathématique d'allocation de ressources rares (comme des organes) porte des choix de valeurs implicites (qui compte comme « prioritaire » ?) qui doivent être rendus explicites et débattus.</p>
+    </section>
+
+    <!-- ============ BLANCHIMENT ============ -->
+    <section id="blanchiment">
+      <div class="section-tag">02 — IA en société</div>
+      <h2>Blanchiment éthique (Ethics Washing)</h2>
+      <div class="fiche brick">
+        <div class="fiche-label">Définition à connaître par cœur</div>
+        Le <strong>blanchiment éthique</strong> est l'« instrumentalisation de l'éthique par une communication trompeuse, créant l'impression d'une intelligence artificielle (IA) éthique, alors qu'aucune théorie, argument ou application éthique substantielle n'est en place et qu'aucun éthicien n'est impliqué. »
+      </div>
+      <p>Le cours situe ce concept par analogie avec deux notions voisines :</p>
+      <div class="grid2">
+        <div class="card"><h4>Écoblanchiment (greenwashing)</h4>Déception selon laquelle les produits d'une organisation seraient écologiquement responsables, alors que ce n'est pas — ou peu — le cas.</div>
+        <div class="card"><h4>Privacy washing</h4>Déception selon laquelle des mesures existeraient pour protéger les données des utilisateurs, alors que ce n'est pas réellement le cas.</div>
+      </div>
+      <h3>Comment le blanchiment éthique se manifeste-t-il en IA ?</h3>
+      <ul>
+        <li>Les organisations <strong>définissent leur propre cadre</strong> pour l'éthique et font semblant de respecter des valeurs éthiques comme l'équité, la vie privée, l'explicabilité — sans réel engagement institutionnel derrière.</li>
+        <li>Ce qui compte, c'est <strong>comment elles communiquent</strong> leurs choix (marketing), plus que la substance réelle des choix eux-mêmes.</li>
+        <li>Exemple donné pour l'équité : il n'existe <strong>pas de consensus</strong> sur la notion d'équité (voir section « Équité » plus bas) — une organisation peut donc <strong>choisir une notion d'équité au hasard</strong>, tester si elle « marche » (statistiquement, en apparence), et s'en servir comme argument marketing, sans justification éthique réelle du choix.</li>
+      </ul>
+    </section>
+
+    <!-- ============ CONF DIFF ============ -->
+    <section id="confdiff">
+      <div class="section-tag">03 — Cadres &amp; principes</div>
+      <h2>Confidentialité différentielle (Differential Privacy)</h2>
+      <div class="fiche">
+        <div class="fiche-label">Définition</div>
+        La confidentialité différentielle est une garantie mathématique : <strong>en examinant le résultat (la sortie statistique) d'une analyse, on ne peut pas dire si les données d'un individu particulier sont incluses dans l'ensemble de données ou non.</strong> Concrètement, on ajoute du « bruit » statistique calibré aux résultats pour masquer la contribution de n'importe quel individu tout en préservant l'utilité globale des statistiques.
+      </div>
+      <p>Cette technique <strong>fonctionne mieux sur les bases de données de plus grande taille</strong> : plus le nombre d'individus dans une base de données <strong>augmente</strong>, plus l'effet d'un individu isolé sur la statistique globale <strong>diminue</strong> — il devient donc plus facile de le « noyer » dans la masse sans perdre trop de précision.</p>
+
+      <h3>Le paramètre epsilon (ε)</h3>
+      <p>La confidentialité différentielle est réglée par un paramètre appelé <strong>epsilon (ε)</strong>, qui contrôle le compromis entre confidentialité et précision (« privacy-utility trade-off »).</p>
+      <div class="fiche gold">
+        <div class="fiche-label">Relation à retenir pour l'examen</div>
+        Plus <strong>ε augmente</strong>, moins il y a de bruit ajouté (donc plus de précision statistique), mais <strong>plus le risque de déterminer les données spécifiques d'un individu augmente</strong>. Question du cours : que se passe-t-il si les paramètres de perte de confidentialité dépassent les niveaux acceptables afin de fournir une protection suffisante ? → Il faut alors accepter de sacrifier de l'exactitude statistique pour préserver la vie privée, ou revoir la conception du système.
+      </div>
+
+      <h3>Exemple concret donné en cours</h3>
+      <p>Dans l'analyse de données de santé, imaginons quelqu'un qui souffre d'un <strong>problème de santé très rare</strong>. Si la confidentialité différentielle n'est pas bien appliquée (ε trop élevé, ou mécanisme mal calibré), il devient possible de <strong>déterminer si cette personne spécifique souffre de ce problème ou non</strong> — simplement en observant comment les statistiques changent selon que ses données sont incluses ou non dans l'échantillon. C'est précisément ce que la confidentialité différentielle est censée empêcher.</p>
+    </section>
+
+    <!-- ============ MONTREAL ============ -->
+    <section id="montreal">
+      <div class="section-tag">03 — Cadres &amp; principes</div>
+      <h2>Déclaration de Montréal pour une IA responsable</h2>
+      <p>Initiative de l'<strong>Université de Montréal</strong>, lancée le <strong>3 novembre 2017</strong> avec les travaux de co-construction de la Déclaration.</p>
+      <blockquote>
+        La Déclaration de Montréal est une œuvre collective qui a pour objectif de mettre le développement de l'IA au service du bien-être de tout un chacun, et d'orienter le changement social en élaborant des recommandations ayant une forte légitimité démocratique.
+        <cite>declarationmontreal-iaresponsable.com</cite>
+      </blockquote>
+      <h3>Les 10 principes / valeurs</h3>
+      <p>À connaître par cœur — ils reviennent souvent en question d'examen sous forme de « nommez X principes » :</p>
+      <ol>
+        <li>Le <strong>bien-être</strong></li>
+        <li>L'<strong>autonomie</strong></li>
+        <li>L'<strong>intimité et la vie privée</strong></li>
+        <li>La <strong>solidarité</strong></li>
+        <li>La <strong>démocratie</strong></li>
+        <li>L'<strong>équité</strong></li>
+        <li>L'<strong>inclusion</strong></li>
+        <li>La <strong>prudence</strong></li>
+        <li>La <strong>responsabilité</strong></li>
+        <li>La <strong>soutenabilité environnementale</strong></li>
+      </ol>
+      <div class="fiche">
+        <div class="fiche-label">Astuce mnémotechnique</div>
+        Regroupe-les mentalement en 3 familles pour les retenir plus facilement : <strong>valeurs individuelles</strong> (bien-être, autonomie, vie privée) ; <strong>valeurs collectives</strong> (solidarité, démocratie, équité, inclusion) ; <strong>valeurs de gouvernance/précaution</strong> (prudence, responsabilité, soutenabilité environnementale).
+      </div>
+    </section>
+
+    <!-- ============ UE AI ACT ============ -->
+    <section id="ue">
+      <div class="section-tag">03 — Cadres &amp; principes</div>
+      <h2>Loi européenne sur l'intelligence artificielle (EU AI Act)</h2>
+      <p>Il s'agit de la <strong>première réglementation sur l'IA adoptée par un régulateur majeur</strong> au monde. Ses objectifs déclarés incluent que l'utilisation future de ces technologies soit bénéfique pour tous, avec des mesures de subvention, de sensibilisation à l'éducation, et d'engagement politique.</p>
+
+      <h3>Article 6 — Classification des systèmes à haut risque</h3>
+      <blockquote>
+        Un système d'IA est considéré comme à haut risque s'il est utilisé comme composant de sécurité d'un produit ou s'il s'agit d'un produit lui-même couvert par la législation européenne. Ces systèmes doivent faire l'objet d'une évaluation par un tiers avant de pouvoir être vendus ou utilisés.
+        <cite>Article 6, EU AI Act</cite>
+      </blockquote>
+      <p>Autrement dit : ce n'est pas la technologie en elle-même (ex. « réseau de neurones ») qui détermine le niveau de risque légal, mais le <strong>contexte d'utilisation</strong> — un système d'IA utilisé dans un dispositif médical ou un composant de sécurité automobile est automatiquement classé « haut risque », peu importe sa sophistication technique.</p>
+
+      <h3>Article 15 — Précision, robustesse et cybersécurité</h3>
+      <blockquote>
+        Les systèmes d'IA à haut risque doivent être conçus et développés de manière à atteindre un niveau approprié de précision, de robustesse et de cybersécurité, et à fonctionner de manière cohérente à ces égards tout au long de leur cycle de vie.
+        <cite>Article 15, EU AI Act</cite>
+      </blockquote>
+      <div class="fiche brick">
+        <div class="fiche-label">Nuance importante pour l'examen</div>
+        L'article 15 impose une obligation de <strong>maintien dans le temps</strong> (« tout au long de leur cycle de vie ») — ce n'est pas suffisant qu'un système soit précis et robuste au moment de son lancement ; il doit le rester après déploiement, malgré la dérive des données (« data drift ») ou les tentatives d'attaque.
+      </div>
+    </section>
+
+    <!-- ============ RGPD ============ -->
+    <section id="rgpd">
+      <div class="section-tag">03 — Cadres &amp; principes</div>
+      <h2>RGPD — Article 22</h2>
+      <blockquote>
+        La personne concernée a le droit de ne pas faire l'objet d'une décision fondée exclusivement sur un traitement automatisé, y compris le profilage, produisant des effets juridiques la concernant ou l'affectant de manière significative de façon similaire.
+        <cite>Règlement général sur la protection des données (RGPD), Article 22</cite>
+      </blockquote>
+      <div class="fiche">
+        <div class="fiche-label">Ce qu'il faut vraiment comprendre</div>
+        Cet article donne à toute personne le droit de <strong>ne pas être soumise uniquement</strong> à une décision 100 % automatisée (sans intervention humaine) lorsque cette décision a un effet juridique important sur elle — par exemple un refus de crédit automatique, un licenciement algorithmique, un refus d'assurance. Le mot clé est <strong>« exclusivement »</strong> : la loi n'interdit pas l'usage de l'IA en soutien à une décision, mais interdit qu'une décision à fort impact soit prise <strong>uniquement</strong> par la machine, sans supervision ou recours humain possible. Le terme <strong>profilage</strong> désigne le traitement automatisé de données personnelles pour évaluer certains aspects d'une personne (comportement, préférences, situation économique, santé, etc.).
+      </div>
+    </section>
+
+    <!-- ============ EQUITE ============ -->
+    <section id="equite">
+      <div class="section-tag">03 — Cadres &amp; principes</div>
+      <h2>Équité (Fairness)</h2>
+      <p>Le cours distingue deux grandes familles de définitions de l'équité algorithmique — une distinction <strong>classique et très probable à l'examen</strong> :</p>
+      <div class="grid2">
+        <div class="card">
+          <h4>Équité individuelle</h4>
+          <p>Un <strong>même résultat</strong> doit être donné à des <strong>profils similaires</strong>, la seule différence entre eux étant l'attribut sensible (ex. le genre, la race).</p>
+          <p><em>Exemple du cours :</em> en embauche, la décision ne doit pas être basée sur le genre ou la race — deux candidats par ailleurs identiques doivent recevoir la même décision peu importe leur genre ou leur origine.</p>
+        </div>
+        <div class="card">
+          <h4>Équité de groupe</h4>
+          <p>Une <strong>même décision</strong> à travers des <strong>sous-groupes</strong> définis par l'attribut sensible — c'est-à-dire que les statistiques agrégées doivent être comparables entre groupes.</p>
+          <p><em>Exemple du cours :</em> la proportion de femmes et d'hommes acceptés pour un poste devrait être la même.</p>
+        </div>
+      </div>
+      <div class="fiche gold">
+        <div class="fiche-label">Piège classique d'examen</div>
+        Ces deux définitions peuvent <strong>entrer en conflit</strong> : un modèle parfaitement « équitable au niveau individuel » (traiter chaque personne selon ses seuls mérites, sans regarder son groupe) peut très bien produire des résultats globalement déséquilibrés entre groupes si les groupes ont des profils de départ différents dans les données — et vice versa. C'est exactement ce qui explique pourquoi le cours dit qu'il n'y a « pas de consensus » sur la notion d'équité (voir section Blanchiment éthique) : ces définitions sont mathématiquement incompatibles dans le cas général.
+      </div>
+    </section>
+
+    <!-- ============ EXPLICABILITE ============ -->
+    <section id="explicabilite">
+      <div class="section-tag">03 — Cadres &amp; principes</div>
+      <h2>Explicabilité (XAI)</h2>
+      <p><strong>XAI</strong> = <strong>Explainable AI</strong> (IA explicable). L'objectif est de :</p>
+      <ul>
+        <li>Rendre les modèles <strong>interprétables</strong> (pouvoir comprendre leur fonctionnement interne ou leur logique décisionnelle) ;</li>
+        <li><strong>Comprendre les décisions prises</strong> par les algorithmes d'apprentissage automatique — c'est-à-dire pouvoir répondre à la question « pourquoi le modèle a-t-il pris cette décision précise pour ce cas précis ? ».</li>
+      </ul>
+      <div class="fiche">
+        <div class="fiche-label">Pourquoi c'est lié à tout le reste du cours</div>
+        L'explicabilité est la <strong>condition préalable</strong> à plusieurs autres exigences vues dans ce cours : sans explicabilité, impossible de vérifier concrètement l'<strong>équité</strong> d'un modèle, de satisfaire le <strong>droit de recours</strong> de l'Article 22 du RGPD, ou de prouver qu'une entreprise ne fait pas de <strong>blanchiment éthique</strong> en prétendant que son IA est équitable sans pouvoir le démontrer.
+      </div>
+    </section>
+
+    <!-- ============ ANONYMISATION ============ -->
+    <section id="anonymisation">
+      <div class="section-tag">04 — IA et vie privée</div>
+      <h2>Anonymisation des données</h2>
+      <p>L'anonymisation vise à <strong>limiter les risques</strong> liés à la divulgation de données personnelles. Deux limites importantes soulignées par le cours :</p>
+      <ul>
+        <li>Ce n'est <strong>pas une fonction unique qui marche pour tous les types de données</strong> — la bonne méthode d'anonymisation dépend du type de données (texte, image, données médicales, géolocalisation...).</li>
+        <li>Le risque principal vient du <strong>croisement des ensembles de données</strong> (« linkage attack ») : des données anonymisées prises isolément peuvent sembler sûres, mais en les croisant avec d'autres sources de données (même publiques), il devient souvent possible de ré-identifier une personne.</li>
+      </ul>
+
+      <h3>Analyse des données massives : les risques</h3>
+      <div class="grid2">
+        <div class="card">
+          <h4>Reconstruction</h4>
+          Reconstruction des données utilisées pour l'entraînement du modèle — un attaquant peut parfois retrouver des exemples individuels ayant servi à entraîner un modèle d'IA.
+        </div>
+        <div class="card">
+          <h4>Attaque de ré-identification</h4>
+          Retrouver l'identité réelle d'une personne à partir de données supposément anonymisées, souvent par croisement avec d'autres bases de données.
+        </div>
+        <div class="card">
+          <h4>Inférence de l'attribut sensible</h4>
+          Déduire une caractéristique privée d'une personne (santé, orientation, opinions...) à partir de données qui, en apparence, ne révèlent pas directement cette information.
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEDERE ============ -->
+    <section id="federe">
+      <div class="section-tag">04 — IA et vie privée</div>
+      <h2>Apprentissage fédéré (Federated Learning, FL)</h2>
+      <p>Question de transition posée par le cours : <strong>et si on a besoin d'utiliser des jeux de données provenant de parties différentes</strong> (plusieurs hôpitaux, plusieurs entreprises...) sans que chacune ait à révéler ses données brutes aux autres ? C'est le problème que résout l'apprentissage fédéré.</p>
+
+      <div class="attack-diagram">
+        <div class="box">Client 1<br>(données locales)</div>
+        <div class="arrow">→</div>
+        <div class="box">Client 2<br>(données locales)</div>
+        <div class="arrow">→</div>
+        <div class="box">…</div>
+        <div class="arrow">→</div>
+        <div class="box" style="background:var(--teal-dim);">Serveur<br>(coordonne l'apprentissage)</div>
+      </div>
+
+      <ul>
+        <li>Les <strong>clients gardent localement leurs données</strong> — elles ne sont jamais envoyées telles quelles au serveur central.</li>
+        <li>Ils <strong>entraînent en collaboration un modèle</strong> : chaque client entraîne le modèle sur ses propres données, puis envoie seulement les <strong>mises à jour du modèle</strong> (les changements de paramètres) au serveur.</li>
+        <li>L'<strong>apprentissage fédéré centralisé</strong> : un serveur central coordonne l'apprentissage en agrégeant ces mises à jour envoyées par tous les clients.</li>
+        <li>Le FL fait partie des <strong>technologies améliorant la confidentialité</strong>, appelées <strong>PET</strong> (« Privacy-Enhancing Technologies »).</li>
+      </ul>
+
+      <h3>Les limites du FL en matière de vie privée</h3>
+      <div class="fiche brick">
+        <div class="fiche-label">Point crucial pour l'examen</div>
+        Le FL protège les <strong>données brutes</strong>, mais <strong>n'est pas conçu contre les fuites d'entrée et de sortie</strong> — c'est-à-dire que les <strong>mises à jour du modèle elles-mêmes</strong> (envoyées par chaque client au serveur) peuvent, en étant observées ou analysées, révéler des informations sur les données locales d'un client. Le FL doit donc généralement être <strong>combiné avec d'autres PET</strong> : la <strong>confidentialité différentielle</strong>, le <strong>calcul multipartite sécurisé</strong> (secure multi-party computation — plusieurs parties calculent ensemble un résultat sans révéler leurs entrées individuelles), et le <strong>chiffrement entièrement homomorphe</strong> (permet de faire des calculs directement sur des données chiffrées, sans jamais les déchiffrer).
+      </div>
+      <p>Le FL reste <strong>vulnérable</strong> à des attaques comme la <strong>désanonymisation</strong> et l'<strong>inversion de modèle</strong> (reconstruire des données d'entraînement à partir du modèle final). De plus, une <strong>distribution déséquilibrée et peu diversifiée des données</strong> entre les clients <strong>augmente le biais</strong> et augmente aussi <strong>l'efficacité des attaques d'identification</strong> — un risque particulièrement élevé pour les <strong>groupes minoritaires</strong>, qui sont sous-représentés et donc plus faciles à isoler statistiquement dans les mises à jour du modèle.</p>
+    </section>
+
+    <!-- ============ ATTAQUES ============ -->
+    <section id="attaques">
+      <div class="section-tag">04 — IA et vie privée</div>
+      <h2>Attaques par inférence : le détail des mécanismes</h2>
+
+      <h3>Attaques par inférence d'appartenance (Membership Inference Attacks)</h3>
+      <p>Objectif de l'attaquant : <strong>déterminer si les données d'un individu précis ont été utilisées pendant l'entraînement</strong> du modèle — sans nécessairement connaître le contenu de ces données, juste savoir si la personne « fait partie » du jeu d'entraînement ou non.</p>
+      <div class="attack-diagram">
+        <div class="box">Données d'un individu</div>
+        <div class="arrow">?</div>
+        <div class="box" style="background:var(--teal-dim);">Modèle entraîné</div>
+        <div class="arrow">↔</div>
+        <div class="box">Données de l'entraînement</div>
+      </div>
+      <p>Le cours distingue deux scénarios selon le niveau d'accès de l'attaquant :</p>
+      <div class="grid2">
+        <div class="card">
+          <h4>Attaque « boîte blanche » (white-box)</h4>
+          L'attaquant a accès à l'<strong>algorithme d'apprentissage automatique</strong> et au <strong>code source du modèle</strong> — il peut donc analyser directement les paramètres internes du modèle.
+        </div>
+        <div class="card">
+          <h4>Attaque « boîte noire » (black-box)</h4>
+          L'attaquant <strong>n'a pas accès</strong> à l'algorithme ni au code source. Il <strong>interroge le système</strong> (envoie des requêtes) et <strong>observe la réponse</strong> pour en déduire de l'information — comme quelqu'un qui devine le contenu d'une boîte en la secouant, sans jamais l'ouvrir.
+        </div>
+      </div>
+
+      <h3>Attaques par inférence d'attributs (Attribute Inference Attacks)</h3>
+      <p>Ici, l'attaquant ne cherche pas juste à savoir « si » une personne est dans les données, mais à <strong>déterminer les attributs privés</strong> de la personne ciblée (le genre, la race, l'état de santé, etc.), en utilisant un <strong>classificateur d'apprentissage automatique</strong> entraîné spécifiquement à cette fin.</p>
+      <div class="attack-diagram">
+        <div class="box">Personne ciblée (« la cible »)</div>
+        <div class="arrow">→</div>
+        <div class="box" style="background:var(--brick-dim);">Classificateur de l'attaquant<br><em>détermine : genre, race, etc.</em></div>
+      </div>
+      <p>Cette attaque s'appuie sur le fait que même des données apparemment neutres (comportement, habitudes de navigation, historique d'achats) peuvent <strong>statistiquement corréler</strong> avec des attributs sensibles que la personne n'a jamais révélés explicitement.</p>
+    </section>
+
+    <!-- ============ ADVERSARIAL ============ -->
+    <section id="adversarial">
+      <div class="section-tag">04 — IA et vie privée</div>
+      <h2>Apprentissage automatique adversarial (Adversarial ML)</h2>
+      <p>Le cours illustre ce sujet par des références visuelles (arxiv.org), typiquement des exemples d'images légèrement modifiées de façon invisible à l'œil humain, mais qui trompent complètement un modèle de classification (par exemple, faire classer une image de panda comme un gibbon avec un bruit imperceptible ajouté).</p>
+      <div class="fiche">
+        <div class="fiche-label">Ce qu'il faut comprendre</div>
+        L'<strong>apprentissage automatique adversarial</strong> étudie comment des <strong>entrées volontairement conçues</strong> (« exemples adversariaux ») peuvent <strong>tromper un modèle d'IA</strong> pour lui faire produire une sortie incorrecte, tout en semblant normales ou inchangées pour un humain. C'est un enjeu de <strong>sécurité et de robustesse</strong> des systèmes d'IA (directement lié à l'exigence de « robustesse » de l'Article 15 de l'EU AI Act vue plus haut), particulièrement critique pour les systèmes utilisés dans des domaines à haut risque (reconnaissance faciale, véhicules autonomes, diagnostics médicaux).
+      </div>
+    </section>
+
+    <!-- ============ WMD ============ -->
+    <section id="wmd">
+      <div class="section-tag">04 — IA et vie privée</div>
+      <h2>Weapons of Math Destruction</h2>
+      <p><strong>Cathy O'Neil</strong>, mathématicienne, est l'autrice de l'essai <em>Weapons of Math Destruction</em>, qui porte sur les <strong>impacts sociétaux des algorithmes</strong> et sur l'utilisation des données massives dans des secteurs comme l'<strong>assurance</strong>, la <strong>publicité</strong> et l'<strong>éducation</strong>.</p>
+      <blockquote>
+        Les modèles sont des opinions intégrées dans les mathématiques.
+        <cite>Cathy O'Neil, Weapons of Math Destruction</cite>
+      </blockquote>
+      <div class="fiche gold">
+        <div class="fiche-label">L'idée centrale à retenir</div>
+        La thèse de O'Neil, telle que présentée dans le cours : les modèles algorithmiques ont tendance à <strong>étendre le pouvoir et l'influence</strong> de leurs concepteurs dans le monde, tout en se présentant comme des outils neutres et objectifs. Le cours oppose la <strong>transparence du modèle</strong> à l'idée d'une <strong>« boîte noire »</strong> — un modèle mathématique n'est jamais purement neutre : il encode des choix de valeurs (quelles variables utiliser, comment pondérer les erreurs, quel objectif optimiser) qui sont en réalité des <strong>opinions</strong> — d'où la formule « les modèles sont des opinions intégrées dans les mathématiques ».
+      </div>
+    </section>
+
+    <!-- ============ CAS ETHIQUE ============ -->
+    <section id="cas-ethique">
+      <div class="section-tag">05 — Logistique du cours</div>
+      <h2>Travail « Cas d'éthique »</h2>
+      <div class="fiche brick">
+        <div class="fiche-label">Date limite</div>
+        À téléverser sur <strong>Moodle</strong>, au format <strong>PDF</strong>, le <strong>21 juin 2026 à 23h59</strong>.
+      </div>
+      <ul>
+        <li>C'est une <strong>étude de cas</strong> qui doit effectuer une <strong>évaluation éthique</strong> d'une technologie ou d'un programme, en fonction des normes et approches éthiques vues en classe.</li>
+        <li>Le cas doit être choisi parmi ceux listés dans le document <strong>« INM6000 Été 2026 Cas d'éthique »</strong>, disponible sur Moodle.</li>
+        <li><strong>Travail individuel</strong> (pas d'équipe pour ce livrable-ci).</li>
+        <li><strong>Longueur</strong> : de <strong>4 à 6 pages</strong>, hors page de garde et sommaire.</li>
+      </ul>
+      <h4>Normes de présentation</h4>
+      <ol>
+        <li>Interligne et demi (1,5)</li>
+        <li>Police <strong>Times New Roman</strong> (ou équivalent), <strong>12 pt</strong></li>
+        <li>Page de présentation UQAM et bibliographie requises</li>
+      </ol>
+    </section>
+
+    <!-- ============ RAPPORT FINAL ============ -->
+    <section id="rapport-final">
+      <div class="section-tag">05 — Logistique du cours</div>
+      <h2>Rapport final</h2>
+      <div class="fiche brick">
+        <div class="fiche-label">Date limite</div>
+        <strong>9 août 2026, 23h59</strong> — longueur d'environ <strong>10 à 15 pages</strong> (hors page de garde et bibliographie).
+      </div>
+
+      <h3>Éléments requis dans le document</h3>
+      <details>
+        <summary>Voir la structure complète attendue <span></span></summary>
+        <div class="inner">
+          <ul>
+            <li><strong>Identification</strong> : noms et codes permanents des membres de l'équipe (ou de l'étudiant.e si travail individuel).</li>
+            <li><strong>Titre</strong>, possiblement révisé suite aux commentaires obtenus préalablement.</li>
+            <li><strong>Sujet</strong> (1 à 3 paragraphes) : présentez votre sujet, justifiez sa pertinence, expliquez l'angle choisi.</li>
+            <li><strong>Problématique</strong> (1 à 3 phrases) : la ou les questions concrètes auxquelles le travail répond.</li>
+            <li><strong>Concepts clés</strong> (2 à 4 concepts, 1 paragraphe chacun) : les principaux concepts du travail (souvent présents dans le titre), avec justification du choix et définition.</li>
+            <li><strong>Méthodologie</strong> (1 à 2 paragraphes) : comment vous répondez à la/les question(s).</li>
+            <li><strong>Analyse</strong> (3 à 9 paragraphes) : chaque posture ou cas étudié, avec les ressources choisies. Règle donnée en cours : <strong>« un paragraphe = une idée »</strong>.</li>
+            <li><strong>Conclusion</strong> (1 paragraphe) : ce que vous avez retenu, les avenues de recherche futures possibles, votre positionnement final par rapport au sujet.</li>
+            <li><strong>Bibliographie</strong> (minimum 3 ressources) : articles scientifiques, articles de journaux, rapports, études, reportages, etc. — en indiquant à chaque fois auteur(s), date, titre, maison d'édition/journal ou URL.</li>
+          </ul>
+        </div>
+      </details>
+
+      <h4>Normes de présentation</h4>
+      <ol>
+        <li>Interligne et demi (1,5)</li>
+        <li>Police Times New Roman (ou équivalent), 12 pt</li>
+        <li>Page de présentation UQAM et bibliographie requises</li>
+      </ol>
+
+      <h3>Critères de qualité d'un bon projet</h3>
+      <p>La <strong>clarté de l'analyse</strong>, la <strong>qualité de présentation</strong> et l'<strong>orthographe</strong> seront prises en compte. Un bon projet :</p>
+      <ul>
+        <li>a une <strong>portée clairement définie</strong> : ce qui est pertinent pour le projet, et ce qui est hors sujet ;</li>
+        <li><strong>explique</strong> les recherches existantes de manière à démontrer une compréhension réelle des résultats, plutôt que de simplement répéter ce qu'elles disent sans les comprendre ;</li>
+        <li>est <strong>sélectif</strong> dans le nombre de détails inclus, pour garantir que le point principal du document reste clair ;</li>
+        <li>démontre un <strong>niveau de travail adéquat</strong> — c'est un projet à travailler sur toute la durée du cours, pas la veille de la remise ;</li>
+        <li>est <strong>organisé de manière logique</strong> : chaque partie a un but précis, les sections/sous-sections permettent une organisation utile ;</li>
+        <li>utilise <strong>figures, tableaux et citations de manière appropriée</strong>.</li>
+      </ul>
+      <div class="fiche gold">
+        <div class="fiche-label">Attention si travail d'équipe</div>
+        Des points seront <strong>déduits</strong> si la qualité et la quantité du travail ne reflètent pas le nombre de membres de l'équipe (pour les groupes de 2 ou 3 personnes) — le travail doit être proportionnel à l'effectif de l'équipe.
+      </div>
+
+      <p style="margin-top:30px; font-style:italic; color:var(--ink-soft);">Séance suivante annoncée en fin de cours : <strong>« Informatique et écologie »</strong>.</p>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section id="quiz">
+      <div class="section-tag">Révision finale</div>
+      <h2>Quiz — questions susceptibles de sortir à l'examen</h2>
+      <p>Essaie de répondre mentalement (ou à l'écrit) avant de cliquer sur « Voir la réponse ».</p>
+
+      <div class="quiz-item">
+        <div class="num">Question 1</div>
+        <div class="question">Quel est le concept fondateur introduit par Alan Turing qui distingue un ordinateur moderne d'une machine à calcul figée, et pourquoi est-ce important ?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">Le <strong>concept de programme stocké</strong> : une machine qui peut opérer sur son propre programme et le modifier/l'améliorer elle-même. C'est ce qui fait des ordinateurs modernes des <strong>« machines de Turing universelles »</strong>, capables d'exécuter n'importe quel algorithme selon le programme qu'on leur fournit, plutôt que d'être limitées à une seule fonction câblée.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 2</div>
+        <div class="question">Nommez et expliquez les 5V des données massives.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer"><strong>Volume</strong> (quantité), <strong>Vélocité</strong> (vitesse de génération/traitement), <strong>Variété</strong> (diversité des formats), <strong>Valeur</strong> (utilité extraite), <strong>Véracité</strong> (fiabilité/qualité des données).</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 3</div>
+        <div class="question">Quelle est la différence entre l'équité individuelle et l'équité de groupe ? Pourquoi peuvent-elles entrer en conflit ?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">L'<strong>équité individuelle</strong> exige un même résultat pour des profils similaires (seule différence : l'attribut sensible). L'<strong>équité de groupe</strong> exige des résultats agrégés comparables entre sous-groupes définis par un attribut sensible. Elles peuvent entrer en conflit car respecter parfaitement l'une ne garantit pas de respecter l'autre — surtout quand les groupes ont des distributions de départ différentes dans les données. C'est en partie pour cela qu'il n'existe pas de consensus unique sur « la » bonne définition d'équité.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 4</div>
+        <div class="question">Définissez le blanchiment éthique (ethics washing) et donnez un exemple de sa manifestation en IA.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">C'est l'instrumentalisation de l'éthique par une communication trompeuse, créant l'impression d'une IA éthique sans qu'il y ait de véritable théorie, argument ou application éthique substantielle, ni d'éthicien réellement impliqué. Exemple : une organisation choisit une définition d'équité au hasard, teste si elle « fonctionne » statistiquement, puis la présente comme preuve marketing que son système est « équitable », sans réelle justification éthique de ce choix.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 5</div>
+        <div class="question">Qu'est-ce que le paramètre epsilon (ε) en confidentialité différentielle, et quel est le compromis qu'il représente ?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">Epsilon contrôle le compromis entre <strong>précision statistique</strong> et <strong>confidentialité</strong>. Plus ε augmente, moins de bruit est ajouté (résultats plus précis), mais plus le risque de déterminer les données spécifiques d'un individu augmente. À l'inverse, un ε plus petit protège mieux la vie privée mais réduit la précision des statistiques obtenues.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 6</div>
+        <div class="question">L'apprentissage fédéré protège-t-il complètement la vie privée des participants ? Justifiez.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">Non. Le FL garde les données brutes localement chez chaque client, mais <strong>n'est pas conçu contre les fuites d'entrée et de sortie</strong> : les mises à jour du modèle envoyées au serveur peuvent révéler de l'information sur les données locales (via inversion de modèle, désanonymisation, attaques par inférence d'appartenance). Il doit donc être combiné avec d'autres technologies (confidentialité différentielle, calcul multipartite sécurisé, chiffrement homomorphe) pour offrir une protection robuste.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 7</div>
+        <div class="question">Quelle est la différence entre une attaque par inférence d'appartenance en boîte blanche et en boîte noire ?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">En <strong>boîte blanche</strong>, l'attaquant a accès à l'algorithme d'apprentissage automatique et au code source du modèle (il peut analyser les paramètres internes directement). En <strong>boîte noire</strong>, il n'a pas cet accès : il ne peut qu'interroger le système de l'extérieur (envoyer des requêtes) et observer les réponses pour en déduire de l'information.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 8</div>
+        <div class="question">Citez l'Article 22 du RGPD dans ses grandes lignes et expliquez le sens du mot « exclusivement » dans ce contexte.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">L'Article 22 donne à toute personne le droit de ne pas faire l'objet d'une décision fondée <strong>exclusivement</strong> sur un traitement automatisé (y compris le profilage) produisant des effets juridiques ou l'affectant de manière significative. Le mot « exclusivement » est central : la loi n'interdit pas d'utiliser l'IA en soutien à une décision humaine, mais interdit qu'une décision à fort impact soit prise <strong>uniquement</strong> par la machine, sans intervention ou recours humain possible.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 9</div>
+        <div class="question">Nommez au moins 6 des 10 valeurs de la Déclaration de Montréal pour une IA responsable.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">Le bien-être, l'autonomie, l'intimité et la vie privée, la solidarité, la démocratie, l'équité, l'inclusion, la prudence, la responsabilité, la soutenabilité environnementale (les 10 au total).</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 10</div>
+        <div class="question">Que veut dire Cathy O'Neil par « les modèles sont des opinions intégrées dans les mathématiques » ?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">Un modèle mathématique n'est jamais purement neutre ou objectif : les choix faits pour le construire (quelles variables utiliser, comment pondérer les erreurs, quel objectif optimiser) reflètent des jugements de valeur humains — des « opinions » — même s'ils sont présentés sous une forme mathématique qui paraît objective. Ces modèles peuvent ainsi étendre le pouvoir et l'influence de leurs concepteurs tout en donnant l'illusion de la neutralité (lien avec l'enjeu de transparence vs « boîte noire »).</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 11</div>
+        <div class="question">Expliquez la distinction entre attaque par inférence d'appartenance et attaque par inférence d'attributs.</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">L'<strong>inférence d'appartenance</strong> cherche à déterminer si les données d'un individu ont été utilisées pendant l'entraînement du modèle (une question de type oui/non). L'<strong>inférence d'attributs</strong> va plus loin : elle cherche à déterminer des caractéristiques privées spécifiques (genre, race, etc.) d'une personne ciblée, en utilisant un classificateur entraîné à cette fin.</div>
+      </div>
+
+      <div class="quiz-item">
+        <div class="num">Question 12</div>
+        <div class="question">Selon l'Article 6 de l'EU AI Act, qu'est-ce qui détermine si un système d'IA est classé « à haut risque » ?</div>
+        <button class="reveal-btn" onclick="toggleAnswer(this)">Voir la réponse</button>
+        <div class="answer">Ce n'est pas la sophistication technique du système qui compte, mais son <strong>usage</strong> : un système est à haut risque s'il est utilisé comme composant de sécurité d'un produit, ou s'il constitue lui-même un produit couvert par la législation européenne. Ces systèmes doivent être évalués par un tiers avant d'être vendus ou utilisés.</div>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Guide d'étude généré à partir du support de cours « INM6000E26 — Séance 7 » (Prof. Didem Demirag, UQAM, Été 2026) · Toutes les citations et sources renvoient au contenu original du cours.
+    </div>
+  </main>
+</div>
+
+<div class="progress-badge" id="progressBadge">0 / 12 réponses consultées</div>
+
+<script>
+function toggleAnswer(btn){
+  const ans = btn.nextElementSibling;
+  ans.classList.toggle('show');
+  btn.textContent = ans.classList.contains('show') ? 'Masquer la réponse' : 'Voir la réponse';
+  updateProgress();
+}
+function updateProgress(){
+  const shown = document.querySelectorAll('.answer.show').length;
+  document.getElementById('progressBadge').textContent = shown + ' / 12 réponses consultées';
+}
+// Active TOC highlighting
+const sections = document.querySelectorAll('main section');
+const links = document.querySelectorAll('nav.toc a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if(rect.top <= 140 && rect.bottom >= 140) current = sec.id;
+  });
+  links.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>

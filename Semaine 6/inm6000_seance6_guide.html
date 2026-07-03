@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>INM6000 - Séance 6 - Guide d'étude complet</title>
+<style>
+  :root{
+    --bg:#0d1b2a; --panel:#132a3d; --accent:#38bdf8; --accent2:#facc15;
+    --text:#e6edf3; --muted:#9fb3c8; --card:#16324a; --good:#34d399; --warn:#f87171;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    background:linear-gradient(135deg,#0d1b2a,#1b3a4b);
+    color:var(--text); margin:0; padding:0; line-height:1.6;
+  }
+  header{
+    background:linear-gradient(120deg,#0f2c3f,#155263);
+    padding:40px 20px; text-align:center; border-bottom:4px solid var(--accent);
+  }
+  header h1{margin:0 0 8px 0; font-size:2.1em;}
+  header p{color:var(--muted); margin:4px 0;}
+  nav{
+    max-width:1000px; margin:20px auto; background:var(--panel);
+    border-radius:12px; padding:18px 22px; box-shadow:0 4px 15px rgba(0,0,0,.3);
+  }
+  nav h2{margin-top:0; font-size:1.1em; color:var(--accent2);}
+  nav ul{columns:2; gap:20px; padding-left:20px;}
+  nav a{color:var(--accent); text-decoration:none;}
+  nav a:hover{text-decoration:underline;}
+  .container{max-width:1000px; margin:0 auto; padding:10px 20px 60px;}
+  section{
+    background:var(--panel); border-radius:14px; padding:26px 30px; margin:26px 0;
+    box-shadow:0 4px 15px rgba(0,0,0,.25); border-left:5px solid var(--accent);
+  }
+  section h2{
+    color:var(--accent2); border-bottom:2px solid rgba(255,255,255,.1);
+    padding-bottom:10px; margin-top:0;
+  }
+  h3{color:var(--accent); margin-top:26px;}
+  .def{
+    background:var(--card); border-left:4px solid var(--good);
+    padding:14px 18px; border-radius:8px; margin:14px 0;
+  }
+  .def b{color:var(--good);}
+  .ex{
+    background:#1e2b3f; border-left:4px solid var(--accent2);
+    padding:12px 18px; border-radius:8px; margin:12px 0; font-size:.96em;
+  }
+  .ex b{color:var(--accent2);}
+  .attn{
+    background:#3a1f22; border-left:4px solid var(--warn);
+    padding:12px 18px; border-radius:8px; margin:12px 0;
+  }
+  .attn b{color:var(--warn);}
+  table{width:100%; border-collapse:collapse; margin:16px 0; font-size:.94em;}
+  th,td{border:1px solid rgba(255,255,255,.15); padding:8px 10px; text-align:left;}
+  th{background:#1c3a52; color:var(--accent2);}
+  tr:nth-child(even){background:rgba(255,255,255,.03);}
+  .badge{
+    display:inline-block; background:var(--accent); color:#04202f;
+    font-weight:bold; padding:2px 10px; border-radius:20px; font-size:.8em; margin-right:8px;
+  }
+  .qcard{
+    background:#1c2f42; border-radius:10px; padding:16px 20px; margin:14px 0;
+    border:1px solid rgba(255,255,255,.1);
+  }
+  .qcard p.q{font-weight:bold; color:var(--accent2); margin-bottom:6px;}
+  details{margin-top:8px;}
+  summary{cursor:pointer; color:var(--accent); font-weight:600;}
+  summary:hover{color:var(--accent2);}
+  .answer{background:#12241a; border-left:4px solid var(--good); padding:10px 16px; margin-top:8px; border-radius:6px;}
+  .toplink{display:block; text-align:right; font-size:.8em; margin-top:-10px;}
+  .toplink a{color:var(--muted); text-decoration:none;}
+  footer{text-align:center; padding:30px; color:var(--muted); font-size:.85em;}
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr;} nav ul{columns:1;}}
+  code{background:#0c1c29; padding:2px 6px; border-radius:4px; color:#7dd3fc;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔒 INM6000 — Informatique et société</h1>
+  <p><strong>Séance 6 — Protection de la vie privée (partie 2)</strong></p>
+  <p>Didem Demirag — UQAM, Été 2026 — 9 juin 2026</p>
+</header>
+
+<div class="container">
+
+<nav id="top">
+  <h2>📚 Table des matières</h2>
+  <ul>
+    <li><a href="#s1">1. La vie quotidienne quantifiée</a></li>
+    <li><a href="#s2">2. Le "double de données"</a></li>
+    <li><a href="#s3">3. Applications de fitness</a></li>
+    <li><a href="#s4">4. Géolocalisation et vie privée</a></li>
+    <li><a href="#s5">5. Attaques par inférence</a></li>
+    <li><a href="#s6">6. Assainissement des données géo</a></li>
+    <li><a href="#s7">7. Incitations à la protection</a></li>
+    <li><a href="#s8">8. Profilage</a></li>
+    <li><a href="#s9">9. Intégrité contextuelle (Nissenbaum)</a></li>
+    <li><a href="#s10">10. Sujets divers</a></li>
+    <li><a href="#s11">11. Paradoxe de la vie privée</a></li>
+    <li><a href="#s12">12. Privacy by design & IA</a></li>
+    <li><a href="#s13">13. Le travail à remettre (Cas d'éthique)</a></li>
+    <li><a href="#quiz">🎯 Questions d'examen probables</a></li>
+  </ul>
+</nav>
+
+<!-- SECTION 1 -->
+<section id="s1">
+<h2>1. La vie quotidienne quantifiée <span class="badge">diapos 2-5</span></h2>
+
+<p>Le thème central du cours : aujourd'hui, une quantité énorme de données sur notre vie de tous les jours est
+enregistrée automatiquement, souvent sans qu'on y pense activement. On parle de <b>"quantified self"</b>
+(le "soi quantifié").</p>
+
+<h3>Quels types de données sont collectées ?</h3>
+<p>Le cours donne 5 exemples concrets qu'il faut bien comprendre — chacun vient d'une source différente :</p>
+<table>
+<tr><th>Donnée</th><th>Exemple de source</th><th>Ce que ça révèle</th></tr>
+<tr><td>Heures de sommeil</td><td>Montre connectée (Fitbit, Apple Watch)</td><td>Rythme de vie, santé, habitudes nocturnes</td></tr>
+<tr><td>Nombre de pas</td><td>Téléphone, montre connectée</td><td>Niveau d'activité physique, déplacements</td></tr>
+<tr><td>Nouvelles connexions</td><td>LinkedIn, réseaux sociaux</td><td>Réseau social, relations professionnelles</td></tr>
+<tr><td>Électricité dépensée</td><td>Compteur "intelligent" (smart meter)</td><td>Présence à la maison, habitudes, appareils utilisés</td></tr>
+<tr><td>Nombre d'abonnés</td><td>Réseaux sociaux (Instagram, YouTube...)</td><td>Popularité, influence, activité en ligne</td></tr>
+</table>
+
+<div class="def"><b>Pourquoi c'est important :</b> Chacune de ces données, prise seule, semble anodine.
+Mais l'idée clé du cours (qu'on retrouvera partout) est que <b>la combinaison</b> de plusieurs données
+anodines peut révéler des choses très intimes sur une personne (habitudes, santé, localisation, identité).</div>
+
+<h3>Référence : "Self-Tracking" (Neff & Nafus)</h3>
+<p>Le livre cité pose deux questions fondamentales :</p>
+<ul>
+<li><b>Comment et pourquoi</b> les gens enregistrent-ils et analysent-ils des données sur eux-mêmes ? →
+  Motivation : mieux se connaître, s'améliorer (sport, santé), par curiosité, par jeu (gamification).</li>
+<li>Les données de self-tracking peuvent être : <b>utiles</b> (motivantes, informatives), <b>puissantes</b>
+  (permettent de changer des comportements), <b>agréables</b>, mais aussi <b>fastidieuses</b> (contraignantes
+  à maintenir), <b>décevantes</b> (résultats pas à la hauteur des attentes) ou <b>erronées</b> (capteurs
+  imprécis, mauvaise interprétation).</li>
+</ul>
+</section>
+
+<!-- SECTION 2 -->
+<section id="s2">
+<h2>2. Le "double de données" (<i>data double</i>) <span class="badge">diapo 6</span></h2>
+
+<div class="def"><b>Concept clé :</b> Nos données personnelles créent une <b>version virtuelle et partielle
+de nous-mêmes</b> qui existe sur des serveurs — un "double de données". Ce double nous relie à des systèmes
+sociaux plus vastes (entreprises, algorithmes, publicité, assurances, etc.).</div>
+
+<p>Point important à retenir : <b>"les données ont une vie sociale"</b>. Cela signifie qu'une fois créées,
+les données circulent, sont analysées, vendues, combinées avec d'autres données — indépendamment de la
+personne réelle qu'elles représentent. Le "double de données" peut donc être utilisé, jugé, catégorisé
+sans que la personne réelle en ait conscience ou contrôle.</p>
+
+<div class="ex"><b>Chiffre à retenir :</b> 290 millions de téléchargements d'applications de fitness en
+Europe en 2021 (source : Sensor Tower). Ce chiffre illustre l'ampleur du phénomène de "self-tracking" via
+des applications commerciales.</div>
+
+<h3>Est-ce que ça vaut la peine de partager vos données ?</h3>
+<p>Le cours pose 4 tensions/problèmes à connaître :</p>
+<ol>
+<li><b>Asymétrie de valeur</b> : les données sont <i>beaucoup plus utiles pour les entreprises</i> (ciblage
+publicitaire, revente, amélioration de produits) que pour l'individu lui-même.</li>
+<li><b>Suggestions trop générales</b> : les recommandations personnalisées basées sur ces données ne sont
+souvent pas si utiles, car elles restent générales (pas vraiment "sur mesure").</li>
+<li><b>Questions sur la vie privée</b> : qui voit ces données ? à quelles fins ?</li>
+<li><b>Possession compliquée</b> : à qui "appartiennent" les données une fois collectées ? L'utilisateur ?
+L'entreprise ? Le flou juridique autour de la propriété des données est un problème central.</li>
+</ol>
+</section>
+
+<!-- SECTION 3 -->
+<section id="s3">
+<h2>3. Applications de fitness <span class="badge">diapos 8-11</span></h2>
+
+<h3>Cas concrets de dérives (à connaître par cœur — souvent demandé en exemple d'examen)</h3>
+
+<div class="attn">
+<b>1. Strava (2018) — la carte thermique (heatmap)</b><br>
+Strava a publié publiquement une carte thermique (heatmap) de données <i>agrégées et anonymisées</i>
+montrant les zones où ses utilisateurs couraient/pédalaient le plus. Problème : dans des zones isolées
+(ex. bases militaires à l'étranger), les seules personnes utilisant l'appli étaient des soldats — la carte
+a donc <b>révélé l'emplacement exact de bases militaires secrètes</b> et les trajets de patrouille des soldats.
+</div>
+<p><i>Leçon pédagogique :</i> même des données "anonymisées" et "agrégées" peuvent révéler des informations
+sensibles si le contexte (peu d'utilisateurs dans une zone) permet de désanonymiser ou d'inférer.</p>
+
+<div class="attn">
+<b>2. MyFitnessPal — fuite de données</b><br>
+Fuite touchant environ <b>150 millions d'utilisateurs</b>. Illustre le risque de sécurité (piratage) en plus
+du risque de vie privée (usage abusif) : deux problèmes distincts mais liés.
+</div>
+
+<div class="attn">
+<b>3. Programmes de bien-être en entreprise (employer wellness programs)</b><br>
+Certains employeurs offrent des avantages (rabais assurance, primes) si l'employé partage ses données de
+fitness. Cela pose la question : <b>quelle quantité d'informations personnelles un employeur devrait-il
+avoir</b> sur la santé de ses employés ? Risque de discrimination ou de pression indirecte.
+</div>
+
+<h3>Pourquoi les données de fitness sont particulièrement sensibles</h3>
+<ul>
+<li>Elles incluent des données <b>sensibles</b> au sens légal : date de naissance, photos.</li>
+<li>Elles incluent des <b>données biométriques ou liées au mouvement</b> : rythme cardiaque, nombre de pas.</li>
+<li>Elles sont <b>collectées et agrégées en continu</b>, souvent combinées avec d'autres types de données
+(localisation, réseaux sociaux).</li>
+<li>Cette combinaison permet d'<b>inférer</b> des habitudes de vie et même l'identité d'une personne.</li>
+</ul>
+
+<h3>Étude : connaissances et comportements des utilisateurs</h3>
+<p>Une étude ("Understanding Fitness Tracker Users' Security and Privacy Knowledge, Attitudes and
+Behaviours") a mesuré ce que font réellement les utilisateurs :</p>
+<table>
+<tr><th>Comportement</th><th>% qui le fait ("Yes")</th></tr>
+<tr><td>Lire la politique de confidentialité</td><td>11%</td></tr>
+<tr><td>Lire les conditions d'utilisation</td><td>13%</td></tr>
+<tr><td>S'assurer que les données sont sécurisées/privées</td><td>24%</td></tr>
+<tr><td>Changer les paramètres de sécurité/confidentialité par défaut</td><td>31%</td></tr>
+<tr><td>Définir ses préférences de partage de données</td><td>49%</td></tr>
+</table>
+<div class="def"><b>À retenir :</b> Un écart énorme existe entre l'importance que les gens disent accorder à
+la vie privée et leurs comportements réels (très peu lisent les politiques de confidentialité). C'est un
+premier aperçu du <b>"paradoxe de la vie privée"</b> détaillé plus loin dans le cours.</div>
+<p>Conclusion de l'étude : les participants reconnaissent que beaucoup de scénarios à risque sont
+<b>plausibles</b>, mais estiment qu'ils sont <b>peu susceptibles de se produire</b> — un biais cognitif qui
+explique en partie l'inaction face aux risques.</p>
+</section>
+
+<!-- SECTION 4 -->
+<section id="s4">
+<h2>4. Géolocalisation et protection de la vie privée <span class="badge">diapos 12-13</span></h2>
+
+<div class="def"><b>Définition (Beresford et Stajano, 2003) :</b> L'objectif principal de la protection
+de la vie privée en géolocalisation est <b>d'empêcher une entité non désirée d'apprendre la localisation
+géographique passée, présente et future d'un individu</b>.</div>
+
+<h3>Pourquoi la localisation est dangereuse pour la vie privée</h3>
+<p>À partir des traces de mobilité (l'historique des positions GPS d'une personne), on peut inférer :</p>
+<ul>
+<li>Son <b>lieu d'habitation</b> et de <b>travail</b></li>
+<li>Son <b>identité</b></li>
+<li>Ses <b>centres d'intérêt</b></li>
+<li>Ses <b>habitudes</b></li>
+<li>Une <b>déviation par rapport à son comportement habituel</b> (ex: détecter qu'elle va à l'hôpital, chez
+un avocat, à une manifestation, etc.)</li>
+</ul>
+<p>Tout cela constitue un <b>bris de vie privée</b>.</p>
+
+<div class="def"><b>Terme clé à retenir : quasi-identificateur</b><br>
+Les données spatio-temporelles (où j'étais, à quel moment) peuvent servir de <b>quasi-identificateur</b> :
+même sans nom, la combinaison de plusieurs positions dans le temps suffit souvent à identifier une personne
+unique (car peu de gens partagent exactement le même trajet quotidien).</div>
+</section>
+
+<!-- SECTION 5 -->
+<section id="s5">
+<h2>5. Attaques par inférence sur données de mobilité <span class="badge">diapos 14-16</span></h2>
+
+<div class="def"><b>Définition :</b> Une attaque par inférence combine un <b>ensemble de données de
+mobilité</b> avec, possiblement, des <b>connaissances auxiliaires</b> (informations externes) pour essayer
+de déduire des informations personnelles sur les individus.</div>
+
+<div class="attn"><b>Remarque importante (souvent en question d'examen) :</b> des données peuvent être
+<b>privées aujourd'hui</b> mais <b>ne plus l'être demain</b>, à cause de la publication future d'un autre
+jeu de données qui, combiné au premier, permet une inférence qui n'était pas possible avant. La vie privée
+n'est donc jamais garantie de façon permanente — elle dépend de ce qui sera publié dans le futur aussi.</div>
+
+<h3>Les 5 objectifs possibles d'une attaque par inférence</h3>
+<ol>
+<li><b>Identification des points d'intérêt (POI)</b> — ex : maison, travail, gymnase, centre médical. Ce
+sont les lieux "sémantiquement" importants qui caractérisent une personne.</li>
+<li><b>Prédiction des motifs de mobilité</b> — deviner où la personne est/était/sera.</li>
+<li><b>Chaînage d'enregistrements (record linkage)</b> — relier plusieurs enregistrements du même individu,
+même s'ils utilisent des pseudonymes différents ou proviennent de bases de données différentes.</li>
+<li><b>Découverte de relations sociales</b> — ex : deux personnes souvent proches géographiquement sont
+probablement en relation (amis, collègues, couple).</li>
+<li><b>Prédiction d'attributs démographiques</b> — déduire l'âge, le revenu, le statut social, etc. à
+partir des habitudes de déplacement.</li>
+</ol>
+
+<h3>Exemple concret : identifier la maison et le travail à partir de traces GPS</h3>
+<p>Supposons qu'on a les traces GPS d'une voiture, avec le nom du conducteur remplacé par un pseudonyme
+aléatoire. Deux <b>heuristiques</b> simples permettent de "désanonymiser" en partie :</p>
+<table>
+<tr><th>Heuristique</th><th>Logique</th></tr>
+<tr><td><b>Identifier la maison</b></td><td>Choisir le <i>dernier arrêt avant minuit</i> (la plupart des gens rentrent dormir chez eux)</td></tr>
+<tr><td><b>Identifier le travail</b></td><td>Choisir l'endroit où il y a <i>le moins de déplacements pendant la journée</i> (on reste au bureau plusieurs heures sans bouger)</td></tr>
+</table>
+<div class="def"><b>Terme clé : géocodage inverse (reverse geocoding)</b><br>
+Technique qui transforme des coordonnées GPS (latitude/longitude) en une <b>adresse physique lisible</b>
+(ex : "123 rue Sainte-Catherine"). C'est la dernière étape qui transforme une position abstraite en identité réelle.</div>
+</section>
+
+<!-- SECTION 6 -->
+<section id="s6">
+<h2>6. Assainissement des données géolocalisées <span class="badge">diapos 17-18</span></h2>
+
+<p>"Assainir" (sanitize) les données = les transformer pour réduire le risque de vie privée avant de les
+publier ou de les partager.</p>
+
+<h3>Techniques d'assainissement</h3>
+<div class="def"><b>Masques géographiques (geographic masks)</b> : modifier la localisation pour préserver
+la vie privée. Techniques :
+<ul>
+<li><b>Agrégation</b> : regrouper les positions par zone (ex: quartier plutôt que l'adresse exacte)</li>
+<li><b>Perturbation aléatoire</b> : ajouter du "bruit" aléatoire aux coordonnées</li>
+<li><b>Randomisation en fonction de la densité</b> : perturber plus fortement dans les zones peu peuplées
+(où il est plus facile d'identifier quelqu'un) et moins fortement dans les zones denses</li>
+</ul>
+</div>
+<p>Autres transformations possibles : <b>sous-échantillonner</b> (garder moins de points), <b>échanger des
+traces</b> entre deux pseudonymes différents, <b>ajouter des enregistrements artificiels</b> (faux points
+pour brouiller les pistes).</p>
+
+<div class="def"><b>Couverture spatiale (Gruteser et Grunwald, 2003)</b> — c'est du <b>k-anonymat</b>
+appliqué à la géolocalisation : à chaque unité de temps, chaque individu doit se trouver dans une zone
+partagée par <b>au moins k−1 autres individus</b>. Ainsi, on ne peut jamais distinguer un individu parmi
+moins de k personnes possibles.</div>
+
+<div class="def"><b>Mix-zone (Beresford et Stajano, 2003)</b> : une zone de l'espace où <b>aucune
+observation n'est produite</b> (le tracking est "coupé"). Quand la personne ressort de cette zone, un
+<b>nouveau pseudonyme</b> lui est attribué, différent de celui utilisé à l'entrée. Cela empêche de relier
+le "avant" et le "après" de la mix-zone à la même personne.</div>
+
+<h3>Limites de ces techniques</h3>
+<ul>
+<li><b>Connaissances géographiques de l'adversaire</b> : si l'attaquant connaît bien le terrain, il peut
+écarter les hypothèses peu probables (ex : une position perturbée qui tombe au milieu d'un lac ou d'une
+zone inaccessible sera automatiquement rejetée, et l'attaquant devinera la zone accessible la plus proche).</li>
+<li><b>Risque de chaînabilité (linkability)</b> : même si on ne peut pas identifier un individu précis,
+on peut parfois <b>suivre le déplacement d'un groupe</b> d'une zone à une autre à chaque étape temporelle
+— donc la vie privée du groupe (sinon de l'individu) est compromise.</li>
+</ul>
+</section>
+
+<!-- SECTION 7 -->
+<section id="s7">
+<h2>7. Incitations à développer la protection de la vie privée <span class="badge">diapo 19</span></h2>
+<p>Quatre types de motivation à connaître (souvent demandés sous forme de liste à l'examen) :</p>
+<div class="grid2">
+<div class="ex"><b>1. Incitation commerciale</b><br>Le respect de la vie privée peut devenir un argument
+marketing/commercial (différenciation face à la concurrence).</div>
+<div class="ex"><b>2. Incitation financière (amendes)</b><br>Les entreprises risquent des amendes en cas de
+fuite avérée d'informations personnelles (ex: RGPD).</div>
+<div class="ex"><b>3. Prise de conscience du public</b><br>Nécessite un effort d'éducation. Problème :
+cette prise de conscience arrive souvent seulement <b>après un scandale</b> lié à une grave brèche de vie
+privée (réactif plutôt que proactif).</div>
+<div class="ex"><b>4. Cadre législatif</b><br>Lois et directives encadrant la collecte/protection des
+données (ex : loi sur la protection des données personnelles, avis de la CNIL, directives européennes).</div>
+</div>
+</section>
+
+<!-- SECTION 8 -->
+<section id="s8">
+<h2>8. Profilage <span class="badge">diapos 20-23</span></h2>
+
+<div class="def"><b>Le profilage</b> consiste à collecter et analyser des données sur les utilisateurs
+(démographiques, comportementales, préférences) pour construire un "profil" — souvent à des fins
+publicitaires ou de personnalisation.</div>
+
+<h3>Types de données utilisées pour le profilage (tableau du cours)</h3>
+<table>
+<tr><th>Type de donnée</th><th>Exemple</th><th>Plateforme</th></tr>
+<tr><td>Démographique</td><td>âge, genre, éducation, personnalité (déduits du texte des tweets via ML)</td><td>Twitter</td></tr>
+<tr><td>Comportementale</td><td>likes, tags, profil Facebook</td><td>Facebook</td></tr>
+<tr><td>Démographique (explicite/implicite)</td><td>nom, langue, famille — via mots-clés et historique de navigation</td><td>Plusieurs plateformes</td></tr>
+<tr><td>Préférences</td><td>nouvelles, préférences politiques (via les pages "likées")</td><td>Facebook</td></tr>
+<tr><td>Démographique + préférences</td><td>tweets, followers, URLs partagées (Deep Learning)</td><td>Facebook + Twitter</td></tr>
+</table>
+
+<h3>Préoccupations des utilisateurs</h3>
+<p>Ce qui arrive à leurs données, comment elles sont stockées, qui y a accès, quelles garanties existent.</p>
+
+<h3>Conséquences d'une fuite de données</h3>
+<div class="grid2">
+<div class="ex"><b>Pour les individus</b><br>Vol d'identité, perte financière, discrimination, atteinte à
+la réputation, accès non autorisé à des comptes, perte de confidentialité.</div>
+<div class="ex"><b>Pour les organisations</b><br>Perte de confiance des clients, atteinte à la réputation,
+violation de propriété intellectuelle, perturbation des opérations, sanctions réglementaires.</div>
+</div>
+
+<h3>Chiffres à retenir (Consumer Privacy Survey, 2019)</h3>
+<table>
+<tr><td>84%</td><td>se soucient de la confidentialité de leurs données</td></tr>
+<tr><td>80%</td><td>prêts à consacrer temps ou argent pour protéger leurs données</td></tr>
+<tr><td>48%</td><td>ont déjà changé de fournisseur de service à cause de politiques de données insatisfaisantes</td></tr>
+</table>
+</section>
+
+<!-- SECTION 9 -->
+<section id="s9">
+<h2>9. Intégrité contextuelle (Helen Nissenbaum) <span class="badge">diapos 24-31 — TRÈS IMPORTANT</span></h2>
+
+<div class="attn"><b>C'est probablement le concept le plus important de cette séance — attends-toi à une
+question dessus à l'examen.</b></div>
+
+<div class="def"><b>Idée centrale :</b> La confidentialité (vie privée) n'est <b>pas</b> définie par le
+fait qu'une information soit "publique" ou "privée" dans l'absolu. Elle est définie par <b>la manière dont
+l'information circule</b>. La vie privée est donc <b>fluide</b>, pas binaire.</div>
+
+<p><b>Flux d'informations</b> = transfert de connaissances d'une partie à une autre.</p>
+<div class="def">Un flux d'informations est <b>approprié</b> quand il respecte les <b>normes de
+confidentialité contextuelles</b> établies dans une situation donnée. Le même partage d'information peut
+être normal dans un contexte et être une violation de la vie privée dans un autre.</div>
+
+<h3>Les 5 paramètres d'une norme contextuelle (à mémoriser — figure du cours)</h3>
+<table>
+<tr><th>Paramètre</th><th>Question qu'il répond</th></tr>
+<tr><td><b>Type de données</b></td><td>Quel type d'information est partagé ?</td></tr>
+<tr><td><b>Personne concernée (subject)</b></td><td>À qui s'adressent (appartiennent) les informations ?</td></tr>
+<tr><td><b>Expéditeur (sender)</b></td><td>Qui partage/envoie les données ?</td></tr>
+<tr><td><b>Destinataire (recipient)</b></td><td>Qui reçoit les données ?</td></tr>
+<tr><td><b>Principe de transmission</b></td><td>Quelles sont les contraintes imposées au flux (ex : consentement, confidentialité, obligation légale) ?</td></tr>
+</table>
+<div class="ex"><b>Exemple pour bien comprendre :</b> Un médecin (expéditeur) qui partage votre dossier
+médical (type de données) avec un autre médecin traitant (destinataire) dans le cadre de vos soins
+(principe de transmission = nécessité médicale) → flux <b>approprié</b>.<br>
+Le même médecin qui partage ce dossier avec votre employeur sans votre consentement → flux <b>inapproprié</b>,
+même si l'information (le type de données) est identique. C'est le <b>changement de destinataire et de
+principe de transmission</b> qui rend le flux problématique, pas la donnée elle-même.</div>
+
+<h3>Comment évaluer un nouveau flux d'informations</h3>
+<p>Quand un nouveau flux ou une nouvelle norme apparaît (ex: nouvelle fonctionnalité d'une appli), il faut
+évaluer sa légitimité éthique en considérant :</p>
+<ul>
+<li>Les <b>intérêts</b> des parties concernées</li>
+<li>Les <b>valeurs éthiques et politiques</b> en jeu</li>
+<li>Les <b>fonctions, objectifs et valeurs</b> propres au contexte</li>
+</ul>
+
+<h3>Trois idées clés à retenir sur l'intégrité contextuelle</h3>
+<ol>
+<li><b>Au-delà des binaires</b> : on ne raisonne pas en "privé vs. public" ou "donnée personnelle vs. pas
+personnelle" — c'est trop simpliste.</li>
+<li><b>Les attentes comptent plus que les pratiques</b> : une violation de la vie privée dépend de <b>nos
+attentes dans un contexte donné</b>, et non simplement des pratiques suivies par le fournisseur de service
+(même si l'entreprise respecte sa propre politique, cela peut quand même violer les attentes de l'utilisateur).</li>
+<li><b>Le contexte complet compte</b> : ce qui est acceptable dans un contexte (ex : partager son poids
+avec son médecin) ne l'est pas nécessairement dans un autre (ex : partager son poids sur les réseaux
+sociaux, ou avec son employeur).</li>
+</ol>
+
+<h3>Comment vérifier l'intégrité contextuelle d'un système (méthode pratique)</h3>
+<p>Lors de l'introduction d'un changement dans un système sociotechnique, se poser ces questions :</p>
+<ul>
+<li>De nouveaux flux d'informations seront-ils introduits ?</li>
+<li>Les flux d'informations existants vont-ils changer ?</li>
+<li>Quels sont les effets de ces changements ?</li>
+<li>Ces mesures améliorent-elles l'expérience utilisateur, ou la dégradent-elles en détournant l'attention
+du sujet ?</li>
+</ul>
+
+<div class="attn"><b>Nuance importante à citer si demandée à l'examen (citation du cours) :</b>
+« En tant que modèle théorique, l'intégrité contextuelle vise à <b>prédire</b> ce que les gens ressentiront
+à l'égard de la vie privée dans différentes circonstances ; elle ne prétend <b>pas</b> que c'est ainsi que
+les gens pensent réellement à la vie privée ou prennent leurs décisions. » — Autrement dit, c'est un modèle
+prédictif/descriptif, pas un modèle du raisonnement humain réel.</div>
+</section>
+
+<!-- SECTION 10 -->
+<section id="s10">
+<h2>10. Quelques autres sujets divers sur la vie privée <span class="badge">diapos 32-40</span></h2>
+
+<h3>a) Chatbot sur une personne décédée — confidentialité post-mortem</h3>
+<p>Questions soulevées : Qu'advient-il des comptes (courriel, réseaux sociaux, images, blogs, stockage de
+documents) quand le titulaire décède ? Cela introduit le concept d'<b>héritage d'actifs numériques</b> —
+qui a le droit d'accéder, de gérer ou de supprimer ces données après la mort de la personne ?</p>
+
+<h3>b) Traçage des contacts (contact tracing — COVID-19)</h3>
+<p>Suivi des mouvements de population via données de télécommunication ou de localisation des téléphones,
+utilisé pour <b>prédire et prévenir la propagation du COVID-19</b>.</p>
+<div class="def"><b>Préoccupations relatives à la confidentialité :</b>
+<ul>
+<li><b>Volontaire ou obligatoire ?</b> (consentement)</li>
+<li><b>Destruction des informations</b> (les données sont-elles supprimées après usage ?)</li>
+<li><b>Transparence</b> (sait-on comment les données sont utilisées ?)</li>
+<li><b>Collecte de données</b> (quelle quantité, quel niveau de détail ?)</li>
+<li><b>Divulgation de l'emplacement</b> (à qui, dans quelles conditions ?)</li>
+</ul>
+</div>
+<div class="def"><b>Attaques de sécurité possibles sur les applis de traçage :</b>
+<ul>
+<li><b>Bluesnarfing</b> : accès non autorisé à des informations via Bluetooth</li>
+<li><b>Attaque par rejeu (replay attack)</b> : réutiliser un signal/message intercepté pour tromper le système</li>
+<li><b>Déni de service (DoS)</b> : rendre le service indisponible</li>
+<li><b>Énumération</b> : deviner/lister systématiquement des identifiants valides</li>
+<li><b>Attaque Carryover</b> : exploiter des identifiants ou tokens persistants entre sessions</li>
+</ul>
+</div>
+
+<h3>c) Recherche avec des données publiques (réseaux sociaux)</h3>
+<p>Les plateformes de médias sociaux offrent des données riches et accessibles publiquement, utilisées par
+des chercheurs. Cela pose des <b>défis méthodologiques et éthiques</b> :</p>
+<ul>
+<li>L'utilisation de données publiques à des fins de recherche constitue-t-elle une atteinte à la vie
+privée et à la confidentialité ?</li>
+<li>Les utilisateurs des réseaux sociaux deviennent-ils des <b>participants involontaires</b> à une
+recherche (sans consentement éclairé, sans savoir que leurs posts sont étudiés) ?</li>
+</ul>
+</section>
+
+<!-- SECTION 11 -->
+<section id="s11">
+<h2>11. Le "paradoxe" de la vie privée <span class="badge">diapos 36-37</span></h2>
+
+<div class="def"><b>Le paradoxe de la vie privée</b> : les gens accordent une grande importance déclarée à
+la vie privée (dans les sondages, ils disent s'en soucier), <b>mais</b> ils renoncent facilement à leurs
+données personnelles pour un très petit avantage matériel (ex : un rabais, une appli gratuite, un gadget
+gratuit), ou n'utilisent pas de mesures concrètes pour protéger leur vie privée.</div>
+
+<p>La bande dessinée du cours illustre cela avec ironie : on refuse de se faire implanter une puce RFID
+"parce que ça viole nos droits" — mais si la même puce inclut un téléphone, un appareil photo et un lecteur
+MP3, soudain "c'est cool" (WRONG vs RIGHT dans la BD). Cela montre comment un petit avantage pratique fait
+oublier l'enjeu de vie privée sous-jacent.</p>
+
+<h3>Trois interprétations possibles de ce paradoxe (l'engagement sur les réseaux sociaux)</h3>
+<p>L'engagement massif des gens sur les réseaux sociaux malgré les risques pourrait signifier :</p>
+<ol>
+<li>Un signe que les participants <b>ne se soucient pas vraiment</b> de leur vie privée (malgré ce qu'ils
+disent) ?</li>
+<li>Qu'ils <b>ne comprennent pas les risques</b> liés au partage d'informations ?</li>
+<li>Qu'ils <b>trouvent les contrôles de confidentialité inutilisables</b> (trop compliqués, mal conçus,
+donc ils abandonnent) ?</li>
+</ol>
+<div class="ex">Ce lien fait aussi écho à l'étude vue plus tôt sur les applis de fitness : très peu de gens
+lisent les politiques de confidentialité, malgré une préoccupation déclarée élevée (84% dans le sondage de
+2019). C'est le même paradoxe qui se répète.</div>
+</section>
+
+<!-- SECTION 12 -->
+<section id="s12">
+<h2>12. Privacy by design & IA <span class="badge">diapos 38-39</span></h2>
+
+<div class="def"><b>Privacy by design ("protection de la vie privée dès la conception")</b> : intégrer la
+problématique du respect de la vie privée <b>dès la conception</b> d'un système, plutôt que d'y penser
+après coup.</div>
+<ul>
+<li>Considérer la vie privée <b>a priori</b> (avant le déploiement), plutôt que réagir <b>a posteriori</b>
+une fois qu'un bris de vie privée est constaté.</li>
+<li>La protection et la confidentialité des données doivent être considérées <b>tout au long du cycle de
+vie</b> de la technologie (conception → développement → déploiement → maintenance → fin de vie).</li>
+</ul>
+
+<h3>Privacy by design et l'IA</h3>
+<ul>
+<li>Les systèmes d'IA doivent être conçus pour <b>ne pas nuire aux individus</b>.</li>
+<li><b>RGPD, article 25</b> : impose que des mesures techniques et organisationnelles appropriées soient
+prises <b>dès la définition</b> du système (privacy by design) et <b>par défaut</b> (privacy by default) —
+protection efficace des données, garanties intégrées dans le traitement.</li>
+<li>Les systèmes d'IA doivent protéger : <b>la dignité, l'intégrité, la liberté, la vie privée, la sûreté
+et la sécurité</b> des êtres humains dans leurs interactions sociales.</li>
+<li>Sinon, c'est un <b>danger à éviter</b> dans l'adoption de l'IA (risque de reproduire ou d'amplifier des
+atteintes à la vie privée à grande échelle).</li>
+</ul>
+</section>
+
+<!-- SECTION 13 -->
+<section id="s13">
+<h2>13. Travail à remettre — Cas d'éthique <span class="badge">diapo 42</span></h2>
+<div class="attn">
+<b>⚠️ Rappel de remise :</b>
+<ul>
+<li><b>Date limite :</b> 21 juin 2026, 23h59</li>
+<li><b>Format :</b> PDF, à téléverser sur Moodle</li>
+<li><b>Nature du travail :</b> une étude de cas qui fait une <b>évaluation éthique</b> d'une technologie ou
+d'un programme, en s'appuyant sur les normes et approches éthiques vues en classe (ex : intégrité
+contextuelle, utilitarisme vs. kantisme, privacy by design, etc.)</li>
+<li><b>Cas à choisir :</b> dans le document "INM6000Été2026 Cas d'éthique" disponible sur Moodle</li>
+<li><b>Travail individuel</b></li>
+<li><b>Longueur :</b> 4 à 6 pages (hors page de garde et bibliographie)</li>
+<li><b>Mise en forme :</b> interligne 1,5 ; police Times New Roman (ou équivalent) 12 pt ; page de
+présentation UQAM et bibliographie obligatoires</li>
+</ul>
+</div>
+<p><b>Prochain cours :</b> le sujet sera l'intelligence artificielle (IA).</p>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+<h2>🎯 Questions probables à l'examen (avec réponses cachées)</h2>
+<p>Essaie de répondre <b>avant</b> de cliquer sur "Voir la réponse" — c'est la meilleure façon de vérifier
+ta maîtrise.</p>
+
+<div class="qcard">
+<p class="q">Q1. Qu'est-ce qu'un "double de données" (data double) et pourquoi dit-on que "les données ont
+une vie sociale" ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Le "double de données" est la version virtuelle et partielle de nous-mêmes créée par nos données
+personnelles, qui vit sur des serveurs et nous relie à des systèmes sociaux plus larges. On dit que "les
+données ont une vie sociale" parce qu'une fois créées, elles circulent, sont analysées et combinées
+indépendamment de la personne réelle — le double peut être jugé ou catégorisé sans le contrôle de
+l'individu.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q2. Expliquez le cas Strava de 2018 et ce qu'il révèle sur les limites de "l'anonymisation".</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Strava a publié une carte thermique de données agrégées et anonymisées d'activités sportives. Dans des
+zones peu peuplées (ex: bases militaires), seuls quelques utilisateurs (des soldats) utilisaient l'appli,
+ce qui a permis d'identifier l'emplacement et les trajets de patrouille de bases militaires secrètes. Cela
+montre que l'agrégation et l'anonymisation ne suffisent pas toujours : dans des contextes à faible densité
+de données, il reste possible de réidentifier ou d'inférer des informations sensibles.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q3. Quel est l'objectif principal de la protection de la vie privée en géolocalisation selon
+Beresford et Stajano (2003) ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Empêcher une entité non désirée d'apprendre la localisation géographique passée, présente et future d'un
+individu.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q4. Nommez et expliquez les deux heuristiques permettant d'identifier la maison et le lieu de
+travail d'une personne à partir de traces GPS anonymisées.</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+1) Pour la maison : choisir le dernier arrêt avant minuit. 2) Pour le travail : choisir l'endroit où il y a
+le moins de déplacements pendant la journée. Ensuite, le géocodage inverse transforme ces coordonnées en
+adresse physique.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q5. Quelle est la différence entre la "couverture spatiale" (k-anonymat géographique) et une
+"mix-zone" ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+La couverture spatiale garantit qu'à chaque instant, un individu se trouve dans une zone partagée par au
+moins k-1 autres personnes (on ne peut pas le distinguer parmi moins de k personnes). Une mix-zone est une
+zone où aucune observation n'est produite pendant que la personne la traverse ; à sa sortie, un nouveau
+pseudonyme (différent de celui d'entrée) lui est attribué, ce qui empêche de relier son trajet avant/après
+la zone.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q6. Selon la théorie de l'intégrité contextuelle de Nissenbaum, la vie privée est-elle définie
+par le fait qu'une donnée soit privée ou publique ? Justifiez.</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Non. Selon Nissenbaum, la vie privée est définie par la manière dont l'information circule (les flux
+d'informations), pas par une classification binaire privée/publique. Un même type de donnée peut être
+approprié à partager dans un contexte et inapproprié dans un autre — la vie privée est fluide et dépend du
+respect des normes contextuelles.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q7. Nommez les 5 paramètres qui définissent une norme contextuelle selon la théorie de
+l'intégrité contextuelle.</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+1) Type de données, 2) Personne concernée (subject), 3) Expéditeur (sender), 4) Destinataire (recipient),
+5) Principe de transmission.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q8. Une violation de la vie privée dépend-elle davantage des attentes de l'individu ou des
+pratiques suivies par le fournisseur de service ? Expliquez selon l'intégrité contextuelle.</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Selon l'intégrité contextuelle, une violation de la vie privée dépend de nos attentes dans un contexte
+donné, plutôt que des pratiques suivies par le fournisseur. Même si une entreprise respecte sa propre
+politique de confidentialité, cela peut quand même constituer une violation si ça va à l'encontre des
+attentes contextuelles de l'utilisateur.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q9. Qu'est-ce que le "paradoxe de la vie privée" ? Donnez un exemple du cours.</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+C'est le fait d'accorder une grande importance déclarée à la vie privée, tout en renonçant facilement à ses
+données personnelles pour un petit avantage matériel, ou en n'utilisant pas de mesures pour se protéger.
+Exemple : dans l'étude sur les applis de fitness, 84% des gens disent se soucier de leur vie privée
+(sondage 2019), mais seulement 11% lisent réellement la politique de confidentialité.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q10. Qu'est-ce que le "privacy by design" et que dit l'article 25 du RGPD à ce sujet ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Le privacy by design consiste à intégrer la protection de la vie privée dès la conception d'un système
+(a priori), plutôt que d'y réagir après un incident (a posteriori), et ce tout au long du cycle de vie de
+la technologie. L'article 25 du RGPD impose que des mesures techniques et organisationnelles appropriées
+soient prises dès la définition du système et par défaut, afin de protéger efficacement les données.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q11. Citez 3 préoccupations de confidentialité liées au traçage de contacts (contact tracing)
+pendant la COVID-19.</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Par exemple (3 parmi 5) : volontaire ou obligatoire (consentement), destruction des informations,
+transparence, collecte de données, divulgation de l'emplacement.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q12. Pourquoi les données de fitness sont-elles considérées comme particulièrement sensibles ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Parce qu'elles incluent des données sensibles (date de naissance, photos) et des données biométriques ou
+liées au mouvement (rythme cardiaque, pas). Elles sont collectées et agrégées en continu, souvent combinées
+avec d'autres types de données, ce qui permet d'inférer des habitudes de vie et même l'identité de la
+personne.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q13. Qu'est-ce qu'un "quasi-identificateur" dans le contexte des données spatio-temporelles ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Ce sont des données (comme l'historique de positions GPS dans le temps) qui, sans révéler directement le
+nom d'une personne, permettent souvent de l'identifier de façon unique car peu de gens partagent exactement
+le même trajet quotidien — la combinaison des positions dans le temps agit comme un identifiant.</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q14. Quelle nuance Nissenbaum apporte-t-elle sur la nature prédictive vs. descriptive du modèle
+d'intégrité contextuelle ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+Le modèle vise à prédire ce que les gens ressentiront à l'égard de la vie privée dans différentes
+circonstances ; il ne prétend pas que c'est ainsi que les gens pensent réellement à la vie privée ou
+prennent leurs décisions en la matière (le modèle est prédictif, pas descriptif du raisonnement humain
+réel).</div></details>
+</div>
+
+<div class="qcard">
+<p class="q">Q15. Quelles sont les 4 incitations à développer la protection de la vie privée présentées
+dans le cours ?</p>
+<details><summary>Voir la réponse</summary><div class="answer">
+1) Incitation commerciale (argument marketing), 2) Incitatif financier (amendes en cas de fuite), 3) Prise
+de conscience du public (souvent après un scandale), 4) Cadre législatif (lois et directives, ex: CNIL,
+directives européennes).</div></details>
+</div>
+
+</section>
+
+<a class="toplink" href="#top">↑ Retour en haut</a>
+</div>
+
+<footer>
+Guide d'étude généré pour INM6000 — Séance 6 (9 juin 2026) — Basé sur le contenu du cours de Didem Demirag, UQAM.
+</footer>
+
+</body>
+</html>

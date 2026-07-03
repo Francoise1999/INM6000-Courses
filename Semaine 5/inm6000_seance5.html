@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Séance 5 : Éthique en pratique | Dossier d'étude</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A3D;
+    --ink-soft:#334357;
+    --parchment:#F3EEE3;
+    --parchment-deep:#E9E1D0;
+    --brass:#AD8A4E;
+    --brass-light:#D8C193;
+    --seal:#8B2E2E;
+    --seal-soft:#C6635A;
+    --line:#c9beaa;
+    --paper-shadow: 0 18px 40px -20px rgba(27,42,61,.35);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at top left, #223350 0%, #16212f 55%, #10181f 100%);
+    color:var(--ink);
+    font-family:'Newsreader', serif;
+    line-height:1.65;
+  }
+  ::selection{background:var(--brass-light);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:78vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:var(--parchment);
+    padding:60px 24px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(0deg, rgba(255,255,255,.02) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.02) 0 1px, transparent 1px 3px);
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    color:var(--brass-light);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:clamp(2.1rem, 5.2vw, 3.6rem);
+    margin:0 0 18px;
+    max-width:14ch;
+    line-height:1.08;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--brass-light);
+    font-weight:500;
+  }
+  .hero p.sub{
+    max-width:46ch;
+    font-size:1.08rem;
+    color:#cfd8e3;
+    margin:0 0 30px;
+  }
+  .seal{
+    width:104px; height:104px;
+    border-radius:50%;
+    border:2px solid var(--brass);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.62rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    position:relative;
+    margin-bottom:28px;
+  }
+  .seal::before{
+    content:"";
+    position:absolute; inset:8px;
+    border:1px dashed var(--brass);
+    border-radius:50%;
+  }
+  .hero-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    color:#9fb0c2;
+    letter-spacing:.04em;
+  }
+
+  /* ---------- FOLDER TAB NAV ---------- */
+  .tabs-wrap{
+    position:sticky; top:0; z-index:50;
+    background:linear-gradient(180deg, #16212f 0%, #16212fee 80%, transparent);
+    padding:14px 0 0;
+    backdrop-filter:blur(6px);
+  }
+  .tabs{
+    display:flex; gap:6px;
+    overflow-x:auto;
+    max-width:980px;
+    margin:0 auto;
+    padding:0 20px 12px;
+    scrollbar-width:thin;
+  }
+  .tabs a{
+    flex:0 0 auto;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:#b9c4d1;
+    text-decoration:none;
+    background:#1e2c3f;
+    border:1px solid #33455c;
+    border-bottom:none;
+    padding:9px 14px;
+    border-radius:8px 8px 0 0;
+    white-space:nowrap;
+    transition:.2s;
+  }
+  .tabs a:hover{color:var(--parchment); background:#26374d;}
+
+  /* ---------- PAPER / MAIN ---------- */
+  .paper{
+    max-width:900px;
+    margin:0 auto 60px;
+    background:var(--parchment);
+    box-shadow:var(--paper-shadow);
+    border-radius:2px;
+  }
+  .sheet{
+    padding:52px 56px;
+    border-bottom:1px dashed var(--line);
+  }
+  .sheet:last-child{border-bottom:none;}
+  @media(max-width:700px){ .sheet{padding:34px 22px;} }
+
+  .fiche-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+    color:var(--seal);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:8px;
+  }
+  .fiche-num::before{
+    content:"";
+    width:26px; height:1px;
+    background:var(--seal);
+  }
+  h2{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.85rem;
+    margin:0 0 20px;
+    color:var(--ink);
+  }
+  h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.22rem;
+    margin:28px 0 10px;
+    color:var(--ink-soft);
+  }
+  p{margin:0 0 14px; font-size:1.02rem;}
+  ul, ol{margin:0 0 16px; padding-left:22px;}
+  li{margin-bottom:8px;}
+  strong{color:var(--seal); font-weight:600;}
+  a.src{color:var(--brass); font-family:'IBM Plex Mono', monospace; font-size:.78rem; word-break:break-all;}
+
+  .callout{
+    background:var(--parchment-deep);
+    border-left:3px solid var(--brass);
+    padding:16px 20px;
+    border-radius:0 6px 6px 0;
+    margin:18px 0;
+    font-size:.98rem;
+  }
+  .callout.quote{
+    font-style:italic;
+    font-family:'Fraunces', serif;
+    font-size:1.08rem;
+    border-left-color:var(--seal-soft);
+  }
+  .callout .lbl{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-style:normal;
+    font-size:.65rem;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:6px;
+  }
+
+  .qa{
+    background:#fffdf8;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:18px 22px;
+    margin:16px 0;
+  }
+  .qa .q{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.78rem;
+    letter-spacing:.03em;
+    color:var(--seal);
+    text-transform:uppercase;
+    margin-bottom:6px;
+  }
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:18px 0;
+  }
+  @media(max-width:640px){.grid2{grid-template-columns:1fr;}}
+  .card{
+    background:#fffdf8;
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:16px 18px;
+  }
+  .card h4{
+    margin:0 0 8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.76rem;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--brass);
+  }
+
+  /* accordion for codes */
+  details.code-card{
+    background:#fffdf8;
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin:12px 0;
+    overflow:hidden;
+  }
+  details.code-card summary{
+    cursor:pointer;
+    padding:14px 18px;
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.02rem;
+    color:var(--ink);
+    list-style:none;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:10px;
+  }
+  details.code-card summary::-webkit-details-marker{display:none;}
+  details.code-card summary::after{
+    content:"＋";
+    font-family:'IBM Plex Mono', monospace;
+    color:var(--brass);
+    font-size:1.1rem;
+    transition:transform .2s;
+  }
+  details.code-card[open] summary::after{ transform:rotate(45deg); }
+  details.code-card .body{
+    padding:0 18px 18px;
+    font-size:.96rem;
+  }
+  details.code-card .body a.src{display:inline-block; margin-top:6px;}
+
+  /* scale of values illustration */
+  .scale-wrap{ text-align:center; margin:24px 0; }
+  .scale-wrap svg{ max-width:340px; width:100%; height:auto; }
+
+  /* step method */
+  .steps{ counter-reset: step; margin:20px 0; }
+  .step{
+    position:relative;
+    padding:16px 20px 16px 58px;
+    background:#fffdf8;
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:12px;
+  }
+  .step::before{
+    counter-increment: step;
+    content: counter(step);
+    position:absolute; left:16px; top:16px;
+    width:28px; height:28px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--parchment);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.85rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step h4{ margin:0 0 6px; font-family:'Fraunces', serif; font-size:1.08rem; color:var(--ink);}
+  .step ul{margin-bottom:0;}
+
+  /* case file: robot policier */
+  .case-header{
+    display:flex; align-items:center; gap:12px;
+    margin-bottom:14px;
+  }
+  .stamp{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.68rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--seal);
+    border:2px solid var(--seal);
+    border-radius:6px;
+    padding:5px 10px;
+    transform:rotate(-3deg);
+  }
+
+  /* deadline card */
+  .deadline{
+    background:var(--ink);
+    color:var(--parchment);
+    border-radius:8px;
+    padding:20px 22px;
+    margin:18px 0;
+    display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between;
+  }
+  .deadline .date{
+    font-family:'Fraunces', serif;
+    font-size:1.3rem;
+    color:var(--brass-light);
+  }
+  .deadline .txt{ font-family:'IBM Plex Mono', monospace; font-size:.76rem; letter-spacing:.04em; color:#cfd8e3;}
+
+  table.crit{ width:100%; border-collapse:collapse; margin:16px 0; font-size:.94rem;}
+  table.crit th, table.crit td{ text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); }
+  table.crit th{ font-family:'IBM Plex Mono', monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:var(--brass);}
+  table.crit td.pct{ font-family:'IBM Plex Mono', monospace; text-align:right; color:var(--seal); font-weight:600;}
+
+  /* glossary */
+  .gloss{
+    display:grid;
+    grid-template-columns:auto 1fr;
+    gap:6px 16px;
+    margin:16px 0;
+  }
+  .gloss dt{
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:600;
+    font-size:.9rem;
+    color:var(--seal);
+    white-space:nowrap;
+  }
+  .gloss dd{ margin:0 0 10px; font-size:.96rem;}
+
+  /* quiz */
+  .quiz-item{
+    background:#fffdf8;
+    border:1px solid var(--line);
+    border-left:4px solid var(--seal);
+    border-radius:6px;
+    padding:16px 20px;
+    margin-bottom:14px;
+  }
+  .quiz-item .qnum{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.7rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:6px;
+    display:block;
+  }
+  .quiz-item .question{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    font-size:1.06rem;
+    margin-bottom:10px;
+  }
+  .quiz-item details summary{
+    cursor:pointer;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.76rem;
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+    padding:6px 0;
+  }
+  .quiz-item details[open] summary{ color:var(--seal); }
+  .quiz-item .answer{
+    margin-top:8px;
+    padding:12px 14px;
+    background:var(--parchment-deep);
+    border-radius:6px;
+    font-size:.95rem;
+  }
+
+  footer{
+    text-align:center;
+    color:#8393a5;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:.72rem;
+    letter-spacing:.06em;
+    padding:40px 20px 60px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-eyebrow">Dossier d'étude — reconstitué pour révision</div>
+  <div class="seal">Éthique<br>Info.</div>
+  <h1>INM6000 — Séance 5<br><em>Éthique en pratique</em></h1>
+  <p class="sub">Explication ligne par ligne, terme par terme, de tout le contenu de la présentation de Didem Demirag (UQAM, Été 2026), avec réponses aux questions posées dans les diapositives et un quiz de révision à la fin.</p>
+  <div class="hero-meta">UQAM · INM6000 / INF6000 · Cours du 2 juin 2026</div>
+</section>
+
+<div class="tabs-wrap">
+  <nav class="tabs">
+    <a href="#s1">01 · Intro</a>
+    <a href="#s2">02 · Crypto</a>
+    <a href="#s3">03 · Données</a>
+    <a href="#s4">04 · Chatbots</a>
+    <a href="#s5">05 · Libre</a>
+    <a href="#s6">06 · Déontologie</a>
+    <a href="#s7">07 · Codes pro</a>
+    <a href="#s8">08 · ACM</a>
+    <a href="#s9">09 · Méthode</a>
+    <a href="#s10">10 · Robot policier</a>
+    <a href="#s11">11 · Travail à remettre</a>
+    <a href="#s12">12 · Quiz</a>
+  </nav>
+</div>
+
+<main class="paper">
+
+  <!-- ===================== 1. INTRODUCTION ===================== -->
+  <section class="sheet" id="s1">
+    <div class="fiche-num">Fiche 01 — Diapositive 2</div>
+    <h2>Introduction : qu'est-ce que l'éthique ?</h2>
+
+    <p>La diapositive donne une définition précise, décortiquons-la mot par mot :</p>
+
+    <div class="callout quote">
+      <span class="lbl">Définition du cours</span>
+      « L'éthique est une branche de la philosophie s'intéressant à systématiser, défendre et recommander des jugements de valeurs sur ce qui est "bien" et "mal". »
+    </div>
+
+    <p>Trois verbes-clés à retenir, car ils décrivent trois activités différentes que fait l'éthique :</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Systématiser</h4>
+        L'éthique n'est pas juste une opinion au cas par cas : elle essaie de construire des <strong>théories cohérentes</strong> (des systèmes de règles ou de principes) qui permettent de juger n'importe quelle situation de façon logique, et non arbitraire.
+      </div>
+      <div class="card">
+        <h4>Défendre</h4>
+        Une position éthique doit pouvoir être <strong>argumentée rationnellement</strong>. Ce n'est pas juste "je pense que" — il faut justifier pourquoi une action est bonne ou mauvaise avec des raisons.
+      </div>
+      <div class="card">
+        <h4>Recommander</h4>
+        L'éthique a une visée <strong>pratique</strong> : elle ne fait pas que décrire ce que les gens pensent être bien, elle propose ce qu'on <em>devrait</em> faire.
+      </div>
+      <div class="card">
+        <h4>Jugements de valeur</h4>
+        Des affirmations sur ce qui est désirable ou non (contrairement à un fait, qui décrit "ce qui est", un jugement de valeur dit "ce qui devrait être" ou "ce qui est préférable").
+      </div>
+    </div>
+
+    <h3>Pourquoi préciser "précède et complémente la morale et le droit" ?</h3>
+    <p>Le cours établit un ordre logique important entre trois notions qu'on confond souvent :</p>
+    <dl class="gloss">
+      <dt>Éthique</dt>
+      <dd>La réflexion philosophique, théorique, sur ce qui est bien ou mal. C'est le niveau le plus abstrait et le plus général — elle cherche les <em>principes</em>.</dd>
+      <dt>Morale</dt>
+      <dd>L'ensemble des règles de conduite concrètes, souvent culturelles ou personnelles, qu'une société ou un individu adopte réellement dans la vie de tous les jours. La morale est en quelque sorte l'application vécue de réflexions éthiques (ou de traditions).</dd>
+      <dt>Droit</dt>
+      <dd>L'ensemble des lois formelles, écrites et sanctionnées par l'État. Le droit s'inspire souvent de principes éthiques et moraux, mais il ajoute la contrainte légale (amendes, prison, etc.). Toute chose légale n'est pas nécessairement éthique, et vice versa — c'est un point d'examen classique.</dd>
+    </dl>
+    <p>« Précède » = l'éthique vient <strong>avant</strong> chronologiquement et logiquement : on réfléchit d'abord aux principes avant de les traduire en règles morales concrètes ou en lois. « Complémente » = elle continue d'agir <strong>en parallèle</strong> du droit, notamment pour juger des situations que la loi ne couvre pas encore (ex : l'intelligence artificielle évolue plus vite que la législation).</p>
+
+    <div class="qa">
+      <div class="q">Question posée dans le cours</div>
+      <strong>« Quelles sont les spécificités de l'éthique informatique ? »</strong>
+      <p style="margin-top:10px;">C'est la question fondamentale de toute la séance (et du cours en général). Réponse développée : l'informatique pose des dilemmes éthiques <em>nouveaux</em> parce que ses technologies (algorithmes, IA, cryptographie, données massives) créent des situations qui n'existaient pas avant — traitement massif et invisible de données personnelles, décisions automatisées à grande échelle, possibilité de copier/distribuer l'information à coût nul, code qui a un pouvoir réel sur les gens (ex. un algorithme qui décide qui obtient un prêt). L'éthique informatique doit donc parfois <strong>inventer de nouveaux repères</strong>, plutôt que seulement appliquer des principes anciens (contrairement à la médecine).</p>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">À retenir</span>
+      Le cours souligne que <strong>la médecine et la biologie ont une tradition éthique beaucoup plus mature</strong> (bioéthique, comités d'éthique hospitaliers, serment d'Hippocrate depuis l'Antiquité) alors que l'informatique, discipline jeune (née au 20e siècle), doit encore construire ses propres repères éthiques. C'est pour ça qu'on voit apparaître, tranquillement, des codes de déontologie informatique (voir plus bas).
+    </div>
+  </section>
+
+  <!-- ===================== 2. CRYPTOGRAPHIE ===================== -->
+  <section class="sheet" id="s2">
+    <div class="fiche-num">Fiche 02 — Diapositive 3</div>
+    <h2>Le caractère moral du travail cryptographique</h2>
+
+    <p>Cette diapositive s'appuie sur un article académique (référence : <a class="src" href="https://eprint.iacr.org/2015/1162.pdf" target="_blank">eprint.iacr.org/2015/1162.pdf</a>) qui soutient que la cryptographie n'est pas un outil neutre.</p>
+
+    <div class="callout quote">
+      <span class="lbl">Citation 1</span>
+      « La cryptographie réorganise le pouvoir : elle configure qui peut faire quoi, à partir de quoi. »
+    </div>
+    <p><strong>Explication en profondeur :</strong> la cryptographie (chiffrement, signatures numériques, protocoles comme TLS) détermine concrètement <em>qui a accès à quoi</em>. Par exemple : un chiffrement fort protège la vie privée d'un journaliste sous régime autoritaire (pouvoir donné au citoyen), mais le même outil peut aussi empêcher la police d'enquêter sur un crime (pouvoir retiré à l'État). Choisir de créer, déployer, ou casser un système cryptographique, ce n'est donc jamais un acte "neutre" — c'est une décision qui redistribue du pouvoir entre différents acteurs (gouvernements, entreprises, individus, criminels). C'est pour cela que le travail des cryptographes est présenté comme ayant un <strong>caractère moral</strong>, et pas seulement technique.</p>
+
+    <div class="callout quote">
+      <span class="lbl">Citation 2</span>
+      « Les devoirs moraux s'étendent au-delà de l'impératif de ne pas nuire personnellement : vous devez également essayer de promouvoir le bien social. »
+    </div>
+    <p><strong>Explication :</strong> cette phrase distingue deux niveaux d'obligation morale :</p>
+    <ul>
+      <li><strong>Devoir négatif ("ne pas nuire")</strong> — le minimum : ne pas causer de tort directement avec son travail (ex. ne pas construire un logiciel espion).</li>
+      <li><strong>Devoir positif ("promouvoir le bien social")</strong> — une exigence plus forte, proche de l'éthique conséquentialiste/utilitariste : un professionnel de l'informatique (et en particulier un cryptographe, vu son pouvoir sur l'accès à l'information) a une responsabilité active de contribuer à des usages bénéfiques pour la société, pas seulement d'éviter le mal.</li>
+    </ul>
+    <div class="qa">
+      <div class="q">Pourquoi cette diapo est-elle importante pour l'examen</div>
+      Elle illustre le principe que <strong>la technologie n'est jamais neutre</strong> — un des grands thèmes du cours d'informatique et société. Une technique (ici la cryptographie) façonne des rapports de pouvoir réels entre les personnes, les entreprises et les États.
+    </div>
+  </section>
+
+  <!-- ===================== 3. DONNÉES MASSIVES ===================== -->
+  <section class="sheet" id="s3">
+    <div class="fiche-num">Fiche 03 — Diapositive 4</div>
+    <h2>Données massives et algorithmes prédictifs</h2>
+    <p>Le cours prend l'exemple précis des <strong>données génétiques</strong> pour illustrer les enjeux du "big data" (données massives) combiné aux algorithmes prédictifs (des modèles qui utilisent des données passées pour prédire un résultat futur — ex. risque de maladie, comportement).</p>
+
+    <p>Trois questions structurent la réflexion — décortiquons chacune :</p>
+
+    <div class="steps">
+      <div class="step">
+        <h4>« Quelle utilisation des données génétiques ? »</h4>
+        Cette question porte sur le <strong>type d'usage</strong> qu'on fait des données : diagnostic médical personnalisé ? recherche scientifique ? assurance (fixer une prime selon le risque génétique) ? recrutement d'employés ? Chaque usage a des implications éthiques très différentes — un usage médical consenti n'a pas la même légitimité qu'un usage par un assureur pour exclure une personne.
+      </div>
+      <div class="step">
+        <h4>« Qui a le droit d'accéder aux données génétiques ? »</h4>
+        Question de <strong>gouvernance de l'accès</strong> : le patient lui-même, son médecin, un chercheur, une compagnie d'assurance, un employeur, la police (enquête criminelle), une entreprise privée comme 23andMe ? Le consentement et le contrôle sur ses propres données génétiques (qui sont partagées avec les proches biologiques — donc jamais purement "individuelles") sont au cœur du débat.
+      </div>
+      <div class="step">
+        <h4>« Dans quel but peuvent-elles être utilisées de manière éthique ? »</h4>
+        Cette dernière question déplace le débat du "qui" vers le "pourquoi" : même un acteur légitime (ex. un hôpital) doit justifier une <strong>finalité éthiquement acceptable</strong>. Le principe classique en éthique des données est celui de la <em>finalité</em> : une donnée collectée pour un but (soigner) ne devrait pas être réutilisée pour un autre but sans nouveau consentement (ex. vendre à un assureur).
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">Lien avec le reste du cours (INM6000)</span>
+      Cette diapo est un pont direct vers le thème de la <strong>vie privée</strong> (annoncé pour la semaine suivante, "La vie privée 2") : les données génétiques sont l'exemple ultime de donnée sensible, parce qu'elles sont immuables (on ne peut pas les changer comme un mot de passe), qu'elles révèlent des informations sur des tiers (famille), et qu'elles peuvent être utilisées par des algorithmes prédictifs pour discriminer (ex. refuser une assurance à cause d'un risque génétique futur, même non réalisé).
+    </div>
+  </section>
+
+  <!-- ===================== 4. CHATBOTS ===================== -->
+  <section class="sheet" id="s4">
+    <div class="fiche-num">Fiche 04 — Diapositive 5</div>
+    <h2>Chatbots</h2>
+    <p>Le cours identifie trois grands enjeux éthiques liés aux chatbots (agents conversationnels basés sur l'IA, ex. ChatGPT, Claude, assistants vocaux) :</p>
+
+    <div class="grid2">
+      <div class="card">
+        <h4>Fiabilité des résultats</h4>
+        Les chatbots peuvent produire des informations fausses avec une grande confiance apparente (le phénomène des « hallucinations »). Problème éthique : l'utilisateur peut prendre une décision importante (santé, droit, finance) sur la base d'une information erronée présentée comme fiable.
+      </div>
+      <div class="card">
+        <h4>Les biais</h4>
+        Un chatbot est entraîné sur des données produites par des humains, qui contiennent déjà des préjugés sociaux (de genre, de race, culturels). L'IA peut donc reproduire ou amplifier ces biais à grande échelle, de façon moins visible qu'un biais humain individuel.
+      </div>
+      <div class="card">
+        <h4>Remplacer l'interaction et l'expertise humaines</h4>
+        Risque que les chatbots se substituent à des relations humaines essentielles (thérapeute, enseignant, médecin, ami) ou à une expertise professionnelle réelle, sans avoir la même responsabilité, le même jugement contextuel, ni la même capacité d'empathie authentique.
+      </div>
+    </div>
+
+    <h3>Cas à discuter : les avatars de personnes décédées</h3>
+    <p>Le cours pose un cas concret pour appliquer ces trois enjeux : <strong>utiliser des chatbots d'IA pour créer des avatars de personnes décédées</strong> (parfois appelé "deadbot" ou "griefbot" — un chatbot entraîné sur les messages, écrits ou voix d'une personne décédée pour "continuer à lui parler").</p>
+    <p>Pour bien répondre à ce genre de cas à l'examen ou au travail, applique la méthode d'analyse (voir Fiche 09) :</p>
+    <ul>
+      <li><strong>Fiabilité :</strong> l'avatar ne "sait" pas vraiment ce que la personne aurait dit ou pensé — il génère un texte statistiquement plausible, ce qui peut induire en erreur sur la vraie personnalité du défunt.</li>
+      <li><strong>Biais / manipulation :</strong> qui contrôle l'entraînement de l'avatar (famille ? entreprise commerciale ?) peut orienter son discours, potentiellement pour du profit (abonnement) ou une image biaisée du défunt.</li>
+      <li><strong>Remplacement humain :</strong> risque de nuire au processus de deuil naturel — au lieu d'accepter la perte, l'endeuillé pourrait développer une dépendance émotionnelle malsaine envers une simulation.</li>
+      <li><strong>Valeurs en conflit :</strong> réconfort psychologique immédiat des proches <em>vs.</em> respect de la dignité et de l'autonomie de la personne décédée (a-t-elle consenti de son vivant ?) <em>vs.</em> intérêts commerciaux de l'entreprise qui offre le service.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== 5. LOGICIELS LIBRES ===================== -->
+  <section class="sheet" id="s5">
+    <div class="fiche-num">Fiche 05 — Diapositive 6</div>
+    <h2>Logiciels libres</h2>
+    <div class="callout quote">
+      <span class="lbl">Définition — Free Software Foundation</span>
+      « Un logiciel libre respecte les libertés essentielles des utilisateurs : la liberté de l'exécuter, de l'étudier et de le modifier, ainsi que de redistribuer des copies avec ou sans modifications. »
+      <div style="margin-top:8px;"><a class="src" href="http://www.gnu.org/philosophy/free-sw.html" target="_blank">gnu.org/philosophy/free-sw.html</a></div>
+    </div>
+
+    <p>Cette définition (de Richard Stallman / GNU) est très citée en cours d'informatique et société. Elle correspond en fait aux <strong>« quatre libertés »</strong> classiques du logiciel libre — même si la diapo n'en cite que trois formulations, il est utile de connaître les quatre officielles pour l'examen :</p>
+
+    <div class="grid2">
+      <div class="card"><h4>Liberté 0 — Exécuter</h4>Utiliser le logiciel pour n'importe quel usage, sans restriction imposée par l'auteur.</div>
+      <div class="card"><h4>Liberté 1 — Étudier</h4>Accéder au code source pour comprendre comment le programme fonctionne (implique l'accès au code source).</div>
+      <div class="card"><h4>Liberté 2 — Redistribuer</h4>Partager des copies du logiciel avec d'autres personnes, gratuitement ou non.</div>
+      <div class="card"><h4>Liberté 3 — Modifier et redistribuer les modifications</h4>Adapter le programme à ses besoins puis publier ses propres versions modifiées.</div>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">Nuance importante pour l'examen</span>
+      « Logiciel libre » (free software, au sens de <em>liberté</em>, pas nécessairement <em>gratuit</em>) est différent de « logiciel gratuit » (freeware, gratuit mais souvent fermé/propriétaire) et différent aussi de « open source » (mouvement voisin mais historiquement plus orienté sur les avantages pratiques/techniques du code ouvert que sur la philosophie des libertés). Le logiciel libre pose une question éthique centrale : <strong>qui contrôle la technologie que nous utilisons tous les jours ?</strong> — un lien direct avec la question du pouvoir vue dans la fiche sur la cryptographie.
+    </div>
+  </section>
+
+  <!-- ===================== 6. DÉONTOLOGIE VS ÉTHIQUE ===================== -->
+  <section class="sheet" id="s6">
+    <div class="fiche-num">Fiche 06 — Diapositives 7-8</div>
+    <h2>Analyser un cas d'éthique en pratique : la déontologie</h2>
+    <p>Le cours bascule ici de la théorie vers la pratique, en introduisant l'outil central pour analyser des cas concrets : <strong>le code de déontologie</strong>.</p>
+
+    <div class="callout quote">
+      <span class="lbl">Définition</span>
+      « [La déontologie est un] ensemble de droits et de devoirs qui régissent une profession, la conduite de ceux qui l'exercent, ainsi que les rapports entre ceux-ci et leurs clients ou le public. »
+    </div>
+
+    <h3>Différence clé : éthique vs déontologie</h3>
+    <table class="crit">
+      <tr><th>Éthique</th><th>Déontologie</th></tr>
+      <tr>
+        <td>Réflexion <strong>générale et théorique</strong> sur le bien et le mal, applicable à tous les humains.</td>
+        <td>Ensemble de règles <strong>concrètes et spécifiques</strong> à une profession donnée.</td>
+      </tr>
+      <tr>
+        <td>Pas nécessairement écrite ni contraignante légalement.</td>
+        <td>Souvent écrite, formalisée, et peut avoir une valeur légale ou disciplinaire (sanctions par un ordre professionnel).</td>
+      </tr>
+    </table>
+    <p>Le cours le résume ainsi : « le code de déontologie est plus détaillé et plus orienté vers la pratique qu'un code éthique. » — c'est-à-dire que la déontologie <em>opérationnalise</em> l'éthique pour un contexte professionnel précis.</p>
+
+    <h3>Exemples de professions avec un code de déontologie</h3>
+    <p>Policiers, avocats, psychologues, médecins, experts-comptables — le point commun : ce sont des professions à fort impact sur le public, souvent encadrées par un <strong>ordre professionnel</strong> qui a le pouvoir de sanctionner (amende, suspension, radiation).</p>
+
+    <div class="callout">
+      <span class="lbl">Point important — informatique au Québec</span>
+      Il existe depuis <strong>1994</strong> un code de déontologie des informaticiens et informaticiennes, celui de l'<strong>Association professionnelle des informaticiens et informaticiennes du Québec (APIIQ)</strong>. Contrairement à des professions comme le génie ou le droit, l'informatique <strong>n'est pas un « ordre professionnel » obligatoire au Québec</strong> (pas d'obligation légale d'être membre pour exercer), ce qui rend ce code moins contraignant qu'un vrai ordre. Ce code couvre trois catégories de devoirs : <strong>envers le public</strong>, <strong>envers le client</strong>, et <strong>envers les collègues de travail</strong>.
+    </div>
+  </section>
+
+  <!-- ===================== 7. CODES PROFESSIONNELS ===================== -->
+  <section class="sheet" id="s7">
+    <div class="fiche-num">Fiche 07 — Diapositives 9-12</div>
+    <h2>Panorama des codes de déontologie professionnels</h2>
+    <p>Le cours présente une série d'exemples réels de codes de déontologie au Québec, pour montrer à quoi ressemble concrètement ce type de document, et par comparaison, situer où en est l'informatique.</p>
+
+    <details class="code-card">
+      <summary>Code de déontologie des technologues professionnels (C-26, r. 258)</summary>
+      <div class="body">
+        <p>Un règlement légal québécois (LégisQuébec), organisé en chapitres très structurés : définitions, devoirs envers le public, devoirs envers le client et la profession (compétence/intégrité, indépendance, disponibilité, responsabilité, rémunération, secret professionnel, accès aux dossiers), relations avec l'ordre, actes dérogatoires, publicité. C'est un exemple de code <strong>juridiquement contraignant</strong> car adossé à un ordre professionnel reconnu par l'État (contrairement au code des informaticiens de l'APIIQ, qui n'a pas ce statut légal).</p>
+        <a class="src" href="https://www.legisquebec.gouv.qc.ca/fr/tdm/rc/C-26,%20r.%20258%20" target="_blank">legisquebec.gouv.qc.ca — C-26, r. 258</a>
+      </div>
+    </details>
+
+    <details class="code-card">
+      <summary>Déontologie — Ordre des ingénieurs du Québec (OIQ)</summary>
+      <div class="body">
+        <p>La page de l'OIQ définit la déontologie comme « tous les devoirs et toutes les obligations qui régissent la conduite des membres d'une profession », avec un objectif double : <strong>protéger le public</strong> (objectif premier) et <strong>préserver l'honneur de la profession</strong> (objectif secondaire). L'OIQ a créé en 2010 une <em>ligne éthique</em> (1-877-ETHIQUE) — un service téléphonique d'aide et d'information pour les ingénieurs face à des dilemmes éthiques concrets, ce qui montre que la déontologie n'est pas juste un texte statique, mais un accompagnement continu.</p>
+        <a class="src" href="https://www.oiq.qc.ca/membres/obligations-des-membres/deontologie/" target="_blank">oiq.qc.ca/membres/obligations-des-membres/deontologie</a>
+      </div>
+    </details>
+
+    <details class="code-card">
+      <summary>Code de déontologie des ingénieurs (I-9, r. 6)</summary>
+      <div class="body">
+        <p>Structure très similaire à celui des technologues, mais avec un chapitre supplémentaire notable : <strong>sceau et signature</strong> (l'ingénieur engage sa responsabilité légale personnelle en apposant son sceau sur un plan). C'est un exemple classique de responsabilité professionnelle formalisée qu'on retrouve difficilement en informatique aujourd'hui (aucun "sceau" obligatoire pour un développeur qui livre du code, même si son code peut avoir un impact tout aussi grand, ex. sur des infrastructures critiques).</p>
+        <a class="src" href="https://www.legisquebec.gouv.qc.ca/fr/tdm/rc/I-9,%20r.%206%20" target="_blank">legisquebec.gouv.qc.ca — I-9, r. 6</a>
+      </div>
+    </details>
+
+    <details class="code-card">
+      <summary>Code d'éthique de l'AQIII (informaticiens indépendants)</summary>
+      <div class="body">
+        <p>L'Association québécoise des informaticiennes et informaticiens indépendants propose « un ensemble de règles guidant les comportements et les actions des membres », en complément du code de l'exécutif de l'association, avec un objectif explicite de <strong>transparence</strong> dans les situations de conflit d'intérêts. Contrairement à l'OIQ, l'AQIII est une association <strong>volontaire</strong>, pas un ordre professionnel avec pouvoir disciplinaire légal — d'où l'importance de bien distinguer, à l'examen, un <em>ordre professionnel</em> (pouvoir légal de sanction) d'une <em>association professionnelle</em> (adhésion volontaire, pas de pouvoir légal).</p>
+        <a class="src" href="https://aqiii.org/code-dethique-de-lassociation/" target="_blank">aqiii.org/code-dethique-de-lassociation</a>
+      </div>
+    </details>
+
+    <div class="callout">
+      <span class="lbl">Synthèse à retenir</span>
+      Cette galerie de codes sert à démontrer une chose : dans les professions "matures" comme le génie, la déontologie est <strong>légalement contraignante</strong> via un ordre reconnu par l'État. En informatique, elle reste actuellement <strong>volontaire et morale</strong> (APIIQ, AQIII, ACM) — un enjeu de société ouvert : est-ce qu'il devrait y avoir un vrai Ordre des informaticiens au Québec, avec pouvoir disciplinaire ?
+    </div>
+  </section>
+
+  <!-- ===================== 8. ACM ===================== -->
+  <section class="sheet" id="s8">
+    <div class="fiche-num">Fiche 08 — Diapositive 13</div>
+    <h2>Le code de déontologie de l'ACM</h2>
+    <p><strong>ACM = Association for Computing Machinery</strong>, la plus grande association mondiale de professionnels et chercheurs en informatique. C'est probablement la référence la plus citée en éthique informatique dans le monde académique.</p>
+
+    <p>Le cours distingue deux documents complémentaires produits par l'ACM :</p>
+    <div class="grid2">
+      <div class="card">
+        <h4>Code of Ethics and Professional Conduct</h4>
+        Le code <strong>général</strong>, qui s'applique à tous les membres de l'ACM peu importe leur rôle exact (chercheur, développeur, gestionnaire, étudiant).
+      </div>
+      <div class="card">
+        <h4>Software Engineering Code</h4>
+        Un code <strong>plus spécifique</strong>, ciblé sur la pratique du génie logiciel en particulier (développement, conception, maintenance de logiciels). Disponible en français.
+      </div>
+    </div>
+
+    <h3>Les 8 sections du code ACM</h3>
+    <p>Le cours identifie 8 sections. Elles couvrent l'ensemble des relations qu'un professionnel de l'informatique entretient :</p>
+    <ol>
+      <li><strong>Public</strong> — devoirs envers la société en général (sécurité, bien commun).</li>
+      <li><strong>Clients et employeurs</strong> — loyauté, respect des mandats, conflits d'intérêts.</li>
+      <li><strong>Produits</strong> — qualité, fiabilité, tests adéquats du logiciel livré.</li>
+      <li><strong>Jugement</strong> — intégrité du jugement professionnel indépendant.</li>
+      <li><strong>Gestion</strong> — devoirs des gestionnaires envers leurs équipes.</li>
+      <li><strong>Profession</strong> — faire avancer l'intégrité et la réputation de la profession.</li>
+      <li><strong>Collègues</strong> — respect et collaboration équitable entre pairs.</li>
+      <li><strong>Soi-même</strong> — développement continu de ses propres compétences.</li>
+    </ol>
+
+    <div class="callout">
+      <span class="lbl">À retenir</span>
+      Le but de ce code, dans les mots du cours, est de <strong>« formaliser la morale que les membres doivent adopter dans l'exercice de leurs fonctions. »</strong> C'est exactement l'idée de "traduire" une éthique générale (systématiser/défendre/recommander — voir fiche 1) en règles applicables concrètement au quotidien d'un professionnel de l'informatique. C'est souvent LE code que tu devras utiliser/citer dans ton travail « cas d'éthique » (voir fiche 11), car il est le plus complet et le plus reconnu internationalement pour le domaine.
+    </div>
+  </section>
+
+  <!-- ===================== 9. MÉTHODE D'ANALYSE ===================== -->
+  <section class="sheet" id="s9">
+    <div class="fiche-num">Fiche 09 — Diapositives 14-15 (méthode)</div>
+    <h2>Méthode pour analyser un cas d'éthique en pratique</h2>
+    <p>C'est <strong>la partie la plus importante de la séance pour le travail noté</strong> : une méthode en 4 étapes, tirée d'un article de la revue <em>PLAN</em> de mars 2012 (revue de l'Ordre des ingénieurs du Québec), à appliquer systématiquement à n'importe quel cas d'éthique informatique.</p>
+
+    <div class="steps">
+      <div class="step">
+        <h4>Étape 1 — Analyse de la situation</h4>
+        <p>Objectif : comprendre les faits avant de juger. Questions à te poser :</p>
+        <ul>
+          <li><strong>Quelle est la cause du problème ?</strong> — identifier l'origine concrète : une décision technique, un manque de transparence, une pression commerciale, etc.</li>
+          <li><strong>Quel est le dilemme éthique ?</strong> — formuler précisément le choix impossible ou difficile auquel fait face la personne/l'organisation (souvent deux options, chacune ayant un coût moral).</li>
+          <li><strong>Quelles sont les conséquences et répercussions sur les personnes concernées ?</strong> — lister les parties prenantes (utilisateurs, employés, société, entreprise) et l'impact réel sur chacune.</li>
+          <li><strong>Quelles normes et règles sont pertinentes ?</strong> — lois, codes de déontologie (ACM, APIIQ…), règles professionnelles, normes morales générales.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h4>Étape 2 — Préciser les valeurs conflictuelles</h4>
+        <ul>
+          <li><strong>Quelles sont les valeurs en cause ?</strong> — ex. vie privée, sécurité, profit, transparence, innovation, autonomie, équité.</li>
+          <li><strong>Quel est le principal conflit de valeurs ?</strong> — identifier LA tension centrale (souvent une seule paire de valeurs qui s'opposent directement, ex. "vie privée des utilisateurs" vs "sécurité publique").</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h4>Étape 3 — Prise de décision raisonnable</h4>
+        <ul>
+          <li><strong>Quelle valeur faut-il prioriser dans cette situation ?</strong> — trancher, en justifiant pourquoi cette valeur pèse plus lourd ici (pas dans l'absolu, mais dans ce contexte précis).</li>
+          <li><strong>Quel moyen d'action choisir pour équilibrer les valeurs en conflit ?</strong> — chercher, si possible, une solution qui minimise le sacrifice de la valeur non-prioritaire plutôt que de l'ignorer complètement.</li>
+        </ul>
+      </div>
+      <div class="step">
+        <h4>Étape 4 — Établir un dialogue avec les personnes concernées</h4>
+        <ul>
+          <li><strong>Quels sont les principaux arguments qui justifient la décision auprès des autres ?</strong> — être capable d'expliquer et de défendre son choix devant les parties prenantes affectées, pas juste devant soi-même.</li>
+          <li><strong>Est-ce que la décision peut faire consensus ?</strong> — tester la solidité de la décision : serait-elle acceptable, ou au moins compréhensible, pour la majorité des personnes concernées, même celles défavorisées par le choix ?</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout">
+      <span class="lbl">Conseil pratique pour le devoir « cas d'éthique »</span>
+      Utilise <strong>ces 4 étapes comme plan de ton travail</strong> (4 à 6 pages) : une section pour l'analyse de la situation, une pour les valeurs en conflit, une pour la décision recommandée, une pour l'argumentaire/consensus. C'est probablement exactement la structure attendue par la professeure, puisque le critère "Qualité de l'analyse et de la synthèse" vaut 25% de la note (voir fiche 11).
+    </div>
+  </section>
+
+  <!-- ===================== 10. ROBOT POLICIER ===================== -->
+  <section class="sheet" id="s10">
+    <div class="fiche-num">Fiche 10 — Diapositive 16</div>
+    <div class="case-header">
+      <span class="stamp">Étude de cas</span>
+    </div>
+    <h2>Exemple appliqué : le robot policier</h2>
+    <p>Ce cas est un exemple classique inspiré du <strong>problème du tramway</strong> (trolley problem), transposé à la robotique/IA — un grand classique en éthique de l'IA.</p>
+
+    <div class="callout">
+      <span class="lbl">Énoncé</span>
+      Trente étudiants attendent le bus, placés entre un <strong>robot policier</strong> et la <strong>victime d'une agression</strong> aux prises avec son agresseur.
+      <ul style="margin-top:10px;">
+        <li>Si le robot <strong>intervient</strong> pour arrêter l'agression, il blessera forcément un étudiant (aucune trajectoire ne permet de les éviter tous).</li>
+        <li>Si le robot <strong>n'intervient pas</strong>, l'agression continue et l'agresseur s'enfuit.</li>
+      </ul>
+      <strong>Question posée : quelle instruction éthique doit être donnée au robot ?</strong>
+    </div>
+
+    <p>Appliquons la méthode d'analyse en 4 étapes (fiche 9) à ce cas, à titre d'exemple de démarche :</p>
+
+    <h3>1. Analyse de la situation</h3>
+    <p>Cause du problème : un robot autonome doit agir en temps réel dans une situation où <strong>toute action a un coût humain certain</strong>. Dilemme : agir et blesser un innocent de façon certaine, ou ne pas agir et laisser un préjudice continuer (et un crime impuni). Conséquences : un étudiant blessé physiquement (si intervention) vs. la victime continue de subir l'agression et l'agresseur reste libre (si non-intervention). Normes pertinentes : principes de proportionnalité et de moindre mal utilisés en droit pénal et en éthique militaire/policière ; codes de conduite pour l'usage de la force par la police.</p>
+
+    <h3>2. Valeurs en conflit</h3>
+    <p>Le conflit central est entre : <strong>protection immédiate d'une victime / application de la justice</strong> d'un côté, et <strong>principe de non-malfaisance envers des tiers innocents</strong> (les étudiants) de l'autre. On peut aussi ajouter une valeur transversale : <strong>prévisibilité et responsabilité</strong> — qui est responsable moralement et légalement si le robot blesse quelqu'un (le fabricant ? le programmeur ? l'opérateur ?).</p>
+
+    <h3>3. Décision raisonnable</h3>
+    <p>Il n'y a pas de "bonne" réponse unique — c'est un dilemme volontairement construit sans solution parfaite (comme le trolley problem). Les approches classiques divergent : une approche <strong>utilitariste</strong> chercherait à minimiser le tort total (comparer gravité de l'agression vs gravité de la blessure causée par le robot). Une approche <strong>déontologique</strong> (kantienne) pourrait juger inacceptable qu'un système délibérément programmé blesse un innocent qui n'a rien à voir avec la situation, même pour un "plus grand bien" — l'action délibérée de nuire à un tiers est jugée différemment d'une conséquence non voulue.</p>
+
+    <h3>4. Dialogue et consensus</h3>
+    <p>Ce cas montre bien pourquoi ce type de décision <strong>ne devrait probablement pas être laissée à un robot seul</strong> sans supervision humaine, justement parce qu'un consensus est difficile à obtenir sur la bonne priorité. Cela illustre un principe souvent défendu en éthique de l'IA : le maintien d'un <strong>« humain dans la boucle »</strong> (human-in-the-loop) pour les décisions à fort impact moral et irréversible.</p>
+
+    <div class="callout">
+      <span class="lbl">Pourquoi ce cas est pédagogique</span>
+      Il n'a pas de réponse "correcte" — l'objectif est de montrer qu'un système autonome ne peut pas éviter de faire des choix de valeurs, même en "ne faisant rien" (l'inaction est elle-même un choix moral). C'est l'essence du problème de la <strong>programmation de l'éthique</strong> dans les systèmes autonomes (voitures autonomes, robots militaires, IA de décision).
+    </div>
+  </section>
+
+  <!-- ===================== 11. TRAVAIL À REMETTRE ===================== -->
+  <section class="sheet" id="s11">
+    <div class="fiche-num">Fiche 11 — Diapositives 18-21</div>
+    <h2>Le devoir « Cas d'éthique »</h2>
+
+    <p>La diapositive 18 résume le déroulement de la séance elle-même : lecture du cas <strong>Méo</strong> et discussion en classe, exercice en sous-groupes sur le cas <strong>C-za</strong>, puis explication du devoir noté. (Les détails précis des cas Méo et C-za ne sont pas dans ce PDF — ils étaient probablement présentés oralement ou dans un document séparé sur Moodle ; vérifie Moodle pour leur contenu complet si tu dois t'y référer.)</p>
+
+    <div class="deadline">
+      <div>
+        <div class="txt">DATE LIMITE DE REMISE — SUR MOODLE, FORMAT PDF</div>
+        <div class="date">21 juin 2026, 23 h 59</div>
+      </div>
+      <div class="txt">Travail individuel</div>
+    </div>
+
+    <h3>Consignes</h3>
+    <ul>
+      <li>Le travail est une <strong>étude de cas</strong> qui effectue une <strong>évaluation éthique</strong> d'une technologie ou d'un programme, en te basant sur les normes et approches éthiques vues en classe (donc : la méthode en 4 étapes de la fiche 9, et un code de déontologie pertinent comme celui de l'ACM, fiche 8).</li>
+      <li>Tu dois choisir <strong>un cas</strong> parmi ceux listés dans le document <strong>« INM6000 Été 2026 — Cas d'éthique »</strong>, disponible sur Moodle.</li>
+      <li><strong>Travail individuel</strong> (pas d'équipe).</li>
+      <li>Longueur : <strong>4 à 6 pages</strong>, hors page de garde et bibliographie.</li>
+    </ul>
+
+    <h3>Normes de présentation</h3>
+    <div class="grid2">
+      <div class="card"><h4>Interligne</h4>1,5 (interligne et demi)</div>
+      <div class="card"><h4>Police</h4>Times New Roman (ou équivalent), 12 pt</div>
+      <div class="card"><h4>Page de garde</h4>Page de présentation UQAM requise</div>
+      <div class="card"><h4>Bibliographie</h4>Requise (sources citées correctement)</div>
+    </div>
+
+    <h3>Grille d'évaluation</h3>
+    <table class="crit">
+      <tr><th>Critère</th><th>Pondération</th></tr>
+      <tr><td>Respect des normes de présentation</td><td class="pct">10%</td></tr>
+      <tr><td>Présentation du cas d'étude</td><td class="pct">25%</td></tr>
+      <tr><td>Intégration du code d'éthique</td><td class="pct">25%</td></tr>
+      <tr><td>Qualité de l'analyse et de la synthèse</td><td class="pct">25%</td></tr>
+      <tr><td>Cohérence stylistique et orthographe</td><td class="pct">15%</td></tr>
+    </table>
+
+    <div class="callout">
+      <span class="lbl">Stratégie pour maximiser ta note</span>
+      Vu la pondération, 50% de la note dépend de deux choses concrètes et objectivement vérifiables : bien <strong>présenter le cas</strong> (25% — faits, contexte, acteurs) et bien <strong>intégrer un code d'éthique existant</strong> (25% — cite explicitement des articles/sections précises du code ACM, de l'APIIQ, ou un autre code pertinent, ne reste pas vague). Les 25% d'"analyse et synthèse" correspondent très probablement à l'application rigoureuse de la méthode en 4 étapes (fiche 9). Les 15% de "cohérence stylistique" récompensent une structure claire — utilise justement les 4 étapes comme plan de rédaction.
+    </div>
+
+    <h3>La semaine prochaine (diapo 22)</h3>
+    <p>Le prochain cours porte sur <strong>« La vie privée 2 »</strong> — une suite logique, puisque plusieurs cas vus aujourd'hui (données génétiques, chatbots, robot policier) touchent directement à des enjeux de vie privée qui seront approfondis.</p>
+  </section>
+
+  <!-- ===================== 12. QUIZ ===================== -->
+  <section class="sheet" id="s12">
+    <div class="fiche-num">Fiche 12 — Révision</div>
+    <h2>Quiz de révision — questions probables d'examen</h2>
+    <p>Clique sur « Voir la réponse » pour vérifier ta compréhension après avoir essayé de répondre toi-même.</p>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 1</span>
+      <div class="question">Distinguez éthique, morale et droit.</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">L'éthique est la réflexion philosophique générale sur le bien et le mal (elle systématise, défend, recommande). La morale est l'application concrète et vécue de règles de conduite dans une société ou par un individu. Le droit est l'ensemble des lois formelles sanctionnées par l'État. L'éthique précède et complémente les deux autres : elle inspire la morale et le droit, mais continue d'agir là où la loi n'a pas encore statué.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 2</span>
+      <div class="question">Pourquoi dit-on que l'informatique a une tradition éthique moins mature que la médecine ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Parce que la médecine dispose de siècles de réflexion éthique formalisée (serment d'Hippocrate, comités d'éthique, bioéthique) alors que l'informatique est une discipline jeune qui doit encore construire progressivement ses propres repères, ses codes de déontologie (ex. APIIQ créé seulement en 1994) et ses institutions (pas d'ordre professionnel obligatoire au Québec).</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 3</span>
+      <div class="question">Expliquez la phrase : « la cryptographie réorganise le pouvoir : elle configure qui peut faire quoi, à partir de quoi. »</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">La cryptographie n'est pas un outil neutre : en déterminant qui peut accéder ou non à une information, elle redistribue concrètement du pouvoir entre acteurs (citoyens, entreprises, gouvernements). Un même outil de chiffrement peut protéger la vie privée d'un individu tout en empêchant une enquête légitime — d'où la responsabilité morale des cryptographes.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 4</span>
+      <div class="question">Quelle est la différence entre un devoir moral « négatif » et un devoir moral « positif », selon la diapo sur la cryptographie ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Le devoir négatif consiste à ne pas nuire personnellement (le minimum). Le devoir positif va plus loin : il exige de contribuer activement au bien social, pas seulement d'éviter de causer du tort.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 5</span>
+      <div class="question">Nommez les quatre libertés essentielles du logiciel libre.</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">0) Exécuter le logiciel pour n'importe quel usage. 1) Étudier son fonctionnement (accès au code source). 2) Redistribuer des copies. 3) Modifier le logiciel et redistribuer les versions modifiées.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 6</span>
+      <div class="question">Quelle est la différence fondamentale entre éthique et déontologie ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">L'éthique est une réflexion générale et théorique sur le bien et le mal, applicable à tous. La déontologie est un ensemble de règles concrètes, écrites, propres à une profession spécifique, régissant les devoirs envers le public, les clients et les collègues — plus détaillée et orientée vers la pratique.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 7</span>
+      <div class="question">En quelle année le code de déontologie des informaticiens et informaticiennes du Québec (APIIQ) a-t-il été créé, et quelles sont ses trois catégories de devoirs ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">1994. Les trois catégories : devoirs envers le public, envers le client, et envers les collègues de travail.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 8</span>
+      <div class="question">Quelle est la différence entre un ordre professionnel (comme l'OIQ) et une association professionnelle volontaire (comme l'AQIII) ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Un ordre professionnel a un statut légal reconnu par l'État, avec un pouvoir disciplinaire réel (sanctions, radiation) et souvent une adhésion obligatoire pour exercer. Une association volontaire n'a pas ce pouvoir légal — son code d'éthique repose sur l'adhésion volontaire de ses membres, sans contrainte légale de l'État.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 9</span>
+      <div class="question">Nommez les 8 sections du code de déontologie de l'ACM.</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Public, clients et employeurs, produits, jugement, gestion, profession, collègues, et soi-même.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 10</span>
+      <div class="question">Décrivez les 4 étapes de la méthode d'analyse d'un cas d'éthique (revue PLAN, 2012).</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">1) Analyse de la situation (cause, dilemme, conséquences, normes pertinentes). 2) Préciser les valeurs conflictuelles (quelles valeurs, quel conflit principal). 3) Prise de décision raisonnable (quelle valeur prioriser, quel moyen d'action). 4) Établir un dialogue avec les personnes concernées (arguments justificatifs, possibilité de consensus).</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 11</span>
+      <div class="question">Dans le cas du robot policier, pourquoi ce cas n'a-t-il pas de « bonne » réponse unique ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Parce qu'il s'agit d'un dilemme volontairement construit sans solution parfaite (variante du problème du tramway) : toute action (intervenir ou ne pas intervenir) implique un coût moral certain. Il illustre que même l'inaction d'un système autonome est un choix de valeurs, et pose la question de la responsabilité (fabricant, programmeur, opérateur) et de la nécessité d'un contrôle humain sur les décisions à fort impact moral.</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 12</span>
+      <div class="question">Pour le travail « cas d'éthique », quelle est la date limite, le format exigé, et la pondération des deux plus gros critères d'évaluation ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Date limite : 21 juin 2026, 23h59, à téléverser sur Moodle en format PDF. Les deux plus gros critères (25% chacun) sont : présentation du cas d'étude, et intégration du code d'éthique — auxquels s'ajoute la qualité de l'analyse et de la synthèse (également 25%).</div>
+      </details>
+    </div>
+
+    <div class="quiz-item">
+      <span class="qnum">Question 13</span>
+      <div class="question">Quels sont les trois enjeux éthiques des chatbots identifiés en cours, et comment s'appliquent-ils au cas des avatars de personnes décédées ?</div>
+      <details><summary>Voir la réponse</summary>
+        <div class="answer">Fiabilité des résultats (risque d'hallucinations, fausse impression de fidélité au défunt), biais (contrôle et orientation du discours de l'avatar par un tiers, parfois à but commercial), et remplacement de l'interaction/expertise humaine (risque de nuire au processus de deuil naturel en créant une dépendance à une simulation).</div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Dossier de révision — INM6000 Été 2026 — UQAM · Basé sur la séance 5 du 2 juin 2026
+</footer>
+
+</body>
+</html>
