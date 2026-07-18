@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Séance 9 : Gouvernance de l'information</title>
+<style>
+  :root{
+    --bg: #0b1220;
+    --bg-panel: #121b2e;
+    --bg-panel-2: #0f1729;
+    --ink: #e8edf5;
+    --ink-dim: #9fb0c9;
+    --ink-faint: #6b7d99;
+    --line: #22314d;
+
+    --gold: #e0b15c;      /* droit d'auteur */
+    --gold-dim: #4a3f27;
+    --green: #6fcf97;     /* logiciel libre */
+    --green-dim: #23392e;
+    --blue: #6fa8ff;      /* souveraineté des données */
+    --blue-dim: #21324f;
+    --violet: #b48ef0;    /* gouvernance des plateformes */
+    --violet-dim: #362a4c;
+
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Roboto, sans-serif;
+    --mono: 'SFMono-Regular', Consolas, monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(111,168,255,0.08), transparent 60%),
+      radial-gradient(ellipse 900px 600px at 90% 10%, rgba(224,177,92,0.06), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:inherit;}
+
+  .wrap{max-width:880px; margin:0 auto; padding:0 24px 120px;}
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:80px 24px 60px;
+    max-width:880px;
+    margin:0 auto;
+    border-bottom:1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:18px;
+  }
+  h1.title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(32px, 5vw, 50px);
+    line-height:1.15;
+    margin:0 0 20px;
+    color:#fff;
+  }
+  h1.title em{color:var(--blue); font-style:normal;}
+  .subtitle{
+    color:var(--ink-dim);
+    font-size:16px;
+    max-width:620px;
+  }
+  .meta-row{
+    display:flex; gap:24px; flex-wrap:wrap;
+    margin-top:28px;
+    font-size:13px;
+    color:var(--ink-faint);
+    font-family:var(--mono);
+  }
+  .meta-row span{display:flex; align-items:center; gap:6px;}
+
+  nav.toc{
+    display:flex; flex-wrap:wrap; gap:10px;
+    margin-top:32px;
+  }
+  nav.toc a{
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid var(--line);
+    text-decoration:none;
+    color:var(--ink-dim);
+    transition:all .2s;
+  }
+  nav.toc a:hover{border-color:var(--blue); color:#fff;}
+
+  /* ---------- SECTIONS ---------- */
+  section.topic{
+    padding:70px 0 10px;
+    border-bottom:1px solid var(--line);
+  }
+  section.topic:last-of-type{border-bottom:none;}
+
+  .topic-head{
+    display:flex; align-items:baseline; gap:16px;
+    margin-bottom:8px;
+  }
+  .topic-num{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+  h2.topic-title{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(26px,4vw,34px);
+    margin:0;
+    color:#fff;
+  }
+  .topic-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:4px;
+    margin-bottom:28px;
+    display:inline-block;
+  }
+
+  /* thematic accents */
+  .t-gold .topic-num, .t-gold h2{color:var(--gold);}
+  .t-gold .topic-tag{background:var(--gold-dim); color:var(--gold);}
+  .t-green .topic-num, .t-green h2{color:var(--green);}
+  .t-green .topic-tag{background:var(--green-dim); color:var(--green);}
+  .t-blue .topic-num, .t-blue h2{color:var(--blue);}
+  .t-blue .topic-tag{background:var(--blue-dim); color:var(--blue);}
+  .t-violet .topic-num, .t-violet h2{color:var(--violet);}
+  .t-violet .topic-tag{background:var(--violet-dim); color:var(--violet);}
+
+  h3.sub{
+    font-size:19px;
+    font-weight:600;
+    color:#fff;
+    margin:36px 0 4px;
+  }
+  h3.sub .src-note{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--ink-faint);
+    font-weight:400;
+    display:block;
+    margin-top:2px;
+  }
+  p.lead{color:var(--ink-dim); font-size:15px; margin:8px 0 20px;}
+
+  .card{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:22px 24px;
+    margin:16px 0;
+  }
+  .card.explain{border-left:3px solid var(--blue);}
+  .card.explain .label{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase;
+    letter-spacing:.08em; color:var(--blue); margin-bottom:8px; display:block;
+  }
+
+  dl.terms{margin:0; padding:0;}
+  dl.terms dt{
+    font-weight:600; color:#fff; font-size:15px;
+    margin-top:18px;
+  }
+  dl.terms dt:first-child{margin-top:0;}
+  dl.terms dd{
+    margin:6px 0 0; color:var(--ink-dim); font-size:14.5px;
+  }
+
+  ul.detail-list{margin:10px 0; padding-left:20px;}
+  ul.detail-list li{margin-bottom:10px; color:var(--ink-dim); font-size:14.5px;}
+  ul.detail-list li strong{color:var(--ink);}
+
+  /* réflexion callout */
+  .reflexion{
+    margin:24px 0;
+    border-radius:10px;
+    padding:22px 24px;
+    background:linear-gradient(180deg, rgba(180,142,240,0.08), rgba(180,142,240,0.02));
+    border:1px solid rgba(180,142,240,0.35);
+  }
+  .reflexion .rlabel{
+    font-family:var(--mono); font-size:11px; text-transform:uppercase;
+    letter-spacing:.1em; color:var(--violet); margin-bottom:10px; display:block;
+  }
+  .reflexion .q{font-weight:600; color:#fff; margin-bottom:10px;}
+  .reflexion .a{color:var(--ink-dim); font-size:14.5px;}
+  .reflexion .a strong{color:var(--ink);}
+
+  /* comparison table (entreprise A/B) */
+  table.compare{
+    width:100%; border-collapse:collapse; margin:18px 0;
+    font-size:14px;
+  }
+  table.compare th, table.compare td{
+    padding:12px 14px; border:1px solid var(--line); vertical-align:top;
+  }
+  table.compare th{
+    background:var(--bg-panel-2); color:#fff; font-family:var(--mono);
+    font-size:12px; text-transform:uppercase; letter-spacing:.05em;
+  }
+  table.compare td{color:var(--ink-dim);}
+
+  /* mini quiz */
+  .quiz{
+    margin:20px 0;
+    background:var(--bg-panel-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:20px 22px;
+  }
+  .quiz .qtitle{font-weight:600; color:#fff; margin-bottom:12px; font-size:15px;}
+  .quiz .opts{display:flex; flex-direction:column; gap:8px;}
+  .quiz button.opt{
+    text-align:left;
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    color:var(--ink);
+    padding:10px 14px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    font-family:var(--sans);
+    transition:all .15s;
+  }
+  .quiz button.opt:hover{border-color:var(--blue);}
+  .quiz button.opt.correct{border-color:var(--green); background:var(--green-dim); color:#fff;}
+  .quiz button.opt.wrong{border-color:#e07a7a; background:#3a2323; color:#fff;}
+  .quiz .explain-box{
+    margin-top:12px; font-size:13.5px; color:var(--ink-dim);
+    display:none; padding-top:12px; border-top:1px solid var(--line);
+  }
+  .quiz .explain-box.show{display:block;}
+
+  /* exam prep */
+  section.exam{padding:70px 0 40px;}
+  .exam-item{
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:14px;
+    overflow:hidden;
+  }
+  .exam-item summary{
+    padding:18px 22px;
+    cursor:pointer;
+    font-weight:600;
+    color:#fff;
+    font-size:14.5px;
+    list-style:none;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  .exam-item summary::-webkit-details-marker{display:none;}
+  .exam-item summary::after{
+    content:'+';
+    font-family:var(--mono);
+    color:var(--ink-faint);
+    font-size:20px;
+    flex-shrink:0;
+  }
+  .exam-item[open] summary::after{content:'–';}
+  .exam-item .answer{
+    padding:0 22px 20px;
+    color:var(--ink-dim);
+    font-size:14.5px;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+  }
+  .exam-item .qnum{
+    font-family:var(--mono); color:var(--ink-faint); font-size:12px; margin-right:8px;
+  }
+
+  footer{
+    text-align:center;
+    padding:50px 24px;
+    color:var(--ink-faint);
+    font-size:13px;
+    font-family:var(--mono);
+  }
+
+  .backtop{
+    position:fixed; bottom:24px; right:24px;
+    width:44px; height:44px; border-radius:50%;
+    background:var(--bg-panel); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--ink-dim); text-decoration:none; font-size:18px;
+    opacity:0; transition:opacity .3s;
+    pointer-events:none;
+  }
+  .backtop.show{opacity:1; pointer-events:auto;}
+
+  @media (max-width: 600px){
+    header.hero{padding:60px 20px 40px;}
+    section.topic{padding:50px 0 10px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">INM6000 — Informatique et société · UQAM Été 2026</div>
+  <h1 class="title">Gouvernance de <em>l'information</em></h1>
+  <p class="subtitle">Guide d'étude détaillé de la Séance 9 (30 juin 2026, Didem Demirag) : droit d'auteur face à l'IA générative, logiciel libre, souveraineté des données, gouvernance des plateformes. Chaque notion est expliquée en profondeur, chaque question de réflexion posée en classe est répondue, et un quiz d'examen se trouve à la fin.</p>
+  <div class="meta-row">
+    <span>◆ 4 thèmes principaux</span>
+    <span>◆ 5 questions de réflexion résolues</span>
+    <span>◆ Quiz + questions d'examen à la fin</span>
+  </div>
+  <nav class="toc">
+    <a href="#droit-auteur">1 · Droit d'auteur</a>
+    <a href="#logiciel-libre">2 · Logiciel libre</a>
+    <a href="#souverainete">3 · Souveraineté des données</a>
+    <a href="#gouvernance-plateformes">4 · Gouvernance des plateformes</a>
+    <a href="#examen">Préparation à l'examen</a>
+  </nav>
+</header>
+
+<div class="wrap">
+
+<!-- =================== SECTION 1 : DROIT D'AUTEUR =================== -->
+<section class="topic t-gold" id="droit-auteur">
+  <div class="topic-head">
+    <span class="topic-num">01</span>
+    <h2 class="topic-title">Droit d'auteur</h2>
+  </div>
+  <span class="topic-tag">Copyright · IA générative · Fair use</span>
+
+  <h3 class="sub">Qu'est-ce que le droit d'auteur, concrètement ?</h3>
+  <p class="lead">Le point de départ du cours : le droit d'auteur n'est pas quelque chose qu'on demande, il existe automatiquement dès qu'une œuvre est créée.</p>
+
+  <div class="card explain">
+    <span class="label">Explication ligne par ligne</span>
+    <dl class="terms">
+      <dt>« Le droit d'auteur est automatique... Convention de Berne »</dt>
+      <dd>Dès que tu écris un texte, prends une photo, ou codes un programme, tu détiens automatiquement le droit d'auteur sur cette œuvre — pas besoin de l'enregistrer ou de mettre un ©. La <strong>Convention de Berne</strong> (1886, révisée plusieurs fois) est un traité international signé par presque tous les pays (dont le Canada) qui oblige les pays signataires à reconnaître ce principe automatique. C'est différent des brevets, qui eux doivent être déposés et approuvés.</dd>
+
+      <dt>« Il protège une œuvre jusqu'à 50 ans après la mort de l'auteur »</dt>
+      <dd>C'est la durée minimale exigée par Berne (certains pays, comme les États-Unis ou l'UE, vont jusqu'à 70 ans après la mort). Après cette période, l'œuvre tombe dans le <strong>domaine public</strong> : n'importe qui peut l'utiliser librement, sans autorisation ni paiement.</dd>
+
+      <dt>Droits moraux vs droits économiques</dt>
+      <dd>
+        C'est la distinction la plus importante de cette diapositive. Il y a deux « paquets » de droits séparés dans une même œuvre :
+        <ul class="detail-list">
+          <li><strong>Droits moraux</strong> : le droit d'être reconnu comme l'auteur (paternité) et le droit de s'opposer à ce qu'on déforme ou mutile ton œuvre (respect de l'œuvre). Exemple : même si tu vends ton roman à un éditeur, celui-ci ne peut pas retirer ton nom de la couverture ou réécrire la fin sans ton accord — c'est un droit moral.</li>
+          <li><strong>Droits économiques</strong> : le droit de reproduire, diffuser, adapter l'œuvre (et donc d'en tirer de l'argent). Ce sont ceux-là qu'on peut vendre ou céder à un éditeur, un studio, une maison de disques, etc.</li>
+        </ul>
+      </dd>
+
+      <dt>« Les droits moraux ne peuvent pas être cédés, même si les droits économiques le sont »</dt>
+      <dd>C'est la conséquence directe de la distinction ci-dessus : même si tu vends complètement les droits économiques (par exemple à un studio de cinéma), tu restes légalement « l'auteur moral » de l'œuvre à vie. Un studio peut posséder tous les droits de diffusion d'un film, mais ne peut pas légalement prétendre que quelqu'un d'autre en est l'auteur.</dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">Licences et propriété : l'auteur reste toujours titulaire</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>« L'auteur reste titulaire... peut accorder des licences à un éditeur sans transférer sa propriété »</dt>
+      <dd>Une <strong>licence</strong> n'est pas une vente. C'est une permission d'utiliser l'œuvre selon des conditions précises, pendant que l'auteur garde la propriété. C'est comme louer un appartement : le locataire peut y vivre, mais ne devient jamais propriétaire.</dd>
+
+      <dt>Les licences Creative Commons (CC)</dt>
+      <dd>Un système de licences standardisées qui permet à un auteur de dire précisément ce qu'on a le droit de faire avec son œuvre, sans avoir à négocier un contrat à chaque fois. Les trois grandes conditions mentionnées :
+        <ul class="detail-list">
+          <li><strong>Attribution (BY)</strong> : tu dois citer l'auteur original.</li>
+          <li><strong>Usage commercial</strong> : certaines licences interdisent l'usage à but lucratif (« NC » = non-commercial).</li>
+          <li><strong>Modifications</strong> : certaines licences interdisent de modifier l'œuvre (« ND » = no derivatives), d'autres l'autorisent à condition que la version modifiée garde la même licence (« SA » = share-alike).</li>
+        </ul>
+      </dd>
+
+      <dt>« Les droits d'utilisation varient selon les pays »</dt>
+      <dd>Ce qui est légal dans un pays (par exemple une exception pour usage éducatif) ne l'est pas forcément ailleurs. C'est pourquoi, en libre accès (open access, publications scientifiques, etc.), il est essentiel d'avoir une licence claire et internationale plutôt que de se fier au droit national par défaut.</dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">L'IA générative bouscule ce système</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">L'IA générative (comme les modèles qui écrivent du texte ou génèrent des images) s'entraîne en analysant d'énormes quantités d'œuvres existantes — textes, images, code. Les trois reproches principaux formulés par les créateurs :</p>
+    <ul class="detail-list">
+      <li><strong>Utilisation comme données d'entraînement sans consentement</strong> : les œuvres sont souvent aspirées du web sans demander la permission à leurs auteurs.</li>
+      <li><strong>Absence d'attribution et de rémunération</strong> : contrairement à une licence CC ou un contrat d'édition, l'auteur original n'est ni nommé ni payé quand son œuvre sert à entraîner un modèle.</li>
+      <li><strong>Concurrence potentielle</strong> : une IA entraînée sur le style d'un illustrateur peut ensuite produire des images similaires qui lui font directement concurrence sur le marché.</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Le problème clé : pourquoi l'industrie de l'IA s'inquiète aussi</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>« Les œuvres générées par l'IA risquent de tomber dans le domaine public »</dt>
+      <dd>C'est un point souvent contre-intuitif : le droit d'auteur classique exige un <strong>auteur humain</strong>. Si une IA génère une image toute seule, sans intervention humaine créative suffisante, certains systèmes juridiques (dont les États-Unis, via le U.S. Copyright Office) refusent d'accorder un droit d'auteur dessus — l'œuvre serait donc automatiquement dans le domaine public, libre pour tous, y compris les concurrents de l'entreprise qui l'a générée.</dd>
+
+      <dt>« Cela décourage l'investissement et ralentit le développement de l'IA »</dt>
+      <dd>Le raisonnement économique classique du droit d'auteur (repris plus loin dans la diapo « Le rôle du droit d'auteur ») est que la protection légale incite à investir dans la création, parce qu'on sait qu'on pourra en tirer un bénéfice exclusif. Si une entreprise dépense des millions pour développer une IA générative mais que tout ce qu'elle produit tombe immédiatement dans le domaine public, elle perd son avantage concurrentiel.</dd>
+
+      <dt>Comment organiser les droits malgré ce vide juridique</dt>
+      <dd>Trois mécanismes contractuels mentionnés :
+        <ul class="detail-list">
+          <li><strong>Contrats de travail</strong> : quand un employé crée quelque chose dans le cadre de son emploi, le droit d'auteur appartient souvent à l'employeur.</li>
+          <li><strong>Licences (EULA — End User License Agreement)</strong> : le contrat que tu acceptes en cliquant « J'accepte » quand tu utilises un logiciel, qui précise qui possède quoi.</li>
+          <li><strong>Stratégies de licence ou de commercialisation</strong> : structurer commercialement l'accès au produit pour capter la valeur même sans droit d'auteur classique (abonnements, API payantes, etc.).</li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">La solution proposée : « work made for hire »</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;"><strong>« Work made for hire »</strong> (œuvre réalisée pour autrui) est une doctrine juridique déjà existante en droit américain : quand un employé crée une œuvre dans le cadre de son travail, la loi considère automatiquement l'<em>employeur</em> comme l'auteur légal, pas l'employé. La proposition du cours est d'étendre cette logique à l'IA :</p>
+    <ul class="detail-list">
+      <li><strong>Traiter l'IA comme un outil/« employé »</strong> : tout comme un employé qui utilise un traitement de texte n'en fait pas le co-auteur de son rapport, l'IA serait vue comme un simple instrument.</li>
+      <li><strong>Attribuer légalement l'auteur au programmeur ou au propriétaire de l'IA</strong> : ce serait donc l'entreprise (OpenAI, par exemple) ou le développeur qui détiendrait le droit d'auteur sur ce que l'IA génère.</li>
+    </ul>
+    <p style="color:var(--ink-dim); font-size:14.5px;">Pourquoi c'est une bonne solution selon les auteurs de l'article cité (Samuelson) :</p>
+    <ul class="detail-list">
+      <li><strong>Le droit d'auteur reste attribué à une personne humaine ou morale</strong> — pas à l'IA elle-même, ce qui évite d'accorder des droits légaux à une entité non humaine (un débat philosophique et juridique majeur).</li>
+      <li><strong>Meilleure transparence</strong> sur le rôle de l'IA dans la création, et une <strong>durée de protection claire</strong> (comme pour une œuvre collective).</li>
+      <li>Cela règle aussi des questions pratiques : qui est <strong>responsable légalement</strong> si l'IA génère un contenu diffamatoire ou plagié ? Comment <strong>enregistrer</strong> une œuvre générée par IA au bureau du droit d'auteur ?</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Les procès en cours et l'analogie historique</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>Procès contre Stability AI, OpenAI, GitHub</dt>
+      <dd>Ce sont de vrais recours collectifs intentés par des artistes (contre Stability AI, qui fait l'IA d'images Stable Diffusion), des auteurs (contre OpenAI/ChatGPT), et des programmeurs (contre GitHub Copilot, qui génère du code en s'entraînant sur des dépôts open source). La question centrale posée aux tribunaux : <strong>entraîner un modèle sur des œuvres protégées, sans permission, est-ce automatiquement une violation du droit d'auteur ?</strong></dd>
+
+      <dt>Un conflit déjà vu dans l'histoire</dt>
+      <dd>Le cours établit un parallèle avec des technologies passées qui ont chacune fait paniquer les industries créatives de leur époque :
+        <ul class="detail-list">
+          <li><strong>Pianos mécaniques (début XXe s.)</strong> : les compositeurs craignaient de perdre le contrôle sur leur musique une fois « imprimée » sur des rouleaux perforés.</li>
+          <li><strong>Photocopieuses</strong> : crainte que la copie facile de livres détruise l'industrie de l'édition.</li>
+          <li><strong>Magnétoscopes (affaire Sony Betamax, 1984)</strong> : les studios de cinéma ont poursuivi Sony parce que les gens pouvaient enregistrer des émissions ; la Cour suprême américaine a finalement jugé que l'enregistrement pour usage personnel était légal (fair use).</li>
+          <li><strong>MP3 / Napster</strong> : bouleversement de l'industrie musicale, qui a fini par se réorganiser autour du streaming plutôt que de disparaître.</li>
+        </ul>
+        Dans chaque cas, <strong>les tribunaux ont souvent fini par favoriser l'innovation</strong>, quitte à ce que des réformes législatives viennent ensuite ajuster l'équilibre (par exemple des redevances obligatoires pour la musique enregistrée).</dd>
+    </dl>
+  </div>
+
+  <div class="reflexion">
+    <span class="rlabel">Réflexion posée en classe #1</span>
+    <div class="q">« Les anciennes technologies (pianos mécaniques, magnétoscopes, MP3) ont d'abord suscité des litiges. Selon vous, l'IA générative est-elle similaire ou différente pour le droit d'auteur ? »</div>
+    <div class="a">
+      Il n'y a pas de « bonne réponse » unique — c'est une question ouverte pensée pour la discussion — mais voici les deux côtés de l'argument que tu peux mobiliser à l'examen :
+      <br><br>
+      <strong>Arguments pour la similarité :</strong> comme les pianos mécaniques ou les magnétoscopes, l'IA générative est une nouvelle technologie de reproduction/transformation qui menace un modèle économique établi ; l'histoire suggère que les tribunaux finissent par favoriser l'innovation et que le marché s'adapte (ex. streaming après Napster).
+      <br><br>
+      <strong>Arguments pour la différence :</strong> les technologies passées <em>reproduisaient</em> ou <em>diffusaient</em> une œuvre existante (une copie reste identifiable comme une copie). L'IA générative, elle, peut produire un <em>nouveau contenu</em> à grande échelle qui imite un style sans copier une œuvre précise, ce qui rend la preuve d'infraction beaucoup plus difficile. De plus, l'ampleur du déploiement (des millions d'œuvres utilisées simultanément par des entreprises multimilliardaires) et la vitesse de diffusion sont sans précédent, et l'impact direct sur l'emploi des créateurs (écrivains, illustrateurs) est potentiellement plus large et plus rapide que pour les technologies antérieures.
+    </div>
+  </div>
+
+  <h3 class="sub">Le rôle du droit d'auteur et pourquoi l'IA pose un défi inédit</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>Objectif constitutionnel : favoriser le progrès des sciences et des arts</dt>
+      <dd>C'est important à retenir : le droit d'auteur n'existe pas pour « protéger les artistes » comme fin en soi. Sa justification historique (aux États-Unis, c'est littéralement écrit dans la Constitution) est <strong>utilitariste</strong> : en donnant un monopole temporaire aux créateurs, on les incite à créer davantage, ce qui profite finalement à la société entière. C'est un équilibre entre récompenser les créateurs et permettre à la société de bénéficier de leurs œuvres (via le domaine public, les exceptions, etc.).</dd>
+
+      <dt>Pourquoi l'IA générative pose un défi inédit</dt>
+      <dd>Trois facteurs cumulés qui rendent la situation différente des cas historiques : le <strong>déploiement extrêmement rapide</strong> (comparé aux décennies qu'ont pris les pianos mécaniques ou les magnétoscopes à se répandre), l'<strong>évolution beaucoup plus lente du droit</strong> (les lois et la jurisprudence prennent des années à s'adapter), et l'<strong>impact direct sur les métiers créatifs</strong> eux-mêmes (contrairement aux photocopieuses qui menaçaient un intermédiaire — l'éditeur —, l'IA peut remplacer directement le travail créatif de l'auteur).</dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">L'entraînement est-il une copie ? Le fair use, et la légalité des œuvres générées</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>« Les modèles d'IA ne stockent pas les œuvres, mais des représentations statistiques »</dt>
+      <dd>C'est un point technique central du débat : un modèle d'IA (comme un grand modèle de langage) ne contient pas une copie du texte ou de l'image originale quelque part dans son code. Il apprend des <strong>patterns statistiques</strong> — des relations entre mots, formes, couleurs — répartis dans des milliards de paramètres numériques. C'est pour ça que les défenseurs de l'IA disent que ce n'est pas une « copie » au sens classique du droit d'auteur.</dd>
+
+      <dt>Le droit d'auteur protège l'expression, pas les idées</dt>
+      <dd>Principe fondamental du droit d'auteur, valable bien avant l'IA : tu ne peux pas breveter ou protéger une <em>idée</em> (par exemple « une histoire d'amour interdite entre deux familles rivales »), seulement l'<em>expression concrète et spécifique</em> de cette idée (le texte exact de Roméo et Juliette). C'est pourquoi les idées, les faits, les styles et les concepts généraux ne sont pas protégés — n'importe qui peut écrire une histoire d'amour interdite, ou peindre « dans le style » d'un artiste, tant que l'œuvre concrète n'est pas copiée.</dd>
+
+      <dt>Le fair use (usage équitable)</dt>
+      <dd>Une exception du droit américain qui permet d'utiliser une œuvre protégée <em>sans autorisation</em> sous certaines conditions. Les critères principaux mentionnés :
+        <ul class="detail-list">
+          <li><strong>Usage transformateur</strong> : est-ce que le nouvel usage ajoute quelque chose de nouveau (un sens, un message, une fonction différente) plutôt que de simplement reproduire l'original ?</li>
+          <li><strong>Finalité</strong> (recherche, innovation, critique, parodie) : les usages non commerciaux ou éducatifs sont plus facilement protégés.</li>
+          <li><strong>Impact sur le marché de l'œuvre originale</strong> : est-ce que ce nouvel usage nuit financièrement à l'auteur original en se substituant à son œuvre ?</li>
+        </ul>
+        Les développeurs d'IA invoquent souvent le fair use en disant que l'entraînement est transformateur (le modèle n'affiche jamais l'œuvre originale telle quelle, il en tire des patterns généraux).</dd>
+
+      <dt>Les œuvres générées sont-elles illégales ?</dt>
+      <dd>Règle pratique retenue : une œuvre générée par IA n'est problématique légalement que si elle est <strong>très similaire à une œuvre existante précise</strong> (ce qu'on appelle en droit une « reproduction substantielle »). Par contre, <strong>le style d'un artiste, en tant que tel, n'est pas protégé</strong> — tu peux légalement demander à une IA de générer « une image dans le style de Van Gogh » sans enfreindre le droit d'auteur, parce que le style n'est pas une expression protégeable, seulement une œuvre concrète l'est. Enfin, plus la base de données d'entraînement est <strong>large et diversifiée</strong>, plus le risque que le modèle reproduise accidentellement une œuvre précise diminue statistiquement (l'influence de chaque œuvre individuelle est diluée).</dd>
+    </dl>
+  </div>
+
+  <div class="reflexion">
+    <span class="rlabel">Réflexion posée en classe #2</span>
+    <div class="q">« La création consiste-t-elle toujours à recombiner des éléments existants ? Si toute création est une recombinaison, pourquoi l'IA poserait-elle un problème fondamental ? »</div>
+    <div class="a">
+      Encore une question ouverte, mais voici la structure de réponse attendue :
+      <br><br>
+      <strong>Argument « oui, la création est toujours une recombinaison » :</strong> tout artiste humain est influencé par ce qu'il a lu, vu, entendu. Un romancier recombine des structures narratives, des mots, des tropes déjà existants. Sous cet angle, une IA qui recombine des patterns appris n'est pas fondamentalement différente d'un humain qui s'inspire de ses influences — ce serait juste une question de degré, pas de nature.
+      <br><br>
+      <strong>Pourquoi l'IA pose quand même un problème selon certains :</strong> (1) l'<strong>échelle</strong> — un humain recombine ses influences lentement, sur une carrière ; une IA peut produire des milliers d'œuvres « recombinées » en quelques secondes, à un rythme qui dévalue économiquement le travail humain original ; (2) l'<strong>absence de transformation créative subjective</strong> — un artiste humain apporte une intention, une expérience vécue, un point de vue ; une IA optimise statistiquement sans « vouloir dire » quoi que ce soit ; (3) le <strong>consentement et la rémunération</strong> — même si recombiner est une pratique humaine normale, un humain qui s'inspire d'un autre artiste ne « digère » pas littéralement des copies numériques de ses œuvres sans autorisation à l'échelle industrielle.
+    </div>
+  </div>
+
+  <h3 class="sub">Enjeux futurs</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">Le cours souligne que rien n'est encore tranché : les décisions judiciaires sont encore incertaines, ce qui pourrait entraîner soit une <strong>relocalisation de l'innovation</strong> vers des pays aux lois plus permissives (si un pays interdit l'entraînement sur des œuvres protégées, les entreprises d'IA pourraient déménager leurs opérations ailleurs), soit de <strong>nouvelles lois spécifiques à l'IA</strong>. Les institutions publiques, comme le U.S. Copyright Office, consultent activement les parties prenantes (artistes, entreprises tech, juristes) pour orienter la réglementation à venir.</p>
+  </div>
+
+  <h3 class="sub">Mise à jour 2025-2026 : les tribunaux commencent à trancher</h3>
+  <div class="card explain">
+    <span class="label">Explication — source Reuters</span>
+    <dl class="terms">
+      <dt>Les premières décisions majeures de 2025</dt>
+      <dd>En 2025, les tribunaux américains ont commencé à rendre de vraies décisions (pas seulement des débats théoriques) sur l'entraînement des modèles d'IA. Un principe clé qui se dégage : l'entraînement <strong>peut</strong> être considéré comme transformateur (donc protégé par le fair use) <strong>sans reproduire directement</strong> les œuvres — mais la <strong>provenance des données</strong> (d'où viennent les données d'entraînement) devient un critère central.</dd>
+
+      <dt>La distinction cruciale : source légale vs piratée</dt>
+      <dd>C'est probablement le point le plus important de la mise à jour : les tribunaux distinguent nettement entre (1) entraîner un modèle sur des <strong>œuvres légalement acquises</strong> (achetées, sous licence, ou légitimement accessibles) — ce qui peut relever du fair use — et (2) utiliser des <strong>contenus piratés ou obtenus illégalement</strong>, ce qui est <strong>fortement condamné</strong>, indépendamment de l'usage qui en est fait ensuite. Autrement dit : la question n'est pas seulement « qu'est-ce que l'IA fait avec les données ? » mais aussi « comment les données ont-elles été obtenues au départ ? »</dd>
+
+      <dt>Le préjudice économique comme critère clé</dt>
+      <dd>Les tribunaux examinent si l'IA porte atteinte concrètement au marché des œuvres originales. Il ne suffit pas d'affirmer un préjudice théorique — les auteurs doivent démontrer un <strong>préjudice économique réel</strong>. Les cas les plus sensibles sont ceux où il existe déjà un <strong>marché de licences actif</strong> (par exemple des médias d'actualité qui vendent déjà des licences de leur contenu) : si l'IA peut directement <strong>remplacer</strong> l'achat de cette licence, le risque juridique est plus élevé.</dd>
+
+      <dt>Les limites des recours en violation</dt>
+      <dd>Point important pour nuancer : l'entraînement d'un modèle, à lui seul, <strong>ne suffit pas</strong> à prouver une violation. Les demandeurs (les auteurs qui poursuivent) doivent démontrer une <strong>copie identifiable</strong> ou une <strong>sortie très similaire</strong> à l'œuvre originale — les tribunaux rejettent les accusations basées uniquement sur des suppositions concernant les données d'entraînement. Les preuves techniques (montrer concrètement qu'un output ressemble à un input) deviennent donc essentielles.</dd>
+
+      <dt>Les nouveaux défis pour la gouvernance de l'information</dt>
+      <dd>Les secteurs les plus exposés sont la <strong>presse, la musique et les images</strong>, parce que les modèles qui reproduisent des styles, des voix ou du contenu très proche des originaux créent plus de risques juridiques. Concrètement, cela pousse les entreprises à devoir assurer une <strong>traçabilité</strong> (savoir d'où viennent leurs données) et une <strong>licéité</strong> (légalité) de leurs jeux de données. Les différences entre législations nationales (États-Unis, Royaume-Uni, etc.) compliquent encore la gouvernance à l'échelle internationale — ce qui est le pont conceptuel entre le droit d'auteur et le thème plus large de la gouvernance de l'information vu dans ce cours.</dd>
+    </dl>
+  </div>
+
+  <div class="quiz" data-quiz>
+    <div class="qtitle">Question rapide — Droit d'auteur</div>
+    <p style="font-size:14px; color:var(--ink-dim); margin-top:-6px;">D'après les décisions de 2025, qu'est-ce qui rend l'entraînement d'un modèle d'IA le plus susceptible d'être jugé illégal ?</p>
+    <div class="opts">
+      <button class="opt" data-correct="false">Le fait que le modèle ait été entraîné sur des millions d'œuvres</button>
+      <button class="opt" data-correct="false">Le fait que le modèle génère du texte en français</button>
+      <button class="opt" data-correct="true">Le fait que les données d'entraînement proviennent de sources piratées ou obtenues illégalement</button>
+      <button class="opt" data-correct="false">Le fait que l'entreprise soit rentable</button>
+    </div>
+    <div class="explain-box">Exact : les tribunaux distinguent la légalité de la <em>source</em> des données de celle de leur <em>usage</em>. Une source illégale (piratage) est fortement condamnée, alors qu'un usage transformateur de données légalement acquises peut relever du fair use.</div>
+  </div>
+</section>
+
+<!-- =================== SECTION 2 : LOGICIEL LIBRE =================== -->
+<section class="topic t-green" id="logiciel-libre">
+  <div class="topic-head">
+    <span class="topic-num">02</span>
+    <h2 class="topic-title">Logiciel libre</h2>
+  </div>
+  <span class="topic-tag">FOSS · GNU · Gouvernance communautaire</span>
+
+  <h3 class="sub">Origines et principes fondateurs</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>« Le logiciel libre (FOSS) trouve ses origines avant les années 1970 »</dt>
+      <dd><strong>FOSS</strong> = Free and Open Source Software. À l'origine de l'informatique, dans les laboratoires universitaires et de recherche, le code source était librement partagé entre chercheurs par culture scientifique — un peu comme on partage des articles académiques. Il n'y avait pas encore de « marché » du logiciel comme produit commercial séparé.</dd>
+
+      <dt>« L'apparition du marché du logiciel propriétaire a progressivement limité le partage »</dt>
+      <dd>Dans les années 1970-80, les entreprises (comme IBM, puis Microsoft) ont commencé à vendre le logiciel comme un produit fermé : le code source devient secret commercial, et l'utilisateur reçoit seulement le programme compilé (le binaire), sans droit de le modifier ou de l'étudier.</dd>
+
+      <dt>Le projet GNU (années 1980)</dt>
+      <dd>En réaction, Richard Stallman lance en 1983 le <strong>projet GNU</strong> (« GNU's Not Unix », un acronyme récursif), avec l'objectif de créer un système d'exploitation entièrement libre. C'est le point de départ structuré du mouvement du logiciel libre en tant que mouvement politique et philosophique, pas seulement une pratique technique.</dd>
+
+      <dt>Les quatre libertés fondamentales du FOSS</dt>
+      <dd>C'est LA définition à retenir par cœur pour l'examen — le FOSS repose sur quatre libertés :
+        <ul class="detail-list">
+          <li><strong>Utiliser</strong> le logiciel pour n'importe quel usage.</li>
+          <li><strong>Étudier</strong> comment il fonctionne (donc avoir accès au code source).</li>
+          <li><strong>Modifier</strong> le logiciel selon ses besoins.</li>
+          <li><strong>Redistribuer</strong> des copies, modifiées ou non.</li>
+        </ul>
+      </dd>
+
+      <dt>Les licences GPL, BSD, MIT</dt>
+      <dd>Ce sont les contrats juridiques qui rendent ces quatre libertés légalement contraignantes :
+        <ul class="detail-list">
+          <li><strong>GPL</strong> (GNU General Public License) : la plus « protectrice » — si tu modifies et redistribues un logiciel sous GPL, ta version modifiée doit <em>aussi</em> rester sous GPL (effet « copyleft » ou « viral »). Cela empêche une entreprise de prendre du code libre, de le fermer, et de le revendre en propriétaire.</li>
+          <li><strong>BSD</strong> et <strong>MIT</strong> : des licences beaucoup plus permissives — tu peux prendre le code, le modifier, et même le revendre en logiciel propriétaire fermé, sans obligation de partager tes modifications. Elles exigent généralement juste de garder la mention de copyright originale.</li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">Comment se gouvernent les communautés open source ?</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">C'est le cœur du lien avec le thème de « gouvernance » du cours : un projet FOSS n'a pas de PDG qui décide tout — alors comment ça fonctionne ?</p>
+    <ul class="detail-list">
+      <li>Les projets sont développés par un mélange de <strong>bénévoles</strong> et de <strong>développeurs salariés</strong> (souvent payés par des entreprises qui ont intérêt à ce que le projet continue).</li>
+      <li>La coordination repose sur des <strong>mainteneurs</strong> (des personnes de confiance qui décident quel code est accepté dans le projet), des <strong>comités techniques</strong>, ou des <strong>fondations</strong>, selon les projets.</li>
+      <li>Les règles de participation varient énormément d'un projet à l'autre — certains sont très hiérarchiques (un « dictateur bienveillant » qui a le dernier mot), d'autres sont plus démocratiques.</li>
+      <li>L'objectif commun de toute cette gouvernance : assurer la <strong>qualité</strong> du code, la <strong>pérennité</strong> du projet dans le temps, et la <strong>coordination</strong> entre des milliers de contributeurs dispersés dans le monde.</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Le rôle des entreprises dans l'open source</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">Un point souvent mal compris : l'open source n'est pas « anti-entreprise ». Les entreprises y jouent un rôle central :</p>
+    <ul class="detail-list">
+      <li>Elles <strong>financent des projets</strong> ou <strong>emploient des développeurs</strong> qui y contribuent à temps plein (par exemple, Google paie des employés pour contribuer au noyau Linux).</li>
+      <li>Elles utilisent le logiciel libre comme <strong>fondation gratuite</strong> pour construire leurs propres produits (économie d'argent en développement).</li>
+      <li>Modèles économiques courants : vendre du <strong>support technique</strong>, des <strong>services</strong> autour du logiciel gratuit, ou une <strong>double licence</strong> (une version gratuite/libre, et une version commerciale avec des fonctionnalités payantes).</li>
+      <li>Les entreprises concurrentes peuvent même <strong>collaborer</strong> ensemble au sein de <strong>consortiums neutres</strong> (comme la Linux Foundation) sur des projets communs, tout en se faisant concurrence ailleurs — la leçon clé : <strong>coopération et concurrence peuvent coexister</strong>.</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Les fondations et modèles de gouvernance</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>Pourquoi créer une fondation ?</dt>
+      <dd>Une fondation à but non lucratif permet de gérer un projet <strong>indépendamment</strong> d'une seule entreprise — ça rassure les contributeurs et les entreprises partenaires (aucune entreprise ne peut « prendre le contrôle » unilatéralement du projet).</dd>
+      <dt>Modèles centrés sur les développeurs : Debian, Apache</dt>
+      <dd>Ces projets privilégient la gouvernance par les <strong>développeurs eux-mêmes</strong> via des processus démocratiques internes (votes, chartes techniques), avec moins d'influence directe des intérêts commerciaux.</dd>
+      <dt>Modèles avec participation directe des entreprises : Linux Foundation, Eclipse, GNOME, KDE</dt>
+      <dd>Ici, des entreprises membres (souvent en payant une cotisation) participent directement aux décisions stratégiques, siègent aux conseils d'administration, tout en gardant les libertés du logiciel libre pour l'ensemble des utilisateurs.</dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">Réflexion en classe : Logiciel propriétaire vs Logiciel libre</h3>
+  <p class="lead">Le cours propose une comparaison directe entre deux entreprises fictives pour faire réfléchir sur les avantages/inconvénients réels.</p>
+  <table class="compare">
+    <tr><th>Entreprise A — Propriétaire</th><th>Entreprise B — Libre (open source)</th></tr>
+    <tr><td>Code source fermé, accessible seulement aux employés</td><td>Code source ouvert, accessible à tous</td></tr>
+    <tr><td>Vulnérabilités détectées et corrigées à l'interne uniquement</td><td>Vulnérabilités signalées et corrigées par toute la communauté mondiale</td></tr>
+    <tr><td>Revenus via licence commerciale (vente directe du logiciel)</td><td>Revenus via support technique, services, fonctionnalités payantes</td></tr>
+  </table>
+
+  <div class="reflexion">
+    <span class="rlabel">Réponses aux questions posées</span>
+    <div class="a">
+      <strong>Qui innove le plus rapidement ?</strong> Généralement l'open source (B) : n'importe qui dans le monde peut proposer une amélioration, ce qui multiplie le nombre de « cerveaux » qui travaillent sur le projet en parallèle — c'est l'argument central de l'« effet bazar » (par opposition à la « cathédrale » fermée d'un seul groupe).<br><br>
+      <strong>Qui a le moins de vulnérabilités de sécurité ?</strong> C'est débattu : en théorie, l'open source (B) permet à plus de personnes de trouver des failles (« avec suffisamment d'yeux, tous les bugs sont superficiels » — la loi de Linus). Mais en pratique, un code fermé (A) offre aussi une sécurité par obscurité, et un projet open source mal maintenu peut avoir des failles qui traînent des années sans être corrigées (voir la faille Heartbleed d'OpenSSL, un cas classique).<br><br>
+      <strong>Qui détecte et corrige le plus rapidement les failles ?</strong> Souvent B, grâce à la communauté qui peut réagir en parallèle, sans dépendre du cycle de développement interne d'une seule entreprise.<br><br>
+      <strong>Qui est le plus rentable ?</strong> Dépend du modèle d'affaires : A a un revenu direct et prévisible (licence). B doit construire un modèle plus complexe (support, services) mais peut avoir une adoption beaucoup plus large (donc plus de clients potentiels pour les services payants) grâce à la gratuité de base.<br><br>
+      <strong>Lequel choisir pour un logiciel utilisé dans un hôpital ?</strong> C'est la question la plus riche : dans un contexte à haut risque (vies humaines en jeu), l'argument pour le libre (B) est la <strong>transparence auditable</strong> — des experts en sécurité indépendants peuvent vérifier exactement ce que fait le code, sans devoir « faire confiance » à une entreprise. L'argument pour le propriétaire (A) est la <strong>responsabilité claire</strong> : en cas de problème, il y a une entreprise identifiable et légalement responsable (avec un contrat de support garanti), alors qu'un projet communautaire bénévole n'a parfois aucune obligation contractuelle de réactivité. En pratique, beaucoup d'hôpitaux utilisent des logiciels libres <em>avec un contrat de support commercial</em> — combinant la transparence du code et la responsabilité contractuelle.
+    </div>
+  </div>
+
+  <div class="quiz" data-quiz>
+    <div class="qtitle">Question rapide — Logiciel libre</div>
+    <p style="font-size:14px; color:var(--ink-dim); margin-top:-6px;">Quelle licence oblige une version modifiée et redistribuée à rester elle aussi sous licence libre (effet « copyleft ») ?</p>
+    <div class="opts">
+      <button class="opt" data-correct="false">MIT</button>
+      <button class="opt" data-correct="false">BSD</button>
+      <button class="opt" data-correct="true">GPL</button>
+      <button class="opt" data-correct="false">EULA</button>
+    </div>
+    <div class="explain-box">Exact : la GPL a un effet « copyleft » — toute redistribution modifiée doit rester sous GPL. MIT et BSD sont permissives et n'imposent pas cette obligation.</div>
+  </div>
+</section>
+
+<!-- =================== SECTION 3 : SOUVERAINETÉ DES DONNÉES =================== -->
+<section class="topic t-blue" id="souverainete">
+  <div class="topic-head">
+    <span class="topic-num">03</span>
+    <h2 class="topic-title">Souveraineté des données</h2>
+  </div>
+  <span class="topic-tag">Contrôle · Confiance · Cas 23andMe</span>
+
+  <h3 class="sub">Définition et enjeux fondamentaux</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>« Les données sont devenues un actif stratégique »</dt>
+      <dd>Une donnée n'a pas de valeur toute seule dans un coin — sa valeur émerge quand elle est <strong>utilisée, partagée et réutilisée</strong> (par exemple, croiser des données de santé avec des données géographiques pour repérer une épidémie).</dd>
+
+      <dt>Souveraineté des données — définition centrale</dt>
+      <dd>C'est la capacité de garder le <strong>contrôle</strong> sur ses données : décider <em>qui</em> peut les utiliser, <em>comment</em>, et <em>dans quelles conditions</em>. Le mot « souveraineté » est emprunté au vocabulaire politique (la souveraineté d'un État) pour souligner l'idée d'un pouvoir de décision qui reste entre les mains du propriétaire des données, même quand elles circulent.</dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">Pourquoi c'est important : l'équilibre ouverture/protection</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <ul class="detail-list">
+      <li>Le <strong>partage des données favorise l'innovation</strong> et une meilleure prise de décision (plus de données = de meilleurs modèles, de meilleures analyses).</li>
+      <li>Mais le partage crée trois risques concrets : la <strong>perte de contrôle</strong> (une fois partagée, une donnée peut être copiée à l'infini), la <strong>mauvaise utilisation</strong> (usage détourné de l'intention initiale), et la <strong>dépendance</strong> envers certains acteurs (par exemple dépendre entièrement d'un fournisseur cloud américain pour stocker des données sensibles d'un pays).</li>
+      <li>La souveraineté cherche donc un <strong>équilibre</strong> entre ouverture des données (pour permettre les bénéfices) et protection des intérêts des acteurs concernés.</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">Les acteurs et les éléments clés du modèle</h3>
+  <div class="card explain">
+    <span class="label">Explication — modèle de Von Scherenberg et al. (2024)</span>
+    <dl class="terms">
+      <dt>Fournisseur de données vs consommateur de données</dt>
+      <dd>Deux rôles distincts dans toute transaction de données : le <strong>fournisseur</strong> est celui qui contrôle initialement les données (par exemple, un hôpital qui détient des dossiers patients) ; le <strong>consommateur</strong> est l'acteur qui souhaite les utiliser (par exemple, un chercheur ou une entreprise pharmaceutique). Les deux doivent collaborer dans un <strong>environnement de confiance</strong>, avec des règles d'utilisation clairement définies dès le départ.</dd>
+
+      <dt>Les cinq éléments clés du modèle de souveraineté des données</dt>
+      <dd>
+        <ul class="detail-list">
+          <li><strong>Actif de données</strong> : l'information elle-même, qui doit rester sous contrôle.</li>
+          <li><strong>Accords contractuels</strong> : les contrats qui définissent précisément les conditions d'accès et d'utilisation (similaire aux licences en droit d'auteur).</li>
+          <li><strong>Infrastructure de données</strong> : les systèmes techniques qui appliquent réellement les règles établies (par exemple, un système qui empêche techniquement de copier une donnée en dehors des conditions prévues).</li>
+          <li><strong>Cycle de vie des données</strong> : création → stockage → utilisation → partage → suppression. La souveraineté doit s'appliquer à <em>chaque étape</em>, pas seulement au moment de la collecte.</li>
+          <li><strong>Confiance</strong> : la base essentielle sans laquelle aucun partage de données n'est possible entre deux acteurs qui ne se connaissent pas directement.</li>
+        </ul>
+      </dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">Souveraineté et partage sécurisé</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">Un point contre-intuitif mais important : la souveraineté n'est pas l'opposé du partage — elle le <strong>facilite</strong>. Si un fournisseur de données sait qu'une infrastructure technique garantit que ses données seront utilisées exactement selon les termes convenus (et pas au-delà), il est beaucoup plus disposé à les partager. La souveraineté réduit donc les <strong>problèmes de confiance</strong> entre acteurs qui ne se connaissent pas, en permettant de contrôler à la fois <strong>l'accès</strong> aux données et <strong>leur utilisation après le partage</strong> — ce qui soutient la création d'<strong>écosystèmes de données collaboratifs</strong> (par exemple entre hôpitaux, universités et entreprises pharmaceutiques).</p>
+  </div>
+
+  <div class="reflexion">
+    <span class="rlabel">Réflexion posée en classe #3</span>
+    <div class="q">« Lorsque vous consentez à partager vos données, consentez-vous également à ce que de futurs propriétaires de l'entreprise les utilisent ? Les entreprises devraient-elles être obligées de demander à nouveau le consentement en cas de fusion ou d'acquisition ? »</div>
+    <div class="a">
+      Question ouverte, mais voici les deux angles à connaître pour l'examen :
+      <br><br>
+      <strong>Argument « non, le consentement ne suit pas automatiquement » :</strong> quand tu donnes ton consentement, c'est en te basant sur la confiance envers une entreprise spécifique — sa réputation, ses politiques de confidentialité, sa mission. Un nouvel acquéreur peut avoir des intentions, une culture d'entreprise, ou même un pays d'origine complètement différents (avec des lois de protection des données différentes). Sous cet angle, le consentement initial ne devrait pas « suivre » automatiquement la donnée vers un nouveau propriétaire — ce serait trahir l'esprit du consentement éclairé.
+      <br><br>
+      <strong>Argument « oui, un nouveau consentement devrait être obligatoire » (position renforcée par le cas 23andMe ci-dessous) :</strong> exiger un renouvellement du consentement à chaque fusion/acquisition protège mieux les utilisateurs, mais cela pourrait aussi rendre les fusions d'entreprises pratiquement impossibles si des millions d'utilisateurs devaient tous redonner leur accord — un vrai dilemme pratique qui alimente actuellement des poursuites judiciaires réelles.
+      <br><br>
+      C'est exactement le nœud du problème dans le cas <strong>23andMe</strong> détaillé plus bas.
+    </div>
+  </div>
+
+  <h3 class="sub">Étude de cas : 23andMe et la faillite</h3>
+  <div class="card explain">
+    <span class="label">Explication — source TechCrunch</span>
+    <dl class="terms">
+      <dt>Contexte de la faillite</dt>
+      <dd>23andMe est une entreprise de tests génétiques (tu envoies ta salive, ils analysent ton ADN). Sa faillite soulève une question cruciale : que devient une des bases de données génétiques les plus sensibles au monde quand l'entreprise qui la détient fait faillite ?</dd>
+
+      <dt>La réaction des clients : 15% demandent la suppression</dt>
+      <dd>Environ <strong>1,9 million de clients (15%)</strong> ont demandé la suppression de leurs données génétiques après l'annonce de la faillite — une réaction directe à la crainte que leurs données soient <strong>transférées à un nouvel acquéreur sans leur consentement</strong>. C'est un exemple concret du problème théorique de la question de réflexion ci-dessus.</dd>
+
+      <dt>La vente à Regeneron et la contestation légale</dt>
+      <dd><strong>Regeneron</strong> (une entreprise pharmaceutique) a remporté l'enchère pour acquérir 23andMe et sa base de données génétiques, dans le but d'utiliser ces données pour la <strong>découverte de nouveaux médicaments</strong>. Regeneron s'est engagée à maintenir les politiques de confidentialité existantes de 23andMe. Cependant, <strong>plus de deux douzaines d'États américains</strong> contestent cette vente devant les tribunaux, en argumentant que les données de <strong>15 millions de clients</strong> ne peuvent pas être vendues sans leur consentement explicite — ce qui est la matérialisation exacte du débat théorique posé en classe.</dd>
+
+      <dt>Le rôle de la sécurité et de la confiance</dt>
+      <dd>La faillite est survenue après une <strong>fuite de données majeure</strong> ayant exposé les informations personnelles et génétiques de <strong>6,9 millions de clients</strong>. 23andMe a attribué l'incident à l'<strong>absence d'authentification multifactorielle</strong> chez les utilisateurs (les pirates ont réutilisé des mots de passe volés ailleurs pour se connecter aux comptes — une technique appelée « credential stuffing »). L'entreprise a aussi été critiquée pour ne pas avoir suffisamment sécurisé les comptes ni détecté rapidement la violation. Cette perte de confiance a directement causé la vague de demandes de suppression — ce qui illustre parfaitement l'élément « confiance » du modèle de souveraineté des données vu plus haut : sans confiance, même une infrastructure technique parfaite ne suffit pas à retenir la coopération des utilisateurs.</dd>
+    </dl>
+  </div>
+
+  <div class="reflexion">
+    <span class="rlabel">Réflexion posée en classe #4</span>
+    <div class="q">« Si vos données génétiques pouvaient contribuer au développement de traitements contre des maladies, devraient-elles quand même être supprimées si vous en faites la demande ? Comment la société devrait-elle équilibrer la protection de la vie privée individuelle et la recherche médicale ? »</div>
+    <div class="a">
+      <strong>Argument pour la suppression obligatoire (priorité à la vie privée) :</strong> le consentement doit rester révocable en tout temps — c'est un droit fondamental de la personne sur son propre corps et son identité génétique (qui, contrairement à un mot de passe, ne peut jamais être « changée » si elle fuit). Autoriser des exceptions « pour le bien de la recherche » ouvre la porte à des abus (n'importe quelle entreprise pourrait invoquer l'intérêt scientifique pour retenir des données contre la volonté du client).
+      <br><br>
+      <strong>Argument pour des exceptions limitées (priorité à l'intérêt collectif) :</strong> les données génétiques agrégées et anonymisées ont une valeur considérable pour la recherche médicale (découverte de traitements qui bénéficient à toute la société) ; on pourrait imaginer un compromis où les données <em>déjà anonymisées et intégrées</em> dans une recherche en cours restent utilisables, alors que les données <em>identifiables</em> sont supprimées sur demande.
+      <br><br>
+      <strong>Le point d'équilibre généralement proposé :</strong> un cadre de <strong>consentement granulaire et révocable</strong> — la personne choisit explicitement, au moment du don, si ses données peuvent être utilisées pour la recherche même après une éventuelle demande de suppression du reste de son profil, plutôt qu'un choix « tout ou rien ».
+    </div>
+  </div>
+
+  <div class="quiz" data-quiz>
+    <div class="qtitle">Question rapide — Souveraineté des données</div>
+    <p style="font-size:14px; color:var(--ink-dim); margin-top:-6px;">Dans le cas 23andMe, quel est l'argument principal des États américains qui contestent la vente à Regeneron ?</p>
+    <div class="opts">
+      <button class="opt" data-correct="false">Regeneron n'a pas payé un prix suffisant lors de l'enchère</button>
+      <button class="opt" data-correct="true">Les données de 15 millions de clients ne peuvent pas être vendues sans leur consentement explicite</button>
+      <button class="opt" data-correct="false">23andMe n'avait pas le droit légal de faire faillite</button>
+      <button class="opt" data-correct="false">Regeneron n'est pas une entreprise pharmaceutique légitime</button>
+    </div>
+    <div class="explain-box">Exact : l'argument central porte sur le consentement — les États considèrent que le transfert de données génétiques aussi sensibles à un nouveau propriétaire exige l'accord explicite de chaque client, et non un simple transfert automatique via la vente d'actifs de l'entreprise.</div>
+  </div>
+</section>
+
+<!-- =================== SECTION 4 : GOUVERNANCE DES PLATEFORMES =================== -->
+<section class="topic t-violet" id="gouvernance-plateformes">
+  <div class="topic-head">
+    <span class="topic-num">04</span>
+    <h2 class="topic-title">Gouvernance des plateformes</h2>
+  </div>
+  <span class="topic-tag">Cadre de Gorwa (2019)</span>
+
+  <h3 class="sub">Le cadre conceptuel de Gorwa : trois façons de voir une plateforme</h3>
+  <div class="card explain">
+    <span class="label">Explication — d'après Gorwa, "What is platform governance?" (2019)</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">C'est le modèle théorique central de cette section : Gorwa propose que la « gouvernance des plateformes » doit être comprise sous <strong>trois angles simultanés</strong>, parce qu'une plateforme comme Facebook ou YouTube joue trois rôles à la fois. Ce n'est pas une plateforme <em>ou</em> un régulateur <em>ou</em> une entreprise — c'est <strong>les trois en même temps</strong>, et c'est cette triple nature qui rend leur gouvernance si complexe.</p>
+  </div>
+
+  <h3 class="sub">1. Les plateformes gouvernent les utilisateurs</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <dl class="terms">
+      <dt>Comment une plateforme exerce un pouvoir de gouvernance</dt>
+      <dd>Les plateformes influencent les comportements de leurs utilisateurs par des moyens qui ressemblent à une forme de pouvoir politique, sans passer par des lois traditionnelles :
+        <ul class="detail-list">
+          <li><strong>Algorithmes</strong> : décident quel contenu tu vois en premier, ce qui façonne ton attention et ton opinion.</li>
+          <li><strong>Interfaces</strong> : les choix de conception (design) orientent subtilement le comportement — par exemple, rendre le bouton « partager » plus visible que le bouton « signaler ».</li>
+          <li><strong>Politiques de contenu</strong> : les règles de modération déterminent ce qui est autorisé ou supprimé.</li>
+        </ul>
+      </dd>
+
+      <dt>« Le code est la loi » (Lawrence Lessig)</dt>
+      <dd>Concept clé à retenir : sur une plateforme, ce n'est pas une loi votée par un parlement qui régule ton comportement, mais littéralement le <strong>code informatique</strong> — les choix techniques deviennent des mécanismes de régulation aussi puissants qu'une loi. Si le code ne permet pas de faire quelque chose (par exemple, modifier un message déjà envoyé), cette « règle » s'applique automatiquement à tous, sans procès ni recours possible, contrairement à une vraie loi.</dd>
+
+      <dt>Contrôle de la visibilité et biais de conception</dt>
+      <dd>Les plateformes contrôlent qui voit quoi, et à quelle fréquence — ce qui équivaut à un contrôle sur l'accès à l'information à l'échelle de la société. Les choix de conception peuvent aussi, de façon non-intentionnelle ou intentionnelle, <strong>renforcer des biais sociaux ou des discriminations</strong> existants (par exemple, un algorithme de recommandation d'emploi qui reproduit des inégalités historiques — un lien direct avec les enjeux d'IA et de biais vus ailleurs dans le cours).</dd>
+    </dl>
+  </div>
+
+  <h3 class="sub">2. Les plateformes sont aussi gouvernées</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">C'est l'inverse du point précédent : les plateformes ne sont pas des puissances absolues — elles sont elles-mêmes soumises à des forces externes.</p>
+    <ul class="detail-list">
+      <li>Les <strong>gouvernements</strong> imposent des règles (lois nationales et internationales) qui encadrent directement leurs activités.</li>
+      <li>Des <strong>autorités de régulation</strong> spécialisées surveillent trois grands domaines : la <strong>concurrence</strong> (empêcher les monopoles abusifs), la <strong>protection des données</strong> (comme les lois de type RGPD), et le contenu.</li>
+      <li>Des acteurs <strong>non gouvernementaux</strong> — organisations de défense des droits numériques, chercheurs universitaires, journalistes — renforcent la <strong>reddition de comptes</strong> (accountability) en dénonçant publiquement les abus, même sans pouvoir légal direct.</li>
+      <li>Conclusion clé : la gouvernance résulte d'<strong>interactions entre plusieurs acteurs</strong>, sans qu'aucun ne domine totalement — ni les gouvernements, ni les plateformes elles-mêmes.</li>
+    </ul>
+  </div>
+
+  <h3 class="sub">3. Les plateformes sont des entreprises</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <p style="color:var(--ink-dim); font-size:14.5px; margin-top:0;">Le troisième angle, souvent oublié dans les débats publics : derrière les enjeux de société, une plateforme reste une <strong>multinationale à but lucratif</strong>. Elle est donc soumise aux mêmes mécanismes de <strong>gouvernance d'entreprise</strong> classiques que n'importe quelle grande société : influence des <strong>employés</strong> (grèves internes, démissions collectives pour protester contre une décision), des <strong>investisseurs</strong> (pression pour la rentabilité ou, parfois, pour des pratiques plus responsables), et des attentes croissantes en matière de <strong>responsabilité sociale</strong> de la part du public et des médias.</p>
+  </div>
+
+  <h3 class="sub">Synthèse : les défis de la gouvernance des plateformes</h3>
+  <div class="card explain">
+    <span class="label">Explication</span>
+    <ul class="detail-list">
+      <li>Les plateformes soulèvent des enjeux fondamentaux liés à la <strong>liberté d'expression</strong> et à la <strong>participation démocratique</strong> (qui peut parler, à qui, et qui décide de ce qui est censuré).</li>
+      <li>Les responsabilités sont <strong>partagées</strong> entre les trois acteurs vus plus haut : plateformes, utilisateurs, gouvernements — aucun n'assume seul la responsabilité totale.</li>
+      <li>Les modèles de gouvernance évoluent entre trois options : l'<strong>autorégulation</strong> (la plateforme fixe elle-même ses règles), la <strong>réglementation publique</strong> (l'État impose des lois), et la <strong>co-régulation</strong> (un mélange des deux, souvent vu comme le compromis le plus réaliste aujourd'hui).</li>
+      <li>L'enjeu final : trouver un <strong>équilibre entre innovation, responsabilité et protection des droits</strong> — ce qui relie directement ce thème à la gouvernance de l'information dans son ensemble, le fil conducteur de toute la séance 9.</li>
+    </ul>
+  </div>
+
+  <div class="quiz" data-quiz>
+    <div class="qtitle">Question rapide — Gouvernance des plateformes</div>
+    <p style="font-size:14px; color:var(--ink-dim); margin-top:-6px;">Selon le cadre de Gorwa, laquelle de ces affirmations décrit le mieux la nature des plateformes numériques ?</p>
+    <div class="opts">
+      <button class="opt" data-correct="false">Elles sont uniquement des outils technologiques neutres, sans pouvoir de gouvernance</button>
+      <button class="opt" data-correct="false">Elles sont exclusivement contrôlées par les gouvernements</button>
+      <button class="opt" data-correct="true">Elles gouvernent les utilisateurs, sont elles-mêmes gouvernées, et sont aussi des entreprises — les trois à la fois</button>
+      <button class="opt" data-correct="false">Elles ne poursuivent aucun objectif commercial</button>
+    </div>
+    <div class="explain-box">Exact : c'est la thèse centrale de Gorwa — la complexité de la gouvernance des plateformes vient précisément du fait qu'elles occupent ces trois rôles simultanément, ce qui les distingue des entreprises traditionnelles.</div>
+  </div>
+</section>
+
+</div>
+
+<!-- =================== EXAM PREP =================== -->
+<section class="exam" id="examen">
+  <div class="wrap" style="padding:0;">
+    <div class="topic-head">
+      <span class="topic-num" style="color:var(--ink-faint)">05</span>
+      <h2 class="topic-title" style="color:#fff;">Préparation à l'examen</h2>
+    </div>
+    <p class="lead">Questions probables à partir du contenu de cette séance — clique pour révéler la réponse. Essaie de répondre mentalement avant de cliquer.</p>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q1</span>Quelle est la différence entre droits moraux et droits économiques en droit d'auteur ?</span></summary>
+      <div class="answer">Les <strong>droits économiques</strong> (reproduction, diffusion, adaptation) peuvent être cédés ou vendus à un tiers (un éditeur, un studio). Les <strong>droits moraux</strong> (paternité, respect de l'œuvre) restent toujours attachés à l'auteur original et ne peuvent jamais être cédés, même si les droits économiques le sont entièrement.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q2</span>Pourquoi le droit d'auteur classique pose-t-il un problème pour les œuvres générées par IA ?</span></summary>
+      <div class="answer">Le droit d'auteur exige traditionnellement un <strong>auteur humain</strong>. Une œuvre générée sans intervention créative humaine suffisante risque de ne pas être protégeable et de tomber automatiquement dans le domaine public — ce qui décourage l'investissement des entreprises d'IA, puisqu'elles ne peuvent pas s'assurer un monopole exclusif sur ce que leur système produit.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q3</span>Explique la doctrine du « work made for hire » et pourquoi elle est proposée comme solution pour l'IA.</span></summary>
+      <div class="answer">C'est une doctrine existante qui attribue légalement le droit d'auteur à l'<strong>employeur</strong> plutôt qu'à l'employé quand une œuvre est créée dans le cadre d'un emploi. Appliquée à l'IA, elle traiterait l'IA comme un simple outil/« employé », et attribuerait l'auteur légal au programmeur ou au propriétaire de l'IA — ce qui évite d'accorder des droits à une entité non humaine, tout en gardant un titulaire humain clair, une durée de protection définie, et une meilleure transparence sur le rôle de l'IA.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q4</span>Quels sont les trois critères principaux du fair use (usage équitable) ?</span></summary>
+      <div class="answer">(1) L'<strong>usage transformateur</strong> — est-ce que le nouvel usage ajoute un sens ou une fonction nouvelle ? (2) La <strong>finalité</strong> — recherche, innovation, éducation vs usage purement commercial. (3) L'<strong>impact sur le marché</strong> de l'œuvre originale — est-ce que ce nouvel usage nuit financièrement à l'auteur en se substituant à son œuvre ?</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q5</span>D'après les décisions judiciaires de 2025, quelle distinction est devenue centrale pour juger de la légalité de l'entraînement d'un modèle d'IA ?</span></summary>
+      <div class="answer">La <strong>provenance des données</strong> : entraîner un modèle sur des œuvres <strong>légalement acquises</strong> peut relever du fair use (usage transformateur), alors qu'utiliser des <strong>contenus piratés ou obtenus illégalement</strong> est fortement condamné, peu importe l'usage qui en est fait ensuite. De plus, l'entraînement seul ne suffit pas à prouver une violation : il faut démontrer une copie identifiable ou une sortie très similaire à l'œuvre originale.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q6</span>Quelles sont les quatre libertés fondamentales du logiciel libre (FOSS) ?</span></summary>
+      <div class="answer"><strong>Utiliser</strong> le logiciel pour n'importe quel usage, <strong>étudier</strong> comment il fonctionne (accès au code source), <strong>modifier</strong> le logiciel, et <strong>redistribuer</strong> des copies modifiées ou non.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q7</span>Quelle est la différence pratique entre une licence GPL et une licence MIT/BSD ?</span></summary>
+      <div class="answer">La <strong>GPL</strong> a un effet « copyleft » : toute version modifiée et redistribuée doit rester sous licence GPL (donc rester libre). Les licences <strong>MIT/BSD</strong> sont permissives : elles autorisent même la fermeture du code en logiciel propriétaire commercial dans une version modifiée, sans obligation de repartager le code source.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q8</span>Définis la souveraineté des données et nomme ses cinq éléments clés.</span></summary>
+      <div class="answer">La souveraineté des données est la capacité à garder le contrôle sur ses données : décider qui peut les utiliser, comment, et sous quelles conditions. Ses cinq éléments clés : <strong>actif de données</strong>, <strong>accords contractuels</strong>, <strong>infrastructure de données</strong>, <strong>cycle de vie des données</strong> (création, stockage, utilisation, partage, suppression), et <strong>confiance</strong>.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q9</span>Dans le cas 23andMe, pourquoi les États américains contestent-ils la vente à Regeneron ?</span></summary>
+      <div class="answer">Parce que les données génétiques de <strong>15 millions de clients</strong> ne peuvent, selon eux, pas être vendues à un nouvel acquéreur sans le <strong>consentement explicite</strong> de chaque client — même si l'entreprise Regeneron s'engage à maintenir les politiques de confidentialité existantes. C'est un exemple concret du problème du consentement en cas de fusion/acquisition.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q10</span>Selon le cadre de Gorwa, quelles sont les trois façons dont les plateformes numériques doivent être comprises simultanément ?</span></summary>
+      <div class="answer">(1) Les plateformes <strong>gouvernent les utilisateurs</strong> (via algorithmes, interfaces, modération — « le code est la loi »). (2) Les plateformes sont elles-mêmes <strong>gouvernées</strong> (par les gouvernements, régulateurs, société civile). (3) Les plateformes sont aussi des <strong>entreprises</strong> soumises aux mécanismes classiques de gouvernance corporative (employés, investisseurs, responsabilité sociale).</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q11</span>Qu'est-ce que l'expression « le code est la loi » signifie dans le contexte de la gouvernance des plateformes ?</span></summary>
+      <div class="answer">Ça signifie que les choix techniques de conception d'une plateforme (ce que le code permet ou empêche de faire) agissent comme un mécanisme de régulation aussi contraignant qu'une véritable loi — sauf que ces « règles » sont décidées unilatéralement par l'entreprise qui code la plateforme, sans processus démocratique ni recours judiciaire traditionnel.</div>
+    </details>
+
+    <details class="exam-item">
+      <summary><span><span class="qnum">Q12</span>Quels sont les trois grands modèles de régulation des plateformes évoqués en conclusion ?</span></summary>
+      <div class="answer">L'<strong>autorégulation</strong> (la plateforme fixe elle-même ses règles), la <strong>réglementation publique</strong> (l'État impose des lois contraignantes), et la <strong>co-régulation</strong> (un mélange des deux, souvent présenté comme le compromis le plus réaliste).</div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  INM6000 — Informatique et société · Guide d'étude généré à partir des diapositives de la Séance 9 (D. Demirag, UQAM, Été 2026)
+</footer>
+
+<a href="#" class="backtop" id="backtop">↑</a>
+
+<script>
+  // Quiz interactivity
+  document.querySelectorAll('[data-quiz]').forEach(function(quiz){
+    var opts = quiz.querySelectorAll('.opt');
+    var explainBox = document.createElement('div');
+    explainBox.className = 'explain-box';
+    var srcExplain = quiz.querySelector('.explain-box');
+    opts.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        if(quiz.dataset.answered) return;
+        quiz.dataset.answered = "true";
+        opts.forEach(function(b){
+          if(b.dataset.correct === "true"){ b.classList.add('correct'); }
+          else if (b === btn){ b.classList.add('wrong'); }
+        });
+        if(srcExplain){ srcExplain.classList.add('show'); }
+      });
+    });
+  });
+
+  // Back to top button
+  var backtop = document.getElementById('backtop');
+  window.addEventListener('scroll', function(){
+    if(window.scrollY > 600){ backtop.classList.add('show'); }
+    else { backtop.classList.remove('show'); }
+  });
+</script>
+
+</body>
+</html>

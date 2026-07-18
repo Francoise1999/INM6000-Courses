@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Séance 10 : IA, identité et perception</title>
+<style>
+  :root{
+    --bg: #0b0d12;
+    --bg-panel: #12151d;
+    --bg-panel-2: #171b25;
+    --line: #262c3a;
+    --text: #e7e9ee;
+    --text-dim: #9aa3b5;
+    --accent: #7ee3c9;      /* signal teal - "visibilité" */
+    --accent-2: #d68fff;    /* violet - "soi algorithmique" */
+    --accent-3: #ffb454;    /* amber - alerte/éthique */
+    --mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 15% 0%, rgba(126,227,201,.06), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(214,143,255,.06), transparent 45%),
+      var(--bg);
+    color:var(--text);
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    line-height:1.65;
+    font-size:17px;
+  }
+  h1,h2,h3,.eyebrow,.nav,.pill,.term-name,button{
+    font-family: 'Space Grotesk', 'Segoe UI', system-ui, sans-serif;
+  }
+  a{color:var(--accent);}
+
+  /* ---- header / hero ---- */
+  header.hero{
+    position:relative;
+    padding:90px 8vw 70px;
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
+  }
+  .scanline{
+    position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background: repeating-linear-gradient(180deg, rgba(255,255,255,.015) 0px, rgba(255,255,255,.015) 1px, transparent 1px, transparent 3px);
+  }
+  .eyebrow{
+    color:var(--accent); text-transform:uppercase; letter-spacing:.18em;
+    font-size:.78rem; font-weight:600; margin-bottom:18px; display:flex; gap:10px; align-items:center;
+  }
+  .eyebrow::before{content:"◆"; color:var(--accent-2); font-size:.7rem;}
+  h1{
+    font-size:clamp(2.1rem, 4.5vw, 3.6rem);
+    line-height:1.05; margin:0 0 22px; font-weight:600; letter-spacing:-.01em;
+    max-width:14ch;
+  }
+  h1 em{ font-style:normal; color:var(--accent-2); }
+  .hero-sub{ color:var(--text-dim); max-width:62ch; font-size:1.08rem; }
+  .meta-row{
+    display:flex; flex-wrap:wrap; gap:12px; margin-top:32px;
+  }
+  .pill{
+    border:1px solid var(--line); border-radius:100px; padding:7px 16px;
+    font-size:.78rem; color:var(--text-dim); background:var(--bg-panel);
+  }
+  .pill b{color:var(--text);}
+
+  /* ---- nav ---- */
+  nav.toc{
+    position:sticky; top:0; z-index:50;
+    background:rgba(11,13,18,.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding:14px 8vw; display:flex; gap:22px; flex-wrap:wrap; font-size:.82rem;
+  }
+  nav.toc a{ color:var(--text-dim); text-decoration:none; font-weight:500; white-space:nowrap;}
+  nav.toc a:hover{ color:var(--accent); }
+
+  main{ padding:10px 8vw 40px; max-width:980px; margin:0 auto; }
+
+  section.block{ padding:64px 0; border-bottom:1px solid var(--line); }
+  section.block:last-of-type{ border-bottom:none; }
+
+  .tag{
+    display:inline-block; font-family:var(--mono); font-size:.72rem;
+    color:var(--bg); background:var(--accent); padding:3px 10px; border-radius:4px;
+    margin-bottom:14px; letter-spacing:.05em;
+  }
+  .tag.violet{ background:var(--accent-2); }
+  .tag.amber{ background:var(--accent-3); }
+
+  h2{ font-size:1.9rem; margin:0 0 8px; font-weight:600; }
+  h2 .num{ color:var(--text-dim); font-weight:400; margin-right:10px; font-family:var(--mono); font-size:1.2rem;}
+  .lede{ color:var(--text-dim); font-size:1.05rem; max-width:70ch; margin-bottom:36px; }
+
+  .concept{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:26px 28px; margin:22px 0;
+  }
+  .concept.glow-teal{ border-color:rgba(126,227,201,.35); }
+  .concept.glow-violet{ border-color:rgba(214,143,255,.35); }
+  .concept.glow-amber{ border-color:rgba(255,180,84,.35); }
+  .term-name{
+    font-weight:700; font-size:1.05rem; color:var(--text); margin-bottom:6px; display:block;
+  }
+  .concept p{ margin:8px 0; color:var(--text); }
+  .concept p.def{ color:var(--text-dim); font-style:italic; }
+
+  .quote{
+    border-left:3px solid var(--accent-2); padding:14px 22px; margin:26px 0;
+    background:var(--bg-panel-2); border-radius:0 10px 10px 0; font-style:italic; color:var(--text);
+  }
+  .quote cite{ display:block; margin-top:10px; font-style:normal; font-size:.8rem; color:var(--text-dim); font-family:var(--mono);}
+
+  .source-link{ font-size:.78rem; color:var(--text-dim); font-family:var(--mono); word-break:break-all; }
+
+  ul.explain{ padding-left:22px; }
+  ul.explain li{ margin-bottom:10px; }
+
+  .think-box{
+    background:linear-gradient(135deg, rgba(214,143,255,.08), rgba(126,227,201,.05));
+    border:1px dashed rgba(214,143,255,.4); border-radius:12px; padding:22px 26px; margin:30px 0;
+  }
+  .think-box .tag{ background:transparent; color:var(--accent-2); border:1px solid var(--accent-2); padding:2px 10px;}
+  .think-box h4{ margin:10px 0 8px; font-family:'Space Grotesk',sans-serif; font-size:1.05rem;}
+  .think-box p{ color:var(--text-dim); margin:0; }
+
+  table.compare{
+    width:100%; border-collapse:collapse; margin:20px 0; font-size:.92rem;
+  }
+  table.compare th, table.compare td{
+    border:1px solid var(--line); padding:10px 14px; text-align:left; vertical-align:top;
+  }
+  table.compare th{ background:var(--bg-panel-2); color:var(--accent); font-family:'Space Grotesk',sans-serif; font-size:.82rem; text-transform:uppercase; letter-spacing:.05em;}
+
+  .flow{ display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:24px 0; }
+  .flow .step{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:8px; padding:10px 16px;
+    font-family:var(--mono); font-size:.85rem; color:var(--text);
+  }
+  .flow .arrow{ color:var(--accent-2); font-size:1.1rem; }
+
+  /* quiz */
+  .quiz-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:12px;
+    padding:24px 26px; margin:18px 0;
+  }
+  .quiz-q{ font-weight:600; margin-bottom:14px; font-family:'Space Grotesk',sans-serif; font-size:1rem;}
+  .quiz-q .qn{ color:var(--accent); font-family:var(--mono); margin-right:8px;}
+  .opt{
+    display:block; width:100%; text-align:left; background:var(--bg-panel-2);
+    border:1px solid var(--line); color:var(--text); padding:12px 16px; border-radius:8px;
+    margin-bottom:10px; cursor:pointer; font-family:'Source Serif 4', serif; font-size:.95rem;
+    transition:.15s;
+  }
+  .opt:hover{ border-color:var(--accent); }
+  .opt.correct{ border-color:var(--accent); background:rgba(126,227,201,.12); }
+  .opt.wrong{ border-color:#e5636b; background:rgba(229,99,107,.12); }
+  .feedback{ margin-top:10px; font-size:.88rem; color:var(--text-dim); display:none; }
+  .feedback.show{ display:block; }
+
+  .exam-list{ counter-reset: examq; padding-left:0; list-style:none; }
+  .exam-list li{
+    counter-increment: examq; margin-bottom:18px; padding:18px 20px 18px 52px; position:relative;
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+  }
+  .exam-list li::before{
+    content: counter(examq); position:absolute; left:16px; top:16px;
+    width:26px; height:26px; border-radius:50%; background:var(--accent-3); color:#0b0d12;
+    display:flex; align-items:center; justify-content:center; font-family:var(--mono); font-weight:700; font-size:.85rem;
+  }
+  details{ margin-top:10px; }
+  summary{ color:var(--accent); cursor:pointer; font-family:'Space Grotesk',sans-serif; font-size:.85rem; }
+  details p{ color:var(--text-dim); margin-top:10px; }
+
+  footer{
+    padding:50px 8vw 80px; text-align:center; color:var(--text-dim); font-size:.85rem;
+  }
+
+  @media (max-width:640px){
+    header.hero{padding:60px 6vw 44px;}
+    nav.toc{padding:12px 6vw; gap:14px;}
+    main{padding:0 6vw 40px;}
+    .concept{padding:20px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="scanline"></div>
+  <div class="eyebrow">INM6000 — Informatique et société · UQAM Été 2026</div>
+  <h1>Séance 10 — Intelligence artificielle, <em>identité</em> et perception</h1>
+  <p class="hero-sub">Guide d'étude détaillé : le soi façonné par les algorithmes, la visibilité comme pouvoir, la vision artificielle comme acte politique, et l'informatique affective. Chaque concept expliqué en profondeur, terme par terme — plus les consignes du rapport final et un quiz de préparation à l'examen.</p>
+  <div class="meta-row">
+    <span class="pill">Professeure : <b>Didem Demirag</b></span>
+    <span class="pill">Cours du <b>7 juillet 2026</b></span>
+    <span class="pill">72 diapositives</span>
+    <span class="pill">Rapport final dû le <b>9 août 2026, 23h59</b></span>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#soi">1. Soi algorithmique</a>
+  <a href="#visibilite">2. Visibilité algorithmique</a>
+  <a href="#vision">3. Vision artificielle</a>
+  <a href="#affective">4. Informatique affective</a>
+  <a href="#rapport">5. Rapport final</a>
+  <a href="#quiz">Quiz interactif</a>
+  <a href="#examen">Questions d'examen</a>
+</nav>
+
+<main>
+
+<!-- ============ SECTION 1 : SOI ALGORITHMIQUE ============ -->
+<section class="block" id="soi">
+  <span class="tag violet">Concept 1</span>
+  <h2><span class="num">01</span>Le Soi algorithmique</h2>
+  <p class="lede">L'idée centrale : notre identité n'est plus façonnée uniquement par la société, la famille et l'introspection — elle est désormais coproduite par des systèmes d'IA qui nous observent, nous catégorisent et nous renvoient une image de nous-mêmes.</p>
+
+  <div class="quote">
+    « Le Soi algorithmique fait référence à une forme d'identité médiée numériquement dans laquelle la conscience personnelle, les préférences et même les schémas émotionnels sont façonnés par un retour continu des systèmes d'IA. »
+    <cite>Source citée dans le cours — pmc.ncbi.nlm.nih.gov/articles/PMC12289686</cite>
+  </div>
+
+  <p><strong>Décortiquons cette définition, mot par mot :</strong></p>
+  <ul class="explain">
+    <li><strong>« Identité médiée numériquement »</strong> — ton identité ne se construit plus seulement en te regardant dans un miroir ou en parlant à tes proches ; elle passe désormais par un intermédiaire technique (une app, un algorithme) qui filtre, interprète et te renvoie une version de toi-même.</li>
+    <li><strong>« Conscience personnelle, préférences, schémas émotionnels »</strong> — ce ne sont pas seulement tes goûts musicaux qui sont analysés : ce sont aussi tes humeurs, tes cycles émotionnels, ta manière de réagir — tout devient de la donnée exploitable.</li>
+    <li><strong>« Retour continu » (feedback loop)</strong> — le mécanisme clé : l'IA t'observe → te catégorise → te renvoie une suggestion (une chanson, un contenu, un conseil bien-être) → tu réagis à cette suggestion → l'IA apprend et ajuste. C'est une boucle, pas un miroir statique.</li>
+  </ul>
+
+  <div class="concept glow-violet">
+    <span class="term-name">Co-construction de l'identité</span>
+    <p class="def">L'idée que l'IA ne fait pas que refléter passivement qui tu es — elle participe activement à définir qui tu deviens.</p>
+    <p>Exemple concret donné en cours : <strong>Spotify Wrapped</strong>. Chaque décembre, l'algorithme te dit « voici qui tu es musicalement cette année ». Ce n'est pas un simple résumé neutre : cette rétrospective algorithmique influence la façon dont tu te perçois toi-même à travers tes choix musicaux. Tu commences peut-être même à choisir ta musique en pensant à quoi ressemblera ton "Wrapped" — la prédiction change le comportement qu'elle est censée seulement décrire.</p>
+  </div>
+
+  <div class="concept glow-violet">
+    <span class="term-name">Introspection externalisée</span>
+    <p class="def">Le glissement où l'auto-connaissance (savoir qui je suis) n'est plus un travail intérieur, mais un produit fourni par une machine.</p>
+    <p>Traditionnellement, on se connaît soi-même par la <strong>méditation</strong>, le <strong>journal intime</strong>, la conversation avec des proches. Le cours souligne que cette tâche est <strong>déléguée</strong> aux systèmes algorithmiques : les chatbots thérapeutiques et les apps de suivi de l'humeur font maintenant ce travail de réflexion à ta place. L'auto-connaissance devient un « résumé de données » plutôt qu'une réflexion vécue.</p>
+  </div>
+
+  <div class="think-box">
+    <span class="tag">Risque identifié dans le cours</span>
+    <h4>Dépendance et perte de l'auto-conscience émotionnelle</h4>
+    <p>Trop de confiance envers les algorithmes peut nuire à la réflexion personnelle et à la mémoire. Il y a aussi un <strong>détachement émotionnel</strong> possible : si je laisse toujours une app me dire ce que je ressens, je risque de m'éloigner de mes émotions authentiques et de devenir dépendant de la technologie pour les comprendre. Le cours nuance cependant : utilisée correctement, l'IA peut aussi soutenir l'introspection (ex. outils de suivi émotionnel, assistance thérapeutique) — ce n'est pas noir ou blanc.</p>
+  </div>
+
+  <div class="concept glow-amber">
+    <span class="term-name">Implications éthiques — 3 questions clés</span>
+    <ul class="explain">
+      <li><strong>Problème existentiel :</strong> si une grande partie de ma connaissance de moi-même vient des machines, qu'est-ce que « se connaître soi-même » veut encore dire ?</li>
+      <li><strong>Authenticité :</strong> peut-on être authentique si son identité est continuellement optimisée par des algorithmes invisibles qu'on ne voit ni ne contrôle ?</li>
+      <li><strong>Littératie algorithmique :</strong> le cours insiste sur le besoin de développer une compréhension critique de la façon dont l'IA médiatise notre perception de nous-mêmes — c'est-à-dire, apprendre à repérer *quand* et *comment* un algorithme influence ce qu'on pense être « nous ».</li>
+    </ul>
+    <p style="margin-top:14px;">Et un point de pouvoir important : <strong>les systèmes algorithmiques ne sont pas neutres</strong>. Ils sont influencés par des intérêts commerciaux (vendre plus, garder ton attention), des biais culturels et des données biaisées — ce qui affecte la représentation et l'équité de ce qu'on te renvoie de toi-même.</p>
+  </div>
+
+  <div class="concept">
+    <span class="term-name">Cas pratique : <em>Follower</em> par Lauren McCarthy</span>
+    <p>Une œuvre d'art qui questionne cette dynamique : le service propose à quelqu'un un « abonné réel » pour une journée. Pour être suivi, tu dois répondre à : <em>« Pourquoi souhaitez-vous être suivi ? »</em> et <em>« Pourquoi quelqu'un devrait-il vous suivre ? »</em>. Si sélectionné, une personne te suit physiquement toute une journée, sans que tu saches quand ni qui — et à la fin, tu ne reçois qu'une seule photo de toi, prise par cette personne.</p>
+    <div class="quote" style="margin-top:16px;">
+      « Les systèmes que nous construisons — techniques ou sociaux — façonnent notre manière de vivre ensemble. [...] Il y a tant de choix de conception qui reposent sur des hypothèses quant à l'identité de l'utilisateur et à ses objectifs. »
+      <cite>Lauren McCarthy — cargocollective.com/lmccart/Follower</cite>
+    </div>
+    <p>Le point pédagogique : cette œuvre rend visible, de façon inconfortable, ce que les réseaux sociaux font déjà en silence — te transformer en objet suivi et catégorisé, selon des règles de conception qui ne sont jamais neutres.</p>
+  </div>
+</section>
+
+<!-- ============ SECTION 2 : VISIBILITE ALGORITHMIQUE ============ -->
+<section class="block" id="visibilite">
+  <span class="tag">Concept 2</span>
+  <h2><span class="num">02</span>Visibilité algorithmique</h2>
+  <p class="lede">Question posée directement dans le cours : <strong>« La visibilité est-elle toujours source de pouvoir ? »</strong> ou, inversement, <strong>« Est-ce que nous façonnons nos identités pour plaire à l'algorithme ? »</strong> Cette section trace l'histoire de la visibilité — des médias traditionnels jusqu'aux plateformes comme Facebook.</p>
+
+  <h3 style="margin-top:0;">2.1 — Les visibilités médiatiques (avant Internet)</h3>
+  <p>Avant même l'IA, les médias décidaient déjà qui/quoi était visible. Trois concepts clés à bien maîtriser (ce sont des termes d'examen classiques) :</p>
+
+  <table class="compare">
+    <tr><th>Terme</th><th>Explication simple</th></tr>
+    <tr><td><strong>Framing</strong> (cadrage)</td><td>La façon dont une information est présentée — l'angle choisi — influence comment on la comprend. Deux médias peuvent rapporter le même fait avec un cadrage complètement différent.</td></tr>
+    <tr><td><strong>Gatekeeping</strong> (filtrage)</td><td>Le rôle de « portier » : un éditeur, un journaliste ou un algorithme décide ce qui passe et ce qui est écarté avant même d'atteindre le public.</td></tr>
+    <tr><td><strong>Agenda setting</strong> (mise à l'agenda)</td><td>Les médias ne disent pas nécessairement *quoi penser*, mais ils influencent *à quoi penser* en choisissant quels sujets reçoivent de l'attention.</td></tr>
+  </table>
+
+  <p>Chaque médium produit une visibilité spécifique : la <strong>presse</strong> = visibilité contrôlée par l'édition humaine ; la <strong>radio</strong> = visibilité par le son ; la <strong>télévision/film</strong> = visibilité par les angles de caméra et les techniques visuelles. Conclusion du cours : <strong>la visibilité est médiée</strong> — le médium façonne toujours ce qui peut être vu ou entendu, et n'est jamais neutre.</p>
+
+  <h3>2.2 — La visibilité à l'ère du Web</h3>
+  <p>Avec Internet, la visibilité dépend de l'<strong>architecture logicielle</strong> — les algorithmes deviennent eux-mêmes des acteurs sociotechniques :</p>
+  <div class="concept glow-teal">
+    <span class="term-name">PageRank (Google)</span>
+    <p>Hiérarchise les pages web selon les liens entrants (qui pointe vers toi) et la réputation — plus un site respecté te cite, plus tu montes dans les résultats.</p>
+  </div>
+  <div class="concept glow-teal">
+    <span class="term-name">EdgeRank (Facebook)</span>
+    <p>L'algorithme original derrière le fil d'actualité de Facebook — il détermine quelle visibilité sociale un contenu obtient, selon des signaux comme l'affinité et l'engagement.</p>
+  </div>
+
+  <h3>2.3 — Facebook et la « menace d'invisibilité »</h3>
+  <p>C'est le cœur théorique de cette section (basé sur l'article de Bucher). Le point essentiel à retenir :</p>
+  <div class="think-box">
+    <span class="tag">Idée clé</span>
+    <h4>Un nouveau régime de peur</h4>
+    <p>Historiquement, on craignait d'être trop vu (surveillance). Sur Facebook, la peur s'inverse : ce n'est plus la peur d'être vu, mais <strong>la peur de ne pas être vu</strong> — de disparaître du fil d'actualité de ses propres amis. La visibilité devient une ressource <em>rare</em>, dépendante des logiques de la plateforme : affinité, interactions, récence.</p>
+  </div>
+  <ul class="explain">
+    <li><strong>Inégalités de visibilité :</strong> certains contenus sont favorisés, d'autres « disparaissent » du fil — sans qu'aucune règle explicite ne soit annoncée à l'utilisateur.</li>
+    <li><strong>Pouvoir algorithmique :</strong> il n'y a pas de surveillant central (pas une seule personne qui décide), mais un système dynamique et opaque — personne ne peut vraiment expliquer pourquoi *ce* post est visible et pas *cet autre*.</li>
+    <li><strong>Enjeu central :</strong> pour exister socialement ou commercialement en ligne, il faut activement optimiser sa visibilité.</li>
+  </ul>
+
+  <h3>2.4 — La visibilité comme récompense de l'interaction</h3>
+  <p>Point subtil et important : sur Facebook, <strong>la visibilité est une récompense, pas une sanction</strong>. Être visible = avoir été sélectionné par l'algorithme du News Feed. Un contenu sans interactions (likes, commentaires) est quasiment absent du Top News.</p>
+  <ul class="explain">
+    <li>Les photos et les interactions autour des photos (commentaires, likes) sont particulièrement valorisées par l'algorithme.</li>
+    <li>Le Top News crée des <strong>« histoires de communication »</strong> — par exemple « X a commenté la photo de Y » — qui sont elles-mêmes très visibles parce qu'elles génèrent de l'activité. Cela renforce un biais en boucle vers le contenu déjà interactif.</li>
+    <li>Conclusion : la visibilité repose sur la <strong>participation continue</strong> — interagir devient une condition d'existence sociale sur la plateforme.</li>
+  </ul>
+
+  <h3>2.5 — La participation comme norme sociale</h3>
+  <p>La menace d'invisibilité pousse les utilisateurs à participer pour exister socialement. Un utilisateur « utile » = celui qui participe, commente, partage, interagit ; la non-participation est punie en devenant invisible.</p>
+  <div class="concept">
+    <span class="term-name">Normalisation et popularité circulaire</span>
+    <p>Facebook met en avant les contenus très commentés/aimés, ce qui crée l'<strong>impression que « tout le monde participe »</strong> — cette simulation établit une norme de comportement social (être actif, visible, populaire). Résultat : plus on est visible, plus on attire d'interactions, ce qui renforce les hiérarchies déjà en place (popularité circulaire). L'algorithme forme donc un <strong>sujet participatif et discipliné</strong>, guidé par la quête de visibilité et de reconnaissance.</p>
+  </div>
+
+  <div class="think-box">
+    <span class="tag">Question du cours — à réfléchir</span>
+    <h4>Les réseaux sociaux réduisent-ils notre existence à des données ?</h4>
+    <p>Le cours pose cette question sans y répondre de façon tranchée — c'est un débat ouvert. Un angle possible : si ta valeur sociale (visibilité, popularité) dépend entièrement de métriques quantifiées (likes, commentaires, fréquence de publication), alors une partie de « qui tu es socialement » est effectivement réduite à des chiffres — mais cela ne veut pas dire que ton identité *entière* l'est. La question à te poser à l'examen : qu'est-ce que ça change dans la façon dont on se perçoit soi-même et les autres, quand la reconnaissance sociale passe par un score algorithmique ?</p>
+  </div>
+</section>
+
+<!-- ============ SECTION 3 : VISION ARTIFICIELLE ============ -->
+<section class="block" id="vision">
+  <span class="tag violet">Concept 3</span>
+  <h2><span class="num">03</span>Vision artificielle = interprétation sociale</h2>
+  <p class="lede">Thèse centrale (basée sur l'article <em>Excavating AI</em> de Kate Crawford et Trevor Paglen, 2021) : classer ou reconnaître une image n'est jamais un acte neutre — c'est toujours une interprétation du monde, chargée de choix humains, de biais et de politique.</p>
+
+  <h3 style="margin-top:0;">3.1 — ImageNet Roulette</h3>
+  <p>Une expérience virale : des utilisateurs partageaient leurs selfies avec le hashtag #ImageNetRoulette, et l'IA (entraînée sur la base de données ImageNet) leur attribuait des étiquettes — parfois amusantes, parfois carrément offensantes.</p>
+  <div class="quote">
+    « Il est dangereux que les systèmes d'apprentissage automatique se mettent à classifier les humains et que ces efforts puissent si facilement mal tourner. »
+    <cite>Trevor Paglen — news.artnet.com</cite>
+  </div>
+  <p>Le but du projet n'était pas de dénoncer un bug isolé, mais d'<strong>exposer les biais systémiques</strong> transmis à la machine par les humains qui l'ont entraînée, et de montrer les risques réels : l'IA est utilisée pour décider qui sera embauché, qui sera surveillé, quels étudiants sont suivis en classe, etc.</p>
+
+  <div class="concept glow-violet">
+    <span class="term-name">Comment fonctionne ImageNet (les faits techniques à retenir)</span>
+    <ul class="explain">
+      <li>Base de données de <strong>plus de 14 millions de photos</strong>, utilisée pour entraîner l'IA à reconnaître des images.</li>
+      <li>Les images sont classées dans <strong>20 000 catégories</strong>.</li>
+      <li>Chaque image de personnes a été <strong>manuellement étiquetée par des humains</strong> selon la race, le genre, l'âge, l'émotion ou le caractère.</li>
+      <li>Conséquence directe : cela a injecté des <strong>biais conscients et inconscients</strong> dans l'algorithme — la machine n'invente pas ses préjugés, elle les hérite.</li>
+    </ul>
+  </div>
+
+  <p>Conséquences concrètes documentées dans le cours : après l'attention médiatique, les chercheurs d'ImageNet ont supprimé plus de la moitié des images de la catégorie « people ». Le projet a été exposé sous le titre <strong>« Training Humans »</strong> à la Fondazione Prada à Milan.</p>
+  <div class="quote">
+    « L'ensemble de cette entreprise de collecte d'images et de catégorisation est lui-même une forme de politique. »
+    <cite>Crawford &amp; Paglen</cite>
+  </div>
+  <div class="quote">
+    « Le but n'est pas d'utiliser la technologie pour nous aider à nous voir nous-mêmes, mais d'utiliser nous-mêmes pour voir la technologie telle qu'elle est réellement. »
+    <cite>Cité via The Guardian, 2019</cite>
+  </div>
+
+  <h3>3.2 — Les origines de la vision par ordinateur</h3>
+  <p>Dans les années 1960, les pionniers de l'IA pensaient — de façon assez naïve avec le recul — qu'il suffirait de <strong>relier une caméra à un ordinateur</strong> pour que la machine « voie ». La découverte a été que reconnaître une image est bien plus complexe que prévu, et que <strong>derrière toute technique se cache toujours une interprétation du monde</strong>.</p>
+
+  <div class="concept">
+    <span class="term-name">Le mythe du progrès inévitable</span>
+    <p>Le récit dominant dans l'industrie tech est que la technique finira par « tout résoudre » — que plus de données et plus de puissance de calcul élimineront les biais. Crawford et Paglen contestent cela : la vision automatique <strong>ne devient jamais neutre</strong>, parce qu'elle s'appuie toujours sur des catégories humaines, qui elles-mêmes traduisent nos biais, nos exclusions et nos manières de nommer et de classer.</p>
+  </div>
+
+  <h3>3.3 — Les images comme faits sociaux</h3>
+  <p>Les jeux de données comme ImageNet ne sont pas de simples collections d'images neutres : ce sont des <strong>archives culturelles</strong> où s'inscrivent des normes de genre, de race, d'émotions et de comportements. Étudier ces bases de données, c'est faire une <em>« archéologie du regard machinique »</em> — c'est-à-dire, fouiller pour comprendre quelles valeurs et quelles hiérarchies humaines ont été figées à l'intérieur.</p>
+
+  <div class="think-box">
+    <span class="tag">Pourquoi ça compte (question d'examen probable)</span>
+    <h4>« La machine voit-elle bien ? » n'est pas la bonne question</h4>
+    <p>Les systèmes de vision artificielle participent déjà à des décisions réelles : recrutement, éducation, sécurité, justice. Comprendre leurs fondements, c'est comprendre les logiques de pouvoir qu'ils prolongent. Le cours reformule la question centrale : ce n'est plus « la machine voit-elle bien ? » mais <strong>« que veut-on qu'elle voie ? »</strong> — un déplacement de la question technique vers la question politique.</p>
+  </div>
+
+  <h3>3.4 — Former une IA : structure d'un jeu de données</h3>
+  <p>L'apprentissage supervisé repose sur des jeux de données massifs composés d'images étiquetées. Chaque image apprend à la machine à distinguer des « classes » (ex. pommes / oranges). Ces ensembles d'entraînement déterminent ce que la machine peut connaître et comment elle perçoit le monde. Le cours identifie <strong>trois niveaux</strong> de structure :</p>
+
+  <div class="flow">
+    <div class="step">Taxonomie<br><span style="color:var(--text-dim); font-size:.8em;">classification globale (ex. émotions, objets, visages)</span></div>
+    <span class="arrow">→</span>
+    <div class="step">Classes<br><span style="color:var(--text-dim); font-size:.8em;">catégories spécifiques (ex. joie, tristesse, surprise)</span></div>
+    <span class="arrow">→</span>
+    <div class="step">Images individuelles<br><span style="color:var(--text-dim); font-size:.8em;">chaque image labellisée (ex. « une femme souriante »)</span></div>
+  </div>
+  <p>Chaque niveau reflète des choix et des présupposés humains — donc des biais et des valeurs implicites, à chaque étage de la pyramide.</p>
+
+  <div class="concept glow-amber">
+    <span class="term-name">Le mythe de la neutralité des données</span>
+    <p>On présente souvent ces données comme scientifiques et objectives. En réalité, elles reposent sur des choix humains — donc sur des présupposés culturels, politiques et historiques. Les bases d'images les plus utilisées au monde révèlent des <strong>biais systémiques</strong>, pas des vérités universelles.</p>
+  </div>
+
+  <h3>3.5 — La Trahison des images (René Magritte)</h3>
+  <p>Référence artistique utilisée pour illustrer le propos : une image n'a pas de sens fixe — son interprétation dépend du regard, du contexte et du langage. L'<strong>étiquette</strong> (le mot qu'on associe à l'image, comme "Ceci n'est pas une pipe") transforme la perception : elle relie l'image à une signification, mais toujours de manière instable. C'est exactement ce qui se passe quand une IA étiquette ton visage : l'étiquette n'est jamais la « vérité » de l'image, seulement une interprétation imposée.</p>
+
+  <p><strong>Synthèse de la section :</strong> classer ou reconnaître une image, c'est imposer une lecture du monde. L'acte de labelliser devient un acte politique — il fixe ce qui est visible et reconnaissable. L'IA n'apprend pas seulement à voir : elle hérite des biais et des catégories de la société, et fabrique des cadres de perception qui orientent la manière dont les machines — et donc les institutions qui les utilisent — voient les humains.</p>
+</section>
+
+<!-- ============ SECTION 4 : INFORMATIQUE AFFECTIVE ============ -->
+<section class="block" id="affective">
+  <span class="tag">Concept 4</span>
+  <h2><span class="num">04</span>Informatique affective (Affective Computing)</h2>
+  <p class="lede">Discipline interdisciplinaire visant à concevoir des systèmes capables de <strong>reconnaître, interpréter, traiter et simuler les émotions humaines</strong>. Concept introduit dans les années 1990 par <strong>Rosalind Picard (MIT)</strong>.</p>
+
+  <div class="concept glow-teal">
+    <span class="term-name">Définition et champ</span>
+    <p>L'informatique affective croise l'informatique, la psychologie, l'interaction homme-machine, la robotique et les sciences cognitives. Elle vise à rendre les systèmes plus sensibles au <strong>contexte émotionnel</strong> des utilisateurs. L'IA y joue un rôle central, appuyée sur des capteurs et des algorithmes de reconnaissance émotionnelle (visage, voix, gestes).</p>
+  </div>
+
+  <h3>4.1 — Les modèles d'émotions utilisés</h3>
+  <table class="compare">
+    <tr><th>Modèle</th><th>Idée</th></tr>
+    <tr><td><strong>Ekman's FACS</strong> (Facial Action Coding System)</td><td>Système qui décompose les expressions faciales en unités d'action mesurables, utilisé pour détecter des émotions à partir du visage.</td></tr>
+    <tr><td><strong>Théorie psycho-évolutionnaire de Plutchik</strong></td><td>Modèle en « roue des émotions » qui organise les émotions de base et leurs combinaisons (comme des couleurs primaires et secondaires).</td></tr>
+    <tr><td><strong>Big 6 d'Ekman</strong></td><td>Six émotions de base considérées comme universelles : <strong>peur, colère, joie, tristesse, dégoût, surprise</strong>.</td></tr>
+  </table>
+  <p>Nuance importante soulignée en cours : des recherches récentes montrent une <strong>diversité culturelle</strong> dans l'expression des émotions — les Big 6 ne sont pas vécues ni exprimées de façon identique partout dans le monde.</p>
+
+  <div class="concept">
+    <span class="term-name">Émotions primaires vs. secondaires</span>
+    <p><strong>Primaires</strong> : réflexes biologiques détectables (ex. sursaut de peur). <strong>Secondaires</strong> : plus complexes, contextuelles et difficiles à capter par un capteur (ex. nostalgie, culpabilité, fierté mêlée d'inquiétude).</p>
+  </div>
+
+  <h3>4.2 — Applications pratiques</h3>
+  <ul class="explain">
+    <li><strong>Éducation à distance :</strong> adapter l'enseignement selon l'attention et l'engagement détectés chez les élèves.</li>
+    <li><strong>Santé et accompagnement :</strong> détecter la détresse, l'anxiété ou la douleur — utile face au manque de personnel soignant.</li>
+    <li><strong>Véhicules intelligents :</strong> surveillance du conducteur (attention visuelle, émotions, détection d'anomalies de conduite) pour alerter en cas de danger et permettre de reprendre le contrôle à temps.</li>
+    <li>Fait marquant : les systèmes d'informatique affective appliquée (AAC) <strong>dépassent déjà parfois les humains</strong> pour reconnaître certaines émotions audio-visuelles.</li>
+  </ul>
+
+  <h3>4.3 — Enjeux éthiques de l'informatique affective</h3>
+  <div class="think-box">
+    <span class="tag amber">Attention</span>
+    <h4>À qui appartiennent nos données affectives ?</h4>
+    <p>Les risques sont similaires à ceux de la reconnaissance faciale : surveillance, manipulation, biais culturels. Le cours insiste sur la <strong>nécessité de transparence, de consentement et d'explicabilité</strong> des systèmes émotionnels.</p>
+  </div>
+
+  <h3>4.4 — Informatique affective et XAI (Explainable AI)</h3>
+  <p>Les systèmes affectifs sont utilisés dans des domaines à fort impact humain : éducation, santé, recrutement, interaction homme-machine. Dans ces domaines, <strong>une mauvaise interprétation émotionnelle peut avoir des conséquences graves</strong> (ex. être jugé « peu motivé » à tort par un système de recrutement qui analyse ton visage en entrevue).</p>
+  <p>L'<strong>explicabilité (XAI)</strong> — c'est-à-dire la capacité du système à expliquer pourquoi il a pris telle décision — sert à quatre choses :</p>
+  <ul class="explain">
+    <li>favoriser la confiance des utilisateurs ;</li>
+    <li>aider à comprendre les échecs du modèle ;</li>
+    <li>permettre de détecter les biais dans les données ;</li>
+    <li>faciliter l'audit éthique et réglementaire.</li>
+  </ul>
+
+  <h3>4.5 — IA et émotions humaines : enjeux et limites (section approfondie)</h3>
+  <p>Cette longue section du cours (basée sur un article ACM) creuse un problème fondamental : <strong>qu'est-ce qu'une émotion, exactement</strong>, et peut-on vraiment la mesurer ?</p>
+
+  <div class="concept glow-violet">
+    <span class="term-name">Trois traditions théoriques de l'émotion</span>
+    <ul class="explain">
+      <li><strong>Motivationnelle (Basic Emotion Theory, Ekman) :</strong> l'émotion comme moteur — un état qui déclenche une action.</li>
+      <li><strong>Évaluative (Appraisal Theory) :</strong> l'émotion comme signal — un jugement influencé par le contexte social.</li>
+      <li><strong>Expérientielle (James-Lange, Feeling Tradition) :</strong> l'émotion comme vécu — une sensation consciente et subjective.</li>
+      <li><strong>Théories hybrides (Barrett, Russell, ACT) :</strong> combinent motivation, évaluation et expérience pour mieux refléter la complexité humaine.</li>
+    </ul>
+    <p style="margin-top:12px;">Point crucial pour l'examen : <strong>il n'y a pas de consensus scientifique clair</strong> sur ce que sont réellement les émotions — et pourtant, l'IA doit choisir un modèle pour fonctionner.</p>
+  </div>
+
+  <h3>4.6 — Comment l'IA « mesure » les émotions : les proxies</h3>
+  <p>Puisqu'on ne peut pas brancher un capteur directement sur le « ressenti » de quelqu'un, l'IA utilise des <strong>données proxies</strong> — des signaux indirects censés représenter l'émotion :</p>
+  <table class="compare">
+    <tr><th>Type de proxy</th><th>Exemples</th></tr>
+    <tr><td>Physiologique</td><td>Expressions faciales, rythme cardiaque, flux sanguin, gestes</td></tr>
+    <tr><td>Audio</td><td>Ton de voix, cadence de la parole</td></tr>
+    <tr><td>Comportemental</td><td>Actions observées dans le temps (ex. temps passé sur une app)</td></tr>
+    <tr><td>Sémantique</td><td>Mots écrits, emojis, symboles graphiques</td></tr>
+  </table>
+  <p><strong>Limite fondamentale :</strong> le choix du proxy dépend du modèle conceptuel de l'émotion adopté — et certains signaux (ex. la fréquence cardiaque) ne reflètent pas toujours l'état émotionnel réel. Les approches critiques privilégient l'interaction sociale et culturelle des émotions plutôt que leur seule quantification.</p>
+
+  <div class="concept glow-amber">
+    <span class="term-name">Les directives McStay &amp; Pavliscak — à retenir pour l'examen</span>
+    <ul class="explain">
+      <li><strong>Niveau individuel :</strong> l'expression physique ne représente pas la totalité de l'émotion ; le passé n'est pas nécessairement le futur (une personne qui a semblé triste hier ne le sera pas forcément demain).</li>
+      <li><strong>Niveau relationnel :</strong> éviter les stéréotypes et les hypothèses préjudiciables entre groupes.</li>
+      <li><strong>Niveau sociétal :</strong> il n'y a pas de consensus mondial sur les émotions, et la collecte publique de données émotionnelles peut être invasive.</li>
+    </ul>
+  </div>
+
+  <p><strong>Synthèse de la section :</strong> les émotions humaines sont multidimensionnelles, contextuelles, sociales et dynamiques. Les proxies numériques sont pratiques mais limités — il y a toujours un <strong>écart entre l'expérience vécue et le modèle utilisé</strong>. Ignorer le contexte social conduit à des systèmes moins justes : l'abstraction entraîne une perte d'information essentielle à l'équité. Le problème est comparable aux enjeux des données personnelles en santé, mais avec des défis uniques liés à l'absence de consensus scientifique sur les modèles émotionnels eux-mêmes.</p>
+</section>
+
+<!-- ============ SECTION 5 : RAPPORT FINAL ============ -->
+<section class="block" id="rapport">
+  <span class="tag amber">Travail à remettre</span>
+  <h2><span class="num">05</span>Consignes du rapport final</h2>
+  <p class="lede"><strong>Date limite : le 9 août 2026, 23h59.</strong> Voici la structure exacte attendue, section par section.</p>
+
+  <div class="concept">
+    <span class="term-name">Contenu obligatoire du rapport</span>
+    <ul class="explain">
+      <li><strong>Identification :</strong> noms et codes permanents des membres de l'équipe (ou de l'étudiant·e seul·e).</li>
+      <li><strong>Titre</strong>, possiblement révisé suite aux commentaires obtenus préalablement.</li>
+      <li><strong>Sujet</strong> (1 à 3 paragraphes) : présente ton sujet, justifie sa pertinence, explique l'angle par lequel tu l'abordes.</li>
+      <li><strong>Problématique</strong> (1 à 3 phrases) : une ou quelques questions concrètes auxquelles tu veux répondre.</li>
+      <li><strong>Concepts clés</strong> (2 à 4 concepts, 1 paragraphe chacun) : présente et définis les concepts principaux — ils apparaissent souvent dans ton titre.</li>
+      <li><strong>Méthodologie</strong> (1 à 2 paragraphes) : comment tu t'y prends pour répondre à ta question.</li>
+      <li><strong>Analyse</strong> (3 à 9 paragraphes) : étudie chaque posture ou cas relatif à ta question, avec tes ressources choisies. Règle d'or : <strong>un paragraphe = une idée</strong>.</li>
+      <li><strong>Conclusion</strong> (1 paragraphe) : qu'as-tu retenu ? Quelles avenues de recherche futures ? Comment te positionnes-tu maintenant ?</li>
+      <li><strong>Bibliographie</strong> (minimum 3 ressources) : articles scientifiques, articles de journaux, rapports, études, reportages — avec auteur(s), date, titre, maison d'édition/journal ou URL.</li>
+    </ul>
+  </div>
+
+  <div class="concept glow-amber">
+    <span class="term-name">Normes de présentation</span>
+    <ul class="explain">
+      <li>10 à 15 pages environ (hors page de garde et bibliographie).</li>
+      <li>Interligne et demi.</li>
+      <li>Police Times New Roman (ou équivalent), 12 pt.</li>
+      <li>Page de présentation UQAM et bibliographie requises.</li>
+    </ul>
+  </div>
+
+  <div class="think-box">
+    <span class="tag">Critères d'un bon projet</span>
+    <p>Doit avoir une <strong>portée clairement définie</strong> (ce qui est pertinent, ce qui est hors sujet) ; doit expliquer les recherches existantes de manière à démontrer une <strong>compréhension réelle</strong> plutôt que de répéter ce qu'elles disent sans les comprendre ; doit être <strong>sélectif</strong> dans les détails inclus pour garder le point principal clair ; doit démontrer un niveau de travail adéquat sur toute la durée du cours. Organisation logique exigée : chaque partie a un but précis, sections et sous-sections bien structurées, figures/tableaux et citations utilisés de façon appropriée. Note : des points seront déduits si la qualité/quantité du travail ne reflète pas le nombre de membres de l'équipe (groupes de 2 ou 3).</p>
+  </div>
+
+  <p style="color:var(--text-dim); font-size:.95rem;">📌 Semaine prochaine : <strong>Interfaces responsables et inclusives</strong>.</p>
+</section>
+
+<!-- ============ QUIZ INTERACTIF ============ -->
+<section class="block" id="quiz">
+  <span class="tag">Auto-évaluation</span>
+  <h2><span class="num">Q</span>Quiz interactif</h2>
+  <p class="lede">Clique sur une réponse pour voir immédiatement si c'est correct.</p>
+
+  <div class="quiz-card" data-q="1">
+    <div class="quiz-q"><span class="qn">1.</span>Selon le concept de « co-construction de l'identité », que fait réellement Spotify Wrapped ?</div>
+    <button class="opt" data-correct="false">Il fait un résumé purement neutre de tes écoutes, sans aucun effet sur toi.</button>
+    <button class="opt" data-correct="true">Il t'influence à te percevoir d'une certaine façon, et peut même changer ton comportement d'écoute futur.</button>
+    <button class="opt" data-correct="false">Il sert uniquement à des fins publicitaires, sans lien avec l'identité.</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz-card" data-q="2">
+    <div class="quiz-q"><span class="qn">2.</span>Sur Facebook, quel est le « nouveau régime » de peur décrit dans le cours ?</div>
+    <button class="opt" data-correct="false">La peur d'être trop surveillé par des humains.</button>
+    <button class="opt" data-correct="true">La peur de ne pas être vu — de disparaître du fil d'actualité.</button>
+    <button class="opt" data-correct="false">La peur que l'algorithme soit désactivé.</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz-card" data-q="3">
+    <div class="quiz-q"><span class="qn">3.</span>Combien de photos contient la base de données ImageNet, et en combien de catégories sont-elles classées ?</div>
+    <button class="opt" data-correct="false">1 million de photos, 500 catégories.</button>
+    <button class="opt" data-correct="true">Plus de 14 millions de photos, 20 000 catégories.</button>
+    <button class="opt" data-correct="false">100 000 photos, 1 000 catégories.</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz-card" data-q="4">
+    <div class="quiz-q"><span class="qn">4.</span>Que reproche fondamentalement l'article « Excavating AI » de Crawford &amp; Paglen aux jeux de données d'images ?</div>
+    <button class="opt" data-correct="false">Ils sont trop volumineux pour être stockés efficacement.</button>
+    <button class="opt" data-correct="true">Ils ne sont jamais neutres : ils encodent des choix humains, des biais et une politique de classification.</button>
+    <button class="opt" data-correct="false">Ils ne contiennent pas assez d'images pour bien entraîner l'IA.</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz-card" data-q="5">
+    <div class="quiz-q"><span class="qn">5.</span>Qui a introduit le concept d'informatique affective, et dans quelle décennie ?</div>
+    <button class="opt" data-correct="false">Alan Turing, dans les années 1950.</button>
+    <button class="opt" data-correct="true">Rosalind Picard (MIT), dans les années 1990.</button>
+    <button class="opt" data-correct="false">Kate Crawford, dans les années 2010.</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz-card" data-q="6">
+    <div class="quiz-q"><span class="qn">6.</span>Quels sont les quatre types de « proxies » que l'IA utilise pour détecter les émotions ?</div>
+    <button class="opt" data-correct="false">Génétique, chimique, thermique, magnétique.</button>
+    <button class="opt" data-correct="true">Physiologique, audio, comportemental, sémantique.</button>
+    <button class="opt" data-correct="false">Visuel, tactile, olfactif, gustatif.</button>
+    <div class="feedback"></div>
+  </div>
+
+  <div class="quiz-card" data-q="7">
+    <div class="quiz-q"><span class="qn">7.</span>Quelle est la différence entre « framing », « gatekeeping » et « agenda setting » ?</div>
+    <button class="opt" data-correct="false">Ce sont trois synonymes du même phénomène.</button>
+    <button class="opt" data-correct="true">Le framing est l'angle de présentation, le gatekeeping est le filtrage de ce qui passe, l'agenda setting est le choix des sujets qui reçoivent de l'attention.</button>
+    <button class="opt" data-correct="false">Le framing concerne la radio, le gatekeeping la télévision, l'agenda setting la presse.</button>
+    <div class="feedback"></div>
+  </div>
+</section>
+
+<!-- ============ QUESTIONS D'EXAMEN ============ -->
+<section class="block" id="examen">
+  <span class="tag violet">Préparation à l'examen</span>
+  <h2><span class="num">?</span>Questions susceptibles de sortir à l'examen</h2>
+  <p class="lede">Des questions ouvertes, formulées comme elles pourraient l'être à l'examen. Essaie d'y répondre par écrit avant de dérouler la piste de réponse.</p>
+
+  <ol class="exam-list">
+    <li>
+      Expliquez ce qu'on entend par « soi algorithmique » et donnez un exemple concret tiré du cours illustrant la co-construction de l'identité par l'IA.
+      <details><summary>Piste de réponse</summary><p>Définir la médiation numérique de l'identité + boucle de rétroaction continue, puis utiliser l'exemple de Spotify Wrapped (ou de l'œuvre <em>Follower</em>) pour montrer comment l'IA ne fait pas que refléter, mais façonne activement l'identité.</p></details>
+    </li>
+    <li>
+      Pourquoi Bucher affirme-t-elle que la visibilité sur Facebook est une « récompense » plutôt qu'une punition ? Expliquez le mécanisme.
+      <details><summary>Piste de réponse</summary><p>Décrire l'EdgeRank/News Feed : la visibilité est accordée aux contenus qui génèrent de l'engagement (likes, commentaires) ; l'absence d'interaction = quasi-absence du fil. Ceci crée une boucle où interagir devient nécessaire pour exister socialement — d'où la « menace d'invisibilité » plutôt qu'une menace de surveillance.</p></details>
+    </li>
+    <li>
+      En quoi la catégorisation d'images par l'IA (ex. ImageNet) constitue-t-elle un acte politique plutôt que technique ?
+      <details><summary>Piste de réponse</summary><p>Toute étiquette impose une lecture du monde ; les catégories utilisées (race, genre, âge, caractère) reflètent des choix culturels et historiques des humains qui ont construit le jeu de données, pas une vérité neutre. Citer Crawford & Paglen : « la collecte et la catégorisation d'images est elle-même une forme de politique ».</p></details>
+    </li>
+    <li>
+      Nommez et distinguez les trois grandes traditions théoriques de l'émotion utilisées en informatique affective.
+      <details><summary>Piste de réponse</summary><p>Motivationnelle (l'émotion comme moteur d'action, Ekman) ; Évaluative (l'émotion comme jugement influencé par le contexte, Appraisal Theory) ; Expérientielle (l'émotion comme vécu subjectif, James-Lange). Mentionner aussi les théories hybrides (Barrett, Russell).</p></details>
+    </li>
+    <li>
+      Quelles sont les limites des « proxies » utilisés par l'IA pour détecter les émotions humaines, et quelles conséquences éthiques cela entraîne-t-il ?
+      <details><summary>Piste de réponse</summary><p>Les proxies (physiologique, audio, comportemental, sémantique) sont des mesures indirectes ; un signal (ex. rythme cardiaque) ne reflète pas toujours l'état émotionnel réel. Conséquence : biais, mauvaise interprétation dans des contextes à fort enjeu (recrutement, santé), nécessité de la XAI et des directives McStay & Pavliscak (niveau individuel, relationnel, sociétal).</p></details>
+    </li>
+    <li>
+      Comparez le rôle des médias traditionnels et celui des algorithmes (PageRank, EdgeRank) dans la construction de la visibilité.
+      <details><summary>Piste de réponse</summary><p>Les médias traditionnels contrôlent la visibilité via le framing, le gatekeeping et l'agenda setting, exercés par des humains (éditeurs, journalistes). Les algorithmes automatisent et opacifient ce contrôle : PageRank hiérarchise selon les liens/réputation, EdgeRank selon l'engagement social — mais dans les deux cas, la visibilité est médiée et n'est jamais neutre.</p></details>
+    </li>
+    <li>
+      Expliquez pourquoi les auteurs concluent que « la question n'est plus si la machine voit bien, mais que veut-on qu'elle voie ? »
+      <details><summary>Piste de réponse</summary><p>Parce que la performance technique (précision de reconnaissance) masque la vraie question : quelles catégories, quelles valeurs et quels pouvoirs sont encodés dans ce que le système est entraîné à repérer. Le débat se déplace du technique vers le politique/éthique.</p></details>
+    </li>
+  </ol>
+</section>
+
+</main>
+
+<footer>
+  Guide d'étude généré à partir de INM6000E26 — Séance 10 (7 juillet 2026), professeure Didem Demirag, UQAM.
+</footer>
+
+<script>
+document.querySelectorAll('.quiz-card').forEach(card=>{
+  const opts = card.querySelectorAll('.opt');
+  const fb = card.querySelector('.feedback');
+  opts.forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      if (card.dataset.answered) return;
+      card.dataset.answered = "true";
+      const correct = opt.dataset.correct === "true";
+      opts.forEach(o=>{
+        if (o.dataset.correct === "true") o.classList.add('correct');
+        else if (o === opt) o.classList.add('wrong');
+      });
+      fb.textContent = correct ? "✅ Exact ! Bien joué." : "❌ Pas tout à fait — la bonne réponse est surlignée en vert.";
+      fb.classList.add('show');
+    });
+  });
+});
+</script>
+
+</body>
+</html>
