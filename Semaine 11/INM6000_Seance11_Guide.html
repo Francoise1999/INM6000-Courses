@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>INM6000 — Séance 11 : Interfaces responsables et inclusives</title>
+<style>
+:root{
+  --bg:#0d1117; --bg2:#161b22; --card:#1c232c; --border:#2d3540;
+  --text:#e6edf3; --muted:#9aa7b5; --accent:#4fd1c5; --accent2:#c792ea;
+  --warn:#ff8fa3; --good:#7ee787; --gold:#f0c674;
+}
+*{box-sizing:border-box;}
+body{
+  background:var(--bg); color:var(--text); font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+  line-height:1.65; margin:0; padding:0;
+}
+header{
+  background:linear-gradient(135deg,#101820,#1a2530); padding:40px 20px; text-align:center;
+  border-bottom:3px solid var(--accent);
+}
+header h1{margin:0; font-size:1.9em; color:var(--accent);}
+header p{color:var(--muted); margin-top:8px;}
+.container{max-width:980px; margin:0 auto; padding:20px;}
+nav.toc{
+  background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px 25px; margin:25px 0;
+}
+nav.toc h2{color:var(--accent2); margin-top:0;}
+nav.toc ol{columns:2; column-gap:30px;}
+nav.toc a{color:var(--text); text-decoration:none;}
+nav.toc a:hover{color:var(--accent);}
+section.chapitre{
+  background:var(--card); border:1px solid var(--border); border-radius:14px;
+  padding:25px 30px; margin:30px 0; box-shadow:0 4px 14px rgba(0,0,0,.3);
+}
+section.chapitre > h2{
+  color:var(--accent); border-bottom:2px solid var(--border); padding-bottom:10px; margin-top:0;
+}
+h3{color:var(--accent2); margin-top:28px;}
+h4{color:var(--gold); margin-bottom:6px;}
+.def{
+  background:#11161d; border-left:4px solid var(--accent); padding:12px 16px; margin:14px 0; border-radius:6px;
+}
+.def b{color:var(--accent);}
+.citation{
+  font-style:italic; border-left:4px solid var(--accent2); padding:10px 16px; margin:14px 0;
+  background:#171326; color:#d9c9f0; border-radius:6px;
+}
+.exemple{
+  background:#0f1e18; border-left:4px solid var(--good); padding:10px 16px; margin:14px 0; border-radius:6px;
+}
+.exemple b{color:var(--good);}
+.attention{
+  background:#241318; border-left:4px solid var(--warn); padding:10px 16px; margin:14px 0; border-radius:6px;
+}
+.attention b{color:var(--warn);}
+table{width:100%; border-collapse:collapse; margin:16px 0;}
+th,td{border:1px solid var(--border); padding:10px 12px; text-align:left; vertical-align:top;}
+th{background:#232b36; color:var(--accent);}
+tr:nth-child(even){background:#171e26;}
+.source{font-size:.78em; color:var(--muted); text-align:right; margin-top:4px;}
+details{
+  background:#141a22; border:1px solid var(--border); border-radius:10px; margin:12px 0; padding:10px 16px;
+}
+details summary{
+  cursor:pointer; color:var(--accent); font-weight:600; padding:6px 0; list-style:none;
+}
+details summary::-webkit-details-marker{display:none;}
+details summary::before{content:"▸ "; color:var(--accent2);}
+details[open] summary::before{content:"▾ ";}
+.quiz{
+  background:#1a1512; border:1px solid #3a2f22; border-radius:10px; padding:16px 20px; margin:14px 0;
+}
+.quiz .q{color:var(--gold); font-weight:600;}
+.quiz .a{margin-top:8px; color:var(--good); display:none;}
+.quiz.revealed .a{display:block;}
+.btn{
+  display:inline-block; margin-top:10px; background:var(--accent); color:#04211d; border:none;
+  padding:6px 14px; border-radius:20px; font-weight:700; cursor:pointer; font-size:.85em;
+}
+.btn:hover{background:var(--accent2); color:#1c0d2b;}
+.tag{
+  display:inline-block; background:#233; color:var(--accent); border-radius:20px; padding:2px 12px;
+  font-size:.75em; margin-right:6px;
+}
+.exam{
+  background:#1b1420; border:1px solid #40263f; border-radius:12px; padding:20px 25px; margin:16px 0;
+}
+.exam .q{font-weight:700; color:var(--accent2);}
+.exam .a{margin-top:10px; padding-top:10px; border-top:1px dashed var(--border); display:none;}
+.exam.revealed .a{display:block;}
+footer{text-align:center; color:var(--muted); padding:40px 20px; font-size:.85em;}
+.progress-note{
+  background:#0f1a14; border:1px dashed var(--good); border-radius:10px; padding:14px 18px; margin:20px 0; color:var(--good);
+}
+ul{padding-left:22px;}
+li{margin-bottom:6px;}
+.emoji{font-size:1.1em;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>INM6000 — Informatique et société</h1>
+  <p>Séance 11 : <strong>Interfaces responsables et inclusives</strong><br>
+  UI, UX, accessibilité, charge cognitive, couleur, dark patterns, sécurité utilisable, études d'utilisateurs</p>
+</header>
+
+<div class="container">
+
+<nav class="toc">
+  <h2>Table des matières</h2>
+  <ol>
+    <li><a href="#ch1">UI — Interface utilisateur</a></li>
+    <li><a href="#ch2">UX — Expérience utilisateur</a></li>
+    <li><a href="#ch3">UX vs UI</a></li>
+    <li><a href="#ch4">IHM — Interaction homme-machine</a></li>
+    <li><a href="#ch5">Utilisabilité</a></li>
+    <li><a href="#ch6">Accessibilité et WCAG</a></li>
+    <li><a href="#ch7">Conception inclusive</a></li>
+    <li><a href="#ch8">Accessibilité vs universelle vs inclusive</a></li>
+    <li><a href="#ch9">Charge cognitive</a></li>
+    <li><a href="#ch10">Accessibilité cognitive</a></li>
+    <li><a href="#ch11">Conception inclusive — exemples</a></li>
+    <li><a href="#ch12">Couleur</a></li>
+    <li><a href="#ch13">Daltonisme</a></li>
+    <li><a href="#ch14">UI trompeur (dark patterns)</a></li>
+    <li><a href="#ch15">Sécurité utilisable</a></li>
+    <li><a href="#ch16">Études d'utilisateurs</a></li>
+    <li><a href="#examen">Questions d'examen possibles</a></li>
+  </ol>
+</nav>
+
+<div class="progress-note">
+📌 <b>Comment utiliser ce guide :</b> Chaque section explique chaque terme du cours en détail, avec des exemples concrets. Clique sur les blocs <span style="color:var(--accent)">▸ Quiz éclair</span> pour tester ta compréhension section par section, et sur les <span style="color:var(--accent2)">Questions d'examen</span> à la toute fin pour t'entraîner comme si c'était le vrai examen.
+</div>
+
+<!-- ========================= CH1 ========================= -->
+<section class="chapitre" id="ch1">
+<h2>1. L'interface utilisateur (UI)</h2>
+
+<div class="def"><b>Interface utilisateur (UI)</b> : le point de contact où se produisent les interactions entre les machines et les humains. La <b>conception d'interface utilisateur</b> est le processus de création des interfaces dans des logiciels ou des appareils informatisés, en se concentrant sur <b>l'apparence ou le style</b> (et non sur le fonctionnement interne).</div>
+
+<p>Autrement dit : l'UI, c'est tout ce que tu vois et touches à l'écran (boutons, menus, icônes, couleurs, mise en page) — la « façade » du logiciel.</p>
+
+<h3>Trois types d'interfaces</h3>
+<ul>
+<li><b>Interfaces graphiques (GUI)</b> — celles qu'on utilise le plus (icônes, boutons, fenêtres — comme Windows, un site web, une app mobile).</li>
+<li><b>Interfaces à commande vocale (VUI)</b> — on parle à la machine (Siri, Alexa, Google Assistant).</li>
+<li><b>Interfaces basées sur les gestes</b> — on interagit par mouvements (écran tactile, capteurs de mouvement, réalité augmentée/virtuelle).</li>
+</ul>
+
+<h3>Principes clés d'une bonne UI</h3>
+
+<h4>a) Design « invisible »</h4>
+<p>Une bonne interface disparaît presque : l'utilisateur ne pense pas à l'interface elle-même, il se concentre sur <b>l'accomplissement de sa tâche</b>. L'interface ne doit pas se mettre en travers du chemin.</p>
+<div class="exemple"><b>Exemple donné dans le cours :</b> le <i>Zero Click</i> de Domino's Pizza — on peut commander sa pizza favorite sans même cliquer sur un bouton (l'app détecte l'intention et agit automatiquement). C'est l'exemple ultime d'interface « invisible » : zéro friction entre l'intention et l'action.</div>
+<p>Le cours insiste aussi sur l'importance de <b>comprendre les contextes et les flux de tâches</b> des utilisateurs — c'est-à-dire savoir dans quelle situation réelle (pressé, distrait, sur mobile, etc.) une personne utilise le produit, pour concevoir en conséquence.</p>
+
+<h4>b) Sans frustration + prédictif + personnalisé</h4>
+<ul>
+<li><b>Sans frustration</b> : éviter les obstacles inutiles.</li>
+<li><b>Prédire les besoins des utilisateurs</b> : anticiper ce dont la personne aura besoin avant qu'elle ne le demande (ex. : autocomplétion).</li>
+<li><b>Expériences personnalisées et immersives</b> : adapter le contenu/l'interface à chaque utilisateur.</li>
+<li><b>Éléments de « ludification » (gamification)</b> : ajouter des mécaniques de jeu (points, badges, progression) pour rendre l'usage plus engageant.</li>
+</ul>
+
+<h4>c) Prévisibilité et simplicité</h4>
+<ul>
+<li>Les <b>boutons et éléments courants fonctionnent de manière prévisible</b> (un bouton ressemble à un bouton partout dans l'app).</li>
+<li><b>Grande découvrabilité</b> : l'utilisateur trouve facilement les fonctions sans devoir chercher.</li>
+<li>Les interfaces simples offrent une sensation « invisible » (lien direct avec le point a).</li>
+<li><b>Alignement approprié</b> : les éléments sont bien disposés visuellement (grille, marges cohérentes).</li>
+<li><b>Moins d'actions requises</b> pour effectuer les tâches (minimiser le nombre de clics/étapes).</li>
+<li><b>Les contrôles doivent être proches des objets qu'ils contrôlent</b> (ex. : le bouton « supprimer » à côté de l'élément à supprimer, pas caché dans un menu ailleurs).</li>
+</ul>
+
+<h4>d) Informer et guider</h4>
+<ul>
+<li><b>Informer les utilisateurs</b> de ce qui se passe (retour visuel, messages de statut).</li>
+<li><b>Aider à guider les utilisateurs et réduire les charges</b> (mentales — voir la section Charge cognitive plus bas).</li>
+<li><b>Cohérence de la marque</b> : l'UI reflète l'identité visuelle de l'entreprise.</li>
+<li><b>Prochaines étapes déductibles naturellement</b> : l'utilisateur devine intuitivement quoi faire ensuite.</li>
+<li><b>Adapter l'UI à la plateforme/l'appareil</b> utilisé (une app mobile ne doit pas ressembler à un site desktop copié-collé — chaque plateforme a ses conventions).</li>
+</ul>
+
+<details><summary>Quiz éclair — UI</summary>
+<div class="quiz">
+<div class="q">1. Quels sont les trois types d'interfaces mentionnés ?</div>
+<div class="a">Graphiques, à commande vocale, basées sur les gestes.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Que signifie un design « invisible » ? Donne l'exemple du cours.</div>
+<div class="a">L'utilisateur se concentre sur sa tâche, pas sur l'interface elle-même. Exemple : le Zero Click de Domino's Pizza.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Sur quoi se concentre la conception UI (apparence ou fonctionnement) ?</div>
+<div class="a">Sur l'apparence / le style de l'interface.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH2 ========================= -->
+<section class="chapitre" id="ch2">
+<h2>2. L'expérience utilisateur (UX)</h2>
+
+<div class="def"><b>UX</b> : créer des produits qui offrent des expériences <b>significatives et pertinentes</b> aux utilisateurs. Cela inclut la conception de <b>l'ensemble du processus</b> d'acquisition et d'intégration du produit — pas seulement l'écran, mais tout le parcours.</div>
+
+<p>L'UX couvre :</p>
+<ul>
+<li>L'image de marque, la conception, l'<b>utilisabilité</b> et la <b>fonction</b>.</li>
+<li>Pas seulement rendre le logiciel facile à utiliser, mais aussi concevoir <b>toutes les expériences liées au produit</b> : la campagne marketing, le packaging, le service après-vente.</li>
+<li>Des <b>solutions</b> qui répondent aux <b>problèmes et besoins</b> réels des utilisateurs.</li>
+</ul>
+
+<div class="citation">
+« Les perceptions et les réponses d'une personne qui résultent de l'utilisation ou de l'utilisation anticipée d'un produit, d'un système ou d'un service. »<br>
+<span class="source">— ISO 9241-210, Ergonomie de l'interaction homme-système — Partie 210 : Conception centrée sur l'humain pour les systèmes interactifs</span>
+</div>
+
+<p><b>À retenir sur la définition ISO 9241-210 :</b> elle inclut même l'<b>anticipation</b> — donc l'UX commence avant même qu'on touche le produit (ex. : ce qu'on imagine du produit en voyant sa publicité).</p>
+
+<h3>Relation entre UI et UX</h3>
+<ul>
+<li>La conception d'UI est une <b>partie essentielle</b> de l'UX (un sous-ensemble).</li>
+<li>L'UX représente <b>l'ensemble du spectre</b> de l'expérience utilisateur (plus large que l'UI).</li>
+<li>Concevoir l'UX = imaginer, planifier, modifier les éléments qui <b>affectent</b> l'expérience utilisateur globale.</li>
+</ul>
+
+<div class="exemple"><b>Analogie du cours :</b> UX ~ une voiture (l'expérience complète de conduite : confort, sécurité, plaisir) ; UI ~ la console de conduite (le tableau de bord, les boutons — l'interface concrète que tu touches).</div>
+
+<details><summary>Quiz éclair — UX</summary>
+<div class="quiz">
+<div class="q">1. Quelle norme ISO définit l'UX, et que dit-elle précisément ?</div>
+<div class="a">ISO 9241-210 : « Les perceptions et les réponses d'une personne qui résultent de l'utilisation ou de l'utilisation anticipée d'un produit, d'un système ou d'un service. »</div>
+</div>
+<div class="quiz">
+<div class="q">2. L'UX se limite-t-elle à l'écran/logiciel ?</div>
+<div class="a">Non — elle inclut aussi le marketing, le packaging et le service après-vente : toute l'expérience liée au produit.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Complète l'analogie : UX ~ ___ , UI ~ ___</div>
+<div class="a">UX ~ une voiture (expérience complète) ; UI ~ la console de conduite.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH3 ========================= -->
+<section class="chapitre" id="ch3">
+<h2>3. UX vs UI — Tableau comparatif</h2>
+
+<table>
+<tr><th>UX</th><th>UI</th></tr>
+<tr><td>Approche axée sur l'humain</td><td>Approche axée sur l'humain</td></tr>
+<tr><td>Conception du produit</td><td>Conception de l'expérience esthétique d'un produit</td></tr>
+<tr><td>Application : produits physiques <b>et</b> numériques</td><td>Application : produits <b>numériques uniquement</b></td></tr>
+<tr><td>L'expérience complète</td><td>Éléments visuels qui aident les utilisateurs à interagir avec le produit</td></tr>
+<tr><td><b>Efficacité</b></td><td><b>Esthétique</b></td></tr>
+</table>
+<p class="source">Source : careerfoundry.com — the difference between UX and UI design: a layman's guide</p>
+
+<p><b>Point important à retenir pour l'examen :</b> le mot-clé qui distingue le mieux les deux est <i>efficacité</i> (UX — est-ce que ça marche bien / répond au besoin) vs <i>esthétique</i> (UI — est-ce que c'est beau et agréable visuellement). Aussi : l'UI ne s'applique qu'au numérique, alors que l'UX peut s'appliquer à des produits physiques (ex. : l'expérience d'utiliser une chaise, un four).</p>
+
+<details><summary>Quiz éclair — UX vs UI</summary>
+<div class="quiz">
+<div class="q">1. Quel mot-clé résume le mieux le UI ? Et le UX ?</div>
+<div class="a">UI = esthétique ; UX = efficacité.</div>
+</div>
+<div class="quiz">
+<div class="q">2. L'UI s'applique-t-elle aux produits physiques ?</div>
+<div class="a">Non — l'UI ne s'applique qu'aux produits numériques ; l'UX s'applique aux deux (physiques et numériques).</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH4 ========================= -->
+<section class="chapitre" id="ch4">
+<h2>4. Interaction homme-machine (IHM / HCI)</h2>
+
+<div class="citation">
+« Une discipline qui s'intéresse à la conception, à la mise en œuvre et à l'évaluation de systèmes informatiques interactifs destinés à l'usage humain et à l'étude des principaux phénomènes qui les entourent. »<br>
+<span class="source">— Hewett et al., 1992</span>
+</div>
+
+<ul>
+<li>L'IHM est un domaine <b>interdisciplinaire</b> qui combine : conception, psychologie, sciences cognitives et informatique.</li>
+<li>L'IHM (HCI en anglais) étudie <b>comment les gens interagissent</b> avec les technologies.</li>
+<li>Objectif : améliorer l'interaction humain-technologie et créer des interfaces <b>intuitives et faciles à utiliser</b>.</li>
+</ul>
+
+<div class="def">💡 <b>Nuance importante :</b> l'IHM est le <i>champ de recherche/discipline</i> global qui étudie la conception + l'évaluation + la mise en œuvre des systèmes interactifs. L'UI et l'UX sont des <i>résultats concrets</i> qu'on obtient en appliquant les connaissances de l'IHM.</div>
+
+<details><summary>Quiz éclair — IHM</summary>
+<div class="quiz">
+<div class="q">1. Qui a proposé la définition classique de l'IHM citée dans le cours, et en quelle année ?</div>
+<div class="a">Hewett et al., 1992.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Nomme les quatre disciplines qui composent l'IHM.</div>
+<div class="a">Conception, psychologie, sciences cognitives, informatique.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH5 ========================= -->
+<section class="chapitre" id="ch5">
+<h2>5. Utilisabilité</h2>
+
+<div class="def"><b>Utilisabilité</b> : « un attribut de qualité qui évalue la facilité d'utilisation des interfaces utilisateur. »<span class="source"> — Source : NN/g (Nielsen Norman Group)</span></div>
+
+<p>L'utilisabilité se décompose en <b>5 composantes</b> (c'est le modèle classique de Jakob Nielsen — très probable à l'examen) :</p>
+<ul>
+<li><b>Facilité d'apprentissage</b> — à quel point est-il facile d'accomplir des tâches basiques la première fois ?</li>
+<li><b>Efficacité</b> — une fois familiarisés, à quelle vitesse les utilisateurs accomplissent-ils les tâches ?</li>
+<li><b>Mémorabilité</b> — après une absence, l'utilisateur retrouve-t-il facilement la maîtrise de l'interface ?</li>
+<li><b>Erreurs</b> — combien d'erreurs font les utilisateurs, quelle est leur gravité, et est-ce facile de s'en remettre ?</li>
+<li><b>Satisfaction</b> — à quel point est-ce agréable d'utiliser le design ?</li>
+</ul>
+<p><b>Astuce mnémotechnique :</b> <i>« FEMES »</i> — Facilité d'apprentissage, Efficacité, Mémorabilité, Erreurs, Satisfaction.</p>
+
+<details><summary>Quiz éclair — Utilisabilité</summary>
+<div class="quiz">
+<div class="q">1. Nomme les 5 composantes de l'utilisabilité selon NN/g.</div>
+<div class="a">Facilité d'apprentissage, efficacité, mémorabilité, erreurs, satisfaction.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Laquelle des 5 composantes concerne le retour d'un utilisateur après une pause ?</div>
+<div class="a">La mémorabilité.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH6 ========================= -->
+<section class="chapitre" id="ch6">
+<h2>6. Accessibilité et WCAG</h2>
+
+<div class="def"><b>Accessibilité</b> : la mesure dans laquelle un produit ou un service est disponible pour le <b>plus grand nombre d'utilisateurs possible</b>.</div>
+
+<p>Éléments concrets d'accessibilité mentionnés :</p>
+<ul>
+<li><b>Alternatives de présentation de l'information</b> (ex. : texte alternatif pour une image).</li>
+<li><b>Présentation audio ou tactile</b> de l'information (pour les personnes malvoyantes, par exemple).</li>
+<li><b>Technologies d'assistance</b> pour faciliter l'utilisation du Web (lecteurs d'écran, claviers adaptés...).</li>
+<li><b>L'accessibilité des sites Web</b> en général.</li>
+</ul>
+
+<h3>WCAG — Web Content Accessibility Guidelines</h3>
+<div class="def">
+<b>WCAG</b> = Directives pour l'accessibilité du contenu Web. Une série de directives sur l'accessibilité du Web, produites par la <b>Web Accessibility Initiative (WAI)</b> du <b>World Wide Web Consortium (W3C)</b>.
+</div>
+<p>Destinées à :</p>
+<ul>
+<li>Les développeurs de contenu Web</li>
+<li>Les développeurs d'outils de création Web</li>
+<li>Les développeurs d'outils d'évaluation de l'accessibilité Web</li>
+<li>Tous ceux qui souhaitent/ont besoin d'une norme pour l'accessibilité Web et mobile</li>
+</ul>
+
+<h4>Structure de WCAG 2.2</h4>
+<ul>
+<li><b>13 directives</b>, organisées selon <b>4 principes</b> (souvent retenus par l'acronyme <b>POUR</b>) :
+  <ul>
+    <li><b>P</b>erceptible</li>
+    <li><b>U</b>tilisable</li>
+    <li><b>O</b>... (compréhensible)</li>
+    <li><b>R</b>obuste</li>
+  </ul>
+  (Note : le cours liste littéralement « perceptible, utilisable, compréhensible et robuste » — retiens ces 4 mots exacts.)
+</li>
+<li>Les critères de réussite sont répartis en <b>3 niveaux : A, AA, AAA</b> (A = minimum, AAA = niveau le plus exigeant).</li>
+<li>Disponible en plusieurs langues, y compris le français.</li>
+</ul>
+
+<h3>Exemples d'accessibilité présentés</h3>
+<ul>
+<li><b>Apple VoiceOver</b> — lecteur d'écran intégré d'Apple pour les personnes malvoyantes.</li>
+<li><b>Chart4Blind</b> — une interface intelligente pour convertir des graphiques en une forme accessible aux personnes aveugles.</li>
+<li><b>Google Lookout</b> — application qui utilise la caméra du téléphone pour décrire l'environnement à voix haute (identification d'objets, de texte, de monnaie, etc.) pour les personnes malvoyantes.</li>
+<li>Références à la neurodiversité au travail et aux fonctionnalités d'accessibilité Android (ex. : Project Gameface — contrôler un appareil avec les mouvements du visage).</li>
+</ul>
+
+<details><summary>Quiz éclair — Accessibilité / WCAG</summary>
+<div class="quiz">
+<div class="q">1. Qui publie les WCAG ?</div>
+<div class="a">La Web Accessibility Initiative (WAI) du World Wide Web Consortium (W3C).</div>
+</div>
+<div class="quiz">
+<div class="q">2. Quels sont les 4 principes des WCAG 2.2 ?</div>
+<div class="a">Perceptible, utilisable, compréhensible, robuste.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Combien de niveaux de conformité existent, et lesquels ?</div>
+<div class="a">3 niveaux : A, AA, AAA.</div>
+</div>
+<div class="quiz">
+<div class="q">4. Que fait Chart4Blind ?</div>
+<div class="a">Une interface intelligente qui convertit les graphiques en une forme accessible pour les personnes aveugles.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH7 ========================= -->
+<section class="chapitre" id="ch7">
+<h2>7. Conception inclusive</h2>
+
+<div class="def"><b>Conception inclusive</b> : créer des produits qui comprennent et permettent aux personnes de <b>tous horizons et de toutes capacités</b> d'agir — incluant l'accessibilité, l'âge, la situation économique, la situation géographique, la langue, la race, etc.</div>
+<ul>
+<li>Répondre au <b>plus grand nombre possible</b> de besoins des utilisateurs.</li>
+<li><b>Empathie</b> envers les utilisateurs.</li>
+<li>Adapter les interfaces pour répondre aux différents besoins.</li>
+</ul>
+
+<h3>Les 7 principes de design inclusif (Microsoft)</h3>
+<p class="source">Source : Henny Swan, Ian Pouncey, Heydon Pickering, 2017</p>
+<ol>
+<li><b>Offrir une expérience comparable</b> — tous les utilisateurs doivent pouvoir accomplir les mêmes tâches, même avec des moyens différents.</li>
+<li><b>Tenez compte de la situation</b> — le contexte d'usage (environnement, appareil, capacités) influence l'expérience.</li>
+<li><b>Soyez cohérent</b> — utiliser des éléments familiers pour créer de la continuité.</li>
+<li><b>Donner le contrôle aux utilisateurs</b> — permettre de personnaliser l'expérience.</li>
+<li><b>Offrir un choix</b> — plusieurs façons d'accomplir une même tâche.</li>
+<li><b>Donner la priorité au contenu</b> — mettre en avant l'essentiel (exemples cités : <b>Dropbox</b>, <b>YouTube</b>).</li>
+<li><b>Ajouter de la valeur</b> — les fonctionnalités inclusives profitent à tous, pas seulement à un groupe minoritaire.</li>
+</ol>
+
+<details><summary>Quiz éclair — Conception inclusive</summary>
+<div class="quiz">
+<div class="q">1. Qui a proposé les 7 principes de design inclusif cités dans le cours ?</div>
+<div class="a">Microsoft (via Henny Swan, Ian Pouncey, Heydon Pickering, 2017).</div>
+</div>
+<div class="quiz">
+<div class="q">2. Nomme au moins 4 des 7 principes.</div>
+<div class="a">Offrir une expérience comparable, tenir compte de la situation, être cohérent, donner le contrôle aux utilisateurs, offrir un choix, donner la priorité au contenu, ajouter de la valeur.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH8 ========================= -->
+<section class="chapitre" id="ch8">
+<h2>8. Accessibilité vs conception universelle vs conception inclusive</h2>
+
+<p><b>Objectif commun</b> aux trois : réduire les barrières entre les humains et la technologie, créer des expériences inclusives.</p>
+
+<table>
+<tr><th>Accessibilité</th><th>Conception universelle</th></tr>
+<tr><td>Interfaces/technologies utilisables par des personnes ayant différents niveaux auditifs, cognitifs, physiques et visuels.</td><td>Créer <b>une expérience unique</b> accessible et utilisable par tous.</td></tr>
+<tr><td>Plus <b>restreinte</b> que la conception inclusive : se concentre sur des aménagements <b>spécifiques</b>.</td><td>Contrairement à la conception inclusive : <b>une solution de conception unique</b> sans nécessiter d'adaptations spécialisées.</td></tr>
+<tr><td>Les normes (ex. WCAG) rendent l'accessibilité <b>plus facile à évaluer</b> que la conception inclusive/universelle.</td><td>Utilisée dans les contextes <b>tangibles et environnementaux</b> (ex. : architecture, rampes d'accès).</td></tr>
+<tr><td>&nbsp;</td><td>La conception inclusive est appliquée plus souvent aux <b>produits numériques</b>.</td></tr>
+</table>
+<p class="source">Source : NN/g</p>
+
+<div class="def">🔑 <b>Comment les distinguer à l'examen :</b>
+<ul>
+<li><b>Accessibilité</b> = aménagements <i>spécifiques</i> pour des besoins particuliers (ex. : sous-titres pour sourds).</li>
+<li><b>Conception universelle</b> = <i>une seule</i> solution qui marche pour tout le monde d'emblée (ex. : une rampe utilisable par tous, pas juste par les fauteuils roulants) — plus utilisée dans le monde physique/environnemental.</li>
+<li><b>Conception inclusive</b> = processus qui prend en compte la diversité des besoins dès la conception, plus flexible, plus utilisée pour le numérique.</li>
+</ul>
+</div>
+
+<details><summary>Quiz éclair — Accessibilité vs universelle vs inclusive</summary>
+<div class="quiz">
+<div class="q">1. Laquelle des trois approches est la plus restreinte / se concentre sur des aménagements spécifiques ?</div>
+<div class="a">L'accessibilité.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Laquelle propose « une solution de conception unique sans adaptation spécialisée » ?</div>
+<div class="a">La conception universelle.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Laquelle est le plus souvent appliquée aux produits numériques ?</div>
+<div class="a">La conception inclusive.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH9 ========================= -->
+<section class="chapitre" id="ch9">
+<h2>9. Charge cognitive</h2>
+
+<div class="def"><b>Charge cognitive</b> imposée par une interface : la <b>quantité de ressources mentales nécessaires</b> pour l'utiliser. Le concept a été inventé à l'origine par des <b>psychologues</b> pour décrire l'effort mental requis pour apprendre de nouvelles informations.</div>
+
+<h3>Comment minimiser la charge cognitive</h3>
+<ul>
+<li><b>Évitez l'encombrement visuel</b> (trop d'éléments à la fois).</li>
+<li><b>S'appuyer sur des modèles mentaux existants</b> (utiliser des conventions déjà connues des utilisateurs, ex. : une icône de disquette = « sauvegarder »).</li>
+<li><b>Déléguer les tâches</b> (laisser le système faire le travail à la place de l'utilisateur, ex. : autocomplétion, valeurs par défaut).</li>
+</ul>
+
+<h3>La formule du succès d'une tâche</h3>
+<div class="def">✅ <b>Tâche réussie</b> lorsque : la <b>motivation ≥ la charge cognitive</b>.</div>
+<p>Si la charge cognitive est trop élevée par rapport à la motivation de l'utilisateur à accomplir la tâche, il abandonnera. D'où l'importance de :</p>
+<ul>
+<li><b>Définir la motivation</b> : s'assurer que les fonctionnalités sont connectées avec une correspondance claire entre les tâches, les objectifs et les motivations de l'utilisateur.</li>
+<li><b>Identifier les exigences cognitives</b> de la tâche.</li>
+<li><b>Comprendre le type d'effort cognitif requis</b> (s'appuyer sur les sciences cognitives, la psychologie et la philosophie).</li>
+<li><b>Créer en gardant à l'esprit la diversité cognitive</b> (tout le monde ne traite pas l'information de la même façon).</li>
+</ul>
+<p class="source">Source : Microsoft — Inclusive Design for Cognition Guidebook</p>
+
+<details><summary>Quiz éclair — Charge cognitive</summary>
+<div class="quiz">
+<div class="q">1. Complète la formule : Tâche réussie quand ___ ≥ ___</div>
+<div class="a">Motivation ≥ charge cognitive.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Qui a inventé à l'origine le concept de charge cognitive ?</div>
+<div class="a">Des psychologues (pour décrire l'effort mental requis pour apprendre de nouvelles informations).</div>
+</div>
+<div class="quiz">
+<div class="q">3. Nomme trois stratégies pour minimiser la charge cognitive.</div>
+<div class="a">Éviter l'encombrement visuel, s'appuyer sur des modèles mentaux existants, déléguer les tâches.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH10 ========================= -->
+<section class="chapitre" id="ch10">
+<h2>10. Accessibilité cognitive</h2>
+
+<div class="def">Les <b>besoins fonctionnels</b> concernés par l'accessibilité cognitive : l'<b>attention</b>, le <b>langage et l'alphabétisation</b>, l'<b>apprentissage</b>, la <b>mémoire</b> et la <b>fonction exécutive</b>.</div>
+
+<ul>
+<li>Concerne des <b>conditions qui affectent</b> la parole, l'écriture, et la compréhension du langage parlé/écrit.</li>
+<li>Problèmes possibles : de conception, de contexte, de structure, de langue, d'utilisabilité — pouvant affecter la charge cognitive d'une personne (la quantité de mémoire de travail/mémoire à court terme utilisée en interagissant avec un site/app).</li>
+<li>⚠️ Si la charge cognitive d'une personne est <b>dépassée</b> → elle devient <b>fatiguée</b>, <b>incapable d'interagir</b> avec l'expérience numérique.</li>
+</ul>
+<p>Organisme de référence : le <b>W3C-WAI Cognitive Accessibility (COGA) Task Force</b> — groupe de travail dédié à l'accessibilité cognitive au sein du W3C.</p>
+
+<h3>Comment aider les utilisateurs (accessibilité cognitive)</h3>
+<table>
+<tr><th>Aider les utilisateurs à…</th><th>En…</th></tr>
+<tr><td>comprendre ce que sont les choses et comment les utiliser</td><td>utilisant un contenu clair (texte, images, médias)</td></tr>
+<tr><td>trouver ce dont ils ont besoin</td><td>s'assurant que les processus ne reposent pas sur la mémoire</td></tr>
+<tr><td>éviter les erreurs et savoir comment les corriger</td><td>fournissant de l'aide et du soutien</td></tr>
+<tr><td>se concentrer</td><td>soutenant l'adaptation et la personnalisation</td></tr>
+</table>
+<p class="source">Source : uxdesign.cc — considering accessibility for people with cognitive disabilities</p>
+
+<details><summary>Quiz éclair — Accessibilité cognitive</summary>
+<div class="quiz">
+<div class="q">1. Nomme les 5 besoins fonctionnels liés à l'accessibilité cognitive.</div>
+<div class="a">Attention, langage et alphabétisation, apprentissage, mémoire, fonction exécutive.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Que se passe-t-il quand la charge cognitive d'une personne est dépassée ?</div>
+<div class="a">Elle devient fatiguée et incapable d'interagir avec l'expérience numérique.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Quel groupe de travail du W3C s'occupe d'accessibilité cognitive ?</div>
+<div class="a">Le COGA Task Force (Cognitive Accessibility Task Force).</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH11 ========================= -->
+<section class="chapitre" id="ch11">
+<h2>11. Conception inclusive — exemples concrets</h2>
+
+<h3>Exemple 1 : lisibilité pour les personnes âgées</h3>
+<ul>
+<li><b>Polices lisibles</b> + bouton pour <b>augmenter la taille de la police</b>.</li>
+<li>Contraste élevé entre les caractères du premier plan et de l'arrière-plan.</li>
+<li>Utiliser une police de caractères claire.</li>
+<li>Ces adaptations sont <b>importantes pour tous les utilisateurs</b>, pas seulement les personnes âgées — mais particulièrement utiles car <b>la presbytie</b> (une forme d'hypermétropie liée à l'âge) est très courante chez les personnes plus âgées.</li>
+</ul>
+
+<h3>Exemple 2 : écrans tactiles et personnes âgées</h3>
+<ul>
+<li>L'interaction avec les écrans tactiles pose des <b>défis</b> particuliers pour les personnes âgées.</li>
+<li>Conséquences : <b>anxiété et frustration</b>, <b>incapacité à atteindre un objectif</b>, <b>interaction inefficace</b>.</li>
+</ul>
+<p class="source">Source (exemples 1 et 2) : « A design framework of a smartphone user interface for elderly users »</p>
+
+<details><summary>Quiz éclair — Exemples de conception inclusive</summary>
+<div class="quiz">
+<div class="q">1. Qu'est-ce que la presbytie, et pourquoi est-elle mentionnée ici ?</div>
+<div class="a">Une forme d'hypermétropie liée à l'âge, courante chez les personnes âgées — d'où l'importance d'une bonne lisibilité (police claire, contraste élevé, taille ajustable).</div>
+</div>
+<div class="quiz">
+<div class="q">2. Nomme deux conséquences des difficultés d'interaction tactile chez les personnes âgées.</div>
+<div class="a">Anxiété/frustration, incapacité à atteindre un objectif, interaction inefficace (2 parmi ces 3).</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH12 ========================= -->
+<section class="chapitre" id="ch12">
+<h2>12. Couleur</h2>
+
+<div class="def"><b>Palette de couleurs d'UI</b> : une collection de couleurs utilisées dans la conception d'UI — un <b>ensemble de couleurs qui fonctionnent bien ensemble visuellement</b>.</div>
+
+<h3>Buts d'une palette de couleurs</h3>
+<ul>
+<li>Établir une <b>harmonie visuelle</b>.</li>
+<li>Définir l'<b>identité de la marque</b>.</li>
+<li>Influencer le <b>comportement des utilisateurs</b>.</li>
+</ul>
+
+<div class="def"><b>Théorie des couleurs</b> : un cadre qui sous-tend la façon dont nous comprenons et utilisons la couleur.<br>
+<b>Composant critique de la couleur : HSL</b> — Teinte, Saturation et Luminosité (<i>Hue, Saturation, Lightness</i> en anglais).</div>
+
+<h3>Importance de la couleur pour l'UI</h3>
+<ul>
+<li>Créer des conceptions d'applications Web et mobiles <b>harmonieuses</b>.</li>
+<li>Améliorer l'expérience utilisateur.</li>
+<li>Aligner la palette de couleurs avec le <b>message à transmettre</b>.</li>
+</ul>
+<p>Outil mentionné : <b>Canva — Colour palette generator</b>.</p>
+
+<h3>Fonctions de la couleur dans l'interface</h3>
+<ul>
+<li>Rendre les interfaces <b>visuellement attrayantes, intuitives, faciles à parcourir</b>.</li>
+<li><b>Distinguer les éléments</b> d'une page.</li>
+<li>Contribuer à la <b>hiérarchie visuelle</b> (informer, persuader les utilisateurs).</li>
+<li>Attirer l'attention sur les <b>éléments clés</b>.</li>
+</ul>
+
+<h3>⚠️ Contraste des couleurs (WCAG)</h3>
+<div class="attention">
+Selon les <b>WCAG</b>, le <b>ratio de contraste</b> des couleurs entre le premier plan et l'arrière-plan devrait être suffisamment élevé pour être facilement lisible par la plupart des utilisateurs.<br><br>
+<b>Recommandation à retenir par cœur pour l'examen :</b>
+<ul>
+<li>Au moins <b>4,5:1</b> pour un texte <b>normal</b>.</li>
+<li>Au moins <b>3:1</b> pour un texte de <b>grande taille</b>.</li>
+</ul>
+</div>
+
+<h3>Symbolisme et psychologie des couleurs</h3>
+<ul>
+<li>Les couleurs ont une capacité à <b>communiquer</b>, <b>influencer les décisions</b> et <b>guider les émotions</b>.</li>
+<li>C'est <b>l'impact psychologique de la couleur</b>.</li>
+</ul>
+
+<h3>Accessibilité des palettes de couleurs</h3>
+<ul>
+<li>L'UI doit être utilisable et agréable pour tous, y compris les <b>personnes malvoyantes ou atteintes de daltonisme</b>.</li>
+<li>Il faut tenir compte des <b>variations d'écran et d'éclairage</b> — l'accessibilité et l'adaptabilité à différentes conditions de visualisation.</li>
+</ul>
+
+<h4>Astuces pratiques pour l'accessibilité des couleurs</h4>
+<ul>
+<li><b>Contraste de couleur suffisant</b> : outils comme <b>Contrast Checker de WebAIM</b>.</li>
+<li><b>Évitez les informations dépendantes de la couleur seule</b> : utiliser des motifs, textures ou icônes à côté des couleurs.</li>
+<li><b>Test en niveaux de gris</b> : pour vérifier les déficiences de la vision des couleurs.</li>
+<li><b>Utilisation d'étiquettes et d'indicateurs</b> : ne pas se fier uniquement à la couleur — utiliser des étiquettes de texte, changements de taille, ou autres indicateurs visuels.</li>
+<li><b>Outils de vérification de l'accessibilité</b> : Color Safe, Contrast Grid.</li>
+<li><b>Utilisation consciente des couleurs pouvant déclencher des réactions photosensibles</b> : ex. certaines nuances de rouge ou lumières clignotantes (risque de crises pour personnes photosensibles/épileptiques).</li>
+</ul>
+<p class="source">Source (section couleur) : Interaction Design Foundation</p>
+
+<details><summary>Quiz éclair — Couleur</summary>
+<div class="quiz">
+<div class="q">1. Que signifie HSL ?</div>
+<div class="a">Hue, Saturation, Lightness — Teinte, Saturation, Luminosité.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Quels sont les ratios de contraste minimums recommandés par WCAG pour texte normal et texte de grande taille ?</div>
+<div class="a">4,5:1 pour texte normal ; 3:1 pour texte de grande taille.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Nomme deux outils pour vérifier l'accessibilité des couleurs.</div>
+<div class="a">Contrast Checker (WebAIM), Color Safe, Contrast Grid (2 parmi ces 3).</div>
+</div>
+<div class="quiz">
+<div class="q">4. Pourquoi faut-il éviter de transmettre une info uniquement par la couleur ?</div>
+<div class="a">Parce que les personnes daltoniennes ou malvoyantes ne pourraient pas distinguer l'information — il faut ajouter motifs, textures ou icônes en complément.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH13 ========================= -->
+<section class="chapitre" id="ch13">
+<h2>13. Daltonisme</h2>
+
+<ul>
+<li>Le <b>rouge</b> et le <b>vert</b> sont des couleurs <b>complémentaires</b>, opposées sur le cercle chromatique.</li>
+<li>Ces deux couleurs sont utilisées traditionnellement pour représenter des <b>contraires</b> : le vrai et le faux, le haut et le bas, l'arrêt et le départ (pensez aux feux de circulation !).</li>
+<li>Le rouge et le vert sont les <b>deux couleurs les plus susceptibles d'être confondues</b> par les personnes souffrant de déficiences de la vision des couleurs (daltonisme rouge-vert, le type le plus courant).</li>
+</ul>
+
+<div class="citation">
+« En cas d'incertitude, l'ajout d'étiquettes, d'icônes ou de textures à chaque couleur significative de votre conception la rendra accessible à beaucoup plus de personnes, quelle que soit leur capacité à percevoir les couleurs. »
+</div>
+
+<div class="citation">
+« L'accessibilité dans le design est une forme d'empathie : essayer d'aller au-delà de votre propre perspective personnelle pour essayer de comprendre d'autres personnes qui, dans ce cas, ne voient littéralement pas le monde de la même manière que vous. »
+</div>
+<p class="source">Source : The Verge — colorblindness, design & UI accessibility (exemple du jeu Wordle)</p>
+
+<div class="exemple"><b>Exemple du cours : Wordle.</b> Le jeu Wordle utilise du vert/jaune/gris pour indiquer si une lettre est bien placée, mal placée, ou absente. Le mode « soutien aux daltoniens » remplace ces couleurs (ou ajoute des indices visuels alternatifs) pour que l'information reste accessible aux joueurs daltoniens.</div>
+
+<details><summary>Quiz éclair — Daltonisme</summary>
+<div class="quiz">
+<div class="q">1. Pourquoi le rouge et le vert posent-ils particulièrement problème pour les personnes daltoniennes ?</div>
+<div class="a">Parce que ce sont des couleurs complémentaires (opposées sur le cercle chromatique) traditionnellement utilisées pour représenter des contraires, et ce sont les deux couleurs les plus souvent confondues par les personnes daltoniennes.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Quel jeu est cité comme exemple de soutien aux daltoniens ?</div>
+<div class="a">Wordle.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH14 ========================= -->
+<section class="chapitre" id="ch14">
+<h2>14. UI trompeur (dark patterns / motifs sombres)</h2>
+
+<div class="def"><b>UI trompeur (dark pattern)</b> : favorise les <b>résultats commerciaux</b> au détriment de l'utilisateur — force l'utilisateur à prendre une <b>décision qui n'est pas dans son intérêt</b>.</div>
+
+<ul>
+<li>Mécanismes utilisés : <b>tromperie, manipulation émotionnelle, friction</b>.</li>
+<li>Conséquences possibles pour l'utilisateur : <b>perte financière</b>, <b>perte de confidentialité</b>, perte de <b>contrôle juridique</b>.</li>
+<li>Ces techniques ont <b>plus de chances de réussir</b> auprès des <b>utilisateurs vulnérables</b> : les personnes disposant de peu de temps ou ayant un faible niveau de culture numérique.</li>
+</ul>
+<p class="source">Source : nngroup.com — deceptive patterns</p>
+
+<h3>Exemples de dark patterns</h3>
+<ul>
+<li><b>Obstruction</b> : rendre difficile pour un utilisateur de faire un choix qui ne profite pas à l'entreprise (ex. : la difficulté à se désabonner d'un service).</li>
+<li><b>Manipulations visuelles ou rédactionnelles</b> : subvertit les attentes des utilisateurs (ex. : utilisation de doubles négations qui embrouillent le sens : « Ne pas ne pas s'abonner »).</li>
+<li><b>« Nagging »</b> : rappeler constamment aux utilisateurs d'accepter quelque chose, même s'ils l'ont déjà refusé.</li>
+<li><b>Conceptions de manipulation émotionnelle</b> : culpabiliser les utilisateurs pour les faire faire un choix que l'entreprise privilégie.
+  <div class="exemple"><b>Exemple donné dans le cours :</b> un bouton « Non merci, je n'aime pas économiser de l'argent » (au lieu d'un simple « Non merci ») — pour faire culpabiliser l'utilisateur de refuser une offre.</div>
+</li>
+<li><b>Présélection</b> : ajouter automatiquement des articles supplémentaires au panier, ou présélectionner des options qui ne sont pas nécessaires (ex. : une case déjà cochée pour recevoir des courriels marketing).</li>
+<li><b>Créer un sentiment d'urgence</b> : messages comme « Achetez maintenant, l'offre se termine bientôt ! » pour pousser à une décision rapide, sans réflexion.</li>
+</ul>
+<p class="source">Sources : naveen-bodapati.medium.com (dark patterns / deceptive UX design) et nngroup.com</p>
+
+<details><summary>Quiz éclair — UI trompeur</summary>
+<div class="quiz">
+<div class="q">1. Donne la définition d'un UI trompeur (dark pattern).</div>
+<div class="a">Une interface conçue pour favoriser les résultats commerciaux au détriment de l'utilisateur, en le forçant à prendre une décision qui n'est pas dans son intérêt (via tromperie, manipulation émotionnelle, friction).</div>
+</div>
+<div class="quiz">
+<div class="q">2. Qu'est-ce que le « nagging » ?</div>
+<div class="a">Rappeler constamment à l'utilisateur d'accepter quelque chose, même après un refus déjà exprimé.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Donne l'exemple de manipulation émotionnelle cité en classe.</div>
+<div class="a">Un bouton disant « Non merci, je n'aime pas économiser de l'argent » au lieu d'un simple « Non merci ».</div>
+</div>
+<div class="quiz">
+<div class="q">4. Qui est le plus vulnérable aux dark patterns ?</div>
+<div class="a">Les utilisateurs disposant de peu de temps ou ayant un faible niveau de culture numérique.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH15 ========================= -->
+<section class="chapitre" id="ch15">
+<h2>15. Sécurité utilisable (usable security)</h2>
+
+<div class="def"><b>Sécurité utilisable</b> : conception de mesures de sécurité qui répondent aux <b>besoins et comportements des utilisateurs</b>. Il s'agit de trouver un <b>équilibre entre facilité d'utilisation et sécurité</b>.</div>
+<p>Cela inclut : des instructions claires, des processus d'authentification simplifiés, l'intégration d'interfaces intuitives, l'utilisabilité des méthodes d'authentification, aider les développeurs de sécurité à améliorer l'utilisabilité, influencer le comportement de sécurité des utilisateurs, et l'évaluation de la sécurité utilisable.</p>
+
+<h3>🔑 Les 10 lignes directrices de Kai-Ping Yee (très probable à l'examen)</h3>
+<p>Kai-Ping Yee a proposé des principes de conception pour la sécurité utilisable :</p>
+<ol>
+<li><b>Chemin de moindre résistance</b> : associer la manière la plus confortable d'effectuer une tâche avec le <b>moins d'autorité possible</b> nécessaire.</li>
+<li><b>Autorisation active</b> : accorder l'autorité à d'autres en fonction des <b>actions de l'utilisateur</b> indiquant son consentement.</li>
+<li><b>Révocabilité</b> : offrir à l'utilisateur des moyens de <b>réduire l'autorité</b> des autres pour accéder à ses ressources.</li>
+<li><b>Visibilité</b> : garder une connaissance précise de l'autorité des autres concernant les décisions de l'utilisateur.</li>
+<li><b>Conscience de soi</b> : garder une connaissance précise de l'autorité de l'utilisateur lui-même pour accéder aux ressources.</li>
+<li><b>Chemin de confiance</b> : protéger les canaux de l'utilisateur contre les agents qui manipulent l'autorité en son nom.</li>
+<li><b>Expressivité</b> : permettre à l'utilisateur d'exprimer des politiques de sécurité sûres dans des termes qui correspondent à sa tâche.</li>
+<li><b>Limites pertinentes</b> : distinguer les objets et actions le long des limites pertinentes pour la tâche.</li>
+<li><b>Identifiabilité</b> : présenter les objets et actions avec des apparences distinctes et véridiques.</li>
+<li><b>Prévoyance</b> : indiquer clairement les <b>conséquences</b> des décisions que l'utilisateur est censé prendre.</li>
+</ol>
+
+<div class="citation">
+« La différence entre une mauvaise interface et une bonne interface peut influencer la capacité des utilisateurs à effectuer des tâches en toute sécurité. »
+</div>
+
+<h3>Caractéristiques de sécurité du point de vue de l'utilisateur</h3>
+<ul>
+<li><b>Commodité</b> : la sécurité ne doit pas prendre beaucoup de temps — sinon la fonction risque d'être <b>désactivée</b> pour éviter la perturbation.</li>
+<li><b>Compréhensible</b> : l'utilisateur doit pouvoir <b>reconnaître</b> une fonctionnalité de sécurité plutôt que de devoir se rappeler comment elle fonctionne.</li>
+<li><b>Inclusivité</b> : l'UI doit s'adapter à différents types d'utilisateurs, quel que soit leur niveau d'intuition, de mobilité et de compétences cognitives.</li>
+</ul>
+
+<h3>Tensions entre simplicité et sécurité</h3>
+<ul>
+<li>Dans les conceptions <b>minimalistes</b> : l'UI est intuitive et facile à apprendre — mais cela peut <b>offrir à un attaquant la possibilité de compromettre le système</b> (trop de simplicité peut cacher des failles).</li>
+<li>Une UI <b>bien conçue</b> minimise les erreurs d'authentification et des contrôles de sécurité.</li>
+<li>Les contrôles de sécurité <b>ne doivent pas empêcher</b> les utilisateurs authentifiés d'accomplir leurs tâches.</li>
+<li>Les UI peuvent faciliter diverses fonctionnalités de sécurité : icônes visibles, boîtes de dialogue.</li>
+</ul>
+
+<h3>Utilisabilité de la sécurité</h3>
+<ul>
+<li>Augmenter la <b>volonté</b> de l'utilisateur d'utiliser la méthode de sécurité.</li>
+<li>Garantir que l'utilisateur puisse l'utiliser facilement, en moins de temps, avec moins d'erreurs et une plus grande satisfaction.</li>
+<li>Les UI doivent être <b>évidentes et intuitives</b> — pas d'écart entre le <b>modèle mental</b> de l'utilisateur et l'interface réelle.</li>
+</ul>
+
+<h3>Les avertissements (warnings)</h3>
+<div class="def">Un <b>avertissement</b> : une forme de communication conçue pour protéger les personnes contre les dangers.</div>
+<p>Un avertissement physique <b>efficace</b> doit :</p>
+<ul>
+<li>Communiquer clairement le <b>risque</b>.</li>
+<li>Communiquer les <b>conséquences</b> du non-respect.</li>
+<li>Fournir les <b>instructions</b> pour s'y conformer.</li>
+</ul>
+<div class="attention">⚠️ La plupart des alertes informatiques les plus courantes <b>ne suivent pas</b> une ou plusieurs de ces directives (ex. : une boîte de dialogue « Erreur » vague sans expliquer le risque réel ni quoi faire).</div>
+
+<h3>Cinq pièges à éviter (confidentialité personnelle)</h3>
+<p>Cinq pièges à éviter lors de la conception de systèmes interactifs ayant des implications en matière de confidentialité personnelle, organisés en 2 catégories :</p>
+<table>
+<tr><th>Compréhension</th><th>Action</th></tr>
+<tr><td>Obscurcissement du <b>flux d'informations potentiel</b></td><td>Privilégier la <b>configuration</b> plutôt que l'action</td></tr>
+<tr><td>Obscurcissement du <b>flux d'informations réel</b></td><td>Manque de <b>contrôle à grande échelle</b></td></tr>
+<tr><td>&nbsp;</td><td><b>Inhiber les pratiques établies</b></td></tr>
+</table>
+<p class="source">Source : Springer — link.springer.com/article/10.1007/s00779-004-0304-9</p>
+
+<details><summary>Quiz éclair — Sécurité utilisable</summary>
+<div class="quiz">
+<div class="q">1. Qui a proposé les 10 lignes directrices de conception de sécurité utilisable citées dans le cours ?</div>
+<div class="a">Kai-Ping Yee.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Nomme 4 des 10 principes de Kai-Ping Yee.</div>
+<div class="a">Chemin de moindre résistance, autorisation active, révocabilité, visibilité, conscience de soi, chemin de confiance, expressivité, limites pertinentes, identifiabilité, prévoyance (4 parmi ces 10).</div>
+</div>
+<div class="quiz">
+<div class="q">3. Quels sont les trois éléments d'un avertissement physique efficace ?</div>
+<div class="a">Communiquer clairement le risque, les conséquences du non-respect, et les instructions pour s'y conformer.</div>
+</div>
+<div class="quiz">
+<div class="q">4. Pourquoi une conception minimaliste peut-elle poser un risque de sécurité ?</div>
+<div class="a">Parce qu'elle peut offrir à un attaquant la possibilité de compromettre le système, malgré (ou à cause de) sa simplicité.</div>
+</div>
+<div class="quiz">
+<div class="q">5. Nomme les 3 caractéristiques de sécurité du point de vue utilisateur.</div>
+<div class="a">Commodité, compréhensible, inclusivité.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= CH16 ========================= -->
+<section class="chapitre" id="ch16">
+<h2>16. Études d'utilisateurs</h2>
+
+<div class="def"><b>Études d'utilisateurs</b> : analyser systématiquement les utilisateurs afin de recueillir des informations pour le processus de conception.</div>
+<ul>
+<li>Diverses techniques d'étude des utilisateurs existent.</li>
+<li>Objectif : comprendre les besoins, les attitudes, les difficultés et les comportements des utilisateurs.</li>
+<li>Permet de voir la manière dont les utilisateurs <b>naviguent réellement</b> dans l'expérience du produit — et pas seulement la manière dont ils <i>devraient</i> le faire en théorie.</li>
+</ul>
+<div class="attention">💭 Point soulevé dans le cours : peut-on vraiment prétendre « connaître les utilisateurs » sans avoir fait aucune recherche ? → Non — d'où l'importance des études d'utilisateurs, pour éviter de se fier à des suppositions.</div>
+
+<h3>Qualitatif vs Quantitatif</h3>
+<table>
+<tr><th>Qualitatif</th><th>Quantitatif</th></tr>
+<tr><td>Données <b>descriptives</b></td><td>Données <b>numériques</b></td></tr>
+<tr><td>La façon dont les gens <b>pensent et ressentent</b></td><td><b>Mesurer et analyser</b></td></tr>
+<tr><td>Découvrir les opinions, problèmes, raisons, motivations des utilisateurs</td><td>Statistiques ; quantifier les opinions et comportements des utilisateurs</td></tr>
+</table>
+
+<h4>Exemples — méthodes qualitatives</h4>
+<ul>
+<li><b>Entretiens</b> : une sélection prédéfinie de questions ; l'utilisateur décrit ses interactions, pensées, sentiments par rapport à un produit.</li>
+<li><b>Groupes de discussion (focus groups)</b> : groupes participatifs menés via une discussion, pour recueillir des données sur un produit particulier.</li>
+<li><b>Études sur le terrain</b> : se rendre dans l'environnement réel de l'utilisateur et observer en prenant des notes.</li>
+<li><b>Tests en laboratoire</b> : observation d'utilisateurs effectuant des tâches précises dans un environnement contrôlé.</li>
+</ul>
+
+<h4>Exemples — méthodes quantitatives</h4>
+<ul>
+<li><b>Questionnaires auprès des utilisateurs</b> : format structuré, ciblant des utilisateurs spécifiques.</li>
+<li><b>Test du premier clic</b> : analyser sur quoi un utilisateur cliquerait en premier pour accomplir une tâche prévue.</li>
+<li><b>Cartographie thermique (heat mapping)</b> : cartographie visuelle des données montrant comment les utilisateurs cliquent et font défiler le prototype ou le site Web.</li>
+<li><b>Tests A/B</b> : comparaison de deux versions d'une page Web pour déterminer laquelle convertit le mieux les utilisateurs.</li>
+</ul>
+<p class="source">Source (section études d'utilisateurs) : CareerFoundry</p>
+
+<h3>Études d'utilisateurs pour l'accessibilité</h3>
+<ul>
+<li>L'évaluation de l'accessibilité doit être effectuée <b>tôt et souvent</b> (pas seulement à la fin du projet).</li>
+<li>Rechercher les <b>technologies d'assistance</b> que les utilisateurs cibles utiliseront, et <b>inclure ces personnes</b> dans les tests d'utilisabilité.</li>
+<li>Tests avec des prototypes <b>haute fidélité</b> vs prototypes de <b>faible fidélité</b>.</li>
+<li>Contacter des <b>participants potentiels</b>.</li>
+<li>Exemples de données collectées : durée pour finir les tâches, taux d'achèvement des tâches, taux de réussite des tâches.</li>
+</ul>
+<p>Bénéfices d'une approche centrée sur l'humain pour l'accessibilité :</p>
+<ul>
+<li>Impliquer les communautés pour lesquelles la conception est créée.</li>
+<li>Toucher un <b>spectre plus large</b> de personnes.</li>
+<li>Obtenir des données de <b>meilleure qualité et moins biaisées</b> dès le début du processus de conception.</li>
+<li>Créer des expériences accessibles, accueillantes pour tous.</li>
+<li>Créer des équipes plus <b>diversifiées</b>.</li>
+</ul>
+<p class="source">Source : NN/g et CareerFoundry</p>
+
+<details><summary>Quiz éclair — Études d'utilisateurs</summary>
+<div class="quiz">
+<div class="q">1. Quelle est la différence fondamentale entre données qualitatives et quantitatives ?</div>
+<div class="a">Qualitatif = données descriptives sur la façon dont les gens pensent/ressentent (opinions, motivations) ; Quantitatif = données numériques, mesurables et statistiques.</div>
+</div>
+<div class="quiz">
+<div class="q">2. Nomme les 4 méthodes qualitatives citées.</div>
+<div class="a">Entretiens, groupes de discussion, études sur le terrain, tests en laboratoire.</div>
+</div>
+<div class="quiz">
+<div class="q">3. Nomme les 4 méthodes quantitatives citées.</div>
+<div class="a">Questionnaires, test du premier clic, cartographie thermique, tests A/B.</div>
+</div>
+<div class="quiz">
+<div class="q">4. Quand devrait-on évaluer l'accessibilité dans un projet ?</div>
+<div class="a">Tôt et souvent, tout au long du projet — pas seulement à la fin.</div>
+</div>
+</div>
+</details>
+</section>
+
+<!-- ========================= EXAMEN ========================= -->
+<section class="chapitre" id="examen">
+<h2>📝 Questions d'examen possibles</h2>
+<p>Voici des questions formulées dans un style d'examen. Essaie d'y répondre avant de cliquer pour révéler la réponse.</p>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q1. Distinguez l'UI et l'UX en donnant leur définition respective et un exemple d'application qui illustre bien la différence.</div>
+<div class="a">UI = conception de l'apparence/style des interfaces, uniquement numérique, axée sur l'esthétique. UX = conception de l'ensemble de l'expérience (avant, pendant, après l'usage), applicable aux produits physiques et numériques, axée sur l'efficacité (ISO 9241-210). Exemple : un four (produit physique) a une UX (facilité à cuisiner) mais pas d'UI numérique, alors qu'une app mobile a les deux.</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q2. Quels sont les 4 principes des WCAG et que signifie chaque niveau de conformité (A, AA, AAA) ?</div>
+<div class="a">Les 4 principes : perceptible, utilisable, compréhensible, robuste. Les niveaux A, AA, AAA représentent des degrés croissants d'exigence de conformité — A étant le minimum, AAA le plus strict.</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q3. Expliquez la différence entre accessibilité, conception universelle et conception inclusive, avec un exemple pour chacune.</div>
+<div class="a">Accessibilité = aménagements spécifiques pour des besoins particuliers (ex. lecteur d'écran pour malvoyants). Conception universelle = une solution unique utilisable par tous sans adaptation (ex. rampe d'accès utilisable par tous, contexte physique/environnemental). Conception inclusive = processus qui considère la diversité dès la conception, plus flexible, souvent numérique (ex. les 7 principes de Microsoft).</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q4. Qu'est-ce que la charge cognitive et quelle est la formule du succès d'une tâche ? Donnez deux stratégies pour la réduire.</div>
+<div class="a">La charge cognitive est la quantité de ressources mentales nécessaires pour utiliser une interface. Formule : motivation ≥ charge cognitive = tâche réussie. Stratégies : éviter l'encombrement visuel, s'appuyer sur des modèles mentaux existants, déléguer les tâches (2 au choix).</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q5. Pourquoi la couleur seule ne devrait-elle jamais transmettre une information critique dans une interface ? Donnez la recommandation WCAG sur le contraste.</div>
+<div class="a">Parce que les personnes daltoniennes ou malvoyantes pourraient ne pas percevoir la différence de couleur — il faut ajouter du texte, des icônes ou des motifs. WCAG recommande un ratio de contraste d'au moins 4,5:1 pour texte normal et 3:1 pour texte de grande taille.</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q6. Définissez un « dark pattern » (UI trompeur) et donnez trois exemples concrets vus en classe.</div>
+<div class="a">Un UI trompeur favorise les résultats commerciaux au détriment de l'utilisateur en le forçant à une décision qui n'est pas dans son intérêt, via tromperie/manipulation/friction. Exemples : obstruction (désabonnement difficile), nagging (rappels constants), manipulation émotionnelle (« Non merci, je n'aime pas économiser de l'argent »), présélection, urgence artificielle.</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q7. Nommez au moins 5 des 10 lignes directrices de Kai-Ping Yee sur la sécurité utilisable et expliquez-en une en détail.</div>
+<div class="a">Chemin de moindre résistance, autorisation active, révocabilité, visibilité, conscience de soi, chemin de confiance, expressivité, limites pertinentes, identifiabilité, prévoyance. Exemple détaillé : la révocabilité — offrir à l'utilisateur des moyens de réduire l'autorité des autres personnes/systèmes pour accéder à ses ressources (ex. pouvoir révoquer l'accès d'une app tierce à son compte Google).</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q8. Quelle est la différence entre données qualitatives et quantitatives dans les études d'utilisateurs ? Donnez deux méthodes pour chaque type.</div>
+<div class="a">Qualitatif = données descriptives sur les pensées/sentiments (entretiens, groupes de discussion, études sur le terrain, tests en laboratoire). Quantitatif = données numériques mesurables (questionnaires, test du premier clic, cartographie thermique, tests A/B).</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q9. Qu'est-ce que l'IHM et en quoi diffère-t-elle de l'UI et de l'UX ?</div>
+<div class="a">L'IHM (Hewett et al., 1992) est la discipline interdisciplinaire (conception, psychologie, sciences cognitives, informatique) qui étudie la conception, la mise en œuvre et l'évaluation des systèmes interactifs. L'UI et l'UX sont des résultats/applications concrètes issues des connaissances de l'IHM.</div>
+</div>
+
+<div class="exam" onclick="this.classList.toggle('revealed')">
+<div class="q">Q10. Pourquoi les évaluations d'accessibilité devraient-elles inclure des utilisateurs réels de technologies d'assistance, et à quel moment du projet ?</div>
+<div class="a">Parce que cela permet des données de meilleure qualité et moins biaisées, une approche centrée sur l'humain, et des expériences réellement accessibles — l'évaluation doit se faire tôt et souvent dans le projet, pas seulement à la fin.</div>
+</div>
+
+</section>
+
+<div class="progress-note">
+📚 <b>La semaine prochaine :</b> Médias synthétiques et manipulation de l'information.
+</div>
+
+</div>
+
+<footer>
+Guide d'étude généré à partir de INM6000E26 — Séance 11 (Didem Demirag, UQAM, Été 2026, 14 juillet 2026).<br>
+Clique sur les questions d'examen pour révéler/masquer les réponses.
+</footer>
+
+<script>
+document.querySelectorAll('.quiz').forEach(function(q){
+  q.style.cursor = 'pointer';
+  q.addEventListener('click', function(){ q.classList.toggle('revealed'); });
+});
+</script>
+
+</body>
+</html>
