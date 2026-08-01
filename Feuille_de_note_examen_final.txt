@@ -356,3 +356,144 @@ Pourquoi le problème explose maintenant
 Coût de séquençage : il s'est effondré depuis 2001, beaucoup plus vite que la loi de Moore (de ~100 M$ à quelques milliers de $). → séquencer l'ADN devient accessible à tous.
 
 Quantité partagée : les services de généalogie (23andMe, Ancestry, MyHeritage…) accumulent des bases énormes — MyHeritage : plus de 8 millions de personnes ; plus de 26 millions de tests « at-home » au total.
+
+-------
+Cours 4
+-------
+
+
+Définissez l'éthique et distinguez-la de la morale et du droit.
+L'éthique est la branche de la philosophie qui systématise, défend et recommande des jugements de valeur sur le bien et le mal — c'est la réflexion rationnelle sur « pourquoi » une chose est juste. La morale est l'ensemble des valeurs admises par un groupe ou une culture. Le droit est l'ensemble des règles écrites et obligatoires sanctionnées par l'État. L'éthique précède souvent la loi (on réfléchit avant de légiférer) et la complémente (elle pose des questions que la loi ne couvre pas)
+
+Deux grandes éthiques qui s'opposent
+Éthique du devoir — Kant
+Éthique du bien — Utilitarisme
+
+Opposez l'éthique du devoir (Kant) et l'éthique du bien (utilitarisme).
+Kant (déontologique) : on juge l'action en elle-même ; certaines actions sont bonnes ou mauvaises peu importe les conséquences. Utilitarisme (conséquentialiste) : on juge l'acte uniquement par ses conséquences ; si elles sont bonnes, l'acte est justifié.
+
+
+Les trois types de codes
+
+Quelle est la différence entre un code d'éthique, un code de déontologie et un code de conduite ?
+Le code d'éthique énonce des valeurs et principes servant de guide (général, inspirant). Le code de déontologie est un texte réglementaire énonçant les règles, devoirs et obligations d'une profession (détaillé, contraignant, orienté pratique, avec sanctions). Le code de conduite est l'ensemble des règles écrites qu'une organisation impose à son personnel et ses dirigeants
+
+Il existe au Québec un code de déontologie des informaticiens·ne·s datant de 1994, porté par l'APIIQ (Association professionnelle des informaticiens et informaticiennes du Québec).
+Ce code décrit les devoirs et obligations envers le public, le client et les collègues.
+Point important : un code de déontologie est plus détaillé et plus orienté vers la pratique qu'un code éthique
+
+OIQ — Ordre des ingénieurs du Québec
+
+AQIII
+Association québécoise des informaticiennes et informaticiens indépendants (les pigistes/consultants).
+
+L'idée à retenir de toute la section : en informatique, contrairement à la médecine, il n'y a pas un ordre professionnel unique et obligatoire — il y a plutôt plusieurs associations (APIIQ, AQIII…) et les informaticiens peuvent relever de l'ordre des ingénieurs ou des technologues selon leur titre.
+
+Le code de l'ACM
+ACM
+Association for Computing Machinery — la grande association internationale des professionnels de l'informatique.
+
+Elle publie deux codes :
+
+Code of Ethics and Professional Conduct — général, pour tous les informaticiens.
+Software Engineering Code — plus spécifique, pour le génie logiciel. (Tous deux disponibles en français.)
+Le code est organisé en 8 sections correspondant aux différentes relations du professionnel :
+
+public  ·  clients et employeurs  ·  produits  ·  jugement  ·  gestion  ·  profession  ·  collègues  ·  soi-même
+
+Son but : formaliser la morale que les membres doivent adopter dans l'exercice de leurs fonctions.
+
+Éthique des procédures
+Elle définit les règles permettant d'agir et de décider dans le cyberespace.
+
+Cybernétique
+La science des mécanismes autogouvernés et du contrôle. Autrement dit, l'étude de la façon dont un système (machine, organisme, société) se régule lui-même grâce à l'information et à la rétroaction (feedback).
+
+Agent artificiel
+Une entité logicielle ou robotique capable de percevoir son environnement et d'agir de façon autonome pour atteindre des buts (un robot, un assistant IA, un véhicule autonome…).
+
+Trois approches pour rendre un agent « éthique »
+Moralité des agents : doit-on leur imposer des règles de comportement social, comme à un humain ?
+Apprentissage : l'agent apprend les règles éthiques par l'expérience (mais il peut alors apprendre de mauvais comportements à partir de mauvaises données).
+Principe d'éthique calculatrice : on code des critères formels explicites — l'exemple type étant les lois d'Asimov (section suivante).
+
+Énoncez les trois lois de la robotique d'Asimov et expliquez leur principale limite.
+Loi 1 : ne pas blesser un humain ni, par inaction, le laisser être blessé. Loi 2 : obéir aux humains, sauf si cela viole la Loi 1. Loi 3 : protéger sa propre existence, sauf si cela viole la Loi 1 ou 2. Elles sont strictement hiérarchisées.
+
+Limite : ces règles formelles se contredisent dans les situations réelles complexes. C'est l'illustration des limites de l'« éthique calculatrice » : on ne peut pas réduire toute l'éthique à quelques règles formelles.
+
+Formaliser l'éthique (la rendre calculable)
+Objectifs : implémenter une « éthique computationnelle » (rendre l'éthique exécutable par une machine) et, au passage, clarifier nos propres conceptions éthiques (en essayant de coder une règle, on découvre ses ambiguïtés).
+
+Les cinq approches mentionnées — tu dois savoir reconnaître chacune :
+
+Approche					Idée en une phrase
+Formalisation mathématique / théorie des jeux	: Modéliser les décisions comme des « jeux » avec gains et stratégies optimales — approche purement formelle.
+Logiques déontiques				: Une logique spéciale qui manipule les notions d'obligation, interdiction et permission (du grec deon, le devoir).
+Raisonnement à base de cas			: Décider par analogie avec des cas passés (comme la jurisprudence en droit).
+Apprentissage statistique			: La machine apprend le bon comportement à partir d'exemples, via un algorithme d'apprentissage.
+Logiques non-monotones				: Logiques qui permettent de réviser une conclusion quand de nouveaux faits apparaissent (le contraire de la logique classique, où une vérité reste vraie pour toujours).
+
+Responsabilité civile = devoir de réparer/indemniser un dommage (payer). Responsabilité pénale = être puni pour une infraction (amende, prison). 
+
+Qui est responsable, civilement ou pénalement, en cas de dysfonctionnement d'un robot ? Le créateur, le possesseur, ou l'utilisateur ?
+La responsabilité est diluée entre plusieurs acteurs. C'est exactement ce que les « 5 règles » de la section 17 essaient de clarifier : chacun (concepteur, déployeur, utilisateur) garde une part de responsabilité pour les effets raisonnablement prévisibles.
+
+Transhumanisme
+Mouvement qui prône l'augmentation des capacités humaines (physiques et mentales) grâce aux technologies — jusqu'à transformer la condition humaine elle-même.
+
+Le risque éthique principal
+Une « humanité à deux vitesses » : un fossé entre ceux qui peuvent se payer ces améliorations et ceux qui ne le peuvent pas. C'est un problème d'équité et d'accès.
+
+Artefact computationnel
+L'objet technique isolé : un logiciel, un algorithme, un système informatique pris en lui-même.
+
+Système socio-technique
+L'ensemble plus global : l'artefact plus les humains, les organisations, les usages et le contexte social autour de lui.
+
+
+Énoncez les 5 règles de la responsabilité morale pour les artefacts computationnels. Pourquoi dit-on qu'elle n'est « pas un jeu à somme nulle » ?
+R1 : concepteurs/développeurs/déployeurs sont responsables de l'artefact et de ses effets prévisibles (responsabilité partagée). R2 : cette responsabilité n'est pas à somme nulle. R3 : ceux qui utilisent sciemment l'artefact sont responsables de cet usage. R4 : on doit considérer le système socio-technique dans lequel l'artefact s'insère. R5 : on ne doit pas tromper les utilisateurs sur l'artefact et ses effets.
+
+« Pas à somme nulle » signifie que la présence d'autres responsables ne réduit pas ta propre part de responsabilité : chacun en porte une part pleine et entière. On ne peut pas se dédouaner en disant « d'autres étaient impliqués ».
+
+Question centrale de la section : comment préserver l'autonomie de la décision humaine et éviter le déterminisme ? Le « déterminisme » ici, c'est le risque qu'un algorithme prédise (ou décide) votre avenir à votre place — qu'on vous traite selon ce qu'un modèle prédit que vous ferez, et non selon ce que vous choisissez réellement.
+
+L'Internet des objets (IoT)
+Internet des objets
+Le réseau des objets du quotidien connectés (fourchette, brosse à dents, voiture, frigo…) qui collectent et échangent des données.
+
+Le vrai problème, selon Morozov
+Ce n'est pas seulement la surveillance, mais le nudging permanent : la technologie nous pousse en douceur à nous conformer à une norme de « bon comportement » décidée par d'autres. C'est une menace pour la liberté et l'autonomie, pas seulement pour la vie privée.
+
+L'éthique de la recherche en informatique
+IRB — Institutional Review Board
+Aux États-Unis, la plupart des institutions de recherche ont un « comité de protection des personnes ». Son rôle : valider, superviser et évaluer toute recherche impliquant des « sujets humains ».
+
+Citez les trois principes du rapport Belmont (1978).
+1. Respect de la personne : liberté de participer + information détaillée (consentement éclairé). 2. Bienveillance : risques inférieurs aux bénéfices, et minimisation des risques. 3. Équité : distribution juste des risques et des bénéfices entre les participants. Le rapport Belmont est le texte fondateur de la bioéthique et la base du travail des comités de protection des personnes (IRB).
+
+Consentement libre et éclairé
+Avant toute collecte de données personnelles, il faut normalement obtenir l'accord d'une personne qui comprend pleinement ce à quoi elle consent. L'usage de la tromperie (ex. : mentir sur le but de la collecte) viole le principe de respect de la personne.
+
+Hameçonnage
+Technique d'attaque où on se fait passer pour une source de confiance (banque, employeur…) afin de tromper la victime et lui soutirer des informations (mots de passe, etc.).
+
+Pourquoi la recherche sur le hameçonnage pose-t-elle un dilemme éthique, et à quelles conditions un comité peut-il autoriser la tromperie ?
+Le dilemme : pour être valide, l'étude doit utiliser de fausses attaques indiscernables des vraies, ce qui exige de tromper les sujets et de renoncer au consentement éclairé — en tension avec le principe de respect de la personne.
+
+Conditions pour autoriser la tromperie : (1) risque minimal pour les participants ; (2) aucune atteinte à leurs droits et leur bien-être ; (3) la recherche est impossible autrement ; (4) un débriefing fournit les informations pertinentes après la participation.
+
+Le blanchiment éthique (ethics washing) est l'instrumentalisation de l'éthique par une communication trompeuse, créant l'illusion d'une IA éthique sans qu'aucune théorie, application ou éthicien réels soient impliqués. L'écoblanchiment fait croire qu'un produit est écologiquement responsable ; le privacy washing fait croire que des mesures protègent les données des utilisateurs. Exemple de blanchiment éthique : exploiter l'absence de consensus sur la définition de l'« équité » pour choisir, au hasard ou de façon opportuniste, une définition qui « passe ».
+
+Comment les entreprises pratiquent le blanchiment éthique
+Elles définissent leur propre cadre éthique sur mesure et font semblant de respecter des valeurs comme l'équité, la vie privée, l'explicabilité.
+Le levier est souvent la façon dont elles communiquent leurs choix (beaucoup d'affichage, peu de substance).
+Le cas de l'équité est révélateur : il n'existe pas de consensus sur la définition de l'« équité ». Une entreprise peut donc choisir au hasard une notion d'équité (parmi plusieurs définitions mathématiques incompatibles) jusqu'à en trouver une qui « passe » — et se déclarer « équitable » de façon trompeuse.
+
+La confidentialité différentielle
+Confidentialité différentielle (differential privacy)
+Technique mathématique qui permet d'analyser un jeu de données sans révéler d'information sur un individu précis, typiquement en ajoutant un bruit aléatoire contrôlé aux résultats. Le paramètre ε (epsilon) mesure la « perte de confidentialité » qu'on accepte.
+
+En confidentialité différentielle, qu'arrive-t-il quand le paramètre ε augmente ?
+Quand ε augmente, on ajoute moins de bruit : les résultats sont plus précis et plus utiles, mais le risque de ré-identifier les données d'un individu augmente. Un petit ε protège mieux la vie privée (au prix de résultats plus flous). Choisir ε est donc un arbitrage éthique entre utilité et protection.
