@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INM6000 — Séance 12 : Médias synthétiques et manipulation de l'information</title>
+<style>
+:root{
+  --bg:#0e0d0b;
+  --bg-panel:#17150f;
+  --bg-panel2:#1e1b13;
+  --paper:#f4ecd8;
+  --ink:#d9d2bf;
+  --ink-dim:#a89f8a;
+  --accent:#c9a13b;
+  --accent-red:#b5432e;
+  --accent-red-soft:#7a3327;
+  --line:#3a3324;
+  --mono: "IBM Plex Mono", "Courier New", monospace;
+  --serif: "Iowan Old Style","Georgia","Times New Roman",serif;
+}
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--bg);
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(201,161,59,0.05), transparent 40%),
+    radial-gradient(circle at 80% 90%, rgba(181,67,46,0.06), transparent 45%);
+  color:var(--ink);
+  font-family:var(--serif);
+  line-height:1.6;
+  padding-bottom:120px;
+}
+.stamp-header{
+  position:relative;
+  padding:70px 6vw 50px;
+  border-bottom:3px double var(--line);
+  overflow:hidden;
+}
+.stamp-header::before{
+  content:"DOSSIER 12";
+  position:absolute;
+  top:20px; right:6vw;
+  font-family:var(--mono);
+  font-size:0.75rem;
+  letter-spacing:3px;
+  color:var(--accent-red);
+  border:1px solid var(--accent-red-soft);
+  padding:4px 10px;
+  transform:rotate(3deg);
+  opacity:0.85;
+}
+.eyebrow{
+  font-family:var(--mono);
+  font-size:0.72rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:14px;
+}
+h1.title{
+  font-size:clamp(2rem, 5vw, 3.4rem);
+  margin:0 0 8px;
+  color:var(--paper);
+  font-weight:600;
+  max-width:900px;
+}
+.subtitle{
+  color:var(--ink-dim);
+  font-size:1.05rem;
+  font-style:italic;
+  max-width:700px;
+}
+.meta-strip{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--ink-dim);
+  margin-top:24px;
+  letter-spacing:1px;
+}
+
+nav.toc{
+  margin:40px 6vw;
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  padding:24px 28px;
+}
+nav.toc h2{
+  font-family:var(--mono);
+  font-size:0.8rem;
+  letter-spacing:3px;
+  color:var(--accent);
+  text-transform:uppercase;
+  margin:0 0 14px;
+}
+nav.toc ol{
+  columns:2;
+  column-gap:40px;
+  margin:0; padding-left:20px;
+}
+nav.toc li{margin-bottom:8px;}
+nav.toc a{color:var(--ink); text-decoration:none; border-bottom:1px dotted var(--ink-dim);}
+nav.toc a:hover{color:var(--accent);}
+
+main{padding:0 6vw;}
+
+section.chapter{
+  margin:70px 0;
+  border-left:2px solid var(--line);
+  padding-left:32px;
+  position:relative;
+}
+section.chapter::before{
+  content:attr(data-num);
+  position:absolute;
+  left:-1px; top:-6px;
+  font-family:var(--mono);
+  font-size:0.7rem;
+  background:var(--bg);
+  color:var(--accent-red);
+  padding:2px 8px 2px 0;
+  letter-spacing:2px;
+}
+section.chapter h2{
+  color:var(--paper);
+  font-size:1.9rem;
+  margin-top:0;
+  border-bottom:1px solid var(--line);
+  padding-bottom:12px;
+}
+section.chapter h3{
+  color:var(--accent);
+  font-size:1.15rem;
+  margin-top:34px;
+  font-family:var(--mono);
+  letter-spacing:0.5px;
+  text-transform:none;
+}
+section.chapter p{max-width:800px;}
+section.chapter ul{max-width:780px; padding-left:22px;}
+section.chapter li{margin-bottom:8px;}
+
+.term-card{
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  border-left:4px solid var(--accent);
+  padding:16px 20px;
+  margin:16px 0;
+  max-width:760px;
+}
+.term-card .term{
+  font-weight:700;
+  color:var(--paper);
+  font-family:var(--mono);
+  font-size:0.95rem;
+}
+.term-card p{margin:8px 0 0;}
+
+.callout{
+  background:var(--bg-panel2);
+  border:1px dashed var(--accent-red-soft);
+  padding:16px 20px;
+  max-width:760px;
+  margin:20px 0;
+  font-size:0.95rem;
+  color:var(--ink);
+}
+.callout .label{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  letter-spacing:2px;
+  color:var(--accent-red);
+  text-transform:uppercase;
+  display:block;
+  margin-bottom:6px;
+}
+
+.source-tag{
+  font-family:var(--mono);
+  font-size:0.7rem;
+  color:var(--ink-dim);
+  border-top:1px dotted var(--line);
+  margin-top:18px;
+  padding-top:8px;
+  max-width:780px;
+}
+
+.reflection{
+  background:linear-gradient(135deg, rgba(201,161,59,0.06), rgba(181,67,46,0.04));
+  border:1px solid var(--line);
+  padding:20px 24px;
+  max-width:780px;
+  margin:24px 0;
+}
+.reflection .label{
+  font-family:var(--mono);
+  color:var(--accent);
+  font-size:0.75rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+  display:block;
+}
+.reflection .q{font-style:italic; color:var(--paper); margin:0 0 8px;}
+.reflection details{margin-top:6px;}
+.reflection summary{cursor:pointer; color:var(--accent-red); font-family:var(--mono); font-size:0.78rem;}
+.reflection .answer{margin-top:10px; padding-top:10px; border-top:1px dotted var(--line);}
+
+details.quiz{
+  max-width:780px;
+  background:var(--bg-panel);
+  border:1px solid var(--line);
+  margin:10px 0;
+  padding:14px 18px;
+}
+details.quiz summary{
+  cursor:pointer;
+  font-weight:600;
+  color:var(--paper);
+  list-style:none;
+}
+details.quiz summary::-webkit-details-marker{display:none;}
+details.quiz summary::before{
+  content:"▸ ";
+  color:var(--accent);
+}
+details.quiz[open] summary::before{content:"▾ ";}
+details.quiz .a{
+  margin-top:10px;
+  padding-top:10px;
+  border-top:1px dotted var(--line);
+  color:var(--ink);
+}
+
+.quiz-block h4{
+  font-family:var(--mono);
+  font-size:0.75rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent-red);
+  margin:30px 0 10px;
+}
+
+.divider-line{
+  max-width:780px;
+  border:none;
+  border-top:1px solid var(--line);
+  margin:36px 0;
+}
+
+.exam-section{
+  margin:90px 6vw 40px;
+  padding:40px;
+  background:var(--bg-panel2);
+  border:2px solid var(--accent-red-soft);
+}
+.exam-section h2{
+  font-family:var(--mono);
+  color:var(--accent-red);
+  letter-spacing:2px;
+  font-size:1.5rem;
+  margin-top:0;
+}
+.exam-q{
+  margin:22px 0;
+  max-width:820px;
+}
+.exam-q .qnum{
+  font-family:var(--mono);
+  color:var(--accent);
+  font-size:0.85rem;
+  margin-right:8px;
+}
+.exam-q p.qtext{font-weight:600; color:var(--paper); margin:4px 0 8px;}
+.exam-q details summary{
+  cursor:pointer; color:var(--accent-red); font-family:var(--mono); font-size:0.78rem;
+}
+.exam-q .a{margin-top:10px; padding:12px 16px; background:var(--bg-panel); border-left:3px solid var(--accent);}
+
+footer{
+  text-align:center;
+  padding:50px 6vw;
+  font-family:var(--mono);
+  font-size:0.75rem;
+  color:var(--ink-dim);
+  letter-spacing:1px;
+}
+
+@media (max-width:700px){
+  nav.toc ol{columns:1;}
+  section.chapter{padding-left:18px;}
+  .exam-section{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<header class="stamp-header">
+  <div class="eyebrow">INM6000 — Informatique et société · Été 2026 · Didem Demirag</div>
+  <h1 class="title">Médias synthétiques et manipulation de l'information</h1>
+  <p class="subtitle">Guide d'étude complet et détaillé — Séance 12 (21 juillet 2026) : désinformation, clickbait, fake news, bots, deepfakes, influenceurs IA.</p>
+  <div class="meta-strip">UQAM · Été 2026 · 61 diapositives analysées ligne par ligne</div>
+</header>
+
+<nav class="toc">
+  <h2>Table des matières</h2>
+  <ol>
+    <li><a href="#ch1">1. Désinformation et manipulation — vue d'ensemble</a></li>
+    <li><a href="#ch2">2. Mal informé vs non informé</a></li>
+    <li><a href="#ch3">3. Pourquoi ce sujet est important / démocratie</a></li>
+    <li><a href="#ch4">4. Pourquoi les perceptions erronées persistent et perdurent</a></li>
+    <li><a href="#ch5">5. Effets sur la démocratie et enjeux/solutions</a></li>
+    <li><a href="#ch6">6. Clickbait</a></li>
+    <li><a href="#ch7">7. Fake news — la psychologie</a></li>
+    <li><a href="#ch8">8. Bots et désinformation</a></li>
+    <li><a href="#ch9">9. Deepfakes</a></li>
+    <li><a href="#ch10">10. Influenceurs IA</a></li>
+    <li><a href="#examen">🎯 Questions d'examen probables</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- ============ CHAPITRE 1 ============ -->
+<section class="chapter" id="ch1" data-num="01 / INTRO">
+  <h2>Désinformation et manipulation de l'information</h2>
+  <p>Cette séance porte sur un ensemble de phénomènes qui déforment l'information qui circule en ligne : la désinformation générale, le clickbait, les fake news, les bots, les deepfakes et les influenceurs IA. Le fil conducteur : la technologie numérique (réseaux sociaux, IA générative) n'a pas créé ces phénomènes, mais elle en a démultiplié la vitesse, l'échelle et la crédibilité apparente.</p>
+
+  <h3>Un enjeu majeur</h3>
+  <ul>
+    <li>La désinformation, la mésinformation et les fausses nouvelles <strong>ne sont pas nouvelles</strong> — elles existent depuis longtemps dans l'histoire humaine (propagande, rumeurs, etc.).</li>
+    <li>Ce qui a changé : leur <strong>présence a fortement augmenté</strong> durant la dernière décennie.</li>
+    <li>Les réseaux sociaux et plateformes numériques <strong>accélèrent leur diffusion</strong> — un contenu peut atteindre des millions de personnes en quelques minutes.</li>
+    <li>Comprendre ce phénomène est devenu une <strong>priorité scientifique</strong> — d'où l'explosion des études citées dans cette diapositive (Broda &amp; Strömbäck, 2024).</li>
+  </ul>
+
+  <div class="term-card">
+    <span class="term">Désinformation</span>
+    <p>Fausse information diffusée <em>intentionnellement</em>, dans le but de tromper. Il y a une intention de nuire ou de manipuler.</p>
+  </div>
+  <div class="term-card">
+    <span class="term">Mésinformation</span>
+    <p>Fausse information diffusée <em>sans intention de nuire</em> — la personne qui la partage croit sincèrement qu'elle est vraie. La différence clé avec la désinformation est donc l'<strong>intention</strong>, pas le contenu lui-même.</p>
+  </div>
+  <div class="term-card">
+    <span class="term">Fausses nouvelles (fake news)</span>
+    <p>Contenu présenté sous la forme d'une nouvelle journalistique légitime, mais qui est fabriqué ou trompeur.</p>
+  </div>
+
+  <div class="callout">
+    <span class="label">À retenir pour l'examen</span>
+    La distinction <strong>désinformation (intentionnelle) vs mésinformation (non intentionnelle)</strong> est une des distinctions conceptuelles les plus fréquemment demandées dans ce genre de cours. Ne confondez jamais les deux : le contenu peut être identique, seule l'intention de la personne qui le partage change la catégorie.
+  </div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 1</h4>
+    <details class="quiz">
+      <summary>Quelle est la différence entre désinformation et mésinformation ?</summary>
+      <div class="a">La désinformation est diffusée avec l'intention de tromper ; la mésinformation est diffusée sans cette intention, par une personne qui croit sincèrement que l'information est vraie.</div>
+    </details>
+    <details class="quiz">
+      <summary>Est-ce que la désinformation est un phénomène nouveau, apparu avec Internet ?</summary>
+      <div class="a">Non. Le diaporama insiste sur le fait que la désinformation, la mésinformation et les fausses nouvelles existent depuis longtemps ; ce qui est nouveau, c'est l'ampleur et la vitesse de diffusion permises par les réseaux sociaux.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 2 ============ -->
+<section class="chapter" id="ch2" data-num="02">
+  <h2>Être mal informé vs ne pas être informé</h2>
+  <p>Cette distinction est centrale dans la littérature sur la désinformation, car les deux situations demandent des solutions très différentes.</p>
+
+  <div class="term-card">
+    <span class="term">Ne pas être informé</span>
+    <p>Ne pas disposer de suffisamment d'informations sur un sujet. C'est un simple manque, un vide.</p>
+  </div>
+  <div class="term-card">
+    <span class="term">Être mal informé</span>
+    <p>Croire à des informations inexactes ou trompeuses. Ce n'est pas un vide, mais une croyance active et fausse qui occupe la place de la vérité.</p>
+  </div>
+
+  <div class="callout">
+    <span class="label">Pourquoi cette distinction compte</span>
+    Il est <strong>généralement plus difficile de corriger une fausse croyance</strong> que de simplement combler un manque d'information. Corriger une fausse croyance oblige la personne à admettre qu'elle avait tort, et à "désapprendre" — ce qui rencontre une résistance psychologique bien plus forte que le simple fait d'apprendre une information neuve.
+  </div>
+
+  <p>Un mécanisme aggravant : les individus sont souvent plus enclins à croire les informations qui <strong>confirment leurs opinions ou croyances préexistantes</strong> — c'est une première mention du biais de confirmation, qui sera développé au chapitre suivant.</p>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 2</h4>
+    <details class="quiz">
+      <summary>Pourquoi est-il plus difficile de corriger une fausse croyance que de combler un manque d'information ?</summary>
+      <div class="a">Parce que corriger une fausse croyance implique de remplacer activement quelque chose que la personne croit déjà être vrai, ce qui rencontre une résistance psychologique (remise en question de soi), alors que combler un manque d'information n'implique pas ce conflit — il n'y a rien à "défaire".</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 3 ============ -->
+<section class="chapter" id="ch3" data-num="03">
+  <h2>Pourquoi ce sujet est important — le lien avec la démocratie</h2>
+
+  <h3>Pourquoi ce sujet est-il important ?</h3>
+  <ul>
+    <li>Les fausses informations <strong>influencent les croyances et les comportements</strong> des gens.</li>
+    <li>Elles peuvent <strong>nuire à la santé, à la démocratie et aux organisations</strong> (ex. : désinformation médicale, désinformation électorale).</li>
+    <li>Elles favorisent des <strong>perceptions erronées de la réalité</strong>.</li>
+    <li>Elles <strong>compliquent la prise de décisions fondées sur des faits</strong> — autant pour les individus que pour les gouvernements.</li>
+    <li>Elles peuvent <strong>réduire la confiance envers les institutions</strong> (médias, gouvernements, science).</li>
+  </ul>
+
+  <h3>Citoyens informés et démocratie</h3>
+  <ul>
+    <li>Une démocratie <strong>fonctionne mieux</strong> lorsque les citoyens sont bien informés — c'est un postulat central de la théorie démocratique.</li>
+    <li>Les citoyens informés <strong>participent davantage à la vie politique</strong> (votent, s'engagent, débattent).</li>
+    <li>Ils <strong>comprennent mieux les enjeux sociaux</strong>.</li>
+    <li>Ils sont <strong>plus ouverts aux valeurs démocratiques</strong> (tolérance, pluralisme, etc.).</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Logique du raisonnement</span>
+    Le raisonnement de cette section suit une chaîne causale : citoyens informés → participation politique → compréhension des enjeux → ouverture aux valeurs démocratiques → démocratie qui fonctionne bien. La désinformation attaque donc chaque maillon de cette chaîne.
+  </div>
+
+  <div class="source-tag">Source citée sur ces diapositives : Broda, Elena, and Jesper Strömbäck. "Misinformation, disinformation, and fake news: lessons from an interdisciplinary, systematic literature review." Annals of the International Communication Association 48.2 (2024): 139-166.</div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 3</h4>
+    <details class="quiz">
+      <summary>Nommez trois conséquences négatives possibles de la désinformation mentionnées dans le cours.</summary>
+      <div class="a">Parmi les six mentionnées : elle influence les croyances et comportements ; elle peut nuire à la santé, à la démocratie et aux organisations ; elle favorise des perceptions erronées de la réalité ; elle complique la prise de décision fondée sur des faits ; elle réduit la confiance envers les institutions.</div>
+    </details>
+    <details class="quiz">
+      <summary>Selon le cours, quel est le lien entre citoyens informés et participation politique ?</summary>
+      <div class="a">Les citoyens informés participent davantage à la vie politique, comprennent mieux les enjeux sociaux et sont plus ouverts aux valeurs démocratiques — ce qui fait que la démocratie fonctionne mieux globalement.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 4 ============ -->
+<section class="chapter" id="ch4" data-num="04">
+  <h2>Pourquoi les perceptions erronées persistent</h2>
+
+  <h3>Les mécanismes psychologiques en jeu</h3>
+  <ul>
+    <li>Les individus <strong>recherchent des informations qui confirment leurs croyances</strong> déjà en place.</li>
+    <li>Ils <strong>évitent les informations contradictoires</strong> — ils ne vont pas naturellement chercher ce qui les contredit.</li>
+    <li>Le <strong>biais de confirmation</strong> influence la sélection de l'information.</li>
+    <li>Le <strong>raisonnement motivé</strong> déforme l'interprétation des faits.</li>
+    <li>Les fausses informations <strong>renforcent ces mécanismes psychologiques</strong> — un cercle qui s'auto-alimente.</li>
+  </ul>
+
+  <div class="term-card">
+    <span class="term">Biais de confirmation (confirmation bias)</span>
+    <p>Tendance à rechercher, interpréter et retenir en priorité les informations qui confirment ce qu'on croit déjà, tout en ignorant ou minimisant ce qui le contredit.</p>
+  </div>
+  <div class="term-card">
+    <span class="term">Raisonnement motivé (motivated reasoning)</span>
+    <p>Processus par lequel une personne interprète les faits non pas de façon neutre, mais en fonction d'un objectif ou d'un désir préexistant (ex. : vouloir avoir raison, vouloir préserver son identité de groupe). Ce n'est pas un manque d'intelligence — même des personnes très instruites font du raisonnement motivé.</p>
+  </div>
+
+  <h3>Conséquences des perceptions erronées</h3>
+  <ul>
+    <li>Elles influencent les <strong>opinions publiques</strong>.</li>
+    <li>Elles modifient les <strong>comportements individuels</strong>.</li>
+    <li>Elles peuvent accroître les <strong>préjugés envers certains groupes</strong>.</li>
+    <li>Elles influencent les <strong>attitudes envers les politiques publiques</strong>.</li>
+    <li>Elles peuvent <strong>affecter les résultats démocratiques</strong> (ex. : résultats électoraux, référendums).</li>
+  </ul>
+
+  <h3>Résistance aux connaissances (science denial)</h3>
+  <ul>
+    <li>Les perceptions erronées peuvent mener à une <strong>résistance aux preuves scientifiques</strong>.</li>
+    <li>Certaines personnes <strong>rejettent les informations qui contredisent leurs croyances</strong>, même face à des preuves solides.</li>
+    <li>Ce phénomène touche plusieurs domaines : <strong>climat, politique, etc.</strong></li>
+    <li>Il favorise la <strong>diffusion continue de la désinformation</strong>.</li>
+    <li>Il <strong>complique les efforts de correction</strong> des fausses croyances.</li>
+  </ul>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 4</h4>
+    <details class="quiz">
+      <summary>Qu'est-ce que le biais de confirmation, et quel rôle joue-t-il dans la persistance de la désinformation ?</summary>
+      <div class="a">C'est la tendance à rechercher et privilégier les informations qui confirment ses croyances existantes, tout en évitant les informations contradictoires. Il fait que les fausses croyances, une fois installées, sont "protégées" naturellement par la façon dont on choisit l'information qu'on consulte.</div>
+    </details>
+    <details class="quiz">
+      <summary>Donnez un exemple de domaine où la résistance aux preuves scientifiques est particulièrement documentée.</summary>
+      <div class="a">Le climat (changement climatique) et la politique sont explicitement mentionnés dans le cours comme des domaines touchés par ce phénomène.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 5 ============ -->
+<section class="chapter" id="ch5" data-num="05">
+  <h2>Effets sur la démocratie, enjeux et solutions</h2>
+
+  <h3>Effets sur la démocratie</h3>
+  <ul>
+    <li>La démocratie repose sur un <strong>ensemble commun de faits</strong> partagés par les citoyens.</li>
+    <li>La désinformation <strong>fragilise le débat public</strong> en brisant ce socle commun.</li>
+    <li>Elle <strong>réduit la confiance envers les institutions démocratiques</strong>.</li>
+    <li>Elle <strong>accentue la polarisation sociale et politique</strong>.</li>
+    <li>Les fausses croyances peuvent <strong>influencer les décisions collectives</strong>.</li>
+    <li>Comprendre et combattre la désinformation est <strong>essentiel pour protéger la démocratie</strong>.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Idée clé à comprendre en profondeur</span>
+    L'argument central ici : une démocratie ne peut fonctionner sans un <strong>terrain factuel partagé</strong>. Si deux groupes de citoyens vivent dans des "réalités" factuelles complètement différentes, le débat démocratique (qui suppose qu'on discute des mêmes faits pour arriver à un compromis) devient structurellement impossible — c'est ce qui explique le lien entre désinformation et polarisation.
+  </div>
+
+  <h3>Enjeux et solutions</h3>
+  <ul>
+    <li><strong>Risques</strong> pour la vie privée, la liberté d'expression et la démocratie.</li>
+    <li>L'<strong>utilisation des données</strong> est souvent mal comprise par le public.</li>
+    <li>Besoin de plus de <strong>transparence sur les données et les algorithmes</strong> utilisés par les plateformes.</li>
+    <li>Importance de :
+      <ul>
+        <li>l'<strong>éducation aux médias</strong> (media literacy),</li>
+        <li>la <strong>vérification des faits</strong> (fact-checking),</li>
+        <li>une <strong>réglementation adaptée</strong>.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <div class="source-tag">Source citée : Custers, Bart. "Fake News, Filter Bubbles and Echo Chambers: A Short Overview of Basic Terminology and Key Issues." (2020).</div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 5</h4>
+    <details class="quiz">
+      <summary>Pourquoi dit-on que "la démocratie repose sur un ensemble commun de faits" ? Que se passe-t-il si ce socle est brisé ?</summary>
+      <div class="a">Le débat démocratique suppose que les citoyens discutent des mêmes faits pour arriver à des décisions collectives ou des compromis. Si la désinformation crée des versions différentes et incompatibles de la réalité selon les groupes, le dialogue devient impossible, ce qui fragilise le débat public et accentue la polarisation.</div>
+    </details>
+    <details class="quiz">
+      <summary>Nommez les trois pistes de solution mentionnées face aux enjeux de la désinformation.</summary>
+      <div class="a">L'éducation aux médias, la vérification des faits (fact-checking), et une réglementation adaptée — accompagnées d'un besoin de transparence accrue sur les données et les algorithmes.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 6 : CLICKBAIT ============ -->
+<section class="chapter" id="ch6" data-num="06">
+  <h2>Clickbait (piège à clics)</h2>
+
+  <div class="term-card">
+    <span class="term">Clickbait</span>
+    <p>Contenu conçu pour susciter la curiosité et inciter au clic, souvent au détriment de la valeur informative réelle du contenu.</p>
+  </div>
+
+  <h3>Objectifs du clickbait</h3>
+  <ul>
+    <li>Augmenter le <strong>nombre de visites</strong>.</li>
+    <li>Générer des <strong>interactions</strong> (mentions J'aime, partages, commentaires).</li>
+    <li>Accroître les <strong>revenus publicitaires</strong> — le modèle économique de la publicité en ligne est basé sur le nombre de clics/vues, ce qui crée une incitation financière directe à produire du clickbait.</li>
+  </ul>
+
+  <h3>Comment ça fonctionne ?</h3>
+  <ul>
+    <li>Il crée un <strong>sentiment de curiosité</strong> en laissant une information incomplète (appelé le "curiosity gap" / écart informationnel).</li>
+    <li>Exemple donné : « Vous ne devinerez jamais ce qui s'est passé ensuite… »</li>
+    <li>Ce <strong>manque d'information incite naturellement à cliquer</strong> pour connaître la suite — le cerveau humain a une aversion naturelle à l'incomplétude informationnelle.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Exemple comparatif du cours</span>
+    <strong>Information normale :</strong> « Une nouvelle étude analyse les effets du sommeil sur la mémoire »<br>
+    <strong>Version clickbait :</strong> « Les scientifiques sont choqués par ce qui arrive quand vous dormez moins de 7 heures »<br><br>
+    Notez la transformation : le même contenu factuel devient sensationnaliste par le choix des mots (« choqués », suspense artificiel) sans que l'information elle-même change.
+  </div>
+
+  <h3>Comment reconnaître le clickbait ? Signes fréquents</h3>
+  <ul>
+    <li><strong>Exagération</strong> : « Incroyable », « Choc », « Révolutionnaire », « Vous devez voir ça ».</li>
+    <li><strong>Faux suspense</strong> : « Ce qu'il découvre ensuite va vous surprendre », « La raison est inattendue ».</li>
+    <li><strong>Information incomplète</strong> : « Cette erreur pourrait vous coûter cher… », « Tout le monde fait cette erreur ».</li>
+    <li><strong>Appel aux émotions</strong> : peur, colère, surprise ou curiosité.</li>
+  </ul>
+
+  <div class="source-tag">Source citée : Chen, Yimin, Niall J. Conroy, and Victoria L. Rubin. "Misleading online content: recognizing clickbait as 'false news'." Proceedings of the 2015 ACM on workshop on multimodal deception detection. 2015.</div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 6</h4>
+    <details class="quiz">
+      <summary>Quels sont les trois objectifs principaux visés par le clickbait ?</summary>
+      <div class="a">Augmenter le nombre de visites, générer des interactions (likes, partages, commentaires), et accroître les revenus publicitaires.</div>
+    </details>
+    <details class="quiz">
+      <summary>Expliquez le mécanisme psychologique qui rend le clickbait efficace.</summary>
+      <div class="a">Le clickbait crée un sentiment de curiosité en laissant volontairement une information incomplète. Le manque d'information (l'écart informationnel) incite naturellement les gens à cliquer pour connaître la suite et combler ce manque.</div>
+    </details>
+    <details class="quiz">
+      <summary>Donnez quatre signes fréquents permettant de reconnaître un titre clickbait.</summary>
+      <div class="a">L'exagération (mots comme "Choc", "Incroyable"), le faux suspense, l'information volontairement incomplète, et l'appel direct aux émotions fortes (peur, colère, surprise, curiosité).</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 7 : FAKE NEWS ============ -->
+<section class="chapter" id="ch7" data-num="07">
+  <h2>Fake news — la psychologie du partage</h2>
+  <p>Cette section s'appuie sur l'article de Pennycook &amp; Rand (2021), une référence majeure sur la psychologie des fake news.</p>
+
+  <h3>Pourquoi les fake news sont devenues un problème majeur</h3>
+  <ul>
+    <li>Les fausses informations existent depuis longtemps, mais les <strong>réseaux sociaux ont accéléré leur diffusion</strong>.</li>
+    <li>Les contenus trompeurs <strong>influencent les opinions publiques</strong>.</li>
+    <li>Comprendre la <strong>psychologie humaine</strong> est essentiel pour comprendre le phénomène (et non seulement la technologie).</li>
+    <li>Objectif de la recherche : expliquer <strong>pourquoi les gens croient et partagent</strong> les fake news.</li>
+  </ul>
+
+  <h3>L'exposition aux fausses informations — nuances importantes</h3>
+  <ul>
+    <li>Les fake news représentent en réalité une <strong>partie limitée</strong> des contenus en ligne (contrairement à l'impression qu'on pourrait avoir).</li>
+    <li>L'exposition réelle est <strong>difficile à mesurer</strong> précisément.</li>
+    <li>Beaucoup d'utilisateurs <strong>lisent sans partager</strong>.</li>
+    <li>Certains groupes sont <strong>plus exposés que d'autres</strong>.</li>
+    <li>L'impact dépend davantage <strong>des personnes touchées</strong> que de la quantité totale de fake news en circulation.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Point souvent mal compris</span>
+    Contrairement à une idée reçue, les fake news ne représentent qu'une fraction limitée du contenu total en ligne. L'inquiétude scientifique porte moins sur le "volume" que sur le fait que certains groupes vulnérables ou influents sont plus exposés, ce qui peut avoir un impact disproportionné.
+  </div>
+
+  <h3>Croire vs reconnaître la vérité — deux concepts distincts</h3>
+  <div class="term-card">
+    <span class="term">Croyance générale (belief)</span>
+    <p>Le fait de croire qu'une information est vraie — ceci ne mesure pas si la personne peut réellement distinguer le vrai du faux.</p>
+  </div>
+  <div class="term-card">
+    <span class="term">Discernement (discernment / truth discernment)</span>
+    <p>La capacité à distinguer le vrai du faux — c'est-à-dire la précision du jugement, indépendamment de ce qu'on croit dans un cas particulier.</p>
+  </div>
+  <p>Les facteurs qui influencent la croyance ne sont pas toujours les mêmes que ceux qui influencent le discernement. Une bonne analyse scientifique doit donc mesurer <strong>les deux aspects séparément</strong>. Le but ultime est d'améliorer la précision des jugements (le discernement), pas seulement de réduire la croyance en de fausses informations isolées.</p>
+
+  <h3>Le rôle du raisonnement</h3>
+  <ul>
+    <li>La <strong>pensée rapide</strong> (intuitive, automatique) favorise les erreurs de jugement.</li>
+    <li>La <strong>réflexion analytique</strong> (lente, délibérée) améliore le discernement.</li>
+    <li>Les personnes réfléchies (qui prennent le temps d'analyser) <strong>croient moins aux fausses nouvelles</strong>.</li>
+    <li>Les <strong>connaissances préalables</strong> sont essentielles pour évaluer une information.</li>
+    <li>La <strong>culture médiatique</strong> (media literacy) aide à évaluer l'information.</li>
+    <li>Le <strong>manque de réflexion</strong> favorise les mauvaises décisions.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Lien conceptuel important (théorie de la double-processus)</span>
+    Cette section s'appuie implicitement sur la théorie du double système de pensée (pensée rapide/intuitive vs pensée lente/analytique, popularisée par Daniel Kahneman). Pennycook &amp; Rand montrent empiriquement que le manque de réflexion — pas la partisanerie politique — est le facteur le plus déterminant dans la croyance aux fake news. C'est un point souvent testé à l'examen.
+  </div>
+
+  <h3>Pourquoi les fake news semblent crédibles</h3>
+  <ul>
+    <li>Les humains utilisent des <strong>raccourcis mentaux</strong> (heuristiques) pour juger rapidement de la crédibilité.</li>
+    <li>La <strong>répétition augmente la crédibilité perçue</strong> — c'est l'effet de vérité illusoire (illusory truth effect) : plus on voit/entend une affirmation, plus elle nous semble vraie, même si elle est fausse.</li>
+    <li>Les <strong>sources influencent la confiance</strong> accordée à un contenu.</li>
+    <li>Les <strong>personnalités influentes</strong> renforcent certains messages.</li>
+    <li>Les <strong>émotions fortes attirent l'attention</strong>.</li>
+    <li>La <strong>peur et la colère augmentent la persuasion</strong>.</li>
+  </ul>
+
+  <h3>Pourquoi les gens partagent des fake news (même sans y croire pleinement)</h3>
+  <ul>
+    <li><strong>Croire une information ≠ vouloir la partager</strong> — ce sont deux comportements distincts. On peut douter d'une information et la partager quand même.</li>
+    <li>Certains partagent <strong>sans vérifier l'exactitude</strong> du contenu.</li>
+    <li>La <strong>recherche d'attention</strong> (likes, commentaires, statut social) joue aussi un rôle.</li>
+    <li>Les réseaux sociaux <strong>favorisent l'engagement rapide</strong> plutôt que la réflexion.</li>
+    <li>Le <strong>manque d'attention à la vérité</strong> (au moment du partage, les gens ne pensent tout simplement pas à vérifier) est un facteur majeur — c'est l'argument central de Pennycook &amp; Rand : ce n'est pas que les gens ne savent pas distinguer le vrai du faux, c'est qu'ils n'y pensent pas au moment de partager.</li>
+  </ul>
+
+  <h3>Limites des solutions actuelles</h3>
+  <ul>
+    <li>Les algorithmes <strong>détectent difficilement</strong> toutes les fausses informations.</li>
+    <li>La <strong>définition de la vérité</strong> est parfois complexe (nuances, contexte, zones grises).</li>
+    <li>Le <strong>fact-checking réduit les erreurs mais reste limité</strong> en portée.</li>
+    <li>Les vérifications arrivent souvent <strong>trop tard</strong> (le contenu a déjà circulé massivement).</li>
+    <li>Les <strong>avertissements ne touchent pas tout le monde</strong>.</li>
+    <li>Les <strong>sources seules ne suffisent pas à convaincre</strong> quelqu'un de changer d'avis.</li>
+  </ul>
+
+  <h3>Nouvelles solutions : prévenir les erreurs</h3>
+  <div class="term-card">
+    <span class="term">Prebunking</span>
+    <p>Stratégie qui prépare les utilisateurs <em>avant</em> leur exposition à la désinformation (par opposition au "debunking", qui corrige <em>après coup</em>). L'idée est d'inoculer les gens contre les techniques de manipulation avant qu'ils n'y soient confrontés.</p>
+  </div>
+  <ul>
+    <li>La <strong>littératie numérique</strong> améliore le jugement.</li>
+    <li>Les <strong>rappels d'exactitude</strong> (accuracy nudges/prompts) encouragent la réflexion avant de partager.</li>
+    <li>Les <strong>interventions simples</strong> (ex. : un simple rappel "pensez à l'exactitude") peuvent réduire le partage de fausses infos.</li>
+    <li>L'objectif est de <strong>ralentir avant de diffuser</strong> — contrer la pensée rapide par un moment de pause.</li>
+    <li>Les <strong>utilisateurs gardent leur autonomie</strong> (contrairement à la censure ou au retrait de contenu).</li>
+  </ul>
+
+  <h3>Conclusion : une approche psychologique</h3>
+  <ul>
+    <li>Les fake news ne reposent <strong>pas seulement sur la politique</strong>.</li>
+    <li><strong>Raisonnement, émotions et réseaux sociaux interagissent</strong> ensemble.</li>
+    <li>La <strong>réflexion améliore la détection du faux</strong>.</li>
+    <li>La <strong>technologie seule ne peut pas résoudre le problème</strong>.</li>
+    <li>Les solutions doivent <strong>combiner éducation et outils numériques</strong>.</li>
+    <li>Priorité : <strong>remettre l'exactitude au centre du partage en ligne</strong>.</li>
+  </ul>
+
+  <div class="source-tag">Source principale : Pennycook, Gordon, and David G. Rand. "The psychology of fake news." Trends in cognitive sciences 25.5 (2021): 388-402.</div>
+
+  <div class="reflection">
+    <span class="label">Réflexions posées dans le cours</span>
+    <p class="q">Pourquoi les gens partagent-ils parfois des informations qu'ils ne sont pas sûrs d'être vraies ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">Selon Pennycook &amp; Rand, le partage n'est souvent pas guidé par une évaluation consciente de la vérité, mais par la recherche d'attention, l'engagement social, la rapidité imposée par les réseaux sociaux, et surtout un simple manque d'attention portée à l'exactitude au moment de cliquer "partager". Croire n'équivaut pas à vouloir partager, et vice-versa.</div></details>
+    <p class="q">Les plateformes devraient-elles être responsables de limiter la diffusion des fake news ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">C'est une question ouverte à débattre — il n'y a pas de "bonne" réponse unique attendue. On peut mobiliser les arguments du cours : les plateformes ont un rôle car les algorithmes de recommandation amplifient la diffusion, mais on peut aussi soulever les enjeux de liberté d'expression, de sur-modération, et le fait que la technologie seule ne peut pas résoudre un problème fondamentalement humain/psychologique.</div></details>
+    <p class="q">Est-ce que les réseaux sociaux sont la cause principale des fake news, ou seulement un outil qui amplifie un problème humain existant ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">Le cours penche clairement vers la seconde option : les fausses informations existent depuis longtemps (avant Internet) ; les réseaux sociaux en sont l'accélérateur, pas la cause originelle. Le problème racine est humain/psychologique (biais, raisonnement motivé, manque d'attention à l'exactitude).</div></details>
+  </div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 7</h4>
+    <details class="quiz">
+      <summary>Quelle est la différence entre "croyance" (belief) et "discernement" (discernment) dans l'étude des fake news ?</summary>
+      <div class="a">La croyance mesure si une personne pense qu'une information précise est vraie. Le discernement mesure la capacité générale d'une personne à distinguer le vrai du faux à travers plusieurs informations. Une bonne étude scientifique doit mesurer les deux séparément, car les facteurs qui les influencent ne sont pas toujours identiques.</div>
+    </details>
+    <details class="quiz">
+      <summary>Quel est le facteur le plus déterminant selon Pennycook &amp; Rand pour expliquer pourquoi les gens croient aux fake news : le manque de réflexion ou l'appartenance politique ?</summary>
+      <div class="a">Le manque de réflexion (pensée rapide/intuitive plutôt qu'analytique). Les personnes qui prennent le temps de réfléchir analytiquement croient moins aux fausses nouvelles, indépendamment de leur orientation politique.</div>
+    </details>
+    <details class="quiz">
+      <summary>Qu'est-ce que le "prebunking" et en quoi diffère-t-il des approches correctives classiques comme le fact-checking ?</summary>
+      <div class="a">Le prebunking prépare les utilisateurs avant leur exposition à la désinformation (une forme d'inoculation psychologique), alors que le fact-checking intervient après coup pour corriger une fausse information déjà diffusée — souvent trop tard pour empêcher sa propagation initiale.</div>
+    </details>
+    <details class="quiz">
+      <summary>Expliquez pourquoi "croire une information" et "vouloir la partager" sont deux choses différentes.</summary>
+      <div class="a">Une personne peut douter de la véracité d'une information et la partager quand même, motivée par la recherche d'attention, l'engagement social ou simplement l'absence de réflexion sur l'exactitude au moment de partager. Le partage est donc davantage guidé par des dynamiques sociales que par une évaluation de vérité.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 8 : BOTS ============ -->
+<section class="chapter" id="ch8" data-num="08">
+  <h2>Bots et désinformation</h2>
+
+  <div class="term-card">
+    <span class="term">Bot</span>
+    <p>Logiciel capable d'agir automatiquement en ligne. Les bots peuvent être <strong>entièrement automatisés</strong> ou <strong>contrôlés par des humains</strong> (partiellement ou totalement). Tous les bots ne sont pas dangereux — certains servent à informer ou aider (ex. : bots météo, bots de service client).</p>
+  </div>
+  <div class="term-card">
+    <span class="term">Botnet</span>
+    <p>Groupe de bots qui fonctionnent ensemble, souvent de façon coordonnée, pour amplifier un message ou une action.</p>
+  </div>
+  <p>Les bots existent sur plusieurs plateformes : Twitter (X), Facebook, Reddit, YouTube. Leur rôle dépend de leur objectif et de leur niveau de sophistication.</p>
+
+  <h3>Les différents types de bots</h3>
+  <ul>
+    <li><strong>Spambots</strong> : diffusent souvent du contenu indésirable ou malveillant.</li>
+    <li><strong>Content polluters</strong> : partagent des liens nuisibles ou de la publicité.</li>
+    <li><strong>Social bots</strong> : imitent les comportements humains.</li>
+    <li><strong>Cyborgs</strong> : combinent actions humaines <em>et</em> automatisées (un humain supervise/complète l'action du bot).</li>
+  </ul>
+  <p>Certains bots cherchent à influencer les comportements des utilisateurs. La frontière entre humain et bot devient parfois difficile à identifier — c'est un enjeu croissant.</p>
+
+  <h3>Comment reconnaître un bot ?</h3>
+  <p>Les chercheurs analysent plusieurs caractéristiques des comptes, car <strong>aucun indicateur seul ne permet une détection parfaite</strong> :</p>
+  <ul>
+    <li><strong>Données du réseau</strong> : abonnements, hashtags, mentions et retweets.</li>
+    <li><strong>Habitudes d'activité</strong> : fréquence et horaires des publications (ex. : un compte qui publie 24h/24 sans pause est suspect).</li>
+    <li><strong>Contenu publié</strong> : style, sentiment et type de messages.</li>
+    <li><strong>Informations du profil</strong> : âge du compte, nom d'utilisateur, description.</li>
+  </ul>
+
+  <h3>Détection des bots par les algorithmes</h3>
+  <ul>
+    <li>Les plateformes utilisent des <strong>modèles d'intelligence artificielle</strong>.</li>
+    <li>Les algorithmes analysent de grandes quantités de comportements en ligne.</li>
+    <li>Les <strong>machines détectent mieux les bots que les humains</strong> (les humains ont du mal à distinguer un bot sophistiqué d'un vrai compte).</li>
+    <li>Les <strong>bots modernes imitent de plus en plus les utilisateurs réels</strong>, rendant la détection plus difficile.</li>
+    <li>Les modèles doivent <strong>constamment évoluer</strong> face aux nouvelles stratégies des créateurs de bots (course aux armements).</li>
+    <li>Un algorithme efficace sur une plateforme peut être <strong>moins précis ailleurs</strong> (les indicateurs ne se transfèrent pas parfaitement d'une plateforme à l'autre).</li>
+  </ul>
+
+  <h3>Comment les bots amplifient la désinformation</h3>
+  <ul>
+    <li>Les bots peuvent <strong>diffuser des contenus en quelques secondes</strong>.</li>
+    <li>Ils <strong>accélèrent la viralité</strong> des fausses informations.</li>
+    <li>Ils sont très présents parmi les comptes qui partagent des <strong>sources peu fiables</strong>.</li>
+    <li>Ils utilisent souvent des <strong>mentions de personnes influentes</strong> pour attirer l'attention.</li>
+    <li>Ils peuvent donner une <strong>impression artificielle de popularité</strong> (ex. : faire croire qu'un sujet est très discuté alors que ce sont surtout des bots qui en parlent).</li>
+    <li>Les <strong>humains participent aussi à la diffusion</strong> en partageant ces contenus — les bots amorcent, les humains relaient.</li>
+  </ul>
+
+  <h3>Bots, politique et manipulation en ligne</h3>
+  <ul>
+    <li>Les bots sont utilisés dans certaines <strong>campagnes politiques numériques</strong>.</li>
+    <li>Ils peuvent amplifier des <strong>messages, hashtags ou opinions</strong>.</li>
+    <li>Des stratégies existent pour <strong>attaquer ou discréditer des adversaires</strong>.</li>
+    <li>Une partie des tweets politiques en <strong>période électorale pourrait provenir de bots</strong>.</li>
+    <li>Les origines des bots sont <strong>difficiles à déterminer</strong>.</li>
+    <li>Les campagnes de bots <strong>ne réussissent pas toujours à influencer les résultats</strong> (important nuance : présence de bots ≠ efficacité garantie).</li>
+  </ul>
+
+  <h3>D'où viennent les bots ?</h3>
+  <ul>
+    <li>Identifier l'origine exacte d'un bot est <strong>complexe</strong>.</li>
+    <li>Certains bots sont liés à des <strong>acteurs étrangers</strong>.</li>
+    <li>Beaucoup de bots politiques proviennent aussi d'<strong>acteurs nationaux</strong> (donc pas seulement de l'étranger, contrairement à une idée reçue).</li>
+    <li>Les motivations peuvent être <strong>commerciales, politiques ou idéologiques</strong>.</li>
+    <li>Créer un bot est devenu <strong>relativement accessible</strong> — des outils de création de bots sont disponibles en ligne.</li>
+  </ul>
+
+  <h3>Les limites de notre compréhension des bots</h3>
+  <ul>
+    <li>Les bots deviennent de plus en plus <strong>difficiles à distinguer des humains</strong>.</li>
+    <li>Les données disponibles sur les bots sont souvent <strong>incomplètes</strong>.</li>
+    <li>Les méthodes de détection <strong>changent constamment</strong>.</li>
+    <li>Les bots ne sont pas toujours créés pour nuire.</li>
+    <li>Leur impact dépend de l'<strong>interaction avec les utilisateurs humains</strong>.</li>
+    <li>Le problème principal est l'<strong>amplification de contenus trompeurs</strong>.</li>
+  </ul>
+
+  <h3>Conclusion : les bots comme amplificateurs numériques</h3>
+  <ul>
+    <li>Les bots <strong>ne créent pas toujours la désinformation</strong>, mais ils peuvent l'accélérer.</li>
+    <li>Leur puissance vient de leur <strong>capacité à agir rapidement et en masse</strong>.</li>
+    <li>Les <strong>humains restent une partie essentielle</strong> de la diffusion.</li>
+    <li>La <strong>détection automatique est nécessaire mais imparfaite</strong>.</li>
+    <li>Comprendre les comportements humains <em>et</em> automatisés est essentiel.</li>
+    <li>La lutte contre la désinformation nécessite des <strong>solutions technologiques et éducatives</strong>.</li>
+  </ul>
+
+  <div class="source-tag">Source citée : Hajli, Nick, et al. "Social bots and the spread of disinformation in social media: the challenges of artificial intelligence." British Journal of Management 33.3 (2022): 1238-1253.</div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 8</h4>
+    <details class="quiz">
+      <summary>Nommez les quatre types de bots mentionnés dans le cours et décrivez brièvement chacun.</summary>
+      <div class="a">Spambots (contenu indésirable/malveillant) ; content polluters (liens nuisibles/publicité) ; social bots (imitent les comportements humains) ; cyborgs (combinaison d'actions humaines et automatisées).</div>
+    </details>
+    <details class="quiz">
+      <summary>Un bot vient-il nécessairement d'un acteur étranger ?</summary>
+      <div class="a">Non — le cours précise explicitement que beaucoup de bots politiques proviennent aussi d'acteurs nationaux, pas seulement étrangers. Les motivations peuvent être commerciales, politiques ou idéologiques.</div>
+    </details>
+    <details class="quiz">
+      <summary>Est-ce que la présence de bots dans une campagne politique garantit qu'ils ont influencé les résultats ?</summary>
+      <div class="a">Non. Le cours précise que les campagnes de bots ne réussissent pas toujours à influencer les résultats — leur présence ne garantit pas leur efficacité.</div>
+    </details>
+    <details class="quiz">
+      <summary>Quels types d'indicateurs les chercheurs utilisent-ils pour détecter un bot, et pourquoi faut-il en combiner plusieurs ?</summary>
+      <div class="a">Les données du réseau (abonnements, hashtags, mentions, retweets), les habitudes d'activité (fréquence, horaires), le contenu publié (style, sentiment) et les informations du profil (âge du compte, description). Il faut les combiner car aucun indicateur seul ne permet une détection parfaite.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 9 : DEEPFAKE ============ -->
+<section class="chapter" id="ch9" data-num="09">
+  <h2>Deepfakes</h2>
+
+  <div class="term-card">
+    <span class="term">Deepfake</span>
+    <p>Contenu généré par l'intelligence artificielle (vidéo, audio ou image) qui permet de créer des scènes ou des paroles fausses mais très réalistes. Il peut imiter des personnes réelles de façon convaincante.</p>
+  </div>
+
+  <h3>Caractéristiques générales</h3>
+  <ul>
+    <li>Se diffuse facilement via les réseaux sociaux et devient viral.</li>
+    <li>Rend difficile la distinction entre vrai contenu et faux contenu.</li>
+    <li>Transforme l'information en <strong>outil manipulable à grande échelle</strong>.</li>
+    <li>Apparition dans un environnement dominé par les réseaux sociaux ; propagation rapide de contenus visuels et audio ; utilisation croissante de l'IA ; capacité à modifier la perception de la réalité.</li>
+  </ul>
+
+  <h3>Logique de fonctionnement</h3>
+  <ul>
+    <li>S'appuie sur la <strong>modification de contenus audio et vidéo existants</strong>.</li>
+    <li>Fusionne des <strong>éléments visuels et sonores générés par l'IA</strong>.</li>
+    <li>Crée des contenus artificiels difficiles à distinguer du réel.</li>
+    <li>Se diffuse rapidement grâce aux plateformes numériques.</li>
+    <li>Circule au sein des écosystèmes d'information en ligne.</li>
+    <li>Tire parti de la <strong>crédibilité accordée aux images et aux vidéos</strong> (on a tendance à faire davantage confiance à ce qu'on "voit" qu'à un simple texte).</li>
+  </ul>
+
+  <h3>Diffusion et viralité</h3>
+  <ul>
+    <li>Circulation rapide sur les réseaux sociaux.</li>
+    <li><strong>Amplification par les algorithmes de recommandation</strong>.</li>
+    <li>Forte capacité de viralisation ; difficulté de contrôle une fois publié.</li>
+    <li>Mélange avec contenus authentiques ; participation des utilisateurs à la diffusion.</li>
+  </ul>
+
+  <h3>Potentiel positif (usage bénéfique)</h3>
+  <p>Il est important de noter, pour l'examen, que le cours présente aussi les usages positifs — ne pas réduire le deepfake à un phénomène uniquement négatif :</p>
+  <ul>
+    <li>Création de contenus médiatiques et artistiques.</li>
+    <li>Innovation dans le domaine audiovisuel.</li>
+    <li>Possibilités dans le divertissement et l'éducation.</li>
+    <li>Réutilisation créative de contenus existants.</li>
+    <li>Outil expérimental pour la production numérique.</li>
+    <li>Amélioration de certaines formes de communication.</li>
+  </ul>
+
+  <h3>Manipulation de l'opinion publique</h3>
+  <ul>
+    <li>Utilisation pour influencer les perceptions sociales.</li>
+    <li>Création de récits faux mais crédibles.</li>
+    <li>Instrument de propagande politique.</li>
+    <li>Impact sur les débats publics.</li>
+    <li>Renforcement des narratifs existants.</li>
+    <li>Outil de persuasion invisible (on ne sait pas toujours qu'on est manipulé).</li>
+  </ul>
+
+  <h3>Impact sur la politique et les élections</h3>
+  <ul>
+    <li>Risque d'influencer les résultats électoraux.</li>
+    <li>Diffusion de fausses déclarations de candidats.</li>
+    <li>Possibilité de manipulation stratégique de l'information.</li>
+    <li>Exploitation des périodes de forte sensibilité politique.</li>
+    <li>Création de confusion dans l'électorat.</li>
+    <li>Affaiblissement du processus démocratique.</li>
+  </ul>
+
+  <h3>Tensions sociales et sécurité</h3>
+  <ul>
+    <li>Amplification des divisions sociales existantes.</li>
+    <li>Possibilité de déclencher des violences ou des émeutes.</li>
+    <li>Utilisation dans des contextes de conflits sociaux.</li>
+    <li>Création de faux événements choquants.</li>
+    <li>Risque de panique publique ; atteinte à la stabilité sociale.</li>
+  </ul>
+
+  <h3>Érosion de la confiance</h3>
+  <ul>
+    <li>Diminution de la confiance dans les médias.</li>
+    <li>Remise en cause des preuves visuelles et audio — c'est un changement fondamental : historiquement, la vidéo/photo était considérée comme une preuve fiable ("voir c'est croire") ; le deepfake érode ce statut de preuve.</li>
+    <li>Méfiance envers institutions publiques et privées.</li>
+    <li>Difficulté à distinguer vrai et faux.</li>
+    <li>Fragilisation de l'information en général ; crise de crédibilité globale.</li>
+  </ul>
+
+  <div class="term-card">
+    <span class="term">Effet « liar's dividend » (dividende du menteur)</span>
+    <p>Concept clé : dans un monde où les deepfakes existent, une personne peut nier des faits <strong>réels</strong> en prétendant qu'ils sont faux (un deepfake). Le simple fait que des deepfakes existent crée un doute généralisé qui profite aux acteurs malveillants, même quand ils sont confrontés à de vraies preuves. C'est un des concepts les plus importants et les plus subtils de cette section.</p>
+  </div>
+  <ul>
+    <li>Possibilité de nier des faits réels en les qualifiant de faux.</li>
+    <li>Exploitation du doute généré par les deepfakes.</li>
+    <li>Avantage donné aux acteurs malveillants.</li>
+    <li>Extension de la désinformation dans la société.</li>
+    <li>Menace pour la démocratie et la vérité publique.</li>
+    <li>Besoin de vigilance face à ces technologies émergentes.</li>
+  </ul>
+
+  <div class="callout">
+    <span class="label">Concept à bien maîtriser : le "liar's dividend"</span>
+    Ce n'est PAS le fait qu'un deepfake trompe les gens en leur faisant croire une fausse information. C'est l'inverse : c'est le fait qu'une personne prise en flagrant délit avec une <em>vraie</em> preuve (vidéo authentique) peut désormais dire "c'est un deepfake, c'est faux" et semer suffisamment de doute pour échapper aux conséquences. L'existence même de la technologie du deepfake devient une arme, même sans qu'un deepfake ait été réellement utilisé dans ce cas précis.
+  </div>
+
+  <div class="source-tag">Source citée : Chesney, Bobby, and Danielle Citron. "Deep fakes: A looming challenge for privacy, democracy, and national security." Calif. L. Rev. 107 (2019): 1753.</div>
+
+  <div class="reflection">
+    <span class="label">Réflexions posées dans le cours</span>
+    <p class="q">Est-ce que certaines utilisations sont acceptables (cinéma, humour) mais d'autres non ? Où tracer la ligne ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">Question ouverte à débattre. On peut s'appuyer sur des critères comme : le consentement de la personne représentée, l'intention (divertissement transparent vs tromperie), le contexte de diffusion (œuvre clairement fictive vs contenu présenté comme réel), et le potentiel de préjudice (atteinte à la réputation, désinformation politique, contenu intime non consenti).</div></details>
+    <p class="q">Si vous aviez accès à un outil capable de cloner parfaitement votre visage et votre voix, l'utiliseriez-vous ? Dans quel contexte et avec quelles limites ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">Question personnelle/réflexive sans réponse "correcte" unique — l'examen pourrait demander de justifier une position en mobilisant les concepts vus (consentement, transparence, risques d'usurpation d'identité, liar's dividend).</div></details>
+  </div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 9</h4>
+    <details class="quiz">
+      <summary>Définissez le deepfake en une phrase.</summary>
+      <div class="a">Un contenu (vidéo, audio ou image) généré par l'intelligence artificielle qui crée des scènes ou des paroles fausses mais très réalistes, capable d'imiter des personnes réelles de façon convaincante.</div>
+    </details>
+    <details class="quiz">
+      <summary>Expliquez le concept de "liar's dividend" avec vos propres mots.</summary>
+      <div class="a">C'est l'avantage stratégique que gagnent les acteurs malveillants du simple fait que les deepfakes existent : ils peuvent nier des faits réels et authentiques en prétendant que la preuve (vidéo/audio) est un deepfake fabriqué, exploitant le doute généralisé que cette technologie a créé envers toute preuve visuelle ou audio.</div>
+    </details>
+    <details class="quiz">
+      <summary>Le cours présente-t-il uniquement des usages négatifs du deepfake ?</summary>
+      <div class="a">Non. Le cours présente aussi un "potentiel positif" : création de contenus médiatiques et artistiques, innovation audiovisuelle, usages en divertissement et éducation, réutilisation créative de contenus, et amélioration de certaines formes de communication.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ CHAPITRE 10 : INFLUENCEURS IA ============ -->
+<section class="chapter" id="ch10" data-num="10">
+  <h2>Influenceurs IA</h2>
+
+  <div class="term-card">
+    <span class="term">Influenceur IA</span>
+    <p>Personnage virtuel créé par ordinateur (CGI) et alimenté par l'intelligence artificielle. Conçu pour ressembler et se comporter comme un humain sur les réseaux sociaux.</p>
+  </div>
+
+  <h3>Les influenceurs IA : de quoi s'agit-il ?</h3>
+  <ul>
+    <li>Personnages virtuels créés par ordinateur (CGI) et alimentés par l'IA.</li>
+    <li>Conçus pour <strong>ressembler et se comporter comme des humains</strong> sur les réseaux sociaux.</li>
+    <li>Communiquent <strong>à la première personne</strong> et interagissent avec leur communauté.</li>
+    <li>Développent une audience et collaborent avec des marques, <strong>comme les influenceurs humains</strong>.</li>
+    <li>Représentent une <strong>nouvelle forme de marketing d'influence</strong>.</li>
+  </ul>
+
+  <h3>Pourquoi les marques s'y intéressent</h3>
+  <ul>
+    <li>Marché du marketing d'influence en <strong>forte croissance</strong>.</li>
+    <li><strong>Contrôle total</strong> de l'image, du style et des messages diffusés (contrairement à un humain, qui peut faire des scandales, changer d'avis, etc.).</li>
+    <li>Personnages <strong>entièrement personnalisables</strong> selon les campagnes.</li>
+    <li><strong>Ne vieillissent pas</strong> et ne sont pas limités par des contraintes physiques.</li>
+    <li>Peuvent <strong>suivre rapidement les tendances</strong> et être adaptés à différents publics.</li>
+  </ul>
+
+  <h3>En quoi diffèrent-ils des influenceurs humains ?</h3>
+  <ul>
+    <li>Apparence et comportement très réalistes, mais <strong>identité entièrement virtuelle</strong>.</li>
+    <li><strong>Moins perçus comme authentiques</strong>, ce qui peut réduire la confiance.</li>
+    <li><strong>Plus flexibles</strong> : apparence, personnalité et contenu peuvent être modifiés à volonté.</li>
+    <li>Leur <strong>caractère inédit suscite curiosité et engagement</strong> (effet de nouveauté).</li>
+    <li>Leur <strong>efficacité commerciale reste débattue</strong> dans la littérature scientifique.</li>
+  </ul>
+
+  <h3>Les principaux enjeux</h3>
+  <div class="term-card">
+    <span class="term">Vallée de l'étrange (uncanny valley)</span>
+    <p>Phénomène où un personnage artificiel presque — mais pas parfaitement — réaliste provoque un malaise ou une gêne chez l'observateur humain, plutôt que de l'appréciation.</p>
+  </div>
+  <ul>
+    <li>Équilibre entre réalisme et effet de « vallée de l'étrange ».</li>
+    <li>Difficulté à instaurer la confiance malgré une apparence humaine.</li>
+    <li>Influence de l'<strong>anthropomorphisme</strong> sur les perceptions des utilisateurs (le fait d'attribuer des caractéristiques humaines à une entité non humaine).</li>
+    <li>Questions éthiques liées à la <strong>transparence et à l'authenticité</strong> (le public sait-il qu'il interagit avec une IA ?).</li>
+    <li>Impact potentiel sur les stratégies de communication et de marketing.</li>
+  </ul>
+
+  <div class="source-tag">Source citée : Feng, Yang, Huan Chen, and Quan Xie. "AI influencers in advertising: the role of AI influencer-related attributes in shaping consumer attitudes, consumer trust, and perceived influencer–product fit." Journal of Interactive Advertising 24.1 (2024): 26-47.</div>
+
+  <div class="reflection">
+    <span class="label">Réflexions posées dans le cours</span>
+    <p class="q">Les plateformes devraient-elles utiliser des outils pour détecter et signaler automatiquement les influenceurs IA ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">Question ouverte. Arguments possibles pour : protéger la transparence et l'authenticité, éviter la tromperie du public. Arguments possibles contre : coût technique, faisabilité limitée (frontière floue entre humain/IA), et le fait que certains usages sont transparents dès le départ (le public sait déjà que c'est un personnage virtuel).</div></details>
+    <p class="q">Si un influenceur IA vous donne de bons conseils, est-ce important qu'il ne soit pas une vraie personne ?</p>
+    <details><summary>Piste de réponse</summary><div class="answer">Question réflexive. On peut relier la réponse au concept de confiance et d'authenticité vu dans le cours : la valeur du conseil dépend-elle de la véracité de l'expérience vécue par la source, ou seulement de la qualité objective du conseil ? Les deux positions sont défendables.</div></details>
+  </div>
+
+  <div class="quiz-block">
+    <h4>Auto-quiz — Chapitre 10</h4>
+    <details class="quiz">
+      <summary>Nommez trois avantages pour une marque de travailler avec un influenceur IA plutôt qu'un influenceur humain.</summary>
+      <div class="a">Contrôle total de l'image/style/messages, personnages entièrement personnalisables, absence de vieillissement et de contraintes physiques, et capacité à suivre rapidement les tendances.</div>
+    </details>
+    <details class="quiz">
+      <summary>Qu'est-ce que la "vallée de l'étrange" et pourquoi est-ce un enjeu pour les influenceurs IA ?</summary>
+      <div class="a">C'est le malaise ressenti face à un personnage artificiel presque, mais pas parfaitement, réaliste. C'est un enjeu car les créateurs d'influenceurs IA doivent trouver un équilibre entre réalisme et cet effet de gêne, tout en essayant d'instaurer la confiance du public.</div>
+    </details>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ SECTION EXAMEN ============ -->
+<section class="exam-section" id="examen">
+  <h2>🎯 Questions susceptibles de sortir à l'examen</h2>
+  <p style="color:var(--ink-dim); font-style:italic;">Ces questions couvrent l'ensemble de la séance et imitent le style des questions conceptuelles typiques d'un examen INM6000. Essayez de répondre avant de dévoiler la réponse.</p>
+
+  <div class="exam-q">
+    <span class="qnum">Q1</span>
+    <p class="qtext">Expliquez la différence entre désinformation et mésinformation, et donnez un exemple pour chacune.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Désinformation = fausse information diffusée intentionnellement pour tromper (ex. : une campagne organisée pour discréditer un candidat avec de fausses accusations). Mésinformation = fausse information partagée sans intention de nuire, par une personne convaincue qu'elle dit vrai (ex. : partager une rumeur de santé en pensant qu'elle est exacte). La distinction repose uniquement sur l'intention de la personne qui diffuse, pas sur le contenu lui-même.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q2</span>
+    <p class="qtext">Pourquoi est-il plus difficile de corriger une fausse croyance que de combler un simple manque d'information ? Reliez votre réponse au biais de confirmation.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Une fausse croyance occupe déjà une place active dans l'esprit de la personne ; la corriger demande de remettre en question quelque chose qu'elle croit vrai, ce qui provoque une résistance psychologique. Le biais de confirmation aggrave ce problème : les gens recherchent naturellement les informations qui confirment ce qu'ils croient déjà et évitent celles qui les contredisent, ce qui protège la fausse croyance de la correction.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q3</span>
+    <p class="qtext">Selon Pennycook et Rand, le partage de fake news est-il principalement causé par la partisanerie politique ou par un manque de réflexion ? Justifiez.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Principalement par un manque de réflexion (pensée rapide plutôt qu'analytique). Les personnes qui réfléchissent de façon analytique croient moins aux fausses nouvelles. De plus, croire une information et vouloir la partager sont deux choses distinctes : les gens partagent souvent sans porter attention à l'exactitude, davantage motivés par l'engagement social et la rapidité des réseaux que par une conviction politique.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q4</span>
+    <p class="qtext">Qu'est-ce que le "prebunking" et pourquoi est-il présenté comme une meilleure stratégie que le fact-checking traditionnel ?</p>
+    <details><summary>Voir la réponse</summary><div class="a">Le prebunking prépare les utilisateurs avant leur exposition à la désinformation (une forme d'inoculation), tandis que le fact-checking corrige après coup. Le cours souligne que les vérifications arrivent souvent trop tard (le contenu a déjà circulé) et ne touchent pas tout le monde — le prebunking cherche à éviter ce problème en agissant en amont, tout en préservant l'autonomie des utilisateurs.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q5</span>
+    <p class="qtext">Décrivez trois types de bots et expliquez comment les bots amplifient (sans nécessairement créer) la désinformation.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Types : spambots (contenu indésirable), content polluters (liens nuisibles/publicité), social bots (imitent les humains), cyborgs (mix humain-automatisé). Amplification : les bots diffusent du contenu en quelques secondes, accélèrent la viralité, donnent une impression artificielle de popularité, et utilisent des mentions de personnes influentes — mais ce sont ensuite les humains qui relaient massivement ces contenus, donc les bots amorcent plus qu'ils ne "créent" la désinformation.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q6</span>
+    <p class="qtext">Expliquez le concept du "liar's dividend" lié aux deepfakes et pourquoi il représente une menace même quand aucun deepfake n'a réellement été utilisé.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Le "liar's dividend" est l'avantage que gagnent les acteurs malveillants du simple fait que la technologie du deepfake existe : une personne confrontée à une preuve vidéo/audio authentique peut la qualifier de "deepfake" pour semer le doute et échapper aux conséquences. La menace existe même sans usage réel d'un deepfake, car c'est la simple possibilité de leur existence qui érode la confiance envers toute preuve visuelle ou audio.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q7</span>
+    <p class="qtext">En quoi le clickbait illustre-t-il un mécanisme psychologique précis ? Nommez ce mécanisme et expliquez-le avec l'exemple du sommeil donné en cours.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Le clickbait exploite l'écart informationnel (curiosity gap) : en laissant une information incomplète, il crée un inconfort psychologique que le clic promet de résoudre. Exemple : « Une nouvelle étude analyse les effets du sommeil sur la mémoire » (neutre, complet) devient « Les scientifiques sont choqués par ce qui arrive quand vous dormez moins de 7 heures » (suspense créé artificiellement, information cachée jusqu'au clic) — le contenu factuel est identique, seule la présentation change.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q8</span>
+    <p class="qtext">Pourquoi dit-on que la démocratie "repose sur un ensemble commun de faits" ? Reliez cette idée à la polarisation.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Le débat démocratique suppose que tous les citoyens discutent à partir des mêmes faits pour arriver à des compromis ou des décisions collectives légitimes. Quand la désinformation fragmente cette base factuelle commune (différents groupes croient à des versions incompatibles de la réalité), le dialogue devient impossible et la polarisation sociale et politique s'accentue, car chaque groupe perçoit l'autre comme vivant dans un monde de "faits alternatifs".</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q9</span>
+    <p class="qtext">Quels sont les principaux avantages qu'un influenceur IA offre à une marque par rapport à un influenceur humain, et quel est le principal désavantage en termes de perception ?</p>
+    <details><summary>Voir la réponse</summary><div class="a">Avantages : contrôle total de l'image et des messages, personnalisation complète, absence de vieillissement/contraintes physiques, adaptation rapide aux tendances. Désavantage principal : les influenceurs IA sont moins perçus comme authentiques que les humains, ce qui peut réduire la confiance du public envers eux, en plus de l'effet potentiel de "vallée de l'étrange".</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q10</span>
+    <p class="qtext">Un bot politique très actif pendant une période électorale garantit-il un impact réel sur les résultats de l'élection ? Justifiez avec les nuances vues en cours.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Non. Le cours précise explicitement que les campagnes de bots ne réussissent pas toujours à influencer les résultats, même si une partie des tweets politiques en période électorale pourrait provenir de bots. La présence de bots et leur activité ne garantissent pas leur efficacité réelle sur l'opinion ou le vote — c'est une nuance importante à ne pas oublier.</div></details>
+  </div>
+
+  <div class="exam-q">
+    <span class="qnum">Q11 — Question de synthèse</span>
+    <p class="qtext">En vous appuyant sur au moins trois phénomènes vus dans cette séance (clickbait, fake news, bots, deepfakes, influenceurs IA), expliquez pourquoi le cours conclut que "la technologie seule ne peut pas résoudre le problème" de la désinformation.</p>
+    <details><summary>Voir la réponse</summary><div class="a">Chaque phénomène montre une composante humaine irréductible : le clickbait exploite une vulnérabilité psychologique universelle (la curiosité) ; les fake news se propagent surtout par manque d'attention humaine à l'exactitude, pas par ignorance ; les bots amplifient mais ce sont les humains qui relaient massivement le contenu ; les deepfakes exploitent la confiance humaine envers l'image ; les influenceurs IA misent sur des mécanismes psychosociaux (anthropomorphisme, confiance, authenticité perçue). Dans tous les cas, la solution purement technique (détection algorithmique, retrait de contenu) ne s'attaque pas à la cause profonde : les biais cognitifs, les incitatifs économiques et les comportements sociaux humains. D'où l'insistance du cours sur des solutions combinant éducation (littératie numérique, prebunking) ET outils technologiques.</div></details>
+  </div>
+</section>
+
+<footer>
+  INM6000 — Informatique et société · Guide généré à partir de la Séance 12 (Didem Demirag, UQAM Été 2026) · Bon succès à l'examen.
+</footer>
+
+</body>
+</html>

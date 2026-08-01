@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>INM6000 — Séance 13 : Sécurité et Surveillance — Guide d'étude complet</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg2:#161b22;
+    --card:#1c2333;
+    --card2:#20293d;
+    --border:#2d3548;
+    --accent:#5eead4;
+    --accent2:#f472b6;
+    --accent3:#facc15;
+    --danger:#f87171;
+    --text:#e6edf3;
+    --text-dim:#9aa7b8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    line-height:1.65;
+    margin:0;
+    padding:0;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:20px 18px 80px;}
+  header.top{
+    text-align:center;
+    padding:50px 20px 40px;
+    background:radial-gradient(ellipse at top, #1a2540 0%, #0d1117 70%);
+    border-bottom:1px solid var(--border);
+  }
+  header.top h1{
+    font-size:2.1em;
+    margin:0 0 8px;
+    background:linear-gradient(90deg,var(--accent),var(--accent2));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  header.top p{color:var(--text-dim);margin:4px 0;}
+  nav.toc{
+    background:var(--bg2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:18px 22px;
+    margin:26px 0;
+  }
+  nav.toc h2{margin-top:0;color:var(--accent3);font-size:1.05em;}
+  nav.toc ol{columns:2;column-gap:30px;padding-left:20px;}
+  nav.toc li{margin-bottom:6px;}
+  nav.toc a{color:var(--text);text-decoration:none;font-size:0.93em;}
+  nav.toc a:hover{color:var(--accent);text-decoration:underline;}
+
+  section.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:26px 28px;
+    margin:28px 0;
+    box-shadow:0 4px 18px rgba(0,0,0,.25);
+  }
+  section.card h2{
+    color:var(--accent);
+    border-bottom:2px solid var(--border);
+    padding-bottom:10px;
+    margin-top:0;
+    font-size:1.4em;
+  }
+  section.card h3{color:var(--accent3);margin-top:24px;font-size:1.1em;}
+  .badge{
+    display:inline-block;
+    background:var(--card2);
+    border:1px solid var(--border);
+    color:var(--text-dim);
+    font-size:0.72em;
+    padding:2px 10px;
+    border-radius:20px;
+    margin-bottom:10px;
+  }
+  .def{
+    background:var(--card2);
+    border-left:4px solid var(--accent);
+    padding:12px 16px;
+    border-radius:8px;
+    margin:14px 0;
+  }
+  .def b{color:var(--accent);}
+  .example{
+    background:#1a2233;
+    border:1px dashed var(--accent2);
+    border-radius:8px;
+    padding:12px 16px;
+    margin:14px 0;
+  }
+  .example b{color:var(--accent2);}
+  .analogy{
+    background:#231d33;
+    border-left:4px solid #c084fc;
+    padding:12px 16px;
+    border-radius:8px;
+    margin:14px 0;
+  }
+  .analogy b{color:#c084fc;}
+  .stat{
+    background:#1a1d2b;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 16px;
+    margin:10px 0;
+  }
+  .stat b{color:var(--accent3);font-size:1.05em;}
+  table{width:100%;border-collapse:collapse;margin:16px 0;}
+  th,td{border:1px solid var(--border);padding:10px 12px;text-align:left;font-size:0.93em;}
+  th{background:var(--card2);color:var(--accent);}
+  tr:nth-child(even){background:#171d2c;}
+  ul, ol{padding-left:22px;}
+  li{margin-bottom:6px;}
+  code{
+    background:#0a0e17;
+    color:var(--accent3);
+    padding:2px 6px;
+    border-radius:4px;
+    font-size:0.9em;
+  }
+  .source{color:var(--text-dim);font-size:0.8em;font-style:italic;margin-top:10px;}
+  .diagram-desc{
+    background:#141a29;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:14px 18px;
+    margin:14px 0;
+  }
+  .diagram-desc b{color:var(--accent2);}
+
+  details.quiz{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    margin:14px 0;
+    padding:14px 18px;
+  }
+  details.quiz summary{
+    cursor:pointer;
+    font-weight:600;
+    color:var(--accent3);
+    list-style:none;
+  }
+  details.quiz summary::before{content:"❓ ";}
+  details.quiz summary::-webkit-details-marker{display:none;}
+  details.quiz .answer{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px dashed var(--border);
+    color:var(--text);
+  }
+  details.quiz .answer b{color:var(--accent);}
+
+  .final-exam{
+    background:linear-gradient(160deg,#1e1030,#0d1117);
+    border:1px solid #7c3aed55;
+  }
+  .final-exam h2{color:var(--accent2);}
+  .final-exam details.quiz{background:#241432;border-color:#7c3aed44;}
+
+  .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;}
+  .pill{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:5px 14px;
+    font-size:0.85em;
+    color:var(--accent);
+  }
+  footer{text-align:center;color:var(--text-dim);padding:40px 10px;font-size:0.85em;}
+  .back-top{
+    position:fixed;bottom:20px;right:20px;
+    background:var(--accent);color:#0d1117;
+    width:44px;height:44px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:bold;text-decoration:none;box-shadow:0 4px 12px rgba(0,0,0,.4);
+    opacity:0.85;
+  }
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <h1>🔐 INM6000 — Séance 13</h1>
+  <p>Sécurité et surveillance</p>
+  <p style="font-size:0.85em;">Didem Demirag · UQAM · Été 2026 · Guide d'étude détaillé</p>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <h2>📑 Table des matières</h2>
+  <ol>
+    <li><a href="#s1">1. Fuite des données (statistiques)</a></li>
+    <li><a href="#s2">2. Gouvernance de la sécurité</a></li>
+    <li><a href="#s3">3. Propriétés de sécurité (CIA)</a></li>
+    <li><a href="#s4">4. Mécanismes de sécurité (AAA)</a></li>
+    <li><a href="#s5">5. Menaces et types d'attaquants</a></li>
+    <li><a href="#s6">6. Modéliser l'adversaire</a></li>
+    <li><a href="#s7">7. Rançongiciel (ransomware)</a></li>
+    <li><a href="#s8">8. Cryptojacking</a></li>
+    <li><a href="#s9">9. Définir la sécurité informatique</a></li>
+    <li><a href="#s10">10. Terminologie complète</a></li>
+    <li><a href="#s11">11. Exemple : la maison</a></li>
+    <li><a href="#s12">12. Typologie des attaques</a></li>
+    <li><a href="#s13">13. L'adversaire en détail</a></li>
+    <li><a href="#s14">14. Modèle de menace</a></li>
+    <li><a href="#s15">15. Approches de modélisation</a></li>
+    <li><a href="#s16">16. Attack tree</a></li>
+    <li><a href="#s17">17. Analyse de sécurité</a></li>
+    <li><a href="#s18">18. Pourquoi la sécurité est difficile</a></li>
+    <li><a href="#s19">19. Éthique de la sécurité</a></li>
+    <li><a href="#s20">20. Piratage éthique</a></li>
+    <li><a href="#s21">21. Test de pénétration</a></li>
+    <li><a href="#s22">22. Ingénierie sociale</a></li>
+    <li><a href="#s23">23. Consentement éclairé</a></li>
+    <li><a href="#s24">24. Éthique du hameçonnage (étude de cas)</a></li>
+    <li><a href="#s25">25. Surveillance</a></li>
+    <li><a href="#s26">26. Rapport final (infos pratiques)</a></li>
+    <li><a href="#exam">🎓 Questions d'examen</a></li>
+  </ol>
+</nav>
+
+<!-- SECTION 1 -->
+<section class="card" id="s1">
+  <h2>1. Fuite des données — pourquoi c'est important</h2>
+  <span class="badge">Diapos 2–8</span>
+  <p>Le cours ouvre avec des chiffres pour montrer l'ampleur réelle du problème de sécurité informatique aujourd'hui. Ce ne sont pas juste des anecdotes : ce sont les données qui justifient pourquoi on étudie tout ce chapitre.</p>
+
+  <div class="stat"><b>349 221 481</b> personnes ont été affectées par des brèches de données en 2023 (source : Forbes Advisor). C'est plus que la population des États-Unis en une seule année.</div>
+  <div class="stat">Le coût total mondial de la cybercriminalité devrait atteindre <b>10,5 billions de dollars</b> d'ici 2025 (un « billion » ici = 10<sup>12</sup>, donc 10 500 milliards $).</div>
+  <p>Les conséquences typiques d'une fuite : <b>fraude</b>, <b>vol d'identité</b>, <b>phishing</b> (hameçonnage), et l'accès à des <b>données sensibles</b> (santé, finances, identité).</p>
+
+  <div class="diagram-desc"><b>🖼️ Diapo 3 (image) :</b> capture d'un article du <i>Devoir</i> rapportant qu'environ <b>295 000 personnes au Québec</b> ont été touchées par une fuite de données gouvernementale. C'est l'exemple « proche de chez nous » qui montre que le Québec n'est pas épargné.</div>
+  <div class="diagram-desc"><b>🖼️ Diapos 4-5 (infographie « Compliancy Group ») :</b> une infographie type sur les statistiques de fuites de données (fréquence des brèches, secteurs les plus touchés — souvent la santé — et délais moyens de détection). Le point à retenir : les organisations mettent souvent <b>des mois</b> à détecter une brèche, ce qui aggrave les dommages.</div>
+
+  <h3>Rapport IBM « Cost of a Data Breach 2024 »</h3>
+  <div class="stat"><b>4,88 millions USD</b> : coût moyen mondial d'une fuite de données en 2024 — une hausse de <b>10 %</b> par rapport à l'année précédente. La tendance est donc à la hausse, pas à la stabilisation.</div>
+  <div class="stat"><b>2,22 millions USD d'économies</b> pour les organisations qui utilisent l'IA et l'automatisation de la sécurité en <b>prévention</b>, comparées à celles qui ne le font pas. Autrement dit : investir dans l'IA défensive rapporte concrètement.</div>
+  <div class="stat">Les équipes de sécurité <b>en sous-effectif</b> subissent un coût de brèche <b>1,76 million $ plus élevé</b> que les entreprises bien dotées en personnel.</div>
+  <div class="stat">La prévention basée sur l'IA fait économiser <b>2,2 millions $</b> en coûts de brèche.</div>
+  <div class="stat"><b>Lacunes de visibilité des données</b> : 40 % des brèches concernaient des données stockées dans <b>plusieurs environnements</b> (cloud + sur site, par exemple) → coût de plus de <b>5 millions $</b> et <b>283 jours</b> en moyenne pour identifier et contenir l'incident.</div>
+  <div class="stat"><b>Identifiants volés</b> : dans 16 % des cas, le vecteur d'attaque initial le plus courant était des identifiants (mots de passe, comptes) volés ou compromis.</div>
+  <div class="stat">Quand les <b>forces de l'ordre interviennent</b>, 63 % des victimes de ransomware ont pu <b>éviter de payer</b> une rançon — un argument fort pour toujours impliquer la police plutôt que négocier seul.</div>
+  <div class="stat">Le secteur de la <b>santé</b> a le coût de brèche moyen le plus élevé : <b>9,77 millions $</b> — parce que les données médicales sont extrêmement sensibles et réglementées.</div>
+  <div class="stat"><b>63 %</b> des organisations répercutent le coût de la brèche sur les <b>consommateurs</b> (hausse des prix des services). C'est vous, en tant que client, qui payez indirectement.</div>
+
+  <div class="example"><b>💡 À retenir pour l'examen :</b> les chiffres exacts sont moins importants que les <b>tendances</b> : (1) le coût augmente d'année en année, (2) l'IA en prévention réduit les coûts, (3) le facteur humain (sous-effectif, identifiants volés) est souvent la cause racine, (4) plus une brèche est difficile à détecter (environnements multiples), plus elle coûte cher.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi les entreprises avec des équipes de sécurité en sous-effectif ont-elles des coûts de brèche plus élevés ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'avec moins de personnel dédié à la sécurité, les vulnérabilités sont détectées plus lentement, les incidents sont moins bien contenus, et la réponse à l'incident prend plus de temps — ce qui augmente directement les dommages et donc le coût (jusqu'à 1,76 M$ de plus).</div>
+  </details>
+</section>
+
+<!-- SECTION 2 -->
+<section class="card" id="s2">
+  <h2>2. Gouvernance de la sécurité</h2>
+  <span class="badge">Diapo 9</span>
+  <p>La gouvernance, c'est la structure organisationnelle et les processus par lesquels une organisation gère sa sécurité. Le cours la découpe en deux colonnes complémentaires : <b>gestion du risque</b> (analyser) et <b>mise en œuvre</b> (agir).</p>
+
+  <h3>Colonne 1 — Gestion du risque</h3>
+  <ol>
+    <li><b>Identifier les biens</b> : quels actifs faut-il protéger ? (données, serveurs, réputation…)</li>
+    <li><b>Identifier les sources de menaces</b> : qui ou quoi pourrait attaquer ?</li>
+    <li><b>Évaluer la vulnérabilité face aux menaces</b> : où sont les failles ?</li>
+    <li><b>Évaluer le risque</b> (valeur du bien × dangerosité de la menace)</li>
+    <li><b>Identifier des solutions et les prioriser</b> : on ne peut pas tout corriger en même temps, il faut prioriser selon le risque</li>
+    <li><b>Auditer et recommencer</b> : la sécurité est un <b>cycle continu</b>, jamais un projet « fini une fois pour toutes »</li>
+  </ol>
+
+  <h3>Colonne 2 — Mise en œuvre concrète</h3>
+  <ul>
+    <li><b>Identifier des solutions</b> (techniques, humaines, organisationnelles)</li>
+    <li><b>Politiques de sécurité</b> : les règles écrites</li>
+    <li><b>Organisation</b> : qui est responsable ? quels protocoles suivre ?</li>
+    <li><b>Plans de recouvrement</b> : que faire après un incident pour reprendre les opérations ?</li>
+    <li><b>Gestion des incidents</b> : comment réagir en temps réel à une attaque ?</li>
+    <li><b>Aspects humains (formation)</b> : la meilleure technologie ne sert à rien si les employés cliquent sur un lien de phishing</li>
+  </ul>
+
+  <div class="analogy"><b>🔑 Analogie :</b> pense à la gouvernance de sécurité comme à la gestion de la santé d'une personne. La « gestion du risque » c'est comme aller chez le médecin pour un bilan (identifier les problèmes potentiels, évaluer leur gravité), et la « mise en œuvre » c'est comme suivre un traitement, avoir un plan d'urgence, et se faire vacciner (formation) pour prévenir les problèmes futurs.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi « auditer et recommencer » est-il essentiel dans la gestion du risque ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce que les menaces évoluent constamment (nouveaux logiciels malveillants, nouvelles vulnérabilités découvertes), donc une évaluation du risque faite une seule fois devient rapidement obsolète. La gouvernance de la sécurité est un <b>cycle itératif</b>, pas une action ponctuelle.</div>
+  </details>
+</section>
+
+<!-- SECTION 3 -->
+<section class="card" id="s3">
+  <h2>3. Propriétés de sécurité — le triangle CIA</h2>
+  <span class="badge">Diapo 10</span>
+  <p>C'est probablement le concept le plus fondamental de toute la sécurité informatique — souvent appelé la <b>triade CIA</b> (Confidentiality, Integrity, Availability).</p>
+
+  <table>
+    <tr><th>Propriété</th><th>Définition</th><th>Exemple de violation</th></tr>
+    <tr><td><b>Confidentialité</b></td><td>Ne pas être accessible aux personnes non autorisées</td><td>Un pirate lit vos courriels privés</td></tr>
+    <tr><td><b>Intégrité</b></td><td>Ne pas être modifiable par des personnes non autorisées</td><td>Quelqu'un modifie le solde de votre compte bancaire</td></tr>
+    <tr><td><b>Disponibilité</b></td><td>Être accessible aux personnes autorisées</td><td>Une attaque par déni de service empêche l'accès à un site web</td></tr>
+  </table>
+
+  <div class="analogy"><b>🔑 Analogie du coffre-fort :</b>
+    <ul>
+      <li><b>Confidentialité</b> = seules les personnes avec la combinaison peuvent l'ouvrir</li>
+      <li><b>Intégrité</b> = personne ne peut changer ce qu'il y a dedans sans autorisation</li>
+      <li><b>Disponibilité</b> = le propriétaire légitime peut toujours y accéder quand il en a besoin (le coffre n'est pas soudé fermé par erreur !)</li>
+    </ul>
+  </div>
+
+  <div class="example"><b>💡 Piège classique d'examen :</b> on pense souvent que la sécurité = seulement la confidentialité (empêcher les gens de voir). Mais une attaque par déni de service (DDoS) ne vole rien et ne modifie rien : elle attaque uniquement la <b>disponibilité</b>. C'est quand même une attaque de sécurité !</div>
+
+  <details class="quiz">
+    <summary>Un pirate ne vole aucune donnée, mais rend un site web inaccessible pendant 3 heures. Quelle propriété de la triade CIA est violée ?</summary>
+    <div class="answer"><b>Réponse : la disponibilité.</b> Le site n'est plus accessible aux personnes autorisées, même si la confidentialité et l'intégrité des données ne sont pas touchées.</div>
+  </details>
+</section>
+
+<!-- SECTION 4 -->
+<section class="card" id="s4">
+  <h2>4. Mécanismes de sécurité — le modèle AAA(A)</h2>
+  <span class="badge">Diapo 11</span>
+  <p>Si la triade CIA décrit <b>ce qu'on veut protéger</b> (les propriétés), les mécanismes suivants décrivent <b>comment on la protège</b> concrètement.</p>
+
+  <div class="def"><b>Authentification :</b> vérifier une identité (« es-tu vraiment qui tu prétends être ? »)</div>
+  <div class="def"><b>Autorisation :</b> appliquer une politique d'accès à des ressources (« maintenant que je sais qui tu es, as-tu le droit de faire ça ? »)</div>
+  <div class="def"><b>Traçabilité :</b> mise en place de logs (journaux) permettant de savoir ce qui a été consommé ou fait</div>
+  <div class="def"><b>Auditabilité :</b> généralement post-mortem (analyse forensique/après le fait), bénéficie grandement de la traçabilité</div>
+
+  <p style="text-align:center;font-size:1.3em;margin-top:20px;">
+    <b style="color:var(--accent3)">A</b>uthentication →
+    <b style="color:var(--accent3)">A</b>utorisation →
+    <b style="color:var(--accent3)">A</b>ccounting <span style="color:var(--text-dim)">(and</span>
+    <b style="color:var(--accent3)">A</b>uditing<span style="color:var(--text-dim)">)</span>
+  </p>
+
+  <div class="analogy"><b>🔑 Analogie de l'aéroport :</b>
+    <ul>
+      <li><b>Authentification</b> = montrer ton passeport à la douane (on vérifie que tu es bien toi)</li>
+      <li><b>Autorisation</b> = vérifier que ton billet te donne accès à la porte d'embarquement C12 et pas à la zone VIP</li>
+      <li><b>Traçabilité</b> = les caméras de sécurité et le registre des passages enregistrent qui est passé où et quand</li>
+      <li><b>Auditabilité</b> = après un incident (bagage perdu, personne suspecte), on peut consulter les enregistrements pour comprendre ce qui s'est passé</li>
+    </ul>
+  </div>
+
+  <details class="quiz">
+    <summary>Quelle est la différence entre authentification et autorisation ? Donne un exemple.</summary>
+    <div class="answer"><b>Réponse :</b> L'authentification confirme <b>qui</b> tu es (ex : entrer ton mot de passe pour prouver que tu es bien le propriétaire du compte). L'autorisation détermine <b>ce que tu as le droit de faire</b> une fois identifié (ex : un employé authentifié peut lire des fichiers, mais seul un administrateur authentifié est autorisé à les supprimer).</div>
+  </details>
+</section>
+
+<!-- SECTION 5 -->
+<section class="card" id="s5">
+  <h2>5. Menaces et types d'attaquants</h2>
+  <span class="badge">Diapo 12</span>
+
+  <h3>Objectifs classiques d'une attaque</h3>
+  <ul>
+    <li><b>Écoute</b> (simple ou élaborée) : intercepter des communications sans se faire remarquer</li>
+    <li><b>Contournement de moyens d'authentification / autorisation</b> : passer les barrières de sécurité</li>
+    <li><b>Déni de service</b> (attaque physique ou réseau) : rendre un service indisponible</li>
+  </ul>
+
+  <h3>Types d'attaquants</h3>
+  <ul>
+    <li><b>Internes</b> : un ou plusieurs utilisateurs déjà dans le système (employés, contractuels)</li>
+    <li><b>Externes</b> : sans accès préalable au réseau</li>
+  </ul>
+  <div class="example"><b>💡 Point important souligné dans le cours :</b> les attaquants sont <b>principalement internes</b>. C'est contre-intuitif — on imagine souvent un hacker anonyme externe, mais statistiquement, les employés (par malveillance ou par erreur) représentent une part énorme des incidents de sécurité, car ils ont déjà un accès légitime.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi les menaces internes sont-elles souvent plus dangereuses que les menaces externes ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'un attaquant interne a déjà un accès légitime au système (identifiants, connaissance des processus, accès physique), ce qui contourne d'emblée plusieurs couches de défense périmétrique conçues pour arrêter les attaquants externes.</div>
+  </details>
+</section>
+
+<!-- SECTION 6 -->
+<section class="card" id="s6">
+  <h2>6. Modéliser l'adversaire</h2>
+  <span class="badge">Diapo 13</span>
+  <div class="def"><b>Citation (Schneier on Security, 2010) :</b> on est « sécure » <b>de</b> ou <b>contre</b> quelque chose (hackers, criminels, attaquants, etc.) — la sécurité n'existe jamais dans l'absolu, seulement relativement à une menace précise.</div>
+
+  <ul>
+    <li>Il faut savoir <b>contre qui/quoi</b> on veut se protéger</li>
+    <li>Les mécanismes de sécurité protègent une <b>propriété</b> contre un <b>type d'attaque précis</b></li>
+    <li><b>La sécurité absolue est utopique</b> — « le risque 0 n'existe pas »</li>
+    <li>En fonction des <b>coûts/bénéfices</b>, on choisit de se protéger contre certains attaquants et pas d'autres</li>
+    <li>Si un adversaire plus puissant apparaît, ou si les hypothèses de départ sont mal calibrées, <b>la sécurité mise en place ne tiendra plus</b></li>
+    <li>Objectif réaliste : rendre la vie <b>difficile</b> à l'adversaire, pas l'empêcher à 100 %</li>
+  </ul>
+
+  <div class="analogy"><b>🔑 Analogie :</b> une serrure de porte ne protège pas contre un char d'assaut. Elle est conçue pour arrêter un voleur occasionnel, pas une armée. De la même façon, un mot de passe simple protège contre un curieux, mais pas contre un État avec des ressources illimitées. La sécurité doit toujours être pensée « contre qui » précisément.</div>
+
+  <details class="quiz">
+    <summary>Que veut dire l'expression « le risque 0 n'existe pas » dans le contexte de la modélisation de l'adversaire ?</summary>
+    <div class="answer"><b>Réponse :</b> Cela signifie qu'aucun système ne peut être rendu parfaitement invulnérable. On accepte toujours un certain niveau de risque résiduel, et l'objectif réaliste de la sécurité est de réduire ce risque et de rendre les attaques plus coûteuses/difficiles pour l'adversaire, pas de les éliminer complètement.</div>
+  </details>
+</section>
+
+<!-- SECTION 7 -->
+<section class="card" id="s7">
+  <h2>7. Rançongiciel (Ransomware)</h2>
+  <span class="badge">Diapos 14–15</span>
+  <div class="def"><b>Définition :</b> un code malveillant qui empêche la victime d'accéder à son système ou à ses données, dans le but de lui extorquer de l'argent.</div>
+
+  <ul>
+    <li>La <b>menace la plus sérieuse</b> actuellement en cybersécurité</li>
+    <li>Forte croissance depuis <b>2018</b></li>
+    <li>Cibles fréquentes : villes, services publics, hôpitaux — car ils ont une <b>sécurité faible</b>, offrent un <b>service essentiel</b> (impossible d'arrêter longtemps), donc une <b>forte incitation à payer</b></li>
+    <li><b>7 %</b> des attaques de ransomware ont entraîné des pertes financières en 2023, avec un paiement médian de <b>10 000 $</b></li>
+  </ul>
+
+  <h3>Le dilemme éthique : payer ou ne pas payer ?</h3>
+  <table>
+    <tr><th>Payer la rançon</th><th>Ne pas payer</th></tr>
+    <tr><td>On récupère ses données (ou pas — aucune garantie !)</td><td>On ne récupère pas ses données ; le « business » reste bloqué</td></tr>
+    <tr><td>Pas à l'abri d'une récidive (en 2018, 50 % des victimes ont été attaquées plusieurs fois)</td><td>Risque de divulgation de données potentiellement critiques</td></tr>
+    <tr><td>On encourage le système (finance les criminels, incite à recommencer)</td><td>On n'encourage pas le système criminel</td></tr>
+  </table>
+  <div class="example"><b>💡 Point clé :</b> une bonne préparation (sauvegardes externes régulières) élimine une bonne partie du dilemme — si on peut restaurer ses données sans payer, le rançongiciel perd son levier de pression.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi les hôpitaux et services publics sont-ils des cibles privilégiées pour les rançongiciels ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'ils combinent souvent une sécurité informatique faible, un service jugé essentiel qui ne peut pas rester interrompu longtemps (vies en jeu, services publics critiques), ce qui crée une forte pression pour payer rapidement — rendant l'attaque plus « rentable » pour les criminels.</div>
+  </details>
+</section>
+
+<!-- SECTION 8 -->
+<section class="card" id="s8">
+  <h2>8. Cryptojacking</h2>
+  <span class="badge">Diapo 16</span>
+  <div class="def"><b>Définition :</b> miner de la crypto-monnaie à l'insu du propriétaire d'un ordinateur.</div>
+  <ul>
+    <li>Peut se propager via un <b>logiciel malveillant</b> ou un <b>virus</b></li>
+    <li>Peut être une <b>librairie cachée</b> dans un logiciel ou un site web</li>
+    <li>Reste <b>caché à l'utilisateur</b> — la victime remarque souvent seulement que son ordinateur ralentit ou chauffe, sans savoir pourquoi</li>
+  </ul>
+  <div class="analogy"><b>🔑 Analogie :</b> c'est comme si quelqu'un branchait discrètement une pompe sur ton compteur d'eau pour remplir sa propre piscine — tu paies la facture (électricité, usure du matériel), mais c'est quelqu'un d'autre qui profite du résultat (la crypto-monnaie minée).</div>
+
+  <details class="quiz">
+    <summary>Quelle est la différence principale entre le rançongiciel et le cryptojacking en termes d'objectif de l'attaquant ?</summary>
+    <div class="answer"><b>Réponse :</b> Le rançongiciel vise à <b>extorquer directement de l'argent</b> en bloquant l'accès aux données. Le cryptojacking vise à <b>utiliser discrètement les ressources</b> (CPU/GPU) de la victime pour générer un profit (minage) sans que la victime s'en aperçoive — pas de blocage ni de demande de rançon.</div>
+  </details>
+</section>
+
+<!-- SECTION 9 -->
+<section class="card" id="s9">
+  <h2>9. Définir la sécurité informatique</h2>
+  <span class="badge">Diapos 17–20</span>
+
+  <div class="def"><b>Citation (Paul C. van Oorschot, <i>Computer Security and the Internet</i>) :</b> « Nous définissons la sécurité informatique comme la combinaison de l'art, de la science et de la pratique de l'ingénierie visant à protéger les actifs informatiques contre les actions non autorisées et leurs conséquences, soit en empêchant ces actions, soit en les détectant puis en les récupérant. »</div>
+
+  <p>Cette définition insiste sur <b>trois volets</b> : l'<b>art</b> (créativité pour anticiper des attaques imprévues), la <b>science</b> (fondements mathématiques/cryptographiques), et l'<b>ingénierie</b> (mise en pratique concrète, systèmes réels). Elle inclut aussi <b>deux stratégies</b> de défense : la <b>prévention</b> (empêcher) et la <b>détection + récupération</b> (accepter que ça arrive, mais réagir).</p>
+
+  <div class="diagram-desc"><b>🖼️ Diapo 18 « Comment définir ? » :</b> la diapo pose une question rhétorique avec l'affirmation « Cet ordinateur est sécurisé. » — le but est de faire réaliser que cette phrase, seule, ne veut <b>rien dire</b> sans préciser « sécurisé contre quoi et pour qui ». Ça relie directement au concept de la diapo 13 (modéliser l'adversaire).</div>
+
+  <h3>Sécurité informatique — portée élargie</h3>
+  <ul>
+    <li>Protéger les <b>données</b>, le <b>matériel</b>, les <b>logiciels</b>, les <b>réseaux de communication</b> associés, et les <b>appareils du monde physique</b> (IoT, capteurs, etc.)</li>
+    <li>Contre toute <b>utilisation abusive intentionnelle</b> par des parties non autorisées</li>
+    <li><b>Fiabilité et redondance</b> : protéger aussi contre les <b>dommages ou erreurs involontaires</b> — pas seulement contre des attaquants malveillants ! Un employé qui efface accidentellement une base de données est aussi un problème de sécurité informatique.</li>
+  </ul>
+
+  <div class="diagram-desc"><b>🖼️ Diapo 19-20 (schémas van Oorschot) :</b> ces diapos illustrent visuellement le modèle conceptuel de la sécurité informatique — généralement présenté comme un schéma reliant les <b>actifs</b> (au centre, ce qu'on protège) aux <b>menaces</b> et <b>vulnérabilités</b> qui les entourent, avec les <b>mécanismes de protection</b> (contrôles) formant une barrière entre les deux. L'idée visuelle clé : la sécurité est un <b>équilibre dynamique</b> entre attaque et défense, pas un mur fixe.</div>
+
+  <details class="quiz">
+    <summary>Selon la définition de van Oorschot, quelles sont les deux grandes stratégies de protection des actifs informatiques ?</summary>
+    <div class="answer"><b>Réponse :</b> (1) <b>Empêcher</b> les actions non autorisées (prévention), et (2) les <b>détecter</b> puis <b>récupérer</b> après coup (détection + réponse/recouvrement). La sécurité informatique ne se limite donc pas à bâtir des murs — elle inclut aussi la capacité à réagir après une brèche.</div>
+  </details>
+</section>
+
+<!-- SECTION 10 -->
+<section class="card" id="s10">
+  <h2>10. Terminologie complète de la sécurité</h2>
+  <span class="badge">Diapos 21–23</span>
+  <p>C'est la section <b>la plus dense en vocabulaire</b> — quasi certaine de faire l'objet de questions à l'examen. Chaque terme est lié aux autres dans une chaîne logique.</p>
+
+  <table>
+    <tr><th>Terme</th><th>Définition</th></tr>
+    <tr><td><b>Actifs</b></td><td>informations, logiciels, matériels et services informatiques et de communication</td></tr>
+    <tr><td><b>Politique</b></td><td>spécifie l'intention de conception des règles d'un système</td></tr>
+    <tr><td><b>Attaques</b></td><td>l'exécution délibérée visant à provoquer une brèche de sécurité</td></tr>
+    <tr><td><b>Vulnérabilité</b></td><td>des défauts de conception ou d'implémentation, ou des problèmes de déploiement/configuration</td></tr>
+    <tr><td><b>Adversaire</b></td><td>la source ou l'agent de menace derrière une attaque potentielle — devient « attaquant » une fois la menace activée dans une attaque réelle</td></tr>
+    <tr><td><b>Menace</b></td><td>combinaison de circonstances et d'entités susceptibles de provoquer des brèches de sécurité</td></tr>
+    <tr><td><b>Vecteur d'attaque</b></td><td>les méthodes spécifiques ou séquences d'étapes par lesquelles les attaques sont menées</td></tr>
+    <tr><td><b>Participants</b></td><td>entités légitimes impliquées dans l'exécution d'un protocole (traditionnellement nommées « Alice » et « Bob »)</td></tr>
+    <tr><td><b>Algorithme</b></td><td>procédure effectuée <b>localement</b> par un participant</td></tr>
+    <tr><td><b>Protocole</b></td><td>procédure effectuée <b>conjointement</b> par les participants, dont les rôles respectifs sont clairement identifiés</td></tr>
+  </table>
+
+  <div class="def"><b>La chaîne logique à retenir :</b> une <b>vulnérabilité</b> existe → un <b>adversaire</b> l'identifie → une <b>menace</b> se matérialise → l'adversaire devient un <b>attaquant</b> en exécutant un <b>vecteur d'attaque</b> → cela produit une <b>attaque</b> → qui viole la <b>politique</b> de sécurité et compromet un <b>actif</b>.</div>
+
+  <div class="analogy"><b>🔑 Différence algorithme vs protocole :</b> un <b>algorithme</b>, c'est une recette que <b>toi seul</b> suis dans ta cuisine. Un <b>protocole</b>, c'est une chorégraphie où <b>plusieurs personnes</b> (Alice ET Bob) doivent suivre des étapes coordonnées, chacune avec son rôle précis — comme une poignée de main secrète à deux personnes.</div>
+
+  <details class="quiz">
+    <summary>Quelle est la différence entre un « adversaire » et un « attaquant » ?</summary>
+    <div class="answer"><b>Réponse :</b> L'<b>adversaire</b> est la source/l'agent de menace <b>potentiel</b> (il pourrait attaquer). Il devient un <b>attaquant</b> seulement au moment où la menace se concrétise réellement, c'est-à-dire quand il exécute effectivement une attaque.</div>
+  </details>
+  <details class="quiz">
+    <summary>Un logiciel a un bug qui permet de contourner l'écran de connexion. Comment appelle-t-on ce bug, selon la terminologie du cours ?</summary>
+    <div class="answer"><b>Réponse : une vulnérabilité</b> — un défaut de conception ou d'implémentation qui pourrait être exploité par un adversaire.</div>
+  </details>
+</section>
+
+<!-- SECTION 11 -->
+<section class="card" id="s11">
+  <h2>11. Exemple appliqué : la politique de sécurité de la maison</h2>
+  <span class="badge">Diapo 24</span>
+  <p>Cette diapo prend tous les termes de la section précédente et les applique à un exemple concret et intuitif : protéger une <b>maison</b>. C'est probablement l'exemple le plus susceptible d'être repris tel quel à l'examen (ou avec un scénario similaire) car il illustre <b>chaque terme</b> de la terminologie en contexte.</p>
+
+  <table>
+    <tr><th>Terme</th><th>Dans l'exemple de la maison</th></tr>
+    <tr><td><b>Politique de sécurité</b></td><td>1) Personne n'est autorisé à entrer sans être accompagné d'un membre de la famille. 2) Seuls les membres de la famille peuvent retirer des objets physiques de la maison.</td></tr>
+    <tr><td><b>Vulnérabilité</b></td><td>Une porte arrière déverrouillée</td></tr>
+    <tr><td><b>Vecteur d'attaque</b></td><td>L'entrée par la porte déverrouillée</td></tr>
+    <tr><td><b>Attaquant</b></td><td>La personne qui entre par cette porte</td></tr>
+    <tr><td><b>Attaque</b></td><td>L'enlèvement d'un téléviseur</td></tr>
+    <tr><td><b>Menace</b></td><td>L'existence d'un individu motivé par le fait de voler un bien pour le revendre contre de l'argent</td></tr>
+    <tr><td><b>Brèche de sécurité</b></td><td>Un étranger non accompagné se retrouve dans la maison</td></tr>
+  </table>
+
+  <div class="diagram-desc"><b>🖼️ Description du schéma :</b> le schéma original relie visuellement ces éléments : la <b>vulnérabilité</b> (porte arrière) mène au <b>vecteur d'attaque</b> (entrer par cette porte), ce qui permet à l'<b>attaquant</b> de commettre l'<b>attaque</b> (voler la télé), résultant en une <b>brèche</b> de la <b>politique</b> établie — le tout motivé par la <b>menace</b> sous-jacente (quelqu'un qui veut voler pour revendre).</div>
+
+  <div class="example"><b>💡 Comment réutiliser cet exemple à l'examen :</b> si on te donne un nouveau scénario (ex. un site web avec un mot de passe faible), essaie de remplir le même tableau : quelle est la vulnérabilité ? le vecteur d'attaque ? qui est l'attaquant ? quelle est l'attaque concrète ? quelle politique est violée ? quelle est la menace sous-jacente ?</div>
+
+  <details class="quiz">
+    <summary>Dans l'exemple de la maison, pourquoi la « porte arrière déverrouillée » est-elle une vulnérabilité et non une menace ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'une vulnérabilité est un <b>défaut structurel</b> qui existe indépendamment de la présence d'un attaquant (la porte reste déverrouillée même si personne n'essaie d'entrer). La <b>menace</b>, elle, est la combinaison de circonstances/entités (l'existence d'un individu motivé à voler) qui pourrait exploiter cette vulnérabilité. La vulnérabilité est le « trou », la menace est le « risque qu'on en profite ».</div>
+  </details>
+</section>
+
+<!-- SECTION 12 -->
+<section class="card" id="s12">
+  <h2>12. Typologie des attaques</h2>
+  <span class="badge">Diapo 25</span>
+  <p>Cette section classe les attaques selon leur <b>nature technique</b>, indépendamment du contexte (maison, ordinateur, réseau).</p>
+
+  <div class="def"><b>Espionnage :</b> capture d'informations (écoute passive, sans altérer les données)</div>
+  <div class="def"><b>Modification :</b> altération d'information (l'attaquant change activement des données)</div>
+  <div class="def"><b>Rejeu (replay) :</b> renvoi d'un message capturé précédemment, pour tromper le système en faisant croire qu'une action légitime se reproduit</div>
+  <div class="def"><b>Déni de service :</b> empêcher les participants légitimes de compléter le protocole</div>
+  <div class="def"><b>Cryptanalyse :</b> profiter d'une faiblesse cryptographique pour déchiffrer un message <b>sans avoir la clé</b></div>
+  <div class="def"><b>Manipulation de certificat :</b> choix ou altération d'un certificat dédié à l'authentification (ex. faux certificat SSL)</div>
+  <div class="def"><b>Interactions de protocole :</b> exploitation d'une même clé utilisée dans différents protocoles (une faiblesse dans un contexte se propage à un autre)</div>
+
+  <div class="analogy"><b>🔑 Analogie de l'attaque « rejeu » :</b> imagine que tu enregistres le son de quelqu'un disant « Ouvre la porte » à un système de reconnaissance vocale, puis tu rejoues cet enregistrement plus tard pour tromper le système et faire ouvrir la porte — même si tu n'as jamais eu accès à la vraie voix de la personne en direct.</div>
+
+  <details class="quiz">
+    <summary>Un attaquant intercepte un message de transaction bancaire chiffré et le renvoie tel quel une deuxième fois pour déclencher un second paiement. De quel type d'attaque s'agit-il ?</summary>
+    <div class="answer"><b>Réponse : une attaque par rejeu (replay)</b> — le message capturé est renvoyé sans être déchiffré ni modifié, mais son simple renvoi trompe le système.</div>
+  </details>
+</section>
+
+<!-- SECTION 13 -->
+<section class="card" id="s13">
+  <h2>13. L'adversaire en détail</h2>
+  <span class="badge">Diapo 26</span>
+  <p>Pour bien modéliser un adversaire (rappel de la section 6), on caractérise quatre dimensions :</p>
+  <ul>
+    <li><b>Objectifs</b> : des actifs cibles nécessitant une protection spéciale</li>
+    <li><b>Méthodes</b> : les techniques d'attaque anticipées ou les types d'attaques utilisées</li>
+    <li><b>Capacités</b> : ressources informatiques (CPU, stockage, bande passante), compétences, connaissances, personnel, opportunité</li>
+    <li><b>Niveau de financement</b> : influence directement la détermination et les capacités de l'attaquant</li>
+  </ul>
+
+  <h3>Attaque externe vs interne</h3>
+  <div class="def"><b>Attaque externe :</b> lancée sans aucun accès spécial préalable au réseau cible</div>
+  <div class="def"><b>Attaque interne :</b> provient de parties ayant un <b>avantage de départ</b> — exemple : des employés disposant d'un accès physique</div>
+
+  <details class="quiz">
+    <summary>Pourquoi le « niveau de financement » d'un adversaire est-il une dimension importante à évaluer ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'il détermine indirectement l'ampleur des capacités disponibles (temps, outils spécialisés, personnel qualifié) et la persistance de l'adversaire — un adversaire bien financé (ex. un État) peut soutenir des attaques beaucoup plus sophistiquées et prolongées qu'un individu isolé.</div>
+  </details>
+</section>
+
+<!-- SECTION 14 -->
+<section class="card" id="s14">
+  <h2>14. Modèle de menace</h2>
+  <span class="badge">Diapo 27</span>
+  <p>Créer un « modèle de menace » (threat model), c'est structurer formellement la réflexion sur qui pourrait attaquer et comment.</p>
+  <ul>
+    <li><b>Identifier</b> les menaces, les agents de menace et les vecteurs d'attaque</li>
+    <li>Ce qui est considéré <b>hors champ</b> (hors périmètre d'analyse) doit être <b>explicitement défini</b> — on ne peut pas tout couvrir, alors il faut être clair sur ce qu'on choisit de ne pas couvrir</li>
+    <li>La <b>modélisation des adversaires</b> fait partie intégrante de ce processus</li>
+    <li>Il faut <b>prendre en compte toutes les hypothèses</b> formulées sur le système cible, l'environnement, et les attaquants</li>
+  </ul>
+  <div class="example"><b>💡 Point d'examen :</b> définir explicitement ce qui est « hors champ » est aussi important que définir ce qui est couvert — sinon, on ne sait jamais si une faille découverte plus tard était censée être protégée ou non.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi est-il important de définir explicitement ce qui est « hors champ » dans un modèle de menace ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'un modèle de menace ne peut pas couvrir toutes les menaces possibles de façon réaliste. En définissant clairement les limites, on évite les malentendus sur la portée de la protection offerte, et on peut évaluer honnêtement si une faille découverte plus tard était censée être couverte ou était un risque accepté dès le départ.</div>
+  </details>
+</section>
+
+<!-- SECTION 15 -->
+<section class="card" id="s15">
+  <h2>15. Approches de modélisation des menaces</h2>
+  <span class="badge">Diapo 28</span>
+  <p>Le manuel de van Oorschot présente typiquement <b>trois grandes approches</b> pour aborder la modélisation des menaces (illustrées par un schéma comparatif sur cette diapo) :</p>
+  <div class="def"><b>Approche centrée sur les actifs (asset-centric) :</b> on part des biens précieux à protéger (données, systèmes), puis on identifie quelles menaces pourraient les affecter.</div>
+  <div class="def"><b>Approche centrée sur l'attaquant (attacker-centric) :</b> on part du profil de l'adversaire (ses objectifs, capacités, motivations) pour anticiper ses actions probables.</div>
+  <div class="def"><b>Approche centrée sur le logiciel/système (software-centric) :</b> on analyse l'architecture technique du système lui-même (points d'entrée, flux de données) pour repérer où les attaques pourraient se produire, indépendamment de qui attaque.</div>
+  <p>Ces trois approches sont <b>complémentaires</b> : une analyse de sécurité robuste combine souvent les trois perspectives plutôt que d'en choisir une seule.</p>
+
+  <details class="quiz">
+    <summary>Quelle approche de modélisation des menaces commencerait par cartographier tous les points d'entrée d'une application web ?</summary>
+    <div class="answer"><b>Réponse : l'approche centrée sur le logiciel/système (software-centric)</b>, qui analyse d'abord l'architecture technique et les flux de données pour identifier où les vulnérabilités pourraient exister.</div>
+  </details>
+</section>
+
+<!-- SECTION 16 -->
+<section class="card" id="s16">
+  <h2>16. « Attack tree » (arbre d'attaque)</h2>
+  <span class="badge">Diapo 29</span>
+  <p>Un <b>attack tree</b> est un outil de modélisation qui représente visuellement, sous forme d'arbre, toutes les façons possibles d'atteindre un objectif d'attaque.</p>
+  <div class="def"><b>Structure :</b> la <b>racine</b> de l'arbre représente l'objectif final de l'attaquant (ex. « voler les données clients »). Chaque <b>nœud enfant</b> représente une sous-étape ou une méthode alternative pour atteindre ce but. Les <b>feuilles</b> représentent les actions concrètes/atomiques que l'attaquant peut exécuter.</div>
+  <div class="example"><b>💡 Point clé du cours :</b> « Un vecteur d'attaque est un chemin complet de la racine à la feuille. » Autrement dit, chaque chemin depuis le sommet de l'arbre jusqu'à une feuille terminale correspond à une séquence complète d'étapes qu'un attaquant pourrait suivre pour réussir son attaque.</div>
+  <div class="analogy"><b>🔑 Analogie :</b> pense à un arbre de décision de type « choisis ta propre aventure » pour un cambrioleur : au sommet, l'objectif est « entrer dans la maison ». Les branches se divisent en options — « par la porte », « par la fenêtre », « par le garage » — et chaque branche se subdivise encore (« crocheter la serrure » ou « avoir la clé volée »). Chaque chemin complet, du tronc jusqu'au bout d'une branche, est un scénario d'attaque distinct.</div>
+
+  <details class="quiz">
+    <summary>Que représente un chemin complet, de la racine à une feuille, dans un attack tree ?</summary>
+    <div class="answer"><b>Réponse : un vecteur d'attaque</b> — c'est-à-dire une séquence complète et concrète d'étapes qu'un attaquant peut suivre pour atteindre l'objectif représenté par la racine de l'arbre.</div>
+  </details>
+</section>
+
+<!-- SECTION 17 -->
+<section class="card" id="s17">
+  <h2>17. Analyse de sécurité</h2>
+  <span class="badge">Diapo 30</span>
+  <p>Cette diapo (schéma tiré de van Oorschot) synthétise visuellement le <b>processus complet</b> d'analyse de sécurité : partant de l'identification des actifs et de la politique, en passant par la modélisation des menaces et des adversaires (attack trees, approches asset/attacker/software-centric), jusqu'à la mise en place de contrôles et leur audit.</p>
+  <div class="diagram-desc"><b>🖼️ Description :</b> le schéma relie typiquement dans un flux logique : <b>Actifs → Politique → Menaces/Vulnérabilités → Modélisation de l'adversaire → Contrôles de sécurité → Audit/Récupération</b>, bouclant vers le début — ce qui rejoint directement le cycle de gouvernance vu à la section 2 (« auditer et recommencer »).</div>
+  <p>C'est essentiellement une <b>vue d'ensemble récapitulative</b> qui relie tous les concepts vus depuis le début du cours (terminologie, exemple de la maison, typologie des attaques, modélisation de l'adversaire, attack trees) en un seul processus cohérent.</p>
+
+  <details class="quiz">
+    <summary>Pourquoi le schéma d'analyse de sécurité forme-t-il une boucle plutôt qu'une ligne droite ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce que la sécurité informatique est un processus <b>continu</b>, pas un projet ponctuel. Une fois les contrôles mis en place, il faut les auditer, découvrir de nouvelles vulnérabilités ou menaces émergentes, et recommencer le cycle — cohérent avec le principe de gouvernance « auditer et recommencer » vu plus tôt.</div>
+  </details>
+</section>
+
+<!-- SECTION 18 -->
+<section class="card" id="s18">
+  <h2>18. Pourquoi la sécurité informatique est-elle difficile ?</h2>
+  <span class="badge">Diapo 31</span>
+  <p>Cette diapo liste 10 raisons structurelles qui expliquent pourquoi la sécurité reste un défi permanent, même avec de bons outils.</p>
+  <div class="pill-row">
+    <span class="pill">Adversaire intelligent et adaptatif</span>
+    <span class="pill">Pas de règles</span>
+    <span class="pill">Asymétrie défenseur-attaquant</span>
+    <span class="pill">Échelle d'attaque</span>
+    <span class="pill">Connectivité universelle</span>
+    <span class="pill">Facteurs humains</span>
+    <span class="pill">Rythme de l'évolution technologique</span>
+    <span class="pill">Complexité des logiciels</span>
+    <span class="pill">Formation des développeurs</span>
+    <span class="pill">Interopérabilité et rétrocompatibilité</span>
+  </div>
+  <ul>
+    <li><b>Adversaire intelligent et adaptatif</b> : contrairement à une catastrophe naturelle, l'attaquant s'ajuste activement à vos défenses</li>
+    <li><b>Pas de règles</b> : l'attaquant ne respecte aucune convention, contrairement au défenseur qui doit souvent respecter des lois/éthique</li>
+    <li><b>Asymétrie défenseur-attaquant</b> : le défenseur doit fermer <b>toutes</b> les failles, l'attaquant n'a besoin d'en trouver qu'<b>une seule</b></li>
+    <li><b>Échelle d'attaque</b> : une seule vulnérabilité peut être exploitée à grande échelle, sur des millions de machines simultanément</li>
+    <li><b>Connectivité universelle</b> : tout est interconnecté (Internet), donc une faille locale peut avoir des répercussions mondiales</li>
+    <li><b>Facteurs humains</b> : erreurs, phishing, mots de passe faibles — la technologie seule ne peut pas corriger le comportement humain</li>
+    <li><b>Rythme de l'évolution technologique</b> : les nouvelles technologies arrivent plus vite que la capacité à les sécuriser correctement</li>
+    <li><b>Complexité des logiciels</b> : plus un système est complexe, plus il a de surface d'attaque et de bugs potentiels</li>
+    <li><b>Formation des développeurs</b> : tous les développeurs ne sont pas formés aux bonnes pratiques de sécurité</li>
+    <li><b>Interopérabilité et rétrocompatibilité</b> : garder la compatibilité avec de vieux systèmes force parfois à garder des failles connues ouvertes</li>
+  </ul>
+  <div class="example"><b>💡 La plus importante à retenir :</b> l'<b>asymétrie défenseur-attaquant</b> — c'est souvent LE concept le plus cité dans la littérature de sécurité pour expliquer pourquoi la défense est structurellement désavantagée : le défenseur doit gagner à chaque fois, l'attaquant n'a besoin de gagner qu'une seule fois.</div>
+
+  <details class="quiz">
+    <summary>Explique le concept d'« asymétrie défenseur-attaquant » avec tes propres mots.</summary>
+    <div class="answer"><b>Réponse :</b> Le défenseur doit protéger <b>toutes</b> les portes d'entrée possibles d'un système, sans exception, alors que l'attaquant n'a besoin de trouver <b>qu'une seule</b> faille non protégée pour réussir. Cela crée un déséquilibre structurel : la défense est beaucoup plus exigeante que l'attaque.</div>
+  </details>
+</section>
+
+<!-- SECTION 19 -->
+<section class="card" id="s19">
+  <h2>19. L'éthique de la sécurité (introduction)</h2>
+  <span class="badge">Diapo 32, 45, 46</span>
+  <p>Cette section aborde les questions morales soulevées par la pratique de la sécurité informatique — le cours y consacre une grande partie du contenu, ce qui montre que c'est probablement un axe majeur pour l'examen (et pertinent pour le <b>rapport final</b>, vu le thème du cours INM6000 « Informatique et société »).</p>
+
+  <h3>Questions posées (diapo 32)</h3>
+  <ul>
+    <li>Est-il éthique de <b>diffuser des modules d'exploitation</b> (exploits) publiquement ?</li>
+    <li>Une approche de <b>divulgation responsable</b> : fournir d'abord l'information aux fournisseurs du produit concerné (avant de la rendre publique)</li>
+    <li>Est-ce que les <b>utilisateurs vulnérables doivent être informés</b> avant même que des correctifs (patches) ne soient disponibles ? (dilemme : les informer tôt les protège en théorie, mais informe aussi les attaquants potentiels avant qu'une solution existe)</li>
+  </ul>
+
+  <h3>Suite de la réflexion (diapos 45-46)</h3>
+  <ul>
+    <li>Les problèmes de sécurité impliquent la <b>prise de décision responsable</b>, la <b>confidentialité</b>, la <b>vie privée</b>, le <b>piratage</b>, la <b>fraude</b>, les <b>secrets commerciaux</b>, etc.</li>
+    <li>Il faut prendre des <b>décisions éthiques</b> liées à la sécurité de l'information, et protéger les <b>victimes d'attaques</b> ainsi que l'utilisateur général d'Internet</li>
+    <li>L'<b>étude des comportements malveillants</b> sert à développer de nouvelles défenses — mais cela pose la question de la <b>publication des résultats de recherche</b> : quel est le moyen le plus sûr de diffuser les résultats sans risquer une utilisation malveillante ?</li>
+  </ul>
+
+  <div class="example"><b>💡 Piège classique :</b> la « divulgation responsable » n'est pas un concept simple à sens unique — il y a une vraie tension entre transparence (informer les utilisateurs) et sécurité (ne pas donner d'idées aux attaquants avant qu'un correctif existe).</div>
+
+  <details class="quiz">
+    <summary>Quel est le principe de la « divulgation responsable » d'une vulnérabilité ?</summary>
+    <div class="answer"><b>Réponse :</b> Informer d'abord le fournisseur/l'organisation concernée pour lui laisser le temps de corriger la faille, avant de la rendre publique — plutôt que de divulguer immédiatement l'exploit à tout le monde (ce qui exposerait les utilisateurs à un risque immédiat).</div>
+  </details>
+</section>
+
+<!-- SECTION 20 -->
+<section class="card" id="s20">
+  <h2>20. Piratage éthique</h2>
+  <span class="badge">Diapos 33–37</span>
+  <p>Le <b>piratage éthique</b> (« ethical hacking ») consiste à pirater un système de manière <b>légale et éthique</b>, généralement dans le but de le rendre plus sécuritaire.</p>
+
+  <h3>Ce que doit faire un pirate éthique</h3>
+  <ul>
+    <li>Détecter les menaces et failles dans le système de sécurité de l'entreprise</li>
+    <li>Protéger le réseau et les ordinateurs de l'entreprise contre de nouvelles attaques</li>
+    <li><b>Obtenir l'autorisation</b> d'essayer d'identifier les risques de sécurité (élément central !)</li>
+    <li>Respecter la <b>vie privée</b> de l'entreprise ou de l'individu</li>
+    <li>Ne rien laisser ouvert pour que quelqu'un d'autre puisse l'exploiter</li>
+    <li>Signaler toute vulnérabilité non déjà connue de l'entreprise</li>
+    <li>Proposer des <b>recommandations</b> sur les meilleures pratiques pour contrer les failles trouvées</li>
+  </ul>
+
+  <div class="def"><b>Tests de pénétration (pentest) :</b> tests ciblés sur les faiblesses du système, effectués sur un composant spécifique.</div>
+  <div class="example"><b>💡 Distinction importante d'examen :</b>
+    <ul>
+      <li><b>Piratage éthique</b> = une variété <b>large</b> d'attaques simulées dans des scénarios réalistes, pour découvrir les failles et vulnérabilités de sécurité en général</li>
+      <li><b>Test de pénétration</b> = <b>l'un des aspects</b> du piratage éthique, se concentrant spécifiquement sur la vérification de la sécurité des systèmes de défense</li>
+    </ul>
+    Autrement dit : tous les tests de pénétration sont du piratage éthique, mais le piratage éthique est un concept plus large que le seul pentest.
+  </div>
+
+  <h3>Les « white hat » hackers</h3>
+  <ul>
+    <li>Embauchés par leurs victimes pour découvrir des vulnérabilités et améliorer la cybersécurité</li>
+    <li>Le caractère éthique dépend de <b>deux critères</b> : (1) le <b>but</b> de l'activité de piratage, et (2) si la victime a donné son <b>consentement préalable</b></li>
+  </ul>
+  <div class="def"><b>Cybersécurité (définition élargie) :</b> le maintien de la confidentialité, de l'intégrité et de la disponibilité des données <b>+</b> l'accès physique aux bâtiments et au matériel informatique <b>+</b> l'accès à distance via Internet.</div>
+
+  <h3>Le problème du consentement partiel (diapo 36)</h3>
+  <div class="def"><b>Consentement éclairé post-événement :</b> les données sont collectées à l'insu de la victime, mais elles ne sont incluses dans l'analyse finale <b>qu'une fois</b> le consentement obtenu après coup.</div>
+  <p>Question soulevée : <b>et si un nombre significatif de victimes ne donnent pas leur consentement</b> après coup ? Cela remet en question la <b>validité de l'ensemble</b> du test de pénétration (l'échantillon de données devient biaisé/incomplet).</p>
+
+  <h3>Principes pour minimiser les dommages (diapo 37)</h3>
+  <ul>
+    <li>Minimiser les dommages causés par la tromperie</li>
+    <li>Confirmer que la tromperie est <b>nécessaire</b> pour un test réussi</li>
+    <li>Être sûr que la tromperie entraîne une <b>valeur réelle</b></li>
+    <li>Obtenir l'<b>approbation du client</b></li>
+  </ul>
+
+  <details class="quiz">
+    <summary>Quels sont les deux critères qui déterminent si l'activité d'un « white hat » hacker est éthique ?</summary>
+    <div class="answer"><b>Réponse :</b> (1) le <b>but</b> de l'activité de piratage (améliorer la sécurité, pas nuire), et (2) si la <b>victime a donné son consentement préalable</b>.</div>
+  </details>
+  <details class="quiz">
+    <summary>Quelle est la différence entre le piratage éthique et un test de pénétration ?</summary>
+    <div class="answer"><b>Réponse :</b> Le piratage éthique est un terme <b>large</b> qui englobe une variété d'attaques simulées réalistes pour découvrir des failles de sécurité en général. Le test de pénétration est <b>un aspect spécifique</b> du piratage éthique, concentré sur la vérification ciblée de la robustesse des systèmes de défense.</div>
+  </details>
+</section>
+
+<!-- SECTION 21 -->
+<section class="card" id="s21">
+  <h2>21. Test de pénétration (approfondissement)</h2>
+  <span class="badge">Diapo 38</span>
+  <div class="example"><b>Exemple concret :</b> tenter de pénétrer dans le réseau et d'accéder à des données sensibles.</div>
+  <ul>
+    <li><b>Rapport final</b> : documente si et comment les différentes barrières de sécurité ont été franchies, accompagné de <b>recommandations</b> pour éliminer ces vulnérabilités</li>
+    <li>Avec le <b>consentement de la victime</b>, la conduite de la brèche elle-même est considérée comme <b>éthique</b> — c'est le consentement qui transforme un acte normalement illégal en une pratique professionnelle légitime</li>
+  </ul>
+
+  <details class="quiz">
+    <summary>Qu'est-ce qui transforme légalement/éthiquement une intrusion réseau (normalement un crime) en un test de pénétration légitime ?</summary>
+    <div class="answer"><b>Réponse : le consentement préalable de la victime</b> (généralement formalisé dans un contrat/mandat). C'est ce consentement, combiné à un objectif d'amélioration de la sécurité, qui rend l'acte éthique et légal.</div>
+  </details>
+</section>
+
+<!-- SECTION 22 -->
+<section class="card" id="s22">
+  <h2>22. L'ingénierie sociale</h2>
+  <span class="badge">Diapo 39</span>
+  <div class="def"><b>Définition :</b> la manipulation inter-humaine pour la découverte et l'exploitation des vulnérabilités de sécurité — ici, la « faille » exploitée n'est pas technique, mais <b>psychologique/humaine</b>.</div>
+  <ul>
+    <li>Questions éthiques : l'<b>efficacité du test</b> versus la <b>signification du consentement éclairé</b></li>
+    <li>Pour une évaluation précise, <b>les employés ne peuvent pas être informés</b> qu'ils sont testés — sinon leur comportement change et fausse l'exactitude des résultats (biais de l'observateur)</li>
+    <li>Malgré cela, le <b>consentement éclairé reste nécessaire</b> pour qu'une activité de piratage soit considérée comme éthique — d'où la tension centrale de cette section</li>
+  </ul>
+  <div class="analogy"><b>🔑 Analogie :</b> c'est comme tester si les gens verrouillent leur porte en envoyant un faux livreur sonner chez eux sans les prévenir à l'avance — si tu les préviens, ils vont évidemment tous vérifier leur serrure ce jour-là, ce qui fausse complètement le test.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi ne peut-on pas informer les employés à l'avance qu'ils vont être testés par ingénierie sociale ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce que le fait de savoir qu'ils sont testés modifierait leur comportement (ils seraient artificiellement plus vigilants), ce qui fausserait l'exactitude des résultats du test — on ne mesurerait plus le comportement réel/naturel des employés.</div>
+  </details>
+</section>
+
+<!-- SECTION 23 -->
+<section class="card" id="s23">
+  <h2>23. Consentement éclairé</h2>
+  <span class="badge">Diapo 40</span>
+  <ul>
+    <li>Avant toute collecte de données personnelles, il faut normalement demander un <b>consentement libre et éclairé</b></li>
+    <li>L'usage de la <b>tromperie</b> (par exemple mentir sur le but réel de la collecte) <b>porte atteinte au principe de respect de la personne</b></li>
+    <li><b>Dilemme central</b> : la tromperie est pourtant nécessaire pour mener à bien certaines expérimentations, comme celles sur le <b>hameçonnage (phishing)</b> — si tu préviens les gens qu'ils vont recevoir un faux courriel de phishing, le test perd tout son sens</li>
+  </ul>
+  <div class="example"><b>💡 Le lien à faire :</b> ce dilemme (tromperie nécessaire vs respect de la personne) prépare directement la section suivante, qui présente un cadre formel pour <b>arbitrer</b> ce genre de situation via un comité d'éthique.</div>
+
+  <details class="quiz">
+    <summary>Pourquoi la tromperie pose-t-elle un problème éthique dans la recherche sur le hameçonnage ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce que le consentement libre et éclairé exige normalement d'informer les participants du véritable but de l'étude. Or, mentir sur ce but (tromperie) porte atteinte au principe de respect de la personne — même si, paradoxalement, cette tromperie est nécessaire pour que l'expérimentation sur le phishing ait une quelconque validité.</div>
+  </details>
+</section>
+
+<!-- SECTION 24 -->
+<section class="card" id="s24">
+  <h2>24. Étude de cas : évaluation éthique d'une expérimentation sur le hameçonnage</h2>
+  <span class="badge">Diapos 41–44</span>
+  <p>Cette section présente comment un <b>comité de protection des personnes</b> (comité d'éthique de la recherche) évalue si une expérimentation impliquant tromperie/absence de consentement peut être approuvée.</p>
+
+  <h3>Conditions permettant la tromperie/renonciation au consentement</h3>
+  <p>La tromperie et la renonciation totale au consentement éclairé remettent en question le principe du <b>respect des personnes</b>. Elles peuvent néanmoins être autorisées si <b>toutes</b> ces conditions sont réunies :</p>
+  <ul>
+    <li>L'expérience ne comporte <b>pas plus qu'un risque minimal</b></li>
+    <li>L'étude <b>ne pourrait pas être menée sans recours à la tromperie</b></li>
+    <li>Les résultats de l'étude ont une <b>valeur importante</b></li>
+  </ul>
+  <p>De plus, il faut : rechercher des <b>modèles expérimentaux alternatifs</b> qui ne nécessitent pas de tromperie, et fournir des <b>explications convaincantes</b> justifiant le recours à la tromperie.</p>
+
+  <h3>Contexte plus large</h3>
+  <ul>
+    <li>La tromperie et la renonciation au consentement existent aussi dans les études <b>sociologiques, psychologiques sociales, et pharmacologiques</b></li>
+    <li><b>Utilisation des placebos</b> : nécessaire pour conserver la validité des études sur des comportements spontanés</li>
+    <li>Exemple classique : des expérimentations sur l'<b>influence du contexte social</b> pour déterminer si des témoins aideront quelqu'un en cas d'urgence (référence implicite aux célèbres études sur « l'effet du témoin » / bystander effect en psychologie sociale)</li>
+  </ul>
+
+  <h3>Procédure standard dans les études impliquant une tromperie</h3>
+  <ol>
+    <li>Le sujet <b>consent d'abord à participer</b> (à une étude, sans connaître les détails précis)</li>
+    <li>Les <b>chercheurs retiennent</b> volontairement le fait qu'il s'agit d'une tromperie</li>
+    <li>Les <b>chercheurs informent le sujet une fois l'expérience terminée</b> (c'est le fameux « débriefing »)</li>
+  </ol>
+
+  <div class="example"><b>💡 Cette procédure en 3 étapes est très probablement une question d'examen directe</b> — elle synthétise concrètement comment on résout le dilemme des sections 22-23 (tromperie nécessaire mais respect de la personne requis) : on retarde le consentement complet plutôt que de l'éliminer.</div>
+
+  <details class="quiz">
+    <summary>Quelles sont les trois conditions qui doivent être réunies pour qu'un comité d'éthique autorise la tromperie/renonciation au consentement dans une étude ?</summary>
+    <div class="answer"><b>Réponse :</b> (1) l'expérience ne comporte pas plus qu'un <b>risque minimal</b>, (2) l'étude <b>ne pourrait pas être menée sans</b> recourir à la tromperie, et (3) les résultats de l'étude ont une <b>valeur importante</b>.</div>
+  </details>
+  <details class="quiz">
+    <summary>Décris les trois étapes de la procédure standard pour une étude impliquant une tromperie.</summary>
+    <div class="answer"><b>Réponse :</b> 1) Le sujet consent d'abord à participer à l'étude (sans connaître qu'il y a tromperie). 2) Les chercheurs retiennent le fait qu'il s'agit d'une tromperie pendant l'expérience. 3) Une fois l'expérience terminée, les chercheurs informent le sujet de la nature réelle (tromperie comprise) de l'étude — le débriefing.</div>
+  </details>
+</section>
+
+<!-- SECTION 25 -->
+<section class="card" id="s25">
+  <h2>25. Surveillance</h2>
+  <span class="badge">Diapos 47–50</span>
+  <p>Dernier grand thème du cours : l'équilibre entre <b>sécurité</b> et <b>vie privée</b>, et le concept du <b>capitalisme de surveillance</b>.</p>
+
+  <div class="def"><b>Question centrale posée :</b> Plus de sécurité nécessite-t-il nécessairement moins de confidentialité ? Et plus de surveillance implique-t-elle nécessairement plus de sécurité ? (Le cours pose cette question comme un débat, pas comme une vérité établie.)</div>
+
+  <ul>
+    <li>La surveillance ne se limite pas aux <b>caméras traditionnelles</b> : elle inclut aussi les <b>téléviseurs intelligents</b> équipés de caméras/microphones, et les <b>données générées par les appareils mobiles</b></li>
+    <li>Il y a un <b>équilibre (trade-off)</b> entre vie privée et sécurité : on « sacrifie » une partie de la vie privée contre des gains en matière de sécurité</li>
+  </ul>
+
+  <h3>Pourquoi la vie privée compte (rôle central)</h3>
+  <ul>
+    <li>L'exercice d'autres <b>droits et libertés fondamentaux</b> (la vie privée est souvent une condition préalable à d'autres libertés, comme la liberté d'expression)</li>
+    <li>L'<b>innovation sociétale et économique</b></li>
+    <li>L'<b>autonomie individuelle</b></li>
+  </ul>
+
+  <h3>Le capitalisme de surveillance (Shoshana Zuboff)</h3>
+  <div class="def"><b>Concept :</b> revendique unilatéralement l'expérience humaine comme une <b>matière première gratuite</b> qui peut être traduite en <b>données comportementales</b>.</div>
+  <ul>
+    <li>Une focalisation sur les <b>populations</b> plutôt que sur les utilisateurs individuels</li>
+    <li><b>« Surplus comportemental »</b> : la totalité des informations sur nous qui pourraient être échangées contre des bénéfices sur de nouveaux marchés (ex. publicité ciblée)</li>
+    <li>Avec des <b>millions d'utilisateurs</b> et leurs surplus comportementaux, une sorte de <b>patterns prévisibles</b> émerge</li>
+    <li><b>Point subtil important :</b> la prédiction <b>ne concerne pas réellement des individus</b> — on a besoin de suffisamment d'utilisateurs qui laissent des traces pour qu'un <b>modèle reconnaissable</b> émerge statistiquement, pas pour prédire une personne précise</li>
+  </ul>
+
+  <div class="analogy"><b>🔑 Analogie :</b> le capitalisme de surveillance, c'est comme une entreprise minière qui extrait gratuitement une ressource naturelle (ton comportement en ligne) qu'elle transforme ensuite en un produit vendable (des prédictions/publicités ciblées) — sauf que la « ressource naturelle » ici, c'est ton expérience humaine quotidienne, extraite sans compensation directe.</div>
+
+  <details class="quiz">
+    <summary>Selon Shoshana Zuboff, qu'est-ce que le « surplus comportemental » ?</summary>
+    <div class="answer"><b>Réponse :</b> C'est la totalité des informations sur nous-mêmes (comportements, habitudes, préférences) qui peuvent être extraites et échangées contre des bénéfices sur de nouveaux marchés (comme la publicité ciblée) — un sous-produit de notre activité en ligne que les entreprises capturent et monétisent.</div>
+  </details>
+  <details class="quiz">
+    <summary>Pourquoi le cours précise-t-il que « la prédiction ne concerne pas réellement des individus » dans le contexte du capitalisme de surveillance ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce que le modèle de prédiction fonctionne à l'échelle des <b>populations</b> : il faut un très grand nombre d'utilisateurs laissant des traces comportementales pour qu'un <b>pattern statistique reconnaissable</b> émerge. L'objectif n'est pas de connaître parfaitement une personne en particulier, mais de repérer des tendances collectives exploitables commercialement.</div>
+  </details>
+</section>
+
+<!-- SECTION 26 -->
+<section class="card" id="s26">
+  <h2>26. Rapport final — informations pratiques importantes</h2>
+  <span class="badge">Diapos 53–57</span>
+  <p>⚠️ Cette section n'est pas de la matière d'examen théorique, mais des <b>consignes officielles</b> pour ton travail final — à ne surtout pas négliger, surtout que la date limite approche.</p>
+
+  <div class="stat">📅 <b>Date limite : le 9 août 2026, 23h59</b></div>
+
+  <h3>Contenu obligatoire du rapport</h3>
+  <ol>
+    <li><b>Noms et codes permanents</b> des membres de l'équipe (ou nom + code permanent si individuel)</li>
+    <li><b>Titre</b>, possiblement révisé suite aux commentaires reçus précédemment</li>
+    <li><b>Sujet</b> (1 à 3 paragraphes) : présenter le sujet, justifier sa pertinence, expliquer l'angle choisi</li>
+    <li><b>Problématique</b> (1 à 3 phrases) : question(s) concrète(s) à laquelle/auxquelles tu veux répondre</li>
+    <li><b>Concepts clés</b> (2 à 4 concepts, 1 paragraphe chacun) : présenter les concepts principaux (souvent visibles dans le titre), justifier leur choix, les définir</li>
+    <li><b>Méthodologie</b> (1 à 2 paragraphes) : comment tu comptes répondre à la question</li>
+    <li><b>Analyse</b> (3 à 9 paragraphes) : étudier chaque posture/cas pertinent avec les ressources choisies — règle d'or : <b>1 paragraphe = 1 idée</b></li>
+    <li><b>Conclusion</b> (1 paragraphe) : qu'as-tu retenu ? avenues de recherche futures ? ta position finale sur le sujet ?</li>
+    <li><b>Bibliographie</b> (minimum 3 ressources) : articles scientifiques, articles de journaux, rapports, études, reportages — indiquer à chaque fois : auteur(s), date, titre, maison d'édition/journal/URL</li>
+  </ol>
+
+  <h3>Normes de présentation</h3>
+  <ul>
+    <li><b>10 à 15 pages</b> environ (hors page de garde et bibliographie)</li>
+    <li>Interligne <b>et demi</b> (1,5)</li>
+    <li>Police <b>Times New Roman</b> (ou équivalent), <b>12 pt</b></li>
+    <li><b>Page de présentation UQAM</b> et <b>bibliographie</b> requises</li>
+  </ul>
+
+  <h3>Critères d'un bon projet</h3>
+  <ul>
+    <li>Clarté de l'analyse, qualité de présentation, et <b>orthographe</b> comptent</li>
+    <li>Une <b>portée clairement définie</b> : ce qui est pertinent et ce qui est hors sujet</li>
+    <li>Expliquer les recherches existantes de façon à démontrer une <b>vraie compréhension</b>, pas juste répéter ce qu'elles disent</li>
+    <li>Être <b>sélectif</b> dans les détails inclus, pour garder le point principal clair</li>
+    <li>Démontrer un <b>niveau de travail adéquat</b> réparti sur toute la durée du cours</li>
+    <li>Organisation logique avec des <b>sections/sous-sections</b> utiles, chaque partie ayant un but précis</li>
+    <li>Figures, tableaux et <b>citations utilisés de manière appropriée</b></li>
+    <li>⚠️ Des points seront <b>déduits</b> si la qualité/quantité du travail ne reflète pas le nombre de membres de l'équipe (groupes de 2-3)</li>
+  </ul>
+
+  <div class="example"><b>💡 Conseil pratique :</b> vu ton intérêt déjà exprimé pour la cybersécurité, ce chapitre sur la sécurité/surveillance/éthique du piratage pourrait très bien nourrir directement ton rapport final si le sujet s'y prête — les concepts clés (ex. dilemme éthique du rançongiciel, consentement éclairé, capitalisme de surveillance) sont déjà bien définis et sourcés dans ces diapos.</div>
+</section>
+
+<!-- FINAL EXAM SECTION -->
+<section class="card final-exam" id="exam">
+  <h2>🎓 Questions susceptibles de sortir à l'examen</h2>
+  <p>Voici une série de questions couvrant l'ensemble du chapitre, dans le même esprit que les questions d'examen typiques. Essaie d'y répondre <b>avant</b> de cliquer pour voir la réponse !</p>
+
+  <details class="quiz">
+    <summary>1. Nomme et définis les trois propriétés de la triade CIA en sécurité informatique.</summary>
+    <div class="answer"><b>Réponse :</b> <b>Confidentialité</b> (ne pas être accessible aux personnes non autorisées), <b>Intégrité</b> (ne pas être modifiable par des personnes non autorisées), <b>Disponibilité</b> (être accessible aux personnes autorisées).</div>
+  </details>
+
+  <details class="quiz">
+    <summary>2. Quelle est la différence entre une vulnérabilité, une menace, et une attaque ?</summary>
+    <div class="answer"><b>Réponse :</b> Une <b>vulnérabilité</b> est un défaut structurel (ex. porte déverrouillée). Une <b>menace</b> est la combinaison de circonstances/entités susceptibles d'exploiter cette vulnérabilité (ex. l'existence d'un voleur motivé). Une <b>attaque</b> est l'exécution concrète et délibérée qui exploite la vulnérabilité pour causer une brèche (ex. voler la télé).</div>
+  </details>
+
+  <details class="quiz">
+    <summary>3. Explique le modèle AAA(A) en sécurité.</summary>
+    <div class="answer"><b>Réponse :</b> <b>Authentification</b> (vérifier une identité), <b>Autorisation</b> (appliquer une politique d'accès), <b>Accounting/Traçabilité</b> (logs de ce qui a été fait), <b>Auditabilité</b> (analyse post-mortem, souvent forensique, s'appuyant sur la traçabilité).</div>
+  </details>
+
+  <details class="quiz">
+    <summary>4. Pourquoi dit-on que « la sécurité absolue n'existe pas » ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'on est toujours sécurisé « contre » quelque chose de précis, jamais dans l'absolu. Les ressources sont limitées (analyse coûts/bénéfices), donc on choisit de se protéger contre certains attaquants selon un niveau de risque acceptable — le risque zéro n'existe pas.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>5. Nomme trois raisons pour lesquelles la sécurité informatique est difficile à assurer.</summary>
+    <div class="answer"><b>Réponse (parmi 10 possibles) :</b> l'<b>asymétrie défenseur-attaquant</b> (le défenseur doit tout protéger, l'attaquant n'a besoin que d'une faille), la <b>connectivité universelle</b> (tout est interconnecté via Internet), et les <b>facteurs humains</b> (erreurs, phishing, mots de passe faibles).</div>
+  </details>
+
+  <details class="quiz">
+    <summary>6. Quel est le dilemme éthique principal face à une attaque de rançongiciel ?</summary>
+    <div class="answer"><b>Réponse :</b> Payer permet potentiellement de récupérer ses données mais encourage le système criminel et n'empêche pas une récidive. Ne pas payer signifie rester bloqué et risquer la divulgation de données sensibles, mais n'encourage pas le crime. Une bonne préparation (sauvegardes) réduit ce dilemme.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>7. Qu'est-ce qu'un « attack tree » et que représente un chemin de la racine à une feuille ?</summary>
+    <div class="answer"><b>Réponse :</b> Un attack tree est une représentation arborescente des façons possibles d'atteindre un objectif d'attaque (racine = objectif final, feuilles = actions concrètes). Un chemin complet de la racine à une feuille représente un <b>vecteur d'attaque</b> complet.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>8. Quelle est la différence entre le piratage éthique et le test de pénétration ?</summary>
+    <div class="answer"><b>Réponse :</b> Le piratage éthique est un terme large englobant une variété d'attaques simulées réalistes. Le test de pénétration est un sous-ensemble spécifique du piratage éthique, ciblant la vérification de composants de défense précis.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>9. Décris la procédure standard en trois étapes pour une étude de recherche impliquant une tromperie envers les participants.</summary>
+    <div class="answer"><b>Réponse :</b> 1) Le sujet consent d'abord à participer (sans connaître les détails de la tromperie). 2) Les chercheurs retiennent le fait qu'il y a tromperie pendant l'expérience. 3) Une fois l'expérience terminée, les chercheurs informent le sujet de la véritable nature de l'étude (débriefing).</div>
+  </details>
+
+  <details class="quiz">
+    <summary>10. Quelles sont les trois conditions permettant à un comité d'éthique d'autoriser la tromperie/renonciation au consentement ?</summary>
+    <div class="answer"><b>Réponse :</b> (1) risque minimal seulement, (2) l'étude ne pourrait pas être menée sans tromperie, (3) les résultats ont une valeur importante.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>11. Explique le concept de « capitalisme de surveillance » selon Shoshana Zuboff.</summary>
+    <div class="answer"><b>Réponse :</b> Le capitalisme de surveillance revendique unilatéralement l'expérience humaine comme matière première gratuite, traduite en données comportementales (« surplus comportemental »). L'accent est mis sur les populations plutôt que les individus : avec suffisamment d'utilisateurs, des patterns prévisibles émergent statistiquement, permettant de monétiser ces informations (ex. publicité ciblée) sans nécessairement cibler un individu précis.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>12. Pourquoi les menaces internes (employés) sont-elles souvent plus préoccupantes que les menaces externes ?</summary>
+    <div class="answer"><b>Réponse :</b> Parce qu'un attaquant interne a déjà un accès légitime au système (identifiants, accès physique, connaissance des processus), contournant d'emblée les défenses conçues pour arrêter les attaquants externes. Le cours souligne que les attaquants sont principalement internes.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>13. Applique la terminologie de sécurité (vulnérabilité, vecteur d'attaque, attaquant, attaque, menace) à un scénario de ton choix (ex. un mot de passe faible sur un compte courriel).</summary>
+    <div class="answer"><b>Exemple de réponse :</b> <b>Vulnérabilité</b> = mot de passe faible/facile à deviner. <b>Vecteur d'attaque</b> = tentative de connexion par force brute ou deviner le mot de passe. <b>Attaquant</b> = la personne qui devine le mot de passe. <b>Attaque</b> = connexion non autorisée au compte courriel. <b>Menace</b> = l'existence de personnes motivées à accéder à des comptes courriel pour voler des informations personnelles ou financières.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>14. Quelle est la différence entre un algorithme et un protocole ?</summary>
+    <div class="answer"><b>Réponse :</b> Un algorithme est une procédure effectuée <b>localement</b> par un seul participant. Un protocole est une procédure effectuée <b>conjointement</b> par plusieurs participants, avec des rôles clairement définis pour chacun.</div>
+  </details>
+
+  <details class="quiz">
+    <summary>15. Selon le rapport IBM 2024, quel secteur a le coût de brèche moyen le plus élevé, et pourquoi cela a-t-il du sens ?</summary>
+    <div class="answer"><b>Réponse :</b> Le secteur de la <b>santé</b>, avec un coût moyen de <b>9,77 millions de dollars</b>. Cela s'explique par la nature extrêmement sensible des données médicales, les obligations réglementaires strictes, et les conséquences graves d'une fuite (atteinte à la vie privée, potentiel impact sur les soins).</div>
+  </details>
+</section>
+
+</div>
+
+<a href="#top" class="back-top" title="Retour en haut">↑</a>
+<footer>Guide d'étude généré à partir de INM6000E26 — Séance 13 (Sécurité et surveillance) · Bon courage pour l'examen et le rapport final ! 💪</footer>
+</body>
+</html>

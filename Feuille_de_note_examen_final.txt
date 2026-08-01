@@ -1,0 +1,358 @@
+-------
+Cours 1
+-------
+
+Une loi empirique (fondée sur l'observation, pas sur la physique fondamentale) selon laquelle le nombre de transistors dans un microprocesseur double environ tous les deux ans.
+
+L'enjeu sous-jacent : un savoir produit collectivement et ouvert est-il fiable ? Le cas Wikipedia montre qu'un dispositif ouvert peut s'autocorriger et devenir crédible — mais il introduit aussi des questions de qualité, de vandalisme et de biais des contributeurs.
+
+Un algorithme est une suite finie d'instructions pour résoudre un problème. Un algorithme de prédiction estime un résultat futur ; un algorithme de recommandation suggère un contenu. Ces systèmes orientent le crédit, l'assurance, l'embauche, l'information qu'on voit.
+
+Quels sont les biais de ces algorithmes ?
+
+Réponse : un biais est une distorsion systématique. Les algorithmes apprennent sur des données historiques ; si ces données reflètent des inégalités passées (discrimination à l'embauche, etc.), l'algorithme les reproduit et amplifie, en se donnant un air d'objectivité mathématique.
+
+Comment détecter, quantifier et prévenir la discrimination ?
+
+Réponse : c'est un défi technique et social. Détecter = auditer les décisions par groupe ; quantifier = mesurer des écarts (taux d'erreur par sous-population) ; prévenir = corriger les données, contraindre l'algorithme à l'équité, garder un humain dans la boucle.
+
+Comment demander à l'algorithme de rendre des comptes sur le pourquoi de sa décision ?
+
+Réponse : c'est l'enjeu de la transparence et de la responsabilité (reddition de comptes) algorithmique : l'individu doit pouvoir comprendre, contester et obtenir une explication d'une décision automatisée qui le touche.
+
+Personnaliser (adapter un service à chacun) peut facilement glisser vers discriminer (traiter défavorablement certaines personnes).
+
+Mécanisme du problème
+
+Des décisions sont prises automatiquement sur des individus à partir des prédictions d'un algorithme d'apprentissage, plutôt que sur des faits avérés.
+Une erreur de prédiction peut conduire à une discrimination injuste — surtout s'il n'existe aucun recours pour comprendre le raisonnement (d'où l'importance de la transparence et de la responsabilité algorithmiques).
+
+Effet pervers : refuser de fournir ses données peut conduire à la stigmatisation si la majorité, elle, coopère (« qu'a-t-il à cacher ? »).
+
+La neutralité du net : 
+Principe fondamental d'Internet garantissant un traitement identique à tous les contenus et fournisseurs : c'est un principe de non-discrimination. Aucun contenu ne doit être privilégié ou ralenti ; le fournisseur d'accès ne doit pas influer sur l'activité de l'internaute ni sur la vitesse de transmission des paquets.
+
+Le soi quantifié (Quantified Self) : 
+Ensemble de méthodes visant à collecter et utiliser des variables sur son propre corps ou ses propres comportements (pas, sommeil, fréquence cardiaque, humeur…). Objectif principal : apprendre de son propre corps pour le comprendre et s'améliorer.
+
+L'ouverture des données (Open Data) : 
+Certaines données devraient être publiquement disponibles et pouvoir être réutilisées et recopiées sans aucune restriction.
+
+Pourquoi : transparence envers les citoyens ; accès universel à la connaissance ; ce qui est financé par l'argent public relève du droit de savoir ; développement de nouveaux services/modèles d'affaires ; concurrence plus équitable (→ baisse de prix). Principaux libérateurs : gouvernements, collectivités, fondations, scientifiques, citoyens.
+
+Ne pas confondre : données ouvertes = volontairement publiques et réutilisables. Données massives (big data) = très gros volumes de données, pas forcément ouvertes. Anonymisation = retirer les identifiants pour qu'une donnée ne soit plus reliable à une personne (mais on verra que ré-identifier est souvent possible).
+
+Traces numériques
+Dans la société de l'information, chaque personne laisse constamment des traces numériques qui peuvent être reliées à son identité. 
+
+La protection de la vie privée
+Objectif : 
+Permettre à un individu de limiter les traces numériques de ses actions et d'avoir un meilleur contrôle sur ses données personnelles.
+
+Le respect de la vie privée est un droit fondamental, ancré dans :
+La Déclaration universelle des droits de l'homme des Nations Unies (article 12, 1948).
+Au Québec, la Loi sur la protection des données personnelles dans le secteur privé.
+
+Le risque : 
+Collecte et utilisation des traces ou des données personnelles à des fins frauduleuses. Exemples : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale
+
+Le potentiel d'inférence : 
+C'est la capacité, à partir de données collectées, d'en déduire d'autres informations non fournies — d'autant plus finement avec les données massives. Une donnée collectée risque d'être réutilisée à d'autres fins sans consentement. « Inférer » = déduire une information non donnée à partir d'autres données.
+
+
+Q12 · Développement   En quoi le numérique pose-t-il un problème de développement durable ?
+Le numérique a un coût écologique souvent invisible : forte consommation d'énergie des calculs, du nuage (centres de données très énergivores), de la chaîne de blocs et de l'IA (entraînement des modèles). S'ajoute l'obsolescence programmée, qui multiplie les déchets électroniques. La réponse passe par la durabilité numérique : matériel réparable, durable et sobre.
+
+Les spécificités de l'éthique informatique
+L'éthique s'intéresse aux effets des décisions prises autour de la technologie : la gouvernance (qui décide des règles), les comportements des utilisateurs et ceux des professionnels.
+
+Question du cours
+
+Quelles sont les spécificités de l'éthique informatique ? — Ce qui la rend particulière : l'échelle (une décision touche des millions de personnes d'un coup), la vitesse et l'automatisation (décisions sans humain), l'opacité (boîtes noires algorithmiques), la persistance et la réutilisation des données dans le temps.
+
+La vie privée et les données génomiques
+Question du cours
+
+Q13 · Développement   Pourquoi les données génomiques sont-elles particulières à protéger ?
+Parce qu'elles sont permanentes (impossible de les « réinitialiser » après une fuite), quasi uniquement identifiantes (très difficiles à anonymiser), partagées avec la famille (exposer son ADN expose celui de ses proches sans leur accord) et révélatrices de prédispositions médicales (risque de discrimination à l'assurance ou à l'emploi).
+
+Q11 · Court   Sur quels textes repose le droit à la vie privée vu en cours ?
+La Déclaration universelle des droits de l'homme de l'ONU, article 12 (1948), et au Québec la Loi sur la protection des données personnelles dans le secteur privé. Objectif de la protection : limiter ses traces numériques et mieux contrôler ses données personnelles. Risques en cas d'abus : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale.
+
+-------
+Cours 2
+-------
+
+Idée centrale : pour bâtir sa crédibilité professionnelle, il faut savoir trouver de bonnes sources, les évaluer, et les citer correctement. Tout repose sur la confiance qu'on peut accorder à l'information.
+
+Une source fiable est une source à laquelle on peut accorder confiance : son information est exacte, vérifiable, produite par quelqu'un de compétent et sans intention trompeuse. 
+
+Quels sont les trois grands critères pour évaluer une information sur le web ?
+(1) Le site qui héberge (type, nom de domaine, réputation, sections à propos/coordonnées, hébergeur via CIRA/Whois) ; (2) la publication (date, corroboration, vocabulaire, faits vs opinions, sources citées, intention) ; (3) l'entité autrice (identifiée ? réputation, qualifications, déjà publié sur le sujet ?).
+
+Quel nom de domaine est généralement le plus fiable ?
+.gov (gouvernemental) et .edu (établissement d'enseignement) sont a priori plus fiables ; .com (commercial) demande davantage de vérification car l'intention peut être de vendre ou promouvoir. Le domaine est un indice, pas une garantie.
+
+L'« entité autrice » est la personne, le groupe ou l'organisation qui signe le contenu.
+
+Principe essentiel : un article de presse (source secondaire) rapporte souvent une étude scientifique (source primaire). Il faut remonter à la source primaire pour vérifier ce qui est affirmé, plutôt que se fier au résumé journalistique
+
+Distingue une revue scientifique d'une revue de vulgarisation.
+La revue scientifique/savante vise à diffuser le savoir, s'adresse aux chercheurs, est éditée par une université/association, écrite par des chercheurs, et ses articles sont approuvés par un comité d'experts (révision par les pairs) et longs (2500–10 000 mots). La revue de vulgarisation/intérêt général vise à informer un large public, est éditée commercialement, écrite par des journalistes/pigistes, et ses articles, conformes à une politique éditoriale, sont courts (250–5000 mots) et non révisés par les pairs. Le critère décisif est la révision par les pairs.
+
+Pour un travail de recherche en informatique, les documents pertinents sont :
+Livres et chapitres de livre — vision synthétique et approfondie.
+Articles de périodique (revue ou journal).
+Actes de conférence (« proceedings » : recueil des communications présentées à un colloque) — très importants en informatique, où la conférence est un mode de publication majeur.
+Rapports techniques.
+Thèses et mémoires.
+Articles d'encyclopédie — utiles pour le vocabulaire et les définitions de départ.
+
+L'information scientifique mûrit dans le temps : elle part d'une idée et devient de plus en plus formelle, validée et synthétique. 
+
+Les étapes du cycle de l'information
+Idée → Communications informelles → Conférences non publiées → Rapports de recherche → Articles & conférences publiées → Livres → Ouvrages de référence
+
+
+Comprendre ce circuit explique pourquoi un article publié est plus fiable, et ce que sont un « preprint » et un « postprint »
+Auteur-chercheur → Prépublication (preprint) → Comité de rédaction → Évaluateurs externes → Décision → Postpublication (postprint) → Article publié (version éditeur)
+
+La prépublication (preprint) est la version soumise par l'auteur avant la révision par les pairs : Contient les memes idées mais non validée. L'article publié a passé l'évaluation par des évaluateurs externes (pairs) et porte la mise en forme finale de l'éditeur (version de l'éditeur). Le (Postpublication) postprint est la version corrigée après évaluation mais avant mise en page.
+
+Révision par les pairs (peer review) : des évaluateurs externes, experts du domaine, lisent l'article et recommandent l'acceptation, la révision ou le rejet. C'est le filtre de qualité scientifique.
+ / postprint : version après corrections issues de l'évaluation, mais avant la mise en page finale de l'éditeur.
+
+Version de l'éditeur : la version finale, paginée et mise en forme, publiée dans la revue.
+
+Article publié vs prépublication
+Un article publié a passé la révision par les pairs et porte la mise en forme de l'éditeur (date de réception, d'acceptation, DOI, licence). Une prépublication contient peut-être les mêmes idées, mais n'a pas encore été validée — à utiliser avec prudence et à signaler comme telle.
+
+Le Service des bibliothèques donne accès, via l'authentification UQAM (code MS), à des ressources payantes et fiables qu'on ne trouve pas librement sur le web. Deux portails :
+infosphere.uqam.ca — le tutoriel de méthode : Préparer la recherche → Rechercher l'information → Analyser l'information → Rédiger un travail.
+bibliotheques.uqam.ca — l'accès aux ressources : Sofia, bases de données, périodiques numériques, etc. Il existe un guide par discipline (Sciences → Informatique),
+
+Quel est l'outil le plus efficace pour repérer des articles scientifiques en informatique ?
+Les bases de données spécialisées (3 étoiles sur Infosphère), comme ACM Digital Library et IEEE Xplore, devant Google Scholar et Sofia (2 étoiles). L'accès se fait via l'authentification UQAM. 
+
+En informatique, trois éditeurs/bases incontournables :
+
+ACM Digital Library (Association for Computing Machinery) : texte intégral de 50+ périodiques et 900 comptes-rendus de conférences ; affiche le nombre de citations reçues.
+IEEE Xplore : plein texte de 100+ « transactions », ~900 conférences IEEE et 2000+ normes.
+(Un troisième grand éditeur est aussi mis en valeur dans le guide Informatique.)
+
+Sofia est le moteur unique des bibliothèques (livres, articles, vidéos, thèses…). Deux fonctions à maîtriser :
+1. La recherche avancée
+2. Les filtres (tri et format)
+
+Décris les 7 étapes d'une stratégie de recherche.
+Mots-clés : 1) décomposer le sujet en concepts ; 2) enrichir son vocabulaire (synonymes, traductions, Vitrine linguistique, Termium) ; 3) lier les mots-clés logiquement (booléens). Outil : 4) identifier le ou les outils. Analyse : 5) formuler une première requête ; 6) analyser les résultats ; 7) optimiser au besoin. C'est un processus itératif.
+
+À quoi servent OR et AND dans une requête ? Donne la règle.
+OR élargit et relie les synonymes d'un même concept (trouve l'un ou l'autre). AND restreint et relie des concepts différents (exige les deux). Règle : OR entre synonymes, AND entre concepts. La troncature * capte les variantes (ethic* → ethics, ethical), et les guillemets "…" imposent l'expression exacte.
+
+Tu obtiens trop de résultats. Que fais-tu ? Et pas assez ?
+Trop : vocabulaire plus précis / plus de concepts, chercher dans le titre seulement, limiter aux récents, limiter à un type de document. Pas assez : ajouter des synonymes, chercher dans tous les champs (pas juste titre/résumé), vérifier que la base convient au domaine.
+
+Une fois un article pertinent trouvé, il devient un point de départ pour en trouver d'autres :
+
+Citation en arrière : consulter la bibliographie de l'article (les sources qu'il a utilisées).
+Citation en avant : trouver les articles qui ont cité cet article (souvent plus récents).
+Chercher les autres articles de l'auteur ou de ses co-auteurs.
+Identifier les centres de recherche et associations auxquels les auteurs sont affiliés.
+Repérer les revues où paraissent ces articles, pour les parcourir.
+
+Pourquoi citer ses sources ? (trois raisons)
+(1) Reconnaître l'apport des autres — éviter le plagiat et respecter le droit d'auteur ; (2) démontrer une rigueur scientifique ; (3) permettre au lecteur de retracer et vérifier l'information.
+
+Quand doit-on citer, et quelles situations constituent du plagiat ?
+Quand : dès qu'on reprend une idée, méthode, statistique, image ou donnée d'autrui — qu'on cite mot à mot OU qu'on paraphrase, peu importe que la source soit publiée ou non. Plagiat : copier sans guillemets/source ; insérer images/données sans provenance ; résumer une idée sans citer ; traduire sans mentionner la source ; réutiliser un travail d'un autre cours sans accord (auto-plagiat) ; présenter le travail d'autrui comme le sien, même avec son accord. Encadré par le Règlement no 18, avec sanctions allant de l'échec à l'expulsion.
+
+paraphraser une idée d'autrui sans en indiquer la source est du plagiat.
+
+Règlement no 18 — UQAM (r18.uqam.ca)
+
+Définition : utilisation totale ou partielle du texte ou de la production d'autrui en le faisant passer pour sien, ou sans indication de référence.
+
+Lequel n'a PAS besoin d'être cité ?
+Ce qui relève de la notoriété publique : faits connus de tous et repérables dans plusieurs sources (la Terre tourne autour du Soleil, le 11 septembre 2001, le krach de 1929) ou expressions consacrées (la Grande Noirceur, les Trente Glorieuses). En cas de doute, on cite quand même.
+
+« Comment citer ? » → ça dépend du style bibliographique. Un style bibliographique est un ensemble de règles éditoriales qui précisent comment présenter l'information. À l'UQAM, on utilise le style UQAM-APA, qui repose sur la méthode auteur-date.
+
+Comment cite-t-on une citation courte mot à mot dans le texte ?
+Entre guillemets français « … », dans le texte, suivie de la référence abrégée (Nom, année, p. #). Le numéro de page est obligatoire pour une citation mot à mot. Pour une citation longue (+3 lignes) : en retrait, sans guillemets, interligne simple, source à la fin.
+
+Les 4 éléments d'une référence
+Toute référence comporte, dans l'ordre : 1) l'auteur — 2) la date — 3) le titre — 4) la source. Les règles précises varient selon le type de document (livre, article, page web…) ; consulter le site style-apa.uqam.ca pour chaque variante.
+
+Mise en forme : chaque référence est alignée à gauche, avec un retrait d'un centimètre à partir de sa deuxième ligne (ce qu'on appelle un « retrait suspendu » / hanging indent). Elle n'est pas justifiée à droite. Les entrées sont classées par ordre alphabétique d'auteur.
+
+Zotero : le logiciel de gestion bibliographique
+
+Cite cinq fonctions d'un logiciel comme Zotero.
+(1) Rassembler automatiquement des références depuis les bases/Sofia/Google Scholar ; (2) produire des bibliographies selon un style (UQAM-APA) ; (3) gérer par dossiers ; (4) repérer facilement les références ; (5) gérer les PDF associés et les notes de lecture.
+
+onstruis une requête booléenne pour « impact environnemental de l'IA ».
+Une réponse possible : ("intelligence artificielle" OR IA OR "artificial intelligence" OR AI) AND (environnement* OR écolog* OR "empreinte carbone" OR environment* OR ecolog*). On reconnaît la structure : synonymes reliés par OR à l'intérieur de chaque concept, concepts reliés par AND, troncatures pour les variantes.
+
+-------
+Cours 3
+-------
+
+Bris de vie privée
+Atteinte à la vie privée : un acteur obtient ou déduit une information personnelle sur toi sans ton consentement (ton identité, ta localisation, tes intérêts, tes opinions…).
+
+Inférence
+Déduire une information nouvelle et non fournie à partir de données existantes. C'est le cœur de presque toutes les attaques de vie privée du cours.
+
+Risques cités : spam ciblé, usurpation d'identité, profilage, discrimination.
+
+Objectif principal de la protection de la vie privée
+Permettre à un individu de minimiser et de contrôler les traces numériques et ses données personnelles.
+
+Le droit à la vie privée est un droit fondamental, garanti à plusieurs niveaux : international, européen, national.
+
+Niveau international
+DUDH — Article 12 (ONU, 1948)
+« Nul ne sera l'objet d'immixtions arbitraires dans sa vie privée, sa famille, son domicile ou sa correspondance, ni d'atteintes à son honneur et sa réputation. Toute personne a droit à la protection de la loi contre de telles immixtions. »
+
+C'est le texte fondateur : la vie privée est un droit de l'homme, pas seulement une question technique.
+
+Niveau européen
+Texte	Ce qu'il apporte
+Directive 95/46/CE	Met en avant 3 principes : proportionnalité, transparence, finalité légitime (on ne collecte que pour un but précis et justifié).
+RGPD (Règlement Général sur la Protection des Données)	Portabilité des données, consentement éclairé, transparence, droit à l'oubli, etc. portée internationale Si une donnée est générée sur le sol européen, le RGPD s'applique — même à une entreprise canadienne.
+Niveau national (Canada / Québec)
+Fédéral : PIPEDA — loi canadienne sur la protection des renseignements personnels dans le secteur privé.
+Québec : Loi sur la protection des données personnelles dans le secteur privé.
+
+Le RGPD a une portée extraterritoriale : ce n'est pas où est l'entreprise qui compte, c'est où sont les personnes dont on traite les données.
+
+Donne la définition exacte d'une donnée à caractère personnel et nomme ses deux limites.
+Ensemble d'informations concernant un individu permettant de l'identifier de manière unique. Limite 1 : elle ignore les quasi-identificateurs (données anodines identifiantes une fois combinées). Limite 2 : elle ne couvre pas le potentiel d'inférence (géolocalisation, requêtes, graphe social).
+
+Autorité de protection des données
+Définition
+Entité chargée de faire respecter la législation sur la vie privée auprès des entreprises et institutions.
+
+Missions principales : informer, garantir le droit d'accès, recenser les fichiers, contrôler, réglementer
+
+CNIL (Commission Nationale de l'Informatique et des Libertés),
+
+L'adversaire
+Adversaire
+Entité qui collecte les traces numériques d'un individu afin de commettre un bris de vie privée. Cela peut être un individu, une organisation ou une compagnie.
+
+Les menaces concrètes
+Tout ce qui peut mal tourner une fois que les traces sont collectées.
+
+Publicité ciblée et profilage
+En collectant tes traces, on construit un profil de tes intérêts. Tes partages et ton profil sur les réseaux sociaux révèlent loisirs et opinions politiques. Couplé à l'analyse des données massives, ça devient très précis.
+
+Usurpation d'identité
+Si un acteur malveillant collecte assez d'informations personnelles, il peut se faire passer pour toi.
+
+Cyberchantage
+Les informations qu'on poste peuvent se retourner contre nous. Le cyberchantage consiste à extorquer de l'argent à une victime en menaçant de divulguer des infos confidentielles.
+
+Marché noir des données personnelles
+Il existe un véritable marché où se vendent les fichiers de données personnelles.
+
+Insight important
+Sécuriser l'accès aux données ne résout pas tous les problèmes. Exemple : un employé renvoyé et en colère peut partir avec la base de données clients. La menace interne contourne la sécurité technique.
+
+Données massives (big data) et vie privée
+Diversité des données + puissance de calcul → on peut croiser énormément d'informations.
+Réutilisation des données au-delà de leur finalité initiale (collectées pour X, réutilisées pour Y).
+Une fois rendues publiques, les données sont toujours là (persistance).
+Risque de fuite de données.
+
+Fuite de données (data breach)
+Divulgation non autorisée de données.
+
+Témoin (cookie)
+Petit bloc de données envoyé par un serveur HTTP et laissé dans ton ordinateur par le navigateur web. Il sert à : suivre tes activités, mémoriser tes infos de connexion, retenir les pages visitées, sauvegarder ce que tu saisis dans les formulaires. Utilisé pour la personnalisation.
+
+Cookie de 1ère partie vs cookie de tierce partie : différence et enjeu de vie privée.
+1ʳᵉ partie : posé par le site visité (connexion, panier) — acceptable. Tierce partie : posé par un domaine externe, suit l'utilisateur entre les sites pour la pub — c'est le problème de vie privée (le « cookie apocalypse » = la fin annoncée des cookies tierce partie par Google).
+
+Définis le paradoxe de la vie privée et la privacy fatigue.
+Paradoxe : on dit valoriser sa vie privée mais on cède ses données pour très peu et sans se protéger. Privacy fatigue : épuisement et cynisme face à la protection de sa vie privée, dus au sentiment d'impuissance (fuites constantes) et à une attitude négative envers la protection.
+
+Définis une PET et donne un exemple. Qu'est-ce que le « privacy by design » ?
+PET (Privacy Enhancing Technologies) : ensemble de techniques/applications protégeant les infos personnelles en ligne. Ex. : l'anonymiseur (masque IP, OS, navigateur). Privacy by design : intégrer la vie privée dès la conception (a priori, sur tout le cycle de vie) plutôt que de réagir après un bris.
+
+Énonce les 2 principes fondamentaux centraux + les 4 autres principes. (PET)
+Centraux : ① Minimisation des données (ne collecter que le nécessaire) ; ② Souveraineté des données (elles appartiennent à l'individu qui les contrôle). Autres : consentement explicite (demander l'autorisation et expliquer l'utilisation), droit à l'oubli, transparence (pas une boite noire, tu dois comprendre), imputabilité (l'entreprise est responsable de securiser tes donnees)
+
+
+Anonymat & PET avancées
+Techniques plus poussées : communiquer sans révéler qui on est, prouver un droit sans révéler son identité, etc.
+
+Réseau de communication anonyme
+Technologie PET permettant de communiquer de façon anonyme dans un réseau, en protégeant l'identité de l'envoyeur et/ou du receveur.
+Exemples cités : Dîner des cryptographesMixnetTOR (Onion Routing)Crowds — TOR est le plus connu : il fait passer ton message par plusieurs nœuds en « couches d'oignon » pour cacher l'origine.
+
+Les 3 propriétés d'anonymat
+Propriété	Définition
+Anonymat (envoyeur/receveur)	Cacher l'identité de l'envoyeur/receveur parmi un groupe. Se mesure par la taille du groupe d'anonymat où l'individu est caché, et par l'entropie (incertitude moyenne sur l'auteur d'un message).
+Non-chaînabilité	Être incapable de relier deux messages à la même identité. Concerne deux messages successifs du même individu, ou le même message vu à deux endroits.
+Non-observabilité	Ne pas pouvoir détecter si un message circule ou non. (Encore plus fort : on ne sait même pas qu'il y a communication.)
+
+Entropie (mesure d'anonymat)
+Mesure mathématique de l'incertitude. Plus l'entropie est élevée, plus il est difficile de deviner qui est l'auteur d'un message → meilleur anonymat.
+
+Accréditation anonyme
+Version anonyme d'une accréditation : permet de prouver une propriété ou un droit (ex. « je suis majeur ») sans révéler son identité. Prend souvent la forme d'un jeton cryptographique créé et certifié par une autorité de confiance, et vérifiable par d'autres entités.
+
+Biométrie révocable
+On transforme la donnée biométrique de façon qu'on puisse l'annuler et la remplacer en cas de fuite (contrairement à une empreinte « brute » qu'on ne peut pas changer).
+
+Retrait privé d'information (PIR)
+PIR — Private Information Retrieval
+Un client peut apprendre un élément d'une base de données sur un serveur sans que le serveur n'apprenne quel élément a été consulté.
+
+Nuance cruciale (souvent piégée à l'examen)
+C'est le retrait qui est privé, pas l'information elle-même ! L'info peut être publique ; ce qu'on protège, c'est le fait que TU l'as consultée.
+
+Assainissement
+Processus qui accroît l'incertitude dans les données afin de protéger la vie privée. Usage typique : rendre des données publiques.
+
+Le compromis fondamental
+Il existe un arbitrage inhérent entre le niveau de protection et l'utilité des données assainies. Plus tu protèges, moins les données sont utiles, et inversement.
+
+Les 3 ingrédients d'un bon assainissement
+Modèle de respect de la vie privée : que signifie « être respectueux de la vie privée » pour des données publiées ? (la cible à atteindre)
+Algorithme d'assainissement : comment modifier les données pour atteindre cette cible ?
+
+Mesure d'utilité : comment mesurer si les données restent utiles après modification ?
+
+Les 4 opérateurs d'assainissement
+Opérateur	Ce qu'il fait
+Agrégation	Fusionner plusieurs données en une seule donnée représentative (ex. une moyenne).
+Généralisation	Perte volontaire de granularité. Ex. : révéler la tranche d'âge (20-30) au lieu de l'âge exact (28).
+Suppression	Enlever l'info liée à un attribut. Attention : l'absence d'information peut parfois elle-même causer un bris de vie privée.
+Introduction de fausses données	Ajouter des enregistrements artificiels pour « noyer » les vrais (bruit).
+
+Attaque par inférence
+L'adversaire prend en entrée des données assainies et tente d'inférer de nouvelles informations personnelles.
+
+Qu'est-ce qu'une attaque par chaînage et quel est le défi principal de la protection ?
+Chaînage : relier les enregistrements de deux jeux de données partageant des individus communs. Défi : garantir la protection même face à un adversaire ayant des connaissances auxiliaires, qui ne peuvent pas toujours être modélisées à l'avance. 
+
+Qu'est-ce qu'un quasi-identificateur ? Illustre avec le résultat de Sweeney.
+Une donnée qui n'identifie pas seule mais devient identifiante combinée à d'autres. Sweeney (2000) : 87 % des Américains identifiables avec seulement code postal + date de naissance + genre, en croisant données médicales et liste électorale.
+
+Garantie : dans chaque groupe du jeu assaini, chaque individu est identique à au moins k − 1 autres sur les quasi-identificateurs. On l'atteint par généralisation + suppression (ex. âge 28 → <30, ZIP 13053 → 130**). 
+
+La leçon de l'attaque par intersection
+La k-anonymité ne compose pas : publier plusieurs versions k-anonymes des mêmes individus peut détruire la garantie. C'est exactement la motivation pour des modèles plus forts (l-diversité, t-closeness, confidentialité différentielle).
+
+Les risques liés à l'ADN
+Rançon pour les données génétiques.
+Discrimination génétique : si tu es susceptible de développer une maladie chronique, ta demande de prêt peut être refusée, ou une compagnie d'assurance peut refuser de t'assurer.
+Menacer de révoquer l'accès et de partager des infos sensibles en ligne.
+
+Pourquoi le problème explose maintenant
+Coût de séquençage : il s'est effondré depuis 2001, beaucoup plus vite que la loi de Moore (de ~100 M$ à quelques milliers de $). → séquencer l'ADN devient accessible à tous.
+
+Quantité partagée : les services de généalogie (23andMe, Ancestry, MyHeritage…) accumulent des bases énormes — MyHeritage : plus de 8 millions de personnes ; plus de 26 millions de tests « at-home » au total.
