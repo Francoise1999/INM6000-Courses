@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>INM6000 — Correction de la révision</title>
+<style>
+  :root{
+    --bg:#0f1115; --bg2:#161920; --card:#1b1f29; --border:#2a2f3a;
+    --text:#e6e8ee; --muted:#9aa3b2; --accent:#7dd3fc; --accent2:#a78bfa;
+    --good:#4ade80; --bad:#f87171; --warn:#fbbf24;
+  }
+  *{box-sizing:border-box;}
+  body{
+    background:var(--bg); color:var(--text); font-family:"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; margin:0; padding:0 0 80px 0;
+  }
+  header{
+    background:linear-gradient(135deg,#1b1f29,#141821);
+    padding:36px 24px 28px; border-bottom:1px solid var(--border);
+    text-align:center;
+  }
+  header h1{margin:0 0 6px; font-size:1.7em; color:var(--accent);}
+  header p{margin:0; color:var(--muted); font-size:0.95em;}
+  .container{max-width:900px; margin:0 auto; padding:0 20px;}
+  nav{
+    display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+    margin:24px auto; max-width:900px; padding:0 20px;
+  }
+  nav a{
+    background:var(--card); border:1px solid var(--border); color:var(--accent);
+    padding:8px 14px; border-radius:20px; text-decoration:none; font-size:0.85em;
+  }
+  nav a:hover{border-color:var(--accent);}
+  section{margin-top:40px;}
+  h2{
+    color:var(--accent2); border-bottom:2px solid var(--border); padding-bottom:8px;
+    font-size:1.4em; margin-top:0;
+  }
+  h3{color:var(--accent); font-size:1.1em; margin-bottom:6px;}
+  .q{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:18px 20px; margin-bottom:18px;
+  }
+  .q .stem{color:var(--muted); font-size:0.92em; margin-bottom:10px; font-style:italic;}
+  .answer{
+    display:inline-block; background:rgba(74,222,128,0.12); color:var(--good);
+    border:1px solid rgba(74,222,128,0.4); padding:4px 10px; border-radius:6px;
+    font-weight:600; margin-bottom:10px;
+  }
+  .why{color:var(--text); font-size:0.96em;}
+  .why b{color:var(--accent);}
+  ul{padding-left:22px;}
+  li{margin-bottom:6px;}
+  .case{
+    background:var(--card); border:1px solid var(--border); border-left:4px solid var(--accent2);
+    border-radius:10px; padding:20px 22px; margin-bottom:22px;
+  }
+  .case h4{color:var(--accent2); margin:0 0 10px; font-size:1.05em;}
+  .framework{
+    background:var(--bg2); border:1px dashed var(--border); border-radius:8px;
+    padding:12px 16px; margin-top:12px; font-size:0.92em; color:var(--muted);
+  }
+  .framework b{color:var(--warn);}
+  .tag{
+    display:inline-block; background:rgba(125,211,252,0.12); color:var(--accent);
+    border:1px solid rgba(125,211,252,0.35); font-size:0.75em; padding:2px 8px;
+    border-radius:12px; margin-right:6px; margin-bottom:8px;
+  }
+  .extra-case{
+    background:var(--card); border:1px solid var(--border); border-radius:10px;
+    padding:18px 20px; margin-bottom:18px;
+  }
+  .extra-case h4{color:var(--warn); margin-top:0;}
+  .divider{height:1px; background:var(--border); margin:34px 0;}
+  .exam-tip{
+    background:rgba(167,139,250,0.08); border:1px solid rgba(167,139,250,0.3);
+    border-radius:10px; padding:16px 20px; margin-top:14px; font-size:0.93em;
+  }
+  .exam-tip b{color:var(--accent2);}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>INM6000 — Correction complète de la fiche de révision</h1>
+  <p>Choix multiples · Vrai/Faux · Réponses courtes · Cas éthiques (+ cas supplémentaires pour ta feuille de notes)</p>
+</header>
+
+<nav>
+  <a href="#p1">Partie 1 — QCM/VF</a>
+  <a href="#p2">Partie 2 — Réponses courtes</a>
+  <a href="#p3">Partie 3 — Cas du document</a>
+  <a href="#p4">Cas éthiques supplémentaires</a>
+</nav>
+
+<div class="container">
+
+<section id="p1">
+<h2>Partie 1 — Choix multiple et Vrai/Faux</h2>
+
+<div class="q">
+  <h3>1. Avantage de l'ouverture des données pour les citoyens</h3>
+  <div class="answer">C) Meilleure transparence envers les citoyens</div>
+  <div class="why">L'ouverture des données (open data) vise justement à rendre l'information publique accessible pour renforcer la <b>redevabilité</b> des institutions et permettre aux citoyens de vérifier, comprendre et participer aux décisions publiques. Les options A et B décrivent l'inverse de l'objectif (restriction d'accès), et D n'est pas un bénéfice direct pour le citoyen mais un effet secondaire économique possible.</div>
+</div>
+
+<div class="q">
+  <h3>2. Ce qui NE correspond PAS à l'éco-conception numérique</h3>
+  <div class="answer">A) Augmenter la fréquence et le volume des sauvegardes</div>
+  <div class="why">L'éco-conception cherche à <b>réduire</b> l'empreinte environnementale (énergie, stockage, matériel). Multiplier les sauvegardes augmente la consommation de stockage et d'énergie — c'est contraire au principe de sobriété numérique. B, C et D sont au contraire des pratiques recommandées : virtualisation (mutualise le matériel), limiter le nombre de services (réduit la surface d'infrastructure), optimiser les ressources (efficacité).</div>
+</div>
+
+<div class="q">
+  <h3>3. Vrai ou Faux — traduire un texte sans mentionner la source</h3>
+  <div class="answer">Faux</div>
+  <div class="why">Le fait de <b>traduire</b> un texte ne change pas la paternité des idées ou du contenu original : la source doit toujours être citée, même si on ne reprend pas l'intégralité du texte et même si on le reformule dans une autre langue. Omettre la source constitue du plagiat, peu importe la langue ou la proportion reprise.</div>
+</div>
+
+<div class="q">
+  <h3>4. Caméra entraînée surtout avec des bouteilles en plastique</h3>
+  <div class="answer">B) Biais algorithmique</div>
+  <div class="why">Le problème vient d'un <b>jeu de données d'entraînement non représentatif</b> (surreprésentation du plastique, sous-représentation du verre/métal), ce qui produit des erreurs systématiques sur les catégories sous-représentées. Ce n'est pas une défaillance technique (le système fonctionne comme prévu, il est juste mal entraîné), ni un manque de puissance de calcul ou une surcharge de données — c'est un biais dans la composition des données.</div>
+</div>
+
+<div class="q">
+  <h3>5. Smartphones "écologiques" mais pratiques réelles contraires</h3>
+  <div class="answer">B) Écoblanchiment</div>
+  <div class="why">L'entreprise communique une image écologique <b>sans changer réellement ses pratiques</b> (durée de vie volontairement courte, pas de réduction d'émissions) — c'est la définition même de l'écoblanchiment (greenwashing) : donner une fausse impression de responsabilité environnementale à des fins marketing/image. "Blanchiment éthique" n'est pas un terme standard équivalent, et les options A/D ne décrivent pas une tromperie.</div>
+</div>
+</section>
+
+<section id="p2">
+<h2>Partie 2 — Réponses courtes</h2>
+
+<div class="q">
+  <h3>1. Deux risques associés à une brèche de données génétiques</h3>
+  <div class="why">
+  <ul>
+    <li><b>Discrimination</b> : les données génétiques peuvent être utilisées (par des assureurs, employeurs) pour discriminer une personne selon des prédispositions à certaines maladies, même hypothétiques.</li>
+    <li><b>Atteinte à des tiers non consentants</b> : contrairement à d'autres données personnelles, l'ADN révèle aussi de l'information sur les parents, enfants et la famille élargie de la personne — une fuite touche donc des gens qui n'ont jamais consenti.</li>
+  </ul>
+  <i>Autres exemples valables :</i> ré-identification impossible à annuler (on ne peut pas "changer" son ADN comme un mot de passe), stigmatisation sociale, usage détourné (recherche de paternité, profilage ethnique).
+  </div>
+</div>
+
+<div class="q">
+  <h3>2. Citation de Morozov — technologie et autonomie individuelle</h3>
+  <div class="why">
+  Morozov souligne que les technologies "intelligentes" ne se contentent pas d'assister l'humain : elles finissent par <b>décider à sa place</b> ce qui est acceptable ou non, en éliminant des comportements jugés "indésirables" par un tiers (une entreprise, un État, un algorithme). Cela pose un problème d'<b>autonomie individuelle</b> car la personne perd la capacité de faire ses propres choix, même mauvais — la technologie impose une norme de comportement définie ailleurs.
+  <br><br>
+  <b>Exemple :</b> une application d'assurance auto qui surveille la conduite (vitesse, freinages brusques) et augmente automatiquement les primes en cas de "mauvais" comportement. L'assuré perd la liberté de conduire à sa façon sans surveillance normative constante — le comportement "indésirable" (rouler vite) est décidé par l'assureur, pas par l'individu.
+  </div>
+</div>
+
+<div class="q">
+  <h3>3. Enjeux éthiques de la cryptanalyse et des attaques d'inférence</h3>
+  <div class="why">
+  Ces recherches sont à <b>double usage</b> (dual-use) :
+  <ul>
+    <li><b>Risque</b> : les mêmes techniques qui cassent un chiffrement ou déduisent des données privées à partir de données anonymisées peuvent être utilisées par des attaquants pour violer la vie privée, voler des données ou compromettre la sécurité nationale.</li>
+    <li><b>Bénéfice</b> : elles permettent de découvrir les failles <b>avant</b> les acteurs malveillants, de renforcer les standards cryptographiques (via divulgation responsable), et de démontrer que des données soi-disant "anonymisées" ne le sont pas vraiment — ce qui pousse à mieux protéger la vie privée à long terme.</li>
+  </ul>
+  L'enjeu éthique central est donc de savoir comment encadrer la publication de ces résultats (divulgation responsable) pour maximiser le bénéfice défensif sans donner une arme clé en main aux attaquants.
+  </div>
+</div>
+
+<div class="q">
+  <h3>4. Qu'est-ce que l'utilisabilité ?</h3>
+  <div class="why">
+  L'utilisabilité (usability) est la mesure dans laquelle un système peut être utilisé par des utilisateurs spécifiques pour atteindre des objectifs précis avec <b>efficacité, efficience et satisfaction</b> dans un contexte donné (définition ISO 9241).
+  <br><br>
+  <b>Exemple :</b> le moteur de recherche Google — interface minimaliste, une seule barre de recherche, résultats pertinents en moins d'une seconde, aucune formation nécessaire pour l'utiliser. Il coche les trois critères : rapide (efficience), atteint le but recherché (efficacité), et l'expérience est agréable (satisfaction).
+  </div>
+</div>
+
+<div class="q">
+  <h3>5. Deux raisons pour lesquelles une publication est un "article scientifique"</h3>
+  <div class="why">
+  <ul>
+    <li><b>Évaluation par les pairs (peer review)</b> : l'article est examiné et validé par d'autres experts du domaine avant publication, ce qui garantit un contrôle de qualité et de rigueur.</li>
+    <li><b>Méthodologie scientifique rigoureuse</b> : l'article présente une méthode reproductible, des données/preuves vérifiables, et s'appuie sur la littérature existante (citations), permettant à d'autres chercheurs de reproduire ou contester les résultats.</li>
+  </ul>
+  </div>
+</div>
+</section>
+
+<section id="p3">
+<h2>Partie 3 — Mini cas éthiques (du document)</h2>
+
+<div class="case">
+  <h4>Cas 1 — Vulnérabilité découverte dans une application mobile</h4>
+  <p>Oui, des mesures doivent être prises rapidement. La <b>confidentialité des données des utilisateurs</b> (un des piliers de la triade CIA) prime sur la réputation à court terme de l'entreprise. Retarder un correctif pour éviter une interruption de service expose délibérément les utilisateurs à un risque connu — ce qui est éthiquement et souvent légalement (lois de protection des données) problématique.</p>
+  <p><b>Démarche recommandée :</b></p>
+  <ul>
+    <li>Évaluer la gravité et l'exploitabilité de la faille (priorisation du risque).</li>
+    <li>Corriger rapidement, idéalement via une mise à jour planifiée à faible impact (fenêtre de maintenance, déploiement progressif) pour limiter l'interruption.</li>
+    <li>Informer les utilisateurs de façon transparente si des données ont pu être compromises (obligation de notification dans plusieurs juridictions).</li>
+    <li>Ne pas dissimuler la faille pour "protéger l'image" — cela aggrave la responsabilité en cas de découverte ultérieure.</li>
+  </ul>
+  <div class="framework"><b>Cadre à citer à l'examen :</b> tension entre approche conséquentialiste (minimiser le dommage global, incluant réputationnel) et déontologique (devoir de protéger les utilisateurs, indépendamment des conséquences pour l'entreprise). La réponse "responsable" fait généralement primer le devoir de protection.</div>
+</div>
+
+<div class="case">
+  <h4>Cas 2 — Serveur infecté par un rançongiciel</h4>
+  <p>La recommandation générale (consensus en cybersécurité) est de <b>ne pas payer la rançon</b>, pour plusieurs raisons :</p>
+  <ul>
+    <li>Payer ne garantit pas la récupération des données (les attaquants peuvent ne pas fournir la clé, ou fournir une clé défectueuse).</li>
+    <li>Payer finance et encourage l'écosystème criminel, augmentant le risque d'attaques futures (contre soi ou d'autres organisations).</li>
+    <li>Cela peut signaler à d'autres attaquants que l'entreprise est une cible "payante".</li>
+  </ul>
+  <p><b>Mesures alternatives :</b></p>
+  <ul>
+    <li>Isoler immédiatement les systèmes infectés pour éviter la propagation.</li>
+    <li>Restaurer à partir des sauvegardes disponibles, même incomplètes — accepter une perte de données partielle plutôt que céder au chantage.</li>
+    <li>Signaler l'incident aux autorités compétentes (ex. police, centre canadien pour la cybersécurité).</li>
+    <li>Documenter l'incident et revoir la politique de sauvegarde (fréquence, tests de restauration) pour éviter la récidive.</li>
+  </ul>
+  <div class="framework"><b>Cadre à citer à l'examen :</b> analyse coûts-bénéfices à long terme (conséquentialisme systémique) — le "moindre mal" immédiat (payer) crée un dommage collectif plus grand à long terme.</div>
+</div>
+</section>
+
+<section id="p4">
+<h2>Cas éthiques supplémentaires à développer (feuille de notes)</h2>
+<p style="color:var(--muted);">Des cas additionnels dans le même esprit que ceux du cours, pour élargir ta feuille de notes. Chacun inclut une piste de réponse structurée que tu peux adapter.</p>
+
+<div class="extra-case">
+  <span class="tag">Surveillance</span><span class="tag">Vie privée</span>
+  <h4>Cas — Surveillance des employés en télétravail</h4>
+  <p>Une entreprise installe un logiciel qui capture des captures d'écran aléatoires et suit l'activité clavier/souris de ses employés en télétravail, sans les en informer clairement au préalable. Est-ce justifié ?</p>
+  <div class="framework">
+  <b>Piste :</b> distinguer surveillance <b>proportionnée et transparente</b> (informer les employés, limiter la collecte au strict nécessaire pour la sécurité/productivité) vs surveillance excessive et opaque (viole la confiance, l'autonomie, potentiellement illégale sans consentement). Mentionner le principe de <b>minimisation des données</b> et le devoir de transparence envers les personnes surveillées.
+  </div>
+</div>
+
+<div class="extra-case">
+  <span class="tag">IA</span><span class="tag">Biais</span>
+  <h4>Cas — Algorithme de recrutement biaisé</h4>
+  <p>Une entreprise utilise un algorithme de tri de CV entraîné sur 10 ans d'historique d'embauche, majoritairement des hommes dans des postes techniques. L'algorithme déprécie systématiquement les CV mentionnant des associations féminines.</p>
+  <div class="framework">
+  <b>Piste :</b> biais algorithmique hérité des données historiques (reproduction de discriminations passées). Enjeu de <b>justice/équité</b> et de discrimination indirecte. Solutions : audit régulier de l'algorithme, diversification des données d'entraînement, supervision humaine des décisions automatisées, transparence envers les candidats (droit à l'explication).
+  </div>
+</div>
+
+<div class="extra-case">
+  <span class="tag">Reconnaissance faciale</span><span class="tag">Espace public</span>
+  <h4>Cas — Reconnaissance faciale déployée dans un espace public</h4>
+  <p>Une municipalité installe des caméras de reconnaissance faciale dans les rues pour "améliorer la sécurité", sans consultation publique préalable.</p>
+  <div class="framework">
+  <b>Piste :</b> tension entre <b>sécurité collective</b> et <b>vie privée / liberté de mouvement anonyme</b>. Risque de surveillance de masse, d'erreurs d'identification (biais démographiques connus dans ces systèmes), de dérive vers un contrôle social. Nécessité de proportionnalité, de cadre légal clair, de consultation citoyenne et de mécanismes de reddition de comptes.
+  </div>
+</div>
+
+<div class="extra-case">
+  <span class="tag">Données</span><span class="tag">Consentement</span>
+  <h4>Cas — Revente de données utilisateurs à des tiers</h4>
+  <p>Une application gratuite de suivi de santé revend des données anonymisées d'activité physique à des compagnies d'assurance, en s'appuyant sur des conditions d'utilisation que peu d'utilisateurs lisent.</p>
+  <div class="framework">
+  <b>Piste :</b> question du <b>consentement éclairé réel vs formel</b> (les CGU ne constituent pas un vrai consentement informé). Risque de ré-identification même avec des données "anonymisées". Enjeu de justice : les assureurs pourraient utiliser ces données pour discriminer les primes. Solutions : opt-in explicite et clair, minimisation des données, audits d'anonymisation.
+  </div>
+</div>
+
+<div class="extra-case">
+  <span class="tag">Lancement d'alerte</span><span class="tag">Loyauté</span>
+  <h4>Cas — Lanceur d'alerte (whistleblowing)</h4>
+  <p>Un ingénieur découvre que son entreprise vend sciemment un logiciel médical avec une faille de sécurité connue, sans corriger le problème pour respecter un échéancier de livraison. Doit-il alerter publiquement ?</p>
+  <div class="framework">
+  <b>Piste :</b> tension entre <b>loyauté envers l'employeur</b> et <b>devoir envers le public/les patients</b> (principe de non-malfaisance). Évoquer la hiérarchie des recours : d'abord interne (signalement à la hiérarchie, comité d'éthique), puis externe (régulateur) si aucune action n'est prise, en dernier recours le public/médias. Le risque pour la sécurité des patients justifie généralement l'action, malgré les conséquences professionnelles possibles.
+  </div>
+</div>
+
+<div class="extra-case">
+  <span class="tag">Véhicule autonome</span><span class="tag">Décision automatisée</span>
+  <h4>Cas — Véhicule autonome et dilemme du tramway</h4>
+  <p>Un véhicule autonome doit être programmé pour réagir en cas d'accident inévitable : protéger ses passagers ou minimiser le nombre total de victimes, y compris des piétons.</p>
+  <div class="framework">
+  <b>Piste :</b> illustrer le conflit entre <b>éthique conséquentialiste</b> (minimiser le nombre total de morts) et <b>éthique déontologique/contractuelle</b> (devoir envers le passager qui a "acheté" une protection). Souligner qu'il n'y a pas de réponse unique — c'est un choix de société qui doit être débattu démocratiquement et encadré par la loi, pas laissé aux seuls concepteurs.
+  </div>
+</div>
+
+<div class="extra-case">
+  <span class="tag">Open source</span><span class="tag">Propriété intellectuelle</span>
+  <h4>Cas — Utilisation de code open source sans respect de la licence</h4>
+  <p>Une entreprise intègre une bibliothèque open source sous licence copyleft (ex. GPL) dans son produit commercial fermé, sans redistribuer son propre code source comme l'exige la licence.</p>
+  <div class="framework">
+  <b>Piste :</b> violation du <b>droit d'auteur</b> et de la licence logicielle, non-respect de l'esprit de réciprocité du logiciel libre. Enjeu de confiance envers la communauté FOSS. Solutions : audit des dépendances (conformité des licences), remplacement par des alternatives compatibles, ou respect des obligations de redistribution.
+  </div>
+</div>
+
+<div class="exam-tip">
+<b>Astuce pour ta feuille de notes :</b> pour chaque cas éthique à l'examen, structure ta réponse en 3 temps — (1) identifier le <b>conflit de valeurs</b> en jeu (ex. sécurité vs vie privée, profit vs responsabilité, loyauté vs intérêt public), (2) appliquer un <b>cadre éthique</b> (conséquentialisme, déontologie, principe de proportionnalité, minimisation des données), (3) proposer une <b>action concrète</b> qui reflète le meilleur équilibre. Les correcteurs valorisent généralement la structure du raisonnement plus que "la bonne réponse absolue".
+</div>
+
+</section>
+</div>
+
+</body>
+</html>

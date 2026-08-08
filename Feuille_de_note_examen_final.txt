@@ -1,499 +1,1437 @@
--------
-Cours 1
--------
+||| Une loi empirique (fondée sur l'observation, pas sur la physique fondamentale) selon laquelle le nombre de transistors dans un microprocesseur double environ tous les deux ans |
 
-Une loi empirique (fondée sur l'observation, pas sur la physique fondamentale) selon laquelle le nombre de transistors dans un microprocesseur double environ tous les deux ans.
+Les trois grands  besoins à l'origine du développement de l'informatique :
+(1) des calculs scientifiques plus complexes et précis ; (2) un traitement plus rapide des données comptables ou de recensement ; (3) des applications militaires (décryptage de codes, tables de tir, traque des sous-marins, bombe atomique) |
 
-L'enjeu sous-jacent : un savoir produit collectivement et ouvert est-il fiable ? Le cas Wikipedia montre qu'un dispositif ouvert peut s'autocorriger et devenir crédible — mais il introduit aussi des questions de qualité, de vandalisme et de biais des contributeurs.
+L'enjeu sous-jacent : un savoir produit collectivement et ouvert est-il fiable ? Le cas Wikipedia montre qu'un dispositif ouvert peut s'autocorriger et devenir crédible — mais il introduit aussi des questions de qualité, de vandalisme et de biais des contributeurs. |
 
-Un algorithme est une suite finie d'instructions pour résoudre un problème. Un algorithme de prédiction estime un résultat futur ; un algorithme de recommandation suggère un contenu. Ces systèmes orientent le crédit, l'assurance, l'embauche, l'information qu'on voit.
+Un algorithme est une suite finie d'instructions pour résoudre un problème. Un algorithme de prédiction (des modèles qui utilisent des données passées pour prédire un résultat futur) ; un algorithme de recommandation suggère un contenu. Ces systèmes orientent le crédit, l'assurance, l'embauche, l'information qu'on voit. |
 
-Quels sont les biais de ces algorithmes ?
+un biais est une distorsion systématique. Biais algorithmique : Les algorithmes apprennent sur des données historiques ; si ces données reflètent des inégalités passées (discrimination à l'embauche, etc.), l'algorithme les reproduit et amplifie, en se donnant un air d'objectivité mathématique. |
 
-Réponse : un biais est une distorsion systématique. Les algorithmes apprennent sur des données historiques ; si ces données reflètent des inégalités passées (discrimination à l'embauche, etc.), l'algorithme les reproduit et amplifie, en se donnant un air d'objectivité mathématique.
-
-Comment détecter, quantifier et prévenir la discrimination ?
-
-Réponse : c'est un défi technique et social. Détecter = auditer les décisions par groupe ; quantifier = mesurer des écarts (taux d'erreur par sous-population) ; prévenir = corriger les données, contraindre l'algorithme à l'équité, garder un humain dans la boucle.
+Détecter, quantifier et prévenir la discrimination :
+c'est un défi technique et social. Détecter = auditer les décisions par groupe ; quantifier = mesurer des écarts (taux d'erreur par sous-population) ; prévenir = corriger les données, contraindre l'algorithme à l'équité, garder un humain dans la boucle. |
 
 Comment demander à l'algorithme de rendre des comptes sur le pourquoi de sa décision ?
+c'est l'enjeu de la transparence et de la responsabilité (reddition de comptes) algorithmique : l'individu doit pouvoir comprendre, contester et obtenir une explication d'une décision automatisée qui le touche. |
 
-Réponse : c'est l'enjeu de la transparence et de la responsabilité (reddition de comptes) algorithmique : l'individu doit pouvoir comprendre, contester et obtenir une explication d'une décision automatisée qui le touche.
-
+Enjeu entre personnalisation et discrimination : 
 Personnaliser (adapter un service à chacun) peut facilement glisser vers discriminer (traiter défavorablement certaines personnes).
+Des décisions sont prises automatiquement sur des individus à partir des prédictions d'un algorithme d'apprentissage, plutôt que sur des faits avérés. |
+Une erreur de prédiction peut conduire à une discrimination injuste — surtout s'il n'existe aucun recours pour comprendre le raisonnement (d'où l'importance de la transparence et de la responsabilité algorithmiques). |
 
-Mécanisme du problème
-
-Des décisions sont prises automatiquement sur des individus à partir des prédictions d'un algorithme d'apprentissage, plutôt que sur des faits avérés.
-Une erreur de prédiction peut conduire à une discrimination injuste — surtout s'il n'existe aucun recours pour comprendre le raisonnement (d'où l'importance de la transparence et de la responsabilité algorithmiques).
-
-Effet pervers : refuser de fournir ses données peut conduire à la stigmatisation si la majorité, elle, coopère (« qu'a-t-il à cacher ? »).
+Effet pervers : refuser de fournir ses données peut conduire à la stigmatisation si la majorité coopère . |
 
 La neutralité du net : 
-Principe fondamental d'Internet garantissant un traitement identique à tous les contenus et fournisseurs : c'est un principe de non-discrimination. Aucun contenu ne doit être privilégié ou ralenti ; le fournisseur d'accès ne doit pas influer sur l'activité de l'internaute ni sur la vitesse de transmission des paquets.
+Principe fondamental d'Internet garantissant un traitement identique à tous les contenus et fournisseurs : c'est un principe de non-discrimination. Aucun contenu ne doit être privilégié ou ralenti ; le fournisseur d'accès ne doit pas influer sur l'activité de l'internaute ni sur la vitesse de transmission des paquets. |
 
-Le soi quantifié (Quantified Self) : 
-Ensemble de méthodes visant à collecter et utiliser des variables sur son propre corps ou ses propres comportements (pas, sommeil, fréquence cardiaque, humeur…). Objectif principal : apprendre de son propre corps pour le comprendre et s'améliorer.
+Le soi quantifié :
+Définition : ensemble de méthodes pour collecter et utiliser des variables sur son propre corps/comportement. Objectif : apprendre de son corps pour le comprendre et s'améliorer. Risque : dans le schéma classique, les données sont le plus souvent envoyées à distance (sur des serveurs d'entreprises) plutôt que traitées localement — d'où une menace pour la vie privée ; les mesures peuvent aussi être erronées ou décevantes. |
 
 L'ouverture des données (Open Data) : 
-Certaines données devraient être publiquement disponibles et pouvoir être réutilisées et recopiées sans aucune restriction.
+Certaines données devraient être publiquement disponibles et pouvoir être réutilisées et recopiées sans aucune restriction, , dans l'esprit des mouvements « libres » |
 
-Pourquoi : transparence envers les citoyens ; accès universel à la connaissance ; ce qui est financé par l'argent public relève du droit de savoir ; développement de nouveaux services/modèles d'affaires ; concurrence plus équitable (→ baisse de prix). Principaux libérateurs : gouvernements, collectivités, fondations, scientifiques, citoyens.
+Pourquoi ouvrir les donnees: transparence envers les citoyens ; accès universel à la connaissance ; ce qui est financé par l'argent public relève du droit de savoir ; développement de nouveaux services/modèles d'affaires ; concurrence plus équitable (→ baisse de prix). Principaux libérateurs : gouvernements, collectivités, fondations, scientifiques, citoyens. |
 
-Ne pas confondre : données ouvertes = volontairement publiques et réutilisables. Données massives (big data) = très gros volumes de données, pas forcément ouvertes. Anonymisation = retirer les identifiants pour qu'une donnée ne soit plus reliable à une personne (mais on verra que ré-identifier est souvent possible).
-
-Traces numériques
-Dans la société de l'information, chaque personne laisse constamment des traces numériques qui peuvent être reliées à son identité. 
+Ne pas confondre données ouvertes = volontairement publiques et réutilisables. Données massives (big data) = très gros volumes de données, pas forcément ouvertes. Anonymisation = retirer les identifiants pour qu'une donnée ne soit plus reliable à une personne |
 
 La protection de la vie privée
 Objectif : 
-Permettre à un individu de limiter les traces numériques de ses actions et d'avoir un meilleur contrôle sur ses données personnelles.
-
-Le respect de la vie privée est un droit fondamental, ancré dans :
-La Déclaration universelle des droits de l'homme des Nations Unies (article 12, 1948).
-Au Québec, la Loi sur la protection des données personnelles dans le secteur privé.
+Permettre à un individu de limiter les traces numériques de ses actions et d'avoir un meilleur contrôle sur ses données personnelles. |
 
 Le risque : 
-Collecte et utilisation des traces ou des données personnelles à des fins frauduleuses. Exemples : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale
+Collecte et utilisation des traces ou des données personnelles à des fins frauduleuses. Exemples : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale |
 
 Le potentiel d'inférence : 
-C'est la capacité, à partir de données collectées, d'en déduire d'autres informations non fournies — d'autant plus finement avec les données massives. Une donnée collectée risque d'être réutilisée à d'autres fins sans consentement. « Inférer » = déduire une information non donnée à partir d'autres données.
+C'est la capacité, à partir de données collectées, d'en déduire d'autres informations non fournies — d'autant plus finement avec les données massives. Une donnée collectée risque d'être réutilisée à d'autres fins sans consentement. |
 
+En quoi le numérique pose-t-il un problème de développement durable ?
+Le numérique a un coût écologique souvent invisible : forte consommation d'énergie des calculs, du nuage (centres de données très énergivores), de la chaîne de blocs et de l'IA (entraînement des modèles). S'ajoute l'obsolescence programmée, qui multiplie les déchets électroniques. La réponse passe par la durabilité numérique : matériel réparable, durable et sobre. |
 
-Q12 · Développement   En quoi le numérique pose-t-il un problème de développement durable ?
-Le numérique a un coût écologique souvent invisible : forte consommation d'énergie des calculs, du nuage (centres de données très énergivores), de la chaîne de blocs et de l'IA (entraînement des modèles). S'ajoute l'obsolescence programmée, qui multiplie les déchets électroniques. La réponse passe par la durabilité numérique : matériel réparable, durable et sobre.
+L'éthique informatique s'intéresse aux effets des décisions prises autour de la technologie : la gouvernance (qui décide des règles), les comportements des utilisateurs et ceux des professionnels. |
 
-Les spécificités de l'éthique informatique
-L'éthique s'intéresse aux effets des décisions prises autour de la technologie : la gouvernance (qui décide des règles), les comportements des utilisateurs et ceux des professionnels.
+Quelles sont les spécificités de l'éthique informatique ? — Ce qui la rend particulière : l'échelle (une décision touche des millions de personnes d'un coup), la vitesse et l'automatisation (décisions sans humain), l'opacité (boîtes noires algorithmiques), la persistance et la réutilisation des données dans le temps. |
 
-Question du cours
+Pourquoi les données génomiques sont-elles particulières à protéger ?
+Parce qu'elles sont permanentes (impossible de les « réinitialiser » après une fuite), quasi uniquement identifiantes (très difficiles à anonymiser), partagées avec la famille (exposer son ADN expose celui de ses proches sans leur accord) et révélatrices de prédispositions médicales (risque de discrimination à l'assurance ou à l'emploi). |
 
-Quelles sont les spécificités de l'éthique informatique ? — Ce qui la rend particulière : l'échelle (une décision touche des millions de personnes d'un coup), la vitesse et l'automatisation (décisions sans humain), l'opacité (boîtes noires algorithmiques), la persistance et la réutilisation des données dans le temps.
+Sur quels textes repose le droit à la vie privée vu en cours ?
+La Déclaration universelle des droits de l'homme de l'ONU, article 12 (1948), et au Québec la Loi sur la protection des données personnelles dans le secteur privé. Objectif de la protection : limiter ses traces numériques et mieux contrôler ses données personnelles. Risques en cas d'abus : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale. |
 
-La vie privée et les données génomiques
-Question du cours
+Le revers de l'automatisation et de l'interconnexion des données : le même appareil qui te sert peut, en partageant tes données avec d'autres acteurs (assureur, employeur), te juger, contrôler et pénaliser. Le confort se paie en perte d'autonomie et en surveillance. |||
 
-Q13 · Développement   Pourquoi les données génomiques sont-elles particulières à protéger ?
-Parce qu'elles sont permanentes (impossible de les « réinitialiser » après une fuite), quasi uniquement identifiantes (très difficiles à anonymiser), partagées avec la famille (exposer son ADN expose celui de ses proches sans leur accord) et révélatrices de prédispositions médicales (risque de discrimination à l'assurance ou à l'emploi).
-
-Q11 · Court   Sur quels textes repose le droit à la vie privée vu en cours ?
-La Déclaration universelle des droits de l'homme de l'ONU, article 12 (1948), et au Québec la Loi sur la protection des données personnelles dans le secteur privé. Objectif de la protection : limiter ses traces numériques et mieux contrôler ses données personnelles. Risques en cas d'abus : pourriel ciblé, usurpation d'identité, profilage, discrimination déloyale.
-
--------
-Cours 2
--------
-
-Idée centrale : pour bâtir sa crédibilité professionnelle, il faut savoir trouver de bonnes sources, les évaluer, et les citer correctement. Tout repose sur la confiance qu'on peut accorder à l'information.
-
-Une source fiable est une source à laquelle on peut accorder confiance : son information est exacte, vérifiable, produite par quelqu'un de compétent et sans intention trompeuse. 
+Une source fiable est une source à laquelle on peut accorder confiance : son information est exacte, vérifiable, produite par quelqu'un de compétent et sans intention trompeuse. |
 
 Quels sont les trois grands critères pour évaluer une information sur le web ?
-(1) Le site qui héberge (type, nom de domaine, réputation, sections à propos/coordonnées, hébergeur via CIRA/Whois) ; (2) la publication (date, corroboration, vocabulaire, faits vs opinions, sources citées, intention) ; (3) l'entité autrice (identifiée ? réputation, qualifications, déjà publié sur le sujet ?).
+(1) Le site qui héberge (type, nom de domaine, réputation, sections à propos/coordonnées, hébergeur via CIRA/Whois) ; (2) la publication (date, corroboration, vocabulaire, faits vs opinions, sources citées, intention) ; (3) l'entité autrice (identifiée ? réputation, qualifications, déjà publié sur le sujet ?). |
 
 Quel nom de domaine est généralement le plus fiable ?
-.gov (gouvernemental) et .edu (établissement d'enseignement) sont a priori plus fiables ; .com (commercial) demande davantage de vérification car l'intention peut être de vendre ou promouvoir. Le domaine est un indice, pas une garantie.
+.gov (gouvernemental) et .edu (établissement d'enseignement) plus fiables ; .com (commercial) demande davantage de vérification car l'intention peut être de vendre ou promouvoir. Le domaine est un indice, pas une garantie. |
 
-L'« entité autrice » est la personne, le groupe ou l'organisation qui signe le contenu.
+L'« entité autrice » est la personne, le groupe ou l'organisation qui signe le contenu. |
 
-Principe essentiel : un article de presse (source secondaire) rapporte souvent une étude scientifique (source primaire). Il faut remonter à la source primaire pour vérifier ce qui est affirmé, plutôt que se fier au résumé journalistique
+Principe essentiel : un article de presse (source secondaire) rapporte souvent une étude scientifique (source primaire). Il faut remonter à la source primaire pour vérifier ce qui est affirmé, plutôt que se fier au résumé journalistique |
 
 Distingue une revue scientifique d'une revue de vulgarisation.
-La revue scientifique/savante vise à diffuser le savoir, s'adresse aux chercheurs, est éditée par une université/association, écrite par des chercheurs, et ses articles sont approuvés par un comité d'experts (révision par les pairs) et longs (2500–10 000 mots). La revue de vulgarisation/intérêt général vise à informer un large public, est éditée commercialement, écrite par des journalistes/pigistes, et ses articles, conformes à une politique éditoriale, sont courts (250–5000 mots) et non révisés par les pairs. Le critère décisif est la révision par les pairs.
+La revue scientifique/savante vise à diffuser le savoir, s'adresse aux chercheurs, est éditée par une université/association, écrite par des chercheurs, et ses articles sont approuvés par un comité d'experts et longs . La revue de vulgarisation/intérêt général vise à informer un large public, est éditée commercialement, écrite par des journalistes/pigistes, et ses articles, conformes à une politique éditoriale, sont courts et non révisés par les pairs. Le critère décisif est la révision par les pairs. |
 
 Pour un travail de recherche en informatique, les documents pertinents sont :
-Livres et chapitres de livre — vision synthétique et approfondie.
-Articles de périodique (revue ou journal).
-Actes de conférence (« proceedings » : recueil des communications présentées à un colloque) — très importants en informatique, où la conférence est un mode de publication majeur.
-Rapports techniques.
-Thèses et mémoires.
-Articles d'encyclopédie — utiles pour le vocabulaire et les définitions de départ.
+Livres et chapitres de livre — vision synthétique et approfondie; 
+Articles de périodique (revue ou journal) ;
+Actes de conférence (« proceedings » : recueil des communications présentées à un colloque) — très importants en informatique, où la conférence est un mode de publication majeur;
+Rapports techniques;
+Thèses et mémoires;
+Articles d'encyclopédie — utiles pour le vocabulaire et les définitions de départ; |
 
-L'information scientifique mûrit dans le temps : elle part d'une idée et devient de plus en plus formelle, validée et synthétique. 
+Qu'est-ce qu'un article scientifique ?
+Un article publié dans un atelier (workshop), une conférence ou un journal scientifique, et relu par les pairs (peer-reviewed). Ce n'est PAS : un article de journal (les nouvelles), un magazine, un blogue, un rapport, un mémoire de maîtrise ou une thèse. |
 
-Les étapes du cycle de l'information
-Idée → Communications informelles → Conférences non publiées → Rapports de recherche → Articles & conférences publiées → Livres → Ouvrages de référence
+Qu'est-ce qui caractérise un article scientifique, et quelles sont les quatre grandes parties d'une analyse d'article ?
+Un article scientifique est publié dans un atelier, une conférence ou un journal scientifique et relu par les pairs ; ce n'est ni un article de journal, ni un blogue, ni un mémoire/thèse. Les quatre parties d'une analyse : (1) Identification (titre, auteurs/affiliations, forum, année, thème) ; (2) Problématique (quel problème, pourquoi, quelle approche) ; (3) Contribution (apports et résultats principaux) ; (4) Conclusion (intérêt, généralisation, pistes futures). |
 
+Les étapes du cycle de l'information :
+Idée → Communications informelles → Conférences non publiées → Rapports de recherche → Articles & conférences publiées → Livres → Ouvrages de référence ; |
 
 Comprendre ce circuit explique pourquoi un article publié est plus fiable, et ce que sont un « preprint » et un « postprint »
-Auteur-chercheur → Prépublication (preprint) → Comité de rédaction → Évaluateurs externes → Décision → Postpublication (postprint) → Article publié (version éditeur)
+Auteur-chercheur → Prépublication (preprint) → Comité de rédaction → Évaluateurs externes → Décision → Postpublication (postprint) → Article publié (version éditeur) ; |
 
-La prépublication (preprint) est la version soumise par l'auteur avant la révision par les pairs : Contient les memes idées mais non validée. L'article publié a passé l'évaluation par des évaluateurs externes (pairs) et porte la mise en forme finale de l'éditeur (version de l'éditeur). Le (Postpublication) postprint est la version corrigée après évaluation mais avant mise en page.
+La prépublication (preprint) est la version soumise par l'auteur avant la révision par les pairs : Contient les memes idées mais non validée. L'article publié a passé l'évaluation par des évFaluateurs externes (pairs) et porte la mise en forme finale de l'éditeur (version de l'éditeur). Le (Postpublication) postprint est la version corrigée après évaluation mais avant mise en page. |
 
-Révision par les pairs (peer review) : des évaluateurs externes, experts du domaine, lisent l'article et recommandent l'acceptation, la révision ou le rejet. C'est le filtre de qualité scientifique.
- / postprint : version après corrections issues de l'évaluation, mais avant la mise en page finale de l'éditeur.
+Révision par les pairs (peer review) : des évaluateurs externes, experts du domaine, lisent l'article et recommandent l'acceptation, la révision ou le rejet. C'est le filtre de qualité scientifique. |
 
-Version de l'éditeur : la version finale, paginée et mise en forme, publiée dans la revue.
+Version de l'éditeur : la version finale, paginée et mise en forme, publiée dans la revue. |
 
-Article publié vs prépublication
-Un article publié a passé la révision par les pairs et porte la mise en forme de l'éditeur (date de réception, d'acceptation, DOI, licence). Une prépublication contient peut-être les mêmes idées, mais n'a pas encore été validée — à utiliser avec prudence et à signaler comme telle.
+Article publié :
+Un article publié a passé la révision par les pairs et porte la mise en forme de l'éditeur (date de réception, d'acceptation, DOI, licence). |
 
-Le Service des bibliothèques donne accès, via l'authentification UQAM (code MS), à des ressources payantes et fiables qu'on ne trouve pas librement sur le web. Deux portails :
+Le Service des bibliothèques donne accès, à des ressources payantes et fiables qu'on ne trouve pas librement sur le web. Deux portails :
 infosphere.uqam.ca — le tutoriel de méthode : Préparer la recherche → Rechercher l'information → Analyser l'information → Rédiger un travail.
-bibliotheques.uqam.ca — l'accès aux ressources : Sofia, bases de données, périodiques numériques, etc. Il existe un guide par discipline (Sciences → Informatique),
+bibliotheques.uqam.ca — l'accès aux ressources : Sofia, bases de données, périodiques numériques, etc. Il existe un guide par discipline (Sciences → Informatique), |
 
-Quel est l'outil le plus efficace pour repérer des articles scientifiques en informatique ?
-Les bases de données spécialisées (3 étoiles sur Infosphère), comme ACM Digital Library et IEEE Xplore, devant Google Scholar et Sofia (2 étoiles). L'accès se fait via l'authentification UQAM. 
+L'outil le plus efficace pour repérer des articles scientifiques en informatique:
+Les bases de données spécialisées (3 étoiles sur Infosphère), comme ACM Digital Library et IEEE Xplore, devant Google Scholar et Sofia (2 étoiles). L'accès se fait via l'authentification UQAM. |
 
 En informatique, trois éditeurs/bases incontournables :
-
 ACM Digital Library (Association for Computing Machinery) : texte intégral de 50+ périodiques et 900 comptes-rendus de conférences ; affiche le nombre de citations reçues.
 IEEE Xplore : plein texte de 100+ « transactions », ~900 conférences IEEE et 2000+ normes.
-(Un troisième grand éditeur est aussi mis en valeur dans le guide Informatique.)
+(Un troisième grand éditeur est aussi mis en valeur dans le guide Informatique.) |
 
 Sofia est le moteur unique des bibliothèques (livres, articles, vidéos, thèses…). Deux fonctions à maîtriser :
 1. La recherche avancée
-2. Les filtres (tri et format)
+2. Les filtres (tri et format) |
 
-Décris les 7 étapes d'une stratégie de recherche.
-Mots-clés : 1) décomposer le sujet en concepts ; 2) enrichir son vocabulaire (synonymes, traductions, Vitrine linguistique, Termium) ; 3) lier les mots-clés logiquement (booléens). Outil : 4) identifier le ou les outils. Analyse : 5) formuler une première requête ; 6) analyser les résultats ; 7) optimiser au besoin. C'est un processus itératif.
+Décris les 7 étapes d'une stratégie de recherche : 
+1) décomposer le sujet en concepts ; 2) enrichir son vocabulaire (synonymes, traductions, Vitrine linguistique, Termium) ; 3) lier les mots-clés logiquement (booléens) 4) identifier le ou les outils. 5) formuler une première requête ; 6) analyser les résultats ; 7) optimiser au besoin. C'est un processus itératif. |
 
-À quoi servent OR et AND dans une requête ? Donne la règle.
-OR élargit et relie les synonymes d'un même concept (trouve l'un ou l'autre). AND restreint et relie des concepts différents (exige les deux). Règle : OR entre synonymes, AND entre concepts. La troncature * capte les variantes (ethic* → ethics, ethical), et les guillemets "…" imposent l'expression exacte.
+OR élargit et relie les synonymes d'un même concept (trouve l'un ou l'autre). AND restreint et relie des concepts différents (exige les deux). Règle : OR entre synonymes, AND entre concepts. La troncature * capte les variantes (ethic* → ethics, ethical), et les guillemets "…" imposent l'expression exacte. |
 
-Tu obtiens trop de résultats. Que fais-tu ? Et pas assez ?
-Trop : vocabulaire plus précis / plus de concepts, chercher dans le titre seulement, limiter aux récents, limiter à un type de document. Pas assez : ajouter des synonymes, chercher dans tous les champs (pas juste titre/résumé), vérifier que la base convient au domaine.
+Tu obtiens trop de résultats. Que fais-tu ? Et pas assez ? :
+Trop : vocabulaire plus précis / plus de concepts, chercher dans le titre seulement, limiter aux récents, limiter à un type de document. Pas assez : ajouter des synonymes, chercher dans tous les champs (pas juste titre/résumé), vérifier que la base convient au domaine. |
 
 Une fois un article pertinent trouvé, il devient un point de départ pour en trouver d'autres :
-
-Citation en arrière : consulter la bibliographie de l'article (les sources qu'il a utilisées).
-Citation en avant : trouver les articles qui ont cité cet article (souvent plus récents).
+Citation en arrière : consulter la bibliographie de l'article (les sources qu'il a utilisées);
+Citation en avant : trouver les articles qui ont cité cet article (souvent plus récents);
 Chercher les autres articles de l'auteur ou de ses co-auteurs.
-Identifier les centres de recherche et associations auxquels les auteurs sont affiliés.
-Repérer les revues où paraissent ces articles, pour les parcourir.
+Identifier les centres de recherche et associations auxquels les auteurs sont affiliés.;
+Repérer les revues où paraissent ces articles, pour les parcourir.  |
 
 Pourquoi citer ses sources ? (trois raisons)
-(1) Reconnaître l'apport des autres — éviter le plagiat et respecter le droit d'auteur ; (2) démontrer une rigueur scientifique ; (3) permettre au lecteur de retracer et vérifier l'information.
+(1) Reconnaître l'apport des autres — éviter le plagiat et respecter le droit d'auteur ; (2) démontrer une rigueur scientifique ; (3) permettre au lecteur de retracer et vérifier l'information. |
 
 Quand doit-on citer, et quelles situations constituent du plagiat ?
-Quand : dès qu'on reprend une idée, méthode, statistique, image ou donnée d'autrui — qu'on cite mot à mot OU qu'on paraphrase, peu importe que la source soit publiée ou non. Plagiat : copier sans guillemets/source ; insérer images/données sans provenance ; résumer une idée sans citer ; traduire sans mentionner la source ; réutiliser un travail d'un autre cours sans accord (auto-plagiat) ; présenter le travail d'autrui comme le sien, même avec son accord. Encadré par le Règlement no 18, avec sanctions allant de l'échec à l'expulsion.
+Quand : dès qu'on reprend une idée, méthode, statistique, image ou donnée d'autrui — qu'on cite mot à mot OU qu'on paraphrase, peu importe que la source soit publiée ou non. Plagiat : copier sans guillemets/source ; insérer images/données sans provenance ; résumer une idée sans citer ; traduire sans mentionner la source ; réutiliser un travail d'un autre cours sans accord (auto-plagiat) ; présenter le travail d'autrui comme le sien, même avec son accord. Encadré par le Règlement no 18, avec sanctions allant de l'échec à l'expulsion. |
 
-paraphraser une idée d'autrui sans en indiquer la source est du plagiat.
+paraphraser une idée d'autrui sans en indiquer la source est du plagiat. |
 
-Règlement no 18 — UQAM (r18.uqam.ca)
+Règlement no 18 — UQAM (r18.uqam.ca) |
 
-Définition : utilisation totale ou partielle du texte ou de la production d'autrui en le faisant passer pour sien, ou sans indication de référence.
+Définition : utilisation totale ou partielle du texte ou de la production d'autrui en le faisant passer pour sien, ou sans indication de référence. |
 
-Lequel n'a PAS besoin d'être cité ?
-Ce qui relève de la notoriété publique : faits connus de tous et repérables dans plusieurs sources (la Terre tourne autour du Soleil, le 11 septembre 2001, le krach de 1929) ou expressions consacrées (la Grande Noirceur, les Trente Glorieuses). En cas de doute, on cite quand même.
+Lequel n'a PAS besoin d'être cité ? :
+Ce qui relève de la notoriété publique : faits connus de tous et repérables dans plusieurs sources (la Terre tourne autour du Soleil, le 11 septembre 2001, le krach de 1929) ou expressions consacrées (la Grande Noirceur, les Trente Glorieuses). En cas de doute, on cite quand même. |
 
-« Comment citer ? » → ça dépend du style bibliographique. Un style bibliographique est un ensemble de règles éditoriales qui précisent comment présenter l'information. À l'UQAM, on utilise le style UQAM-APA, qui repose sur la méthode auteur-date.
+« Comment citer ? » → ça dépend du style bibliographique. Un style bibliographique est un ensemble de règles éditoriales qui précisent comment présenter l'information. À l'UQAM, on utilise le style UQAM-APA, qui repose sur la méthode auteur-date.|
 
 Comment cite-t-on une citation courte mot à mot dans le texte ?
-Entre guillemets français « … », dans le texte, suivie de la référence abrégée (Nom, année, p. #). Le numéro de page est obligatoire pour une citation mot à mot. Pour une citation longue (+3 lignes) : en retrait, sans guillemets, interligne simple, source à la fin.
+Entre guillemets français « … », dans le texte, suivie de la référence abrégée (Nom, année, p. #). Le numéro de page est obligatoire pour une citation mot à mot. Pour une citation longue (+3 lignes) : en retrait, sans guillemets, interligne simple, source à la fin. |
 
-Les 4 éléments d'une référence
-Toute référence comporte, dans l'ordre : 1) l'auteur — 2) la date — 3) le titre — 4) la source. Les règles précises varient selon le type de document (livre, article, page web…) ; consulter le site style-apa.uqam.ca pour chaque variante.
+Les 4 éléments d'une référence :
+Toute référence comporte, dans l'ordre : 1) l'auteur — 2) la date — 3) le titre — 4) la source. Les règles précises varient selon le type de document (livre, article, page web…) ; consulter le site style-apa.uqam.ca pour chaque variante. |
 
-Mise en forme : chaque référence est alignée à gauche, avec un retrait d'un centimètre à partir de sa deuxième ligne (ce qu'on appelle un « retrait suspendu » / hanging indent). Elle n'est pas justifiée à droite. Les entrées sont classées par ordre alphabétique d'auteur.
+Mise en forme : chaque référence est alignée à gauche, avec un retrait d'un centimètre à partir de sa deuxième ligne (ce qu'on appelle un « retrait suspendu » / hanging indent). Elle n'est pas justifiée à droite. Les entrées sont classées par ordre alphabétique d'auteur. |
 
-Zotero : le logiciel de gestion bibliographique
+Zotero : le logiciel de gestion bibliographique |
 
-Cite cinq fonctions d'un logiciel comme Zotero.
-(1) Rassembler automatiquement des références depuis les bases/Sofia/Google Scholar ; (2) produire des bibliographies selon un style (UQAM-APA) ; (3) gérer par dossiers ; (4) repérer facilement les références ; (5) gérer les PDF associés et les notes de lecture.
+Cite cinq fonctions d'un logiciel comme Zotero. :
+(1) Rassembler automatiquement des références depuis les bases/Sofia/Google Scholar ; (2) produire des bibliographies selon un style (UQAM-APA) ; (3) gérer par dossiers ; (4) repérer facilement les références ; (5) gérer les PDF associés et les notes de lecture. |
 
-onstruis une requête booléenne pour « impact environnemental de l'IA ».
-Une réponse possible : ("intelligence artificielle" OR IA OR "artificial intelligence" OR AI) AND (environnement* OR écolog* OR "empreinte carbone" OR environment* OR ecolog*). On reconnaît la structure : synonymes reliés par OR à l'intérieur de chaque concept, concepts reliés par AND, troncatures pour les variantes.
+Construis une requête booléenne pour « impact environnemental de l'IA ».
+Une réponse possible : ("intelligence artificielle" OR IA OR "artificial intelligence" OR AI) AND (environnement* OR écolog* OR "empreinte carbone" OR environment* OR ecolog*). On reconnaît la structure : synonymes reliés par OR à l'intérieur de chaque concept, concepts reliés par AND, troncatures pour les variantes. |||
 
--------
-Cours 3
--------
+Atteinte à la vie privée : un acteur obtient ou déduit une information personnelle sur toi sans ton consentement (ton identité, ta localisation, tes intérêts, tes opinions…). |
 
-Bris de vie privée
-Atteinte à la vie privée : un acteur obtient ou déduit une information personnelle sur toi sans ton consentement (ton identité, ta localisation, tes intérêts, tes opinions…).
+Une attaque par inférence combine un ensemble de données de mobilité avec, possiblement, des connaissances auxiliaires (informations externes) pour essayer de déduire des informations personnelles sur les individus. |
 
-Inférence
-Déduire une information nouvelle et non fournie à partir de données existantes. C'est le cœur de presque toutes les attaques de vie privée du cours.
+Les 5 objectifs possibles d'une attaque par inférence :
+Identification des points d'intérêt (POI);
+Prédiction des motifs de mobilité;
+Chaînage d'enregistrements (record linkage);
+Découverte de relations sociales;
+Prédiction d'attributs démographiques; |
 
-Risques cités : spam ciblé, usurpation d'identité, profilage, discrimination.
+Remarque importante : des données peuvent être privées aujourd'hui mais ne plus l'être demain, à cause de la publication future d'un autre jeu de données qui, combiné au premier, permet une inférence qui n'était pas possible avant. La vie privée n'est donc jamais garantie de façon permanente — elle dépend de ce qui sera publié dans le futur aussi. |
 
-Objectif principal de la protection de la vie privée
-Permettre à un individu de minimiser et de contrôler les traces numériques et ses données personnelles.
+Risques cités : spam ciblé, usurpation d'identité, profilage, discrimination. |
 
-Le droit à la vie privée est un droit fondamental, garanti à plusieurs niveaux : international, européen, national.
+Le droit à la vie privée est un droit fondamental, garanti à plusieurs niveaux : international, européen, national. |
 
-Niveau international
+Niveau international : 
 DUDH — Article 12 (ONU, 1948)
-« Nul ne sera l'objet d'immixtions arbitraires dans sa vie privée, sa famille, son domicile ou sa correspondance, ni d'atteintes à son honneur et sa réputation. Toute personne a droit à la protection de la loi contre de telles immixtions. »
+« Nul ne sera l'objet d'immixtions arbitraires dans sa vie privée, sa famille, son domicile ou sa correspondance, ni d'atteintes à son honneur et sa réputation. Toute personne a droit à la protection de la loi contre de telles immixtions. » |
 
-C'est le texte fondateur : la vie privée est un droit de l'homme, pas seulement une question technique.
+Niveau européen :
+Directive 95/46/CE	: Met en avant 3 principes : proportionnalité, transparence, finalité légitime (on ne collecte que pour un but précis et justifié).
+RGPD (Règlement Général sur la Protection des Données): Portabilité des données, consentement éclairé, transparence, droit à l'oubli, etc. portée internationale Si une donnée est générée sur le sol européen, |
 
-Niveau européen
-Texte	Ce qu'il apporte
-Directive 95/46/CE	Met en avant 3 principes : proportionnalité, transparence, finalité légitime (on ne collecte que pour un but précis et justifié).
-RGPD (Règlement Général sur la Protection des Données)	Portabilité des données, consentement éclairé, transparence, droit à l'oubli, etc. portée internationale Si une donnée est générée sur le sol européen, le RGPD s'applique — même à une entreprise canadienne.
-Niveau national (Canada / Québec)
+Niveau national (Canada / Québec) : 
 Fédéral : PIPEDA — loi canadienne sur la protection des renseignements personnels dans le secteur privé.
-Québec : Loi sur la protection des données personnelles dans le secteur privé.
+Québec : Loi sur la protection des données personnelles dans le secteur privé. |
 
-Le RGPD a une portée extraterritoriale : ce n'est pas où est l'entreprise qui compte, c'est où sont les personnes dont on traite les données.
+Le RGPD a une portée extraterritoriale : dès qu'une donnée est générée par/sur une personne dans l'UE (employés, clients, cookies collectant des IP, traitement pour des clients UE), l'entreprise y est soumise, peu importe où elle se trouve. |
 
-Donne la définition exacte d'une donnée à caractère personnel et nomme ses deux limites.
-Ensemble d'informations concernant un individu permettant de l'identifier de manière unique. Limite 1 : elle ignore les quasi-identificateurs (données anodines identifiantes une fois combinées). Limite 2 : elle ne couvre pas le potentiel d'inférence (géolocalisation, requêtes, graphe social).
+Donne la définition exacte d'une donnée à caractère personnel et nomme ses deux limites. :
+Ensemble d'informations concernant un individu permettant de l'identifier de manière unique. Limite 1 : elle ignore les quasi-identificateurs (données anodines identifiantes une fois combinées). Limite 2 : elle ne couvre pas le potentiel d'inférence (géolocalisation, requêtes, graphe social). |
 
-Autorité de protection des données
-Définition
-Entité chargée de faire respecter la législation sur la vie privée auprès des entreprises et institutions.
+Autorité de protection des données :
+Entité chargée de faire respecter la législation sur la vie privée auprès des entreprises et institutions. |
 
-Missions principales : informer, garantir le droit d'accès, recenser les fichiers, contrôler, réglementer
+Missions principales : informer, garantir le droit d'accès, recenser les fichiers, contrôler, réglementer |
 
-CNIL (Commission Nationale de l'Informatique et des Libertés),
+CNIL (Commission Nationale de l'Informatique et des Libertés), |
 
-L'adversaire
-Adversaire
-Entité qui collecte les traces numériques d'un individu afin de commettre un bris de vie privée. Cela peut être un individu, une organisation ou une compagnie.
+Adversaire :
+Entité qui collecte les traces numériques d'un individu afin de commettre un bris de vie privée. Cela peut être un individu, une organisation ou une compagnie. |
 
-Les menaces concrètes
-Tout ce qui peut mal tourner une fois que les traces sont collectées.
+Les menaces concrètes :
+Tout ce qui peut mal tourner une fois que les traces sont collectées. |
 
-Publicité ciblée et profilage
-En collectant tes traces, on construit un profil de tes intérêts. Tes partages et ton profil sur les réseaux sociaux révèlent loisirs et opinions politiques. Couplé à l'analyse des données massives, ça devient très précis.
+Publicité ciblée et profilage :
+En collectant tes traces, on construit un profil de tes intérêts. Tes partages et ton profil sur les réseaux sociaux révèlent loisirs et opinions politiques. Couplé à l'analyse des données massives, ça devient très précis. |
 
-Usurpation d'identité
-Si un acteur malveillant collecte assez d'informations personnelles, il peut se faire passer pour toi.
+Cyberchantage :
+Les informations qu'on poste peuvent se retourner contre nous. Le cyberchantage consiste à extorquer de l'argent à une victime en menaçant de divulguer des infos confidentielles. |
 
-Cyberchantage
-Les informations qu'on poste peuvent se retourner contre nous. Le cyberchantage consiste à extorquer de l'argent à une victime en menaçant de divulguer des infos confidentielles.
+Sécuriser l'accès aux données ne résout pas tous les problèmes. Exemple : un employé renvoyé et en colère peut partir avec la base de données clients. La menace interne contourne la sécurité technique. |
 
-Marché noir des données personnelles
-Il existe un véritable marché où se vendent les fichiers de données personnelles.
+Données massives (big data) et vie privée :
+Diversité des données + puissance de calcul → on peut croiser énormément d'informations.;
+Réutilisation des données au-delà de leur finalité initiale (collectées pour X, réutilisées pour Y).;
+Une fois rendues publiques, les données sont toujours là (persistance).;
+Risque de fuite de données.; |
 
-Insight important
-Sécuriser l'accès aux données ne résout pas tous les problèmes. Exemple : un employé renvoyé et en colère peut partir avec la base de données clients. La menace interne contourne la sécurité technique.
+Fuite de données (data breach) :
+Divulgation non autorisée de données. |
 
-Données massives (big data) et vie privée
-Diversité des données + puissance de calcul → on peut croiser énormément d'informations.
-Réutilisation des données au-delà de leur finalité initiale (collectées pour X, réutilisées pour Y).
-Une fois rendues publiques, les données sont toujours là (persistance).
-Risque de fuite de données.
+Témoin (cookie) :
+Petit bloc de données envoyé par un serveur HTTP et laissé dans ton ordinateur par le navigateur web. Il sert à : suivre tes activités, mémoriser tes infos de connexion, retenir les pages visitées, sauvegarder ce que tu saisis dans les formulaires. Utilisé pour la personnalisation.|   
 
-Fuite de données (data breach)
-Divulgation non autorisée de données.
+Cookie 1ʳᵉ partie : posé par le site visité (connexion, panier) acceptable.| Cookie Tierce partie : posé par un domaine externe, suit l'utilisateur entre les sites pour la pub, c'est le problème de vie privée (le « cookie apocalypse » = la fin annoncée des cookies tierce partie par Google).|
 
-Témoin (cookie)
-Petit bloc de données envoyé par un serveur HTTP et laissé dans ton ordinateur par le navigateur web. Il sert à : suivre tes activités, mémoriser tes infos de connexion, retenir les pages visitées, sauvegarder ce que tu saisis dans les formulaires. Utilisé pour la personnalisation.
+Paradoxe de la vie privee : on dit valoriser sa vie privée mais on cède ses données pour très peu et sans se protéger. (2 phenomenes) | Privacy fatigue : épuisement et cynisme face à la protection de sa vie privée, dus au sentiment d'impuissance (fuites constantes) et à une attitude négative envers la protection. |
 
-Cookie de 1ère partie vs cookie de tierce partie : différence et enjeu de vie privée.
-1ʳᵉ partie : posé par le site visité (connexion, panier) — acceptable. Tierce partie : posé par un domaine externe, suit l'utilisateur entre les sites pour la pub — c'est le problème de vie privée (le « cookie apocalypse » = la fin annoncée des cookies tierce partie par Google).
+Trois interprétations possibles de ce paradoxe :
+L'engagement massif des gens sur les réseaux sociaux malgré les risques pourrait signifier :
+Un signe que les participants ne se soucient pas vraiment de leur vie privée (malgré ce qu'ils disent) ? ;
+Qu'ils ne comprennent pas les risques liés au partage d'informations ? ;
+Qu'ils trouvent les contrôles de confidentialité inutilisables (trop compliqués, mal conçus, donc ils abandonnent) ? |
 
-Définis le paradoxe de la vie privée et la privacy fatigue.
-Paradoxe : on dit valoriser sa vie privée mais on cède ses données pour très peu et sans se protéger. Privacy fatigue : épuisement et cynisme face à la protection de sa vie privée, dus au sentiment d'impuissance (fuites constantes) et à une attitude négative envers la protection.
+PET (Privacy Enhancing Technologies) Technologies de protection de la vie privée  : Ensemble de techniques et d'applications permettant à un individu de protéger ses informations personnelles pendant qu'il est en ligne. Ex. : l'anonymiseur (masque IP, OS, navigateur). | Privacy by design : intégrer la vie privée dès la conception (a priori, sur tout le cycle de vie) plutôt que de réagir après un bris. |
 
-Définis une PET et donne un exemple. Qu'est-ce que le « privacy by design » ?
-PET (Privacy Enhancing Technologies) : ensemble de techniques/applications protégeant les infos personnelles en ligne. Ex. : l'anonymiseur (masque IP, OS, navigateur). Privacy by design : intégrer la vie privée dès la conception (a priori, sur tout le cycle de vie) plutôt que de réagir après un bris.
+Les 2 principes fondamentaux centraux + les 4 autres principes. (PET)
+Centraux : ① Minimisation des données (ne collecter que le nécessaire) ; ② Souveraineté des données ; Autres : consentement explicite (demander l'autorisation et expliquer l'utilisation); droit à l'oubli, transparence (pas une boite noire, tu dois comprendre); imputabilité (l'entreprise est responsable de securiser tes donnees) | 
 
-Énonce les 2 principes fondamentaux centraux + les 4 autres principes. (PET)
-Centraux : ① Minimisation des données (ne collecter que le nécessaire) ; ② Souveraineté des données (elles appartiennent à l'individu qui les contrôle). Autres : consentement explicite (demander l'autorisation et expliquer l'utilisation), droit à l'oubli, transparence (pas une boite noire, tu dois comprendre), imputabilité (l'entreprise est responsable de securiser tes donnees)
+Anonymat & PET avancées : communiquer sans révéler qui on est, prouver un droit sans révéler son identité, etc. |
 
+Réseau de communication anonyme : Technologie PET permettant de communiquer de façon anonyme dans un réseau, en protégeant l'identité de l'envoyeur et/ou du receveur. ;
+Exemples cités : Dîner des cryptographes, Mixnet, TOR (Onion Routing)Crowds — TOR est le plus connu : il fait passer ton message par plusieurs nœuds en « couches d'oignon » pour cacher l'origine. |
 
-Anonymat & PET avancées
-Techniques plus poussées : communiquer sans révéler qui on est, prouver un droit sans révéler son identité, etc.
+Les 3 propriétés d'anonymat : 
+1. Anonymat (envoyeur/receveur) : Cacher l'identité de l'envoyeur/receveur parmi un groupe.;
+2. Non-chaînabilité : Être incapable de relier deux messages à la même identité. Concerne deux messages successifs du même individu, ou le même message vu à deux endroits.;
+3. Non-observabilité : Ne pas pouvoir détecter si un message circule ou non. | 
 
-Réseau de communication anonyme
-Technologie PET permettant de communiquer de façon anonyme dans un réseau, en protégeant l'identité de l'envoyeur et/ou du receveur.
-Exemples cités : Dîner des cryptographesMixnetTOR (Onion Routing)Crowds — TOR est le plus connu : il fait passer ton message par plusieurs nœuds en « couches d'oignon » pour cacher l'origine.
+Entropie (mesure d'anonymat) : 
+Mesure mathématique de l'incertitude. Plus l'entropie est élevée, plus il est difficile de deviner qui est l'auteur d'un message → meilleur anonymat. |
 
-Les 3 propriétés d'anonymat
-Propriété	Définition
-Anonymat (envoyeur/receveur)	Cacher l'identité de l'envoyeur/receveur parmi un groupe. Se mesure par la taille du groupe d'anonymat où l'individu est caché, et par l'entropie (incertitude moyenne sur l'auteur d'un message).
-Non-chaînabilité	Être incapable de relier deux messages à la même identité. Concerne deux messages successifs du même individu, ou le même message vu à deux endroits.
-Non-observabilité	Ne pas pouvoir détecter si un message circule ou non. (Encore plus fort : on ne sait même pas qu'il y a communication.)
+Accréditation anonyme : 
+Version anonyme d'une accréditation : permet de prouver une propriété ou un droit (ex. « je suis majeur ») sans révéler son identité. Prend souvent la forme d'un jeton cryptographique créé et certifié par une autorité de confiance, et vérifiable par d'autres entités. |
 
-Entropie (mesure d'anonymat)
-Mesure mathématique de l'incertitude. Plus l'entropie est élevée, plus il est difficile de deviner qui est l'auteur d'un message → meilleur anonymat.
+Biométrie révocable : 
+On transforme la donnée biométrique de façon qu'on puisse l'annuler et la remplacer en cas de fuite (contrairement à une empreinte « brute » qu'on ne peut pas changer). | 
 
-Accréditation anonyme
-Version anonyme d'une accréditation : permet de prouver une propriété ou un droit (ex. « je suis majeur ») sans révéler son identité. Prend souvent la forme d'un jeton cryptographique créé et certifié par une autorité de confiance, et vérifiable par d'autres entités.
-
-Biométrie révocable
-On transforme la donnée biométrique de façon qu'on puisse l'annuler et la remplacer en cas de fuite (contrairement à une empreinte « brute » qu'on ne peut pas changer).
-
-Retrait privé d'information (PIR)
+Retrait privé d'information (PIR) : 
 PIR — Private Information Retrieval
-Un client peut apprendre un élément d'une base de données sur un serveur sans que le serveur n'apprenne quel élément a été consulté.
+Un client peut apprendre un élément d'une base de données sur un serveur sans que le serveur n'apprenne quel élément a été consulté. |
 
-Nuance cruciale (souvent piégée à l'examen)
-C'est le retrait qui est privé, pas l'information elle-même ! L'info peut être publique ; ce qu'on protège, c'est le fait que TU l'as consultée.
+Nuance cruciale :
+C'est le retrait qui est privé, pas l'information elle-même ! L'info peut être publique ; ce qu'on protège, c'est le fait que TU l'as consultée. |
 
-Assainissement
-Processus qui accroît l'incertitude dans les données afin de protéger la vie privée. Usage typique : rendre des données publiques.
+"Assainir" (sanitize) les données = les transformer pour réduire le risque de vie privée avant de les publier ou de les partager. |
 
-Le compromis fondamental
-Il existe un arbitrage inhérent entre le niveau de protection et l'utilité des données assainies. Plus tu protèges, moins les données sont utiles, et inversement.
+Les 3 ingrédients d'un bon assainissement : 
+1. Modèle de respect de la vie privée;
+2. Algorithme d'assainissement;
+3. Mesure d'utilité  | 
 
-Les 3 ingrédients d'un bon assainissement
-Modèle de respect de la vie privée : que signifie « être respectueux de la vie privée » pour des données publiées ? (la cible à atteindre)
-Algorithme d'assainissement : comment modifier les données pour atteindre cette cible ?
+Remplacer un nom par un pseudonyme ≠ protéger la vie privée. |
 
-Mesure d'utilité : comment mesurer si les données restent utiles après modification ?
+Le compromis :  
+Il existe un arbitrage inhérent entre le niveau de protection et l'utilité des données assainies. Plus tu protèges, moins les données sont utiles, et inversement. |
+
+Mesure d'utilité : comment mesurer si les données restent utiles après modification ?  |
 
 Les 4 opérateurs d'assainissement
-Opérateur	Ce qu'il fait
-Agrégation	Fusionner plusieurs données en une seule donnée représentative (ex. une moyenne).
-Généralisation	Perte volontaire de granularité. Ex. : révéler la tranche d'âge (20-30) au lieu de l'âge exact (28).
-Suppression	Enlever l'info liée à un attribut. Attention : l'absence d'information peut parfois elle-même causer un bris de vie privée.
-Introduction de fausses données	Ajouter des enregistrements artificiels pour « noyer » les vrais (bruit).
+Agrégation : Fusionner plusieurs données en une seule donnée représentative (ex. une moyenne). ;
+Généralisation : Perte volontaire de granularité. Ex. : révéler la tranche d'âge au lieu de l'âge exact ;
+Suppression : Enlever l'info liée à un attribut. Attention : l'absence d'information peut parfois elle-même causer un bris de vie privée. ;
+Introduction de fausses données : Ajouter des enregistrements artificiels pour « noyer » les vrais (bruit). |
 
-Attaque par inférence
-L'adversaire prend en entrée des données assainies et tente d'inférer de nouvelles informations personnelles.
+Qu'est-ce qu'une attaque par chaînage et quel est le défi principal de la protection ? relier les enregistrements de deux jeux de données partageant des individus communs. Défi : garantir la protection même face à un adversaire ayant des connaissances auxiliaires, qui ne peuvent pas toujours être modélisées à l'avance.  |
 
-Qu'est-ce qu'une attaque par chaînage et quel est le défi principal de la protection ?
-Chaînage : relier les enregistrements de deux jeux de données partageant des individus communs. Défi : garantir la protection même face à un adversaire ayant des connaissances auxiliaires, qui ne peuvent pas toujours être modélisées à l'avance. 
+Quasi-identificateur : 
+Une donnée qui n'identifie pas seule mais devient identifiante combinée à d'autres. |
 
-Qu'est-ce qu'un quasi-identificateur ? Illustre avec le résultat de Sweeney.
-Une donnée qui n'identifie pas seule mais devient identifiante combinée à d'autres. Sweeney (2000) : 87 % des Américains identifiables avec seulement code postal + date de naissance + genre, en croisant données médicales et liste électorale.
+k-anonymité :
+Garantie : dans chaque groupe du jeu assaini, chaque individu est identique à au moins k − 1 autres sur les quasi-identificateurs. On l'atteint par généralisation + suppression (ex. âge 28 → <30, ZIP 13053 → 130**).  |
 
-Garantie : dans chaque groupe du jeu assaini, chaque individu est identique à au moins k − 1 autres sur les quasi-identificateurs. On l'atteint par généralisation + suppression (ex. âge 28 → <30, ZIP 13053 → 130**). 
+La k-anonymité ne compose pas : publier plusieurs versions k-anonymes des mêmes individus peut détruire la garantie. C'est exactement la motivation pour des modèles plus forts (l-diversité, t-closeness, confidentialité différentielle). |
 
-La leçon de l'attaque par intersection
-La k-anonymité ne compose pas : publier plusieurs versions k-anonymes des mêmes individus peut détruire la garantie. C'est exactement la motivation pour des modèles plus forts (l-diversité, t-closeness, confidentialité différentielle).
+87 % de la population américaine peut être identifiée de façon unique avec seulement 3 quasi-identificateurs : le code postal, la date de naissance et le genre |
 
-Les risques liés à l'ADN
-Rançon pour les données génétiques.
-Discrimination génétique : si tu es susceptible de développer une maladie chronique, ta demande de prêt peut être refusée, ou une compagnie d'assurance peut refuser de t'assurer.
-Menacer de révoquer l'accès et de partager des infos sensibles en ligne.
+Les risques liés à l'ADN : 
+Rançon pour les données génétiques.; 
+Discrimination génétique : si tu es susceptible de développer une maladie chronique, ta demande de prêt peut être refusée, ou une compagnie d'assurance peut refuser de t'assurer. ;
+Menacer de révoquer l'accès et de partager des infos sensibles en ligne. |
 
-Pourquoi le problème explose maintenant
-Coût de séquençage : il s'est effondré depuis 2001, beaucoup plus vite que la loi de Moore (de ~100 M$ à quelques milliers de $). → séquencer l'ADN devient accessible à tous.
+Pourquoi le problème explose maintenant :
+Coût de séquençage : il s'est effondré depuis 2001, beaucoup plus vite que la loi de Moore (de ~100 M$ à quelques milliers de $). → séquencer l'ADN devient accessible à tous. ; 
+Quantité partagée : les services de généalogie (23andMe, Ancestry, MyHeritage…) accumulent des bases énorme  |||
 
-Quantité partagée : les services de généalogie (23andMe, Ancestry, MyHeritage…) accumulent des bases énormes — MyHeritage : plus de 8 millions de personnes ; plus de 26 millions de tests « at-home » au total.
+L'éthique est la branche de la philosophie qui systématise, défend et recommande des jugements de valeur sur le bien et le mal — c'est la réflexion rationnelle sur « pourquoi » une chose est juste. La morale est l'ensemble des valeurs admises par un groupe ou une culture. Le droit est l'ensemble des règles écrites et obligatoires sanctionnées par l'État. L'éthique précède souvent la loi (on réfléchit avant de légiférer) et la complémente (elle pose des questions que la loi ne couvre pas) |
 
--------
-Cours 4
--------
+Deux grandes éthiques qui s'opposent : 
+Éthique du devoir — Kant;
+Éthique du bien — Utilitarisme |
 
+Kant (déontologique) : on juge l'action en elle-même ; certaines actions sont bonnes ou mauvaises peu importe les conséquences. Utilitarisme (conséquentialiste) : on juge l'acte uniquement par ses conséquences ; si elles sont bonnes, l'acte est justifié. |
 
-Définissez l'éthique et distinguez-la de la morale et du droit.
-L'éthique est la branche de la philosophie qui systématise, défend et recommande des jugements de valeur sur le bien et le mal — c'est la réflexion rationnelle sur « pourquoi » une chose est juste. La morale est l'ensemble des valeurs admises par un groupe ou une culture. Le droit est l'ensemble des règles écrites et obligatoires sanctionnées par l'État. L'éthique précède souvent la loi (on réfléchit avant de légiférer) et la complémente (elle pose des questions que la loi ne couvre pas)
+Le code d'éthique Énonce les valeurs et principes à connotation morale ou civique auxquels adhère une organisation, et qui servent de guide à un individu ou un groupe pour juger de la justesse de ses comportements. (général, inspirant). Le code de déontologie est un Texte réglementaire (donc à valeur juridique) énonçant les règles de conduite professionnelle qui régissent l'exercice d'une profession, et décrivant les devoirs, obligations et responsabilités de ceux qui l'exercent. (détaillé, contraignant, orienté pratique, avec sanctions). Le code de conduite est l'ensemble de règles écrites qu'une entreprise ou un organisme s'engage à observer et qui régissent la conduite de son personnel et de ses dirigeants |
 
-Deux grandes éthiques qui s'opposent
-Éthique du devoir — Kant
-Éthique du bien — Utilitarisme
+Il existe au Québec un code de déontologie des informaticiens datant de 1994, porté par l'APIIQ (Association professionnelle des informaticiens et informaticiennes du Québec). ;
+Ce code décrit les devoirs et obligations envers le public, le client et les collègues.; 
+Un code de déontologie est plus détaillé et plus orienté vers la pratique qu'un code éthique |
 
-Opposez l'éthique du devoir (Kant) et l'éthique du bien (utilitarisme).
-Kant (déontologique) : on juge l'action en elle-même ; certaines actions sont bonnes ou mauvaises peu importe les conséquences. Utilitarisme (conséquentialiste) : on juge l'acte uniquement par ses conséquences ; si elles sont bonnes, l'acte est justifié.
+OIQ — Ordre des ingénieurs du Québec |
 
+AQIII :
+Association québécoise des informaticiennes et informaticiens indépendants (les pigistes/consultants). |
 
-Les trois types de codes
+En informatique, contrairement à la médecine, il n'y a pas un ordre professionnel unique et obligatoire — il y a plutôt plusieurs associations (APIIQ, AQIII…) et les informaticiens peuvent relever de l'ordre des ingénieurs ou des technologues selon leur titre. |
 
-Quelle est la différence entre un code d'éthique, un code de déontologie et un code de conduite ?
-Le code d'éthique énonce des valeurs et principes servant de guide (général, inspirant). Le code de déontologie est un texte réglementaire énonçant les règles, devoirs et obligations d'une profession (détaillé, contraignant, orienté pratique, avec sanctions). Le code de conduite est l'ensemble des règles écrites qu'une organisation impose à son personnel et ses dirigeants
-
-Il existe au Québec un code de déontologie des informaticiens·ne·s datant de 1994, porté par l'APIIQ (Association professionnelle des informaticiens et informaticiennes du Québec).
-Ce code décrit les devoirs et obligations envers le public, le client et les collègues.
-Point important : un code de déontologie est plus détaillé et plus orienté vers la pratique qu'un code éthique
-
-OIQ — Ordre des ingénieurs du Québec
-
-AQIII
-Association québécoise des informaticiennes et informaticiens indépendants (les pigistes/consultants).
-
-L'idée à retenir de toute la section : en informatique, contrairement à la médecine, il n'y a pas un ordre professionnel unique et obligatoire — il y a plutôt plusieurs associations (APIIQ, AQIII…) et les informaticiens peuvent relever de l'ordre des ingénieurs ou des technologues selon leur titre.
-
-Le code de l'ACM
-ACM
-Association for Computing Machinery — la grande association internationale des professionnels de l'informatique.
+ACM : Association for Computing Machinery — la plus grande association mondiale de professionnels et chercheurs en informatique. C'est probablement la référence la plus citée en éthique informatique dans le monde académique | 
 
 Elle publie deux codes :
+Code of Ethics and Professional Conduct — général, pour tous les informaticiens. ;
+Software Engineering Code — plus spécifique, pour le génie logiciel. (Tous deux disponibles en français.) ; |
 
-Code of Ethics and Professional Conduct — général, pour tous les informaticiens.
-Software Engineering Code — plus spécifique, pour le génie logiciel. (Tous deux disponibles en français.)
 Le code est organisé en 8 sections correspondant aux différentes relations du professionnel :
+public;
+clients et employeurs;
+produits;
+jugement;
+gestion;
+profession;
+collègues;
+soi-même; |
 
-public  ·  clients et employeurs  ·  produits  ·  jugement  ·  gestion  ·  profession  ·  collègues  ·  soi-même
+Son but : formaliser la morale que les membres doivent adopter dans l'exercice de leurs fonctions. |
 
-Son but : formaliser la morale que les membres doivent adopter dans l'exercice de leurs fonctions.
+Éthique des procédures :
+Elle définit les règles permettant d'agir et de décider dans le cyberespace. |
 
-Éthique des procédures
-Elle définit les règles permettant d'agir et de décider dans le cyberespace.
-
-Cybernétique
+Cybernétique :
 La science des mécanismes autogouvernés et du contrôle. Autrement dit, l'étude de la façon dont un système (machine, organisme, société) se régule lui-même grâce à l'information et à la rétroaction (feedback).
 
-Agent artificiel
-Une entité logicielle ou robotique capable de percevoir son environnement et d'agir de façon autonome pour atteindre des buts (un robot, un assistant IA, un véhicule autonome…).
+Agent artificiel :
+Une entité logicielle ou robotique capable de percevoir son environnement et d'agir de façon autonome pour atteindre des buts (un robot, un assistant IA, un véhicule autonome…). |
 
 Trois approches pour rendre un agent « éthique »
-Moralité des agents : doit-on leur imposer des règles de comportement social, comme à un humain ?
-Apprentissage : l'agent apprend les règles éthiques par l'expérience (mais il peut alors apprendre de mauvais comportements à partir de mauvaises données).
-Principe d'éthique calculatrice : on code des critères formels explicites — l'exemple type étant les lois d'Asimov (section suivante).
+1. Moralité des agents : doit-on leur imposer des règles de comportement social, comme à un humain ?;
+2. Apprentissage : l'agent apprend les règles éthiques par l'expérience (mais il peut alors apprendre de mauvais comportements à partir de mauvaises données). ;
+3. Principe d'éthique calculatrice : on code des critères formels explicites — l'exemple type étant les lois d'Asimov (section suivante). |
 
-Énoncez les trois lois de la robotique d'Asimov et expliquez leur principale limite.
-Loi 1 : ne pas blesser un humain ni, par inaction, le laisser être blessé. Loi 2 : obéir aux humains, sauf si cela viole la Loi 1. Loi 3 : protéger sa propre existence, sauf si cela viole la Loi 1 ou 2. Elles sont strictement hiérarchisées.
+Les trois lois de la robotique d'Isaac Asimov et expliquez leur principale limite.
+Loi 1 : ne pas blesser un humain ni, par inaction, le laisser être blessé.; Loi 2 : obéir aux humains, sauf si cela viole la Loi 1. ; Loi 3 : protéger sa propre existence, sauf si cela viole la Loi 1 ou 2. Elles sont strictement hiérarchisées. |
 
-Limite : ces règles formelles se contredisent dans les situations réelles complexes. C'est l'illustration des limites de l'« éthique calculatrice » : on ne peut pas réduire toute l'éthique à quelques règles formelles.
+Limite : ces règles formelles se contredisent dans les situations réelles complexes. C'est l'illustration des limites de l'« éthique calculatrice » : on ne peut pas réduire toute l'éthique à quelques règles formelles. | 
 
 Formaliser l'éthique (la rendre calculable)
-Objectifs : implémenter une « éthique computationnelle » (rendre l'éthique exécutable par une machine) et, au passage, clarifier nos propres conceptions éthiques (en essayant de coder une règle, on découvre ses ambiguïtés).
+Objectifs : implémenter une « éthique computationnelle » (rendre l'éthique exécutable par une machine) et, au passage, clarifier nos propres conceptions éthiques (en essayant de coder une règle, on découvre ses ambiguïtés). | 
 
-Les cinq approches mentionnées — tu dois savoir reconnaître chacune :
+Les cinq approches mentionnées  :
+1.Formalisation mathématique / théorie des jeux : Modéliser les décisions comme des « jeux » avec gains et stratégies optimales — approche purement formelle. ;
+2. Logiques déontiques : Une logique spéciale qui manipule les notions d'obligation, interdiction et permission (du grec deon, le devoir); 
+3. Raisonnement à base de cas : Décider par analogie avec des cas passés (comme la jurisprudence en droit). ;
+4. Apprentissage statistique : La machine apprend le bon comportement à partir d'exemples, via un algorithme d'apprentissage.;
+5. Logiques non-monotones : Logiques qui permettent de réviser une conclusion quand de nouveaux faits apparaissent (le contraire de la logique classique, où une vérité reste vraie pour toujours). | 
 
-Approche					Idée en une phrase
-Formalisation mathématique / théorie des jeux	: Modéliser les décisions comme des « jeux » avec gains et stratégies optimales — approche purement formelle.
-Logiques déontiques				: Une logique spéciale qui manipule les notions d'obligation, interdiction et permission (du grec deon, le devoir).
-Raisonnement à base de cas			: Décider par analogie avec des cas passés (comme la jurisprudence en droit).
-Apprentissage statistique			: La machine apprend le bon comportement à partir d'exemples, via un algorithme d'apprentissage.
-Logiques non-monotones				: Logiques qui permettent de réviser une conclusion quand de nouveaux faits apparaissent (le contraire de la logique classique, où une vérité reste vraie pour toujours).
+Responsabilité civile = devoir de réparer/indemniser un dommage (payer) |  Responsabilité pénale = être puni pour une infraction (amende, prison). | 
 
-Responsabilité civile = devoir de réparer/indemniser un dommage (payer). Responsabilité pénale = être puni pour une infraction (amende, prison). 
+Qui est responsable, civilement ou pénalement, en cas de dysfonctionnement d'un robot ? La responsabilité est diluée entre plusieurs acteurs. C'est exactement ce que les « 5 règles » de la section 17 essaient de clarifier : chacun (concepteur, déployeur, utilisateur) garde une part de responsabilité pour les effets raisonnablement prévisibles. |
 
-Qui est responsable, civilement ou pénalement, en cas de dysfonctionnement d'un robot ? Le créateur, le possesseur, ou l'utilisateur ?
-La responsabilité est diluée entre plusieurs acteurs. C'est exactement ce que les « 5 règles » de la section 17 essaient de clarifier : chacun (concepteur, déployeur, utilisateur) garde une part de responsabilité pour les effets raisonnablement prévisibles.
-
-Transhumanisme
-Mouvement qui prône l'augmentation des capacités humaines (physiques et mentales) grâce aux technologies — jusqu'à transformer la condition humaine elle-même.
+Transhumanisme : 
+Mouvement qui prône l'augmentation des capacités humaines (physiques et mentales) grâce aux technologies — jusqu'à transformer la condition humaine elle-même. |
 
 Le risque éthique principal
-Une « humanité à deux vitesses » : un fossé entre ceux qui peuvent se payer ces améliorations et ceux qui ne le peuvent pas. C'est un problème d'équité et d'accès.
+Une « humanité à deux vitesses » : un fossé entre ceux qui peuvent se payer ces améliorations et ceux qui ne le peuvent pas. C'est un problème d'équité et d'accès. |
 
-Artefact computationnel
-L'objet technique isolé : un logiciel, un algorithme, un système informatique pris en lui-même.
+Artefact computationnel : 
+L'objet technique isolé : un logiciel, un algorithme, un système informatique pris en lui-même. |
 
-Système socio-technique
-L'ensemble plus global : l'artefact plus les humains, les organisations, les usages et le contexte social autour de lui.
+Système socio-technique :
+L'ensemble plus global : l'artefact plus les humains, les organisations, les usages et le contexte social autour de lui. |
 
+Énoncez les 5 règles de la responsabilité morale pour les artefacts computationnels
+R1 : concepteurs/développeurs/déployeurs sont responsables de l'artefact et de ses effets prévisibles (responsabilité partagée). R2 : cette responsabilité n'est pas à somme nulle. R3 : ceux qui utilisent sciemment l'artefact sont responsables de cet usage. R4 : on doit considérer le système socio-technique dans lequel l'artefact s'insère. R5 : on ne doit pas tromper les utilisateurs sur l'artefact et ses effets. |
 
-Énoncez les 5 règles de la responsabilité morale pour les artefacts computationnels. Pourquoi dit-on qu'elle n'est « pas un jeu à somme nulle » ?
-R1 : concepteurs/développeurs/déployeurs sont responsables de l'artefact et de ses effets prévisibles (responsabilité partagée). R2 : cette responsabilité n'est pas à somme nulle. R3 : ceux qui utilisent sciemment l'artefact sont responsables de cet usage. R4 : on doit considérer le système socio-technique dans lequel l'artefact s'insère. R5 : on ne doit pas tromper les utilisateurs sur l'artefact et ses effets.
+Un jeu à somme nulle, c'est quand ce que l'un gagne, l'autre le perd (le total reste constant). Dire que la responsabilité n'est PAS à somme nulle signifie : la responsabilité ne se « divise » pas en parts qui s'amenuisent quand il y a plus de monde — chacun en porte une part pleine et entière. |
 
-« Pas à somme nulle » signifie que la présence d'autres responsables ne réduit pas ta propre part de responsabilité : chacun en porte une part pleine et entière. On ne peut pas se dédouaner en disant « d'autres étaient impliqués ».
+comment préserver l'autonomie de la décision humaine et éviter le déterminisme ? Le « déterminisme » ici, c'est le risque qu'un algorithme prédise (ou décide) votre avenir à votre place — qu'on vous traite selon ce qu'un modèle prédit que vous ferez, et non selon ce que vous choisissez réellement. |
 
-Question centrale de la section : comment préserver l'autonomie de la décision humaine et éviter le déterminisme ? Le « déterminisme » ici, c'est le risque qu'un algorithme prédise (ou décide) votre avenir à votre place — qu'on vous traite selon ce qu'un modèle prédit que vous ferez, et non selon ce que vous choisissez réellement.
+L'Internet des objets (IoT) : 
+Le réseau des objets du quotidien connectés (fourchette, brosse à dents, voiture, frigo…) qui collectent et échangent des données. |
 
-L'Internet des objets (IoT)
-Internet des objets
-Le réseau des objets du quotidien connectés (fourchette, brosse à dents, voiture, frigo…) qui collectent et échangent des données.
+Le vrai problème, selon Morozov,
+Ce n'est pas seulement la surveillance, mais le nudging permanent : la technologie nous pousse en douceur à nous conformer à une norme de « bon comportement » décidée par d'autres. C'est une menace pour la liberté et l'autonomie, pas seulement pour la vie privée. |
 
-Le vrai problème, selon Morozov
-Ce n'est pas seulement la surveillance, mais le nudging permanent : la technologie nous pousse en douceur à nous conformer à une norme de « bon comportement » décidée par d'autres. C'est une menace pour la liberté et l'autonomie, pas seulement pour la vie privée.
-
-L'éthique de la recherche en informatique
-IRB — Institutional Review Board
-Aux États-Unis, la plupart des institutions de recherche ont un « comité de protection des personnes ». Son rôle : valider, superviser et évaluer toute recherche impliquant des « sujets humains ».
+L'éthique de la recherche en informatique :
+IRB — Institutional Review Board :
+Aux États-Unis, la plupart des institutions de recherche ont un « comité de protection des personnes ». Son rôle : valider, superviser et évaluer toute recherche impliquant des « sujets humains ». |
 
 Citez les trois principes du rapport Belmont (1978).
-1. Respect de la personne : liberté de participer + information détaillée (consentement éclairé). 2. Bienveillance : risques inférieurs aux bénéfices, et minimisation des risques. 3. Équité : distribution juste des risques et des bénéfices entre les participants. Le rapport Belmont est le texte fondateur de la bioéthique et la base du travail des comités de protection des personnes (IRB).
+1. Respect de la personne : liberté de participer + information détaillée (consentement éclairé). 2. Bienveillance : risques inférieurs aux bénéfices, et minimisation des risques. 3. Équité : distribution juste des risques et des bénéfices entre les participants. Le rapport Belmont est le texte fondateur de la bioéthique et la base du travail des comités de protection des personnes (IRB). |
 
-Consentement libre et éclairé
-Avant toute collecte de données personnelles, il faut normalement obtenir l'accord d'une personne qui comprend pleinement ce à quoi elle consent. L'usage de la tromperie (ex. : mentir sur le but de la collecte) viole le principe de respect de la personne.
+Consentement libre et éclairé :
+Avant toute collecte de données personnelles, il faut normalement obtenir l'accord d'une personne qui comprend pleinement ce à quoi elle consent. L'usage de la tromperie (ex. : mentir sur le but de la collecte) viole le principe de respect de la personne. |
 
-Hameçonnage
-Technique d'attaque où on se fait passer pour une source de confiance (banque, employeur…) afin de tromper la victime et lui soutirer des informations (mots de passe, etc.).
+Hameçonnage :
+Technique d'attaque où on se fait passer pour une source de confiance (banque, employeur…) afin de tromper la victime et lui soutirer des informations (mots de passe, etc.). |
 
 Pourquoi la recherche sur le hameçonnage pose-t-elle un dilemme éthique, et à quelles conditions un comité peut-il autoriser la tromperie ?
-Le dilemme : pour être valide, l'étude doit utiliser de fausses attaques indiscernables des vraies, ce qui exige de tromper les sujets et de renoncer au consentement éclairé — en tension avec le principe de respect de la personne.
+Le dilemme : pour être valide, l'étude doit utiliser de fausses attaques indiscernables des vraies, ce qui exige de tromper les sujets et de renoncer au consentement éclairé — en tension avec le principe de respect |  de la personne. |
 
-Conditions pour autoriser la tromperie : (1) risque minimal pour les participants ; (2) aucune atteinte à leurs droits et leur bien-être ; (3) la recherche est impossible autrement ; (4) un débriefing fournit les informations pertinentes après la participation.
+Conditions pour autoriser la tromperie : (1) risque minimal pour les participants ; (2) aucune atteinte à leurs droits et leur bien-être ; (3) la recherche est impossible autrement ; (4) un débriefing fournit les informations pertinentes après la participation. |
 
-Le blanchiment éthique (ethics washing) est l'instrumentalisation de l'éthique par une communication trompeuse, créant l'illusion d'une IA éthique sans qu'aucune théorie, application ou éthicien réels soient impliqués. L'écoblanchiment fait croire qu'un produit est écologiquement responsable ; le privacy washing fait croire que des mesures protègent les données des utilisateurs. Exemple de blanchiment éthique : exploiter l'absence de consensus sur la définition de l'« équité » pour choisir, au hasard ou de façon opportuniste, une définition qui « passe ».
+Le blanchiment éthique (ethics washing) est l'instrumentalisation de l'éthique par une communication trompeuse, créant l'illusion d'une IA éthique sans qu'aucune théorie, application ou éthicien réels soient impliqués. L'écoblanchiment fait croire qu'un produit est écologiquement responsable alors que ce n est pas le cas ; le privacy washing fait croire que des mesures protègent les données des utilisateurs. Exemple de blanchiment éthique : exploiter l'absence de consensus sur la définition de l'« équité » pour choisir, au hasard ou de façon opportuniste, une définition qui « passe ». |
 
 Comment les entreprises pratiquent le blanchiment éthique
 Elles définissent leur propre cadre éthique sur mesure et font semblant de respecter des valeurs comme l'équité, la vie privée, l'explicabilité.
 Le levier est souvent la façon dont elles communiquent leurs choix (beaucoup d'affichage, peu de substance).
-Le cas de l'équité est révélateur : il n'existe pas de consensus sur la définition de l'« équité ». Une entreprise peut donc choisir au hasard une notion d'équité (parmi plusieurs définitions mathématiques incompatibles) jusqu'à en trouver une qui « passe » — et se déclarer « équitable » de façon trompeuse.
+Le cas de l'équité est révélateur : il n'existe pas de consensus sur la définition de l'« équité ». Une entreprise peut donc choisir au hasard une notion d'équité (parmi plusieurs définitions mathématiques incompatibles) jusqu'à en trouver une qui « passe » — et se déclarer « équitable » de façon trompeuse.  |
 
-La confidentialité différentielle
-Confidentialité différentielle (differential privacy)
-Technique mathématique qui permet d'analyser un jeu de données sans révéler d'information sur un individu précis, typiquement en ajoutant un bruit aléatoire contrôlé aux résultats. Le paramètre ε (epsilon) mesure la « perte de confidentialité » qu'on accepte.
+Confidentialité différentielle : 
+une garantie mathématique : en examinant le résultat (la sortie statistique) d'une analyse, on ne peut pas dire si les données d'un individu particulier sont incluses dans l'ensemble de données ou non. Concrètement, on ajoute du « bruit » statistique calibré aux résultats pour masquer la contribution de n'importe quel individu tout en préservant l'utilité globale des statistiques. Le paramètre ε (epsilon) mesure la « perte de confidentialité » qu'on accepte. |
 
-En confidentialité différentielle, qu'arrive-t-il quand le paramètre ε augmente ?
-Quand ε augmente, on ajoute moins de bruit : les résultats sont plus précis et plus utiles, mais le risque de ré-identifier les données d'un individu augmente. Un petit ε protège mieux la vie privée (au prix de résultats plus flous). Choisir ε est donc un arbitrage éthique entre utilité et protection.
+Cette technique fonctionne mieux sur les bases de données de plus grande taille |
+
+La confidentialité différentielle est réglée par un paramètre appelé epsilon (ε), qui contrôle le compromis entre confidentialité et précision (« privacy-utility trade-off »).
+Quand ε augmente, on ajoute moins de bruit : les résultats sont plus précis et plus utiles, mais le risque de ré-identifier les données d'un individu augmente. Un petit ε protège mieux la vie privée (au prix de résultats plus flous). Choisir ε est donc un arbitrage éthique entre utilité et protection. |
+
+Expliquez le débat sur les portes dérobées (backdoors) dans le chiffrement.
+La tension oppose la sécurité individuelle / vie privée (chiffrement fort pour tous) à la sécurité nationale (permettre aux États d'accéder aux communications). Le problème central : une porte dérobée conçue « pour les bons » constitue une faille qui peut aussi être exploitée par des acteurs malveillants — affaiblir le chiffrement pour tout le monde |||
+
+Pourquoi dit-on que l'informatique a une tradition éthique moins mature que la médecine ?
+Parce que la médecine dispose de siècles de réflexion éthique formalisée (serment d'Hippocrate, comités d'éthique, bioéthique) alors que l'informatique est une discipline jeune qui doit encore construire progressivement ses propres repères, ses codes de déontologie (ex. APIIQ créé seulement en 1994) et ses institutions (pas d'ordre professionnel obligatoire au Québec). |
+
+Les spécificités de l'éthique informatique ?
+l'informatique pose des dilemmes éthiques nouveaux parce que ses technologies créent des situations qui n'existaient pas avant.  L'éthique informatique doit donc parfois inventer de nouveaux repères, plutôt que seulement appliquer des principes anciens (contrairement à la médecine). |
+
+la technologie n'est jamais neutre ;
+Expliquez la phrase : « la cryptographie réorganise le pouvoir : elle configure qui peut faire quoi, à partir de quoi. »
+La cryptographie n'est pas un outil neutre : en déterminant qui peut accéder ou non à une information, elle redistribue concrètement du pouvoir entre acteurs (citoyens, entreprises, gouvernements). Un même outil de chiffrement peut protéger la vie privée d'un individu tout en empêchant une enquête légitime — d'où la responsabilité morale des cryptographes. |
+
+La différence entre un devoir moral « négatif » et un devoir moral « positif », selon la diapo sur la cryptographie ? (2 niveaux d'obligation morale)
+Le devoir négatif consiste à ne pas nuire personnellement (le minimum). Le devoir positif va plus loin : il exige de contribuer activement au bien social, pas seulement d'éviter de causer du tort.  |
+
+Quels sont les trois enjeux éthiques des chatbots identifiés en cours, et comment s'appliquent-ils au cas des avatars de personnes décédées ?
+1. Fiabilité des résultats : Les chatbots peuvent produire des informations fausses avec une grande confiance apparente (le phénomène des « hallucinations »). (risque d'hallucinations, fausse impression de fidélité au défunt), 2. Les biais : Un chatbot est entraîné sur des données produites par des humains, qui contiennent déjà des préjugés sociaux (contrôle et orientation du discours de l'avatar par un tiers, parfois à but commercial), 3. remplacement de l'interaction/expertise humaine (risque de nuire au processus de deuil naturel en créant une dépendance à une simulation). | 
+Valeurs en conflit : réconfort psychologique immédiat des proches vs. respect de la dignité et de l'autonomie de la personne décédée vs. intérêts commerciaux de l'entreprise qui offre le service. |
+
+Un logiciel libre respecte les libertés essentielles des utilisateurs : la liberté de l'exécuter, de l'étudier et de le modifier, ainsi que de redistribuer des copies avec ou sans modifications. |
+
+« Logiciel libre » FOSS = Free and Open Source Software. (au sens de liberté, pas nécessairement gratuit) est différent de « logiciel gratuit » (freeware, gratuit mais souvent fermé/propriétaire) et différent aussi de « open source » (mouvement voisin mais historiquement plus orienté sur les avantages pratiques/techniques du code ouvert que sur la philosophie des libertés). |
+
+Nommez les quatre libertés essentielles du logiciel libre.
+0) Exécuter le logiciel pour n'importe quel usage. 1) Étudier son fonctionnement (accès au code source). 2) Redistribuer des copies. 3) Modifier le logiciel et redistribuer les versions modifiées. |
+
+Quelle est la différence pratique entre une licence GPL et une licence MIT/BSD ?
+La GPL a un effet « copyleft » : toute version modifiée et redistribuée doit rester sous licence GPL (donc rester libre). Les licences MIT/BSD sont permissives : elles autorisent même la fermeture du code en logiciel propriétaire commercial dans une version modifiée, sans obligation de repartager le code source. |
+ 
+La différence entre un ordre professionnel (comme l'OIQ) et une association professionnelle volontaire (comme l'AQIII) ?
+Un ordre professionnel a un statut légal reconnu par l'État, avec un pouvoir disciplinaire réel (sanctions, radiation) et souvent une adhésion obligatoire pour exercer. Une association volontaire n'a pas ce pouvoir légal — son code d'éthique repose sur l'adhésion volontaire de ses membres, sans contrainte légale de l'État. |
+
+Dans le cas du robot policier, pourquoi ce cas n'a-t-il pas de « bonne » réponse unique ?
+Parce qu'il s'agit d'un dilemme volontairement construit sans solution parfaite (variante du problème du tramway) : toute action (intervenir ou ne pas intervenir) implique un coût moral certain. Il illustre que même l'inaction d'un système autonome est un choix de valeurs, et pose la question de la responsabilité (fabricant, programmeur, opérateur) et de la nécessité d'un contrôle humain sur les décisions à fort impact moral. |||
+
+Qu'est-ce qu'un "double de données" (data double) et pourquoi dit-on que "les données ont une vie sociale" ?
+Le "double de données" est la version virtuelle et partielle de nous-mêmes créée par nos données personnelles, qui vit sur des serveurs et nous relie à des systèmes sociaux plus larges. On dit que "les données ont une vie sociale" parce qu'une fois créées, elles circulent, sont analysées et combinées indépendamment de la personne réelle — le double peut être jugé ou catégorisé sans le contrôle de l'individu. |
+
+Est-ce que ça vaut la peine de partager vos données ?
+Le cours pose 4 tensions/problèmes à connaître :
+1. Asymétrie de valeur : les données sont beaucoup plus utiles pour les entreprises  que pour l'individu lui-même.
+2. Suggestions trop générales : 
+3. Questions sur la vie privée : 
+4. Possession compliquée : |
+
+Pourquoi les données de fitness sont-elles considérées comme particulièrement sensibles ?
+Parce qu'elles incluent des données sensibles (date de naissance, photos) et des données biométriques ou liées au mouvement (rythme cardiaque, pas). Elles sont collectées et agrégées en continu, souvent combinées avec d'autres types de données, ce qui permet d'inférer des habitudes de vie et même l'identité de la personne. |
+
+Même des données "anonymisées" et "agrégées" peuvent révéler des informations sensibles si le contexte (peu d'utilisateurs dans une zone) permet de désanonymiser ou d'inférer.  |
+
+Conclusion de l'étude : les participants reconnaissent que beaucoup de scénarios à risque sont plausibles, mais estiment qu'ils sont peu susceptibles de se produire — un biais cognitif qui explique en partie l'inaction face aux risques. |
+
+Quel est l'objectif principal de la protection de la vie privée en géolocalisation selon Beresford et Stajano (2003) ?
+Empêcher une entité non désirée d'apprendre la localisation géographique passée, présente et future d'un individu.  |
+
+Qu'est-ce qu'un "quasi-identificateur" dans le contexte des données spatio-temporelles ?
+Ce sont des données (comme l'historique de positions GPS dans le temps) qui, sans révéler directement le nom d'une personne, permettent souvent de l'identifier de façon unique car peu de gens partagent exactement le même trajet quotidien — la combinaison des positions dans le temps agit comme un identifiant. |
+
+Pourquoi la localisation est dangereuse pour la vie privée
+À partir des traces de mobilité (l'historique des positions GPS d'une personne), on peut inférer :
+Son lieu d'habitation et de travail
+Son identité
+Ses centres d'intérêt
+Ses habitudes
+Une déviation par rapport à son comportement habituel (ex: détecter qu'elle va à l'hôpital, chez un avocat, à une manifestation, etc.)
+Tout cela constitue un bris de vie privée. |
+
+Géocodage inverse (reverse geocoding)
+Technique qui transforme des coordonnées GPS (latitude/longitude) en une adresse physique lisible (ex : "123 rue Sainte-Catherine"). C'est la dernière étape qui transforme une position abstraite en identité réelle. |
+
+Q5. Quelle est la différence entre la "couverture spatiale" (k-anonymat géographique) et une "mix-zone" ?
+La couverture spatiale garantit qu'à chaque instant, un individu se trouve dans une zone partagée par au moins k-1 autres personnes (on ne peut pas le distinguer parmi moins de k personnes). Une mix-zone est une zone où aucune observation n'est produite pendant que la personne la traverse ; à sa sortie, un nouveau pseudonyme (différent de celui d'entrée) lui est attribué, ce qui empêche de relier son trajet avant/après la zone. |
+
+Techniques d'assainissement :
+Masques géographiques (geographic masks) : modifier la localisation pour préserver la vie privée. Techniques :
+1. Agrégation : regrouper les positions par zone (ex: quartier plutôt que l'adresse exacte) ;
+2. Perturbation aléatoire : ajouter du "bruit" aléatoire aux coordonnées;
+3. Randomisation en fonction de la densité : perturber plus fortement dans les zones peu peuplées (où il est plus facile d'identifier quelqu'un) et moins fortement dans les zones denses ;  |
+Autres transformations possibles : sous-échantillonner (garder moins de points), échanger des traces entre deux pseudonymes différents, ajouter des enregistrements artificiels (faux points pour brouiller les pistes).|
+
+Limites de ces techniques : 
+1. Connaissances géographiques de l'adversaire ;
+2. Risque de chaînabilité (linkability)  |
+
+Quelles sont les 4 incitations à développer la protection de la vie privée présentées dans le cours ?
+1) Incitation commerciale (argument marketing), 2) Incitatif financier (amendes en cas de fuite), 3) Prise de conscience du public (souvent après un scandale), 4) Cadre législatif (lois et directives, ex: CNIL, directives européennes). |
+
+Le profilage consiste à collecter et analyser des données sur les utilisateurs (démographiques, comportementales, préférences) pour construire un "profil" — souvent à des fins publicitaires ou de personnalisation. |
+
+Types de données utilisées pour le profilage (tableau du cours)
+Démographique, Comportementale, Démographique (explicite/implicite), Préférences, Démographique + préférences | 
+
+Conséquences d'une fuite de données :
+(fraude, vol d'identité, phishing (hameçonnage), et l'accès à des données sensibles (santé, finances, identité). )
+
+Pour les individus :
+Vol d'identité, perte financière, discrimination, atteinte à la réputation, accès non autorisé à des comptes, perte de confidentialité. ;
+
+Pour les organisations :
+Perte de confiance des clients, atteinte à la réputation, violation de propriété intellectuelle, perturbation des opérations, sanctions réglementaires |
+
+Intégrité contextuelle (Helen Nissenbaum) : La confidentialité (vie privée) n'est pas définie par le fait qu'une information soit "publique" ou "privée" dans l'absolu. Elle est définie par la manière dont l'information circule. La vie privée est donc fluide, pas binaire. |
+
+Flux d'informations = transfert de connaissances d'une partie à une autre.|
+
+Un flux d'informations est approprié quand il respecte les normes de confidentialité contextuelles établies dans une situation donnée. Le même partage d'information peut être normal dans un contexte et être une violation de la vie privée dans un autre. |
+
+Attaques de sécurité possibles sur les applis de traçage :
+Bluesnarfing : accès non autorisé à des informations via Bluetooth;
+Attaque par rejeu (replay attack) : réutiliser un signal/message intercepté pour tromper le système;
+Déni de service (DoS) : rendre le service indisponible;
+Énumération : deviner/lister systématiquement des identifiants valides ;
+Attaque Carryover : exploiter des identifiants ou tokens persistants entre sessions |
+
+Selon la théorie de l'intégrité contextuelle de Nissenbaum, la vie privée est-elle définie par le fait qu'une donnée soit privée ou publique ? Justifiez.
+Non. Selon Nissenbaum, la vie privée est définie par la manière dont l'information circule (les flux d'informations), pas par une classification binaire privée/publique. Un même type de donnée peut être approprié à partager dans un contexte et inapproprié dans un autre — la vie privée est fluide et dépend du respect des normes contextuelles. |
+
+Nommez les 5 paramètres qui définissent une norme contextuelle selon la théorie de l'intégrité contextuelle. :
+1) Type de données, 2) Personne concernée (subject), 3) Expéditeur (sender), 4) Destinataire (recipient), 5) Principe de transmission. |
+
+
+Une violation de la vie privée dépend-elle davantage des attentes de l'individu ou des pratiques suivies par le fournisseur de service ? Expliquez selon l'intégrité contextuelle.
+Selon l'intégrité contextuelle, une violation de la vie privée dépend de nos attentes dans un contexte donné, plutôt que des pratiques suivies par le fournisseur. Même si une entreprise respecte sa propre politique de confidentialité, cela peut quand même constituer une violation si ça va à l'encontre des attentes contextuelles de l'utilisateur. |
+
+Citez 3 préoccupations de confidentialité liées au traçage de contacts (contact tracing) pendant la COVID-19.
+Par exemple (3 parmi 5) : volontaire ou obligatoire (consentement), destruction des informations, transparence, collecte de données, divulgation de l'emplacement. |
+
+Quelle nuance Nissenbaum apporte-t-elle sur la nature prédictive vs. descriptive du modèle d'intégrité contextuelle ?
+Le modèle vise à prédire ce que les gens ressentiront à l'égard de la vie privée dans différentes circonstances ; il ne prétend pas que c'est ainsi que les gens pensent réellement à la vie privée ou prennent leurs décisions en la matière (le modèle est prédictif, pas descriptif du raisonnement humain réel). |||
+
+Apprentissage profond (deep learning) : 
+Le deep learning se définit comme un modèle utilisant plusieurs couches de traitement afin d'apprendre des représentations de données avec plusieurs niveaux d'abstraction (chaque couche apprend des motifs de plus en plus complexes, en s'appuyant sur les couches précédentes). | 
+
+Il a permis d'améliorer l'état de l'art dans :
+la reconnaissance vocale ;
+la reconnaissance visuelle d'objets et la détection d'objets ;
+la découverte de médicaments et la génomique.
+Deux facteurs ont rendu ces progrès possibles : l'augmentation de la puissance de calcul et l'augmentation de la quantité de données disponibles. |
+
+IA dans des domaines critiques (5 domaines) :
+1. Domaine médical : Diagnostic, plans de traitement.;
+2. Évaluations des risques criminels : Systèmes utilisés en justice pénale pour estimer la récidive.;
+3. Évaluations des enseignants publics : Notation algorithmique de la performance enseignante.;
+4. Trading automatisé : Décisions financières prises en microsecondes par des algorithmes.;
+5. Évaluation des risques-clients
+Scoring de crédit, assurance. |
+Le point commun de ces domaines : une erreur ou un biais algorithmique y a des conséquences graves et souvent irréversibles sur la vie des personnes concernées. |
+
+Données massives (big data) et IA :
+Les données massives sont définies comme des « bases de données trop grandes et complexes pour être étudiées avec les méthodes statistiques traditionnelles » |
+
+Nommez et expliquez les 5V des données massives: 
+Volume (quantité de données), Vélocité (vitesse à laquelle elles sont générées/traitées), Variété (diversité des formats — texte, image, capteurs...), Valeur (utilité extraite des données), Véracité (fiabilité/qualité des données). |
+
+Le biais algorithmique consiste à désavantager systématiquement certains groupes de personnes. Le cours en identifie deux causes principales :
+1. Sous-représentation de ces groupes dans les données d'entraînement ;
+2. Préjugés intégrés dans l'algorithme — les biais présents dans les données historiques  sont reproduits, voire amplifiés, par le modèle. |
+
+La Déclaration de Montréal est une œuvre collective qui a pour objectif de mettre le développement de l'IA au service du bien-être de tout un chacun, et d'orienter le changement social en élaborant des recommandations ayant une forte légitimité démocratique. | 
+
+Les 10 principes / valeurs de la Déclaration de Montréal pour une IA responsable : 
+Le bien-être, l'autonomie, l'intimité et la vie privée, la solidarité, la démocratie, l'équité, l'inclusion, la prudence, la responsabilité, la soutenabilité environnementale (les 10 au total). |
+
+Loi européenne sur l'intelligence artificielle (EU AI Act) :
+Il s'agit de la première réglementation sur l'IA adoptée par un régulateur majeur au monde. Ses objectifs déclarés incluent que l'utilisation future de ces technologies soit bénéfique pour tous, avec des mesures de subvention, de sensibilisation à l'éducation, et d'engagement politique. |
+
+Selon l'Article 6 de l'EU AI Act, qu'est-ce qui détermine si un système d'IA est classé « à haut risque » ?
+Ce n'est pas la sophistication technique du système qui compte, mais son usage : un système est à haut risque s'il est utilisé comme composant de sécurité d'un produit, ou s'il constitue lui-même un produit couvert par la législation européenne. Ces systèmes doivent être évalués par un tiers avant d'être vendus ou utilisés. |
+
+RGPD — Article 22 :
+La personne concernée a le droit de ne pas faire l'objet d'une décision fondée exclusivement sur un traitement automatisé, y compris le profilage, produisant des effets juridiques la concernant ou l'affectant de manière significative de façon similaire. |
+
+Citez l'Article 22 du RGPD dans ses grandes lignes et expliquez le sens du mot « exclusivement » dans ce contexte. :
+L'Article 22 donne à toute personne le droit de ne pas faire l'objet d'une décision fondée exclusivement sur un traitement automatisé (y compris le profilage) produisant des effets juridiques ou l'affectant de manière significative. Le mot « exclusivement » est central : la loi n'interdit pas d'utiliser l'IA en soutien à une décision humaine, mais interdit qu'une décision à fort impact soit prise uniquement par la machine, sans intervention ou recours humain possible. |
+
+2 grandes familles de définitions de l'équité algorithmique :
+Quelle est la différence entre l'équité individuelle et l'équité de groupe ? Pourquoi peuvent-elles entrer en conflit ?
+L'équité individuelle exige un même résultat pour des profils similaires (seule différence : l'attribut sensible). L'équité de groupe exige des résultats agrégés comparables entre sous-groupes définis par un attribut sensible. Elles peuvent entrer en conflit car respecter parfaitement l'une ne garantit pas de respecter l'autre — surtout quand les groupes ont des distributions de départ différentes dans les données. C'est en partie pour cela qu'il n'existe pas de consensus unique sur « la » bonne définition d'équité. |
+
+L'anonymisation vise à limiter les risques liés à la divulgation de données personnelles. Deux limites importantes :
+1. Ce n'est pas une fonction unique qui marche pour tous les types de données 
+2. Le risque principal vient du croisement des ensembles de données (« linkage attack ») |
+
+Principaux risques liés aux données massives :
+Reconstruction : retrouver certaines données utilisées pour entraîner un modèle d'intelligence artificielle.;
+Ré-identification : découvrir l'identité d'une personne à partir de données supposées anonymes. ;
+Inférence d'attribut sensible : déduire des informations privées (santé, opinions, orientation, etc.) à partir de données qui ne les révèlent pas directement.  |
+
+Quelle est la différence entre une attaque par inférence d'appartenance en boîte blanche et en boîte noire ?
+En boîte blanche, l'attaquant a accès à l'algorithme d'apprentissage automatique et au code source du modèle (il peut analyser les paramètres internes directement). En boîte noire, il n'a pas cet accès : il ne peut qu'interroger le système de l'extérieur (envoyer des requêtes) et observer les réponses pour en déduire de l'information. |
+
+Expliquez la distinction entre attaque par inférence d'appartenance et attaque par inférence d'attributs.
+L'inférence d'appartenance cherche à déterminer si les données d'un individu ont été utilisées pendant l'entraînement du modèle (une question de type oui/non). L'inférence d'attributs va plus loin : elle cherche à déterminer des caractéristiques privées spécifiques (genre, race, etc.) d'une personne ciblée, en utilisant un classificateur entraîné à cette fin. |
+
+l'apprentissage fédéré : et si on a besoin d'utiliser des jeux de données provenant de parties différentes (plusieurs hôpitaux, plusieurs entreprises...) sans que chacune ait à révéler ses données brutes aux autres ? C'est le problème que résout l'apprentissage fédéré. |
+
+L'apprentissage fédéré protège-t-il complètement la vie privée des participants ? Justifiez.
+Non. Le FL garde les données brutes localement chez chaque client, mais n'est pas conçu contre les fuites d'entrée et de sortie : les mises à jour du modèle envoyées au serveur peuvent révéler de l'information sur les données locales (via inversion de modèle, désanonymisation, attaques par inférence d'appartenance). Il doit donc être combiné avec d'autres technologies (confidentialité différentielle, calcul multipartite sécurisé, chiffrement homomorphe) pour offrir une protection robuste. |
+
+L'apprentissage automatique adversarial étudie comment des entrées volontairement conçues (« exemples adversariaux ») peuvent tromper un modèle d'IA pour lui faire produire une sortie incorrecte, tout en semblant normales ou inchangées pour un humain. C'est un enjeu de sécurité et de robustesse des systèmes d'IA (directement lié à l'exigence de « robustesse » de l'Article 15 de l'EU AI Act vue plus haut), particulièrement critique pour les systèmes utilisés dans des domaines à haut risque (reconnaissance faciale, véhicules autonomes, diagnostics médicaux) |
+
+Que veut dire Cathy O'Neil par « les modèles sont des opinions intégrées dans les mathématiques » ?
+Un modèle mathématique n'est jamais purement neutre ou objectif : les choix faits pour le construire (quelles variables utiliser, comment pondérer les erreurs, quel objectif optimiser) reflètent des jugements de valeur humains — des « opinions » — même s'ils sont présentés sous une forme mathématique qui paraît objective. Ces modèles peuvent ainsi étendre le pouvoir et l'influence de leurs concepteurs tout en donnant l'illusion de la neutralité (lien avec l'enjeu de transparence vs « boîte noire »). |||
+
+Indicateurs environnementaux :
+les outils de mesure qu'on utilise pour parler de l'impact du numérique sur l'environnement :
+Les indicateurs sont classés selon 4 grands enjeux écologiques :
+1. Le changement climatique — le réchauffement global dû aux gaz à effet de serre
+2. La perte de biodiversité — la disparition d'espèces animales/végétales
+3. La raréfaction des ressources — l'épuisement de matières premières (métaux, eau, énergies fossiles)
+4. La multiplication des risques sanitaires et environnementaux — pollution qui affecte la santé humaine` | 
+
+Gaz à effet de serre (GES) : Ce sont des composants gazeux qui absorbent le rayonnement infrarouge émis par la Terre et le renvoient vers le sol — c'est ce qui cause l'effet de serre (comme une couverture qui garde la chaleur). Ex : CO2, CH4, N2O  |
+
+Bilan Carbone : C'est l'exercice qui consiste à comptabiliser toutes les émissions de GES — directes (ex: le camion de l'entreprise) et indirectes (ex: l'électricité achetée, les déplacements des employés) — d'une organisation ou d'un territoire. |
+
+Empreinte en eau :
+Mesure la quantité d'eau douce consommée ou polluée par une entité. Cette "entité" peut être : l'humanité entière, un pays, une entreprise, un ménage, ou même un seul produit (ex: combien d'eau faut-il pour fabriquer un smartphone ?). |
+
+Empreinte Écologique (EE)
+Un indicateur développé par le Global Footprint Network. Il mesure la surface bioproductive (surface de terre/mer capable de produire des ressources ou d'absorber des déchets) nécessaire pour :
+fournir à une population les ressources de biomasse qu'elle consomme (nourriture, bois...),
+absorber ses émissions de CO2 |
+
+Qu'est-ce que l'équivalent CO2 (CO2e) et pourquoi l'utilise-t-on ?
+C'est une unité commune permettant de convertir tous les gaz à effet de serre (CH4, N2O, etc.) selon leur pouvoir de réchauffement, pour pouvoir les comparer et les additionner facilement — comme convertir toutes les devises en dollars. |
+
+Les équipements numériques : 
+de quoi est fait le numérique physiquement ;
+3 grandes catégories : 
+Terminaux (ce que l'utilisateur touche)
+Réseau (ce qui transporte les données)
+Datacentre (où les données sont stockées/traitées) |
+
+Chiffres mondiaux (2019) :
+34 milliards d'équipements numériques dans le monde, pour 4,1 milliards d'utilisateurs — soit environ 8 équipements par utilisateur. ;
+
+Mesurer la consommation d'un équipement numérique :
+Wattmètre : un appareil physique qu'on branche entre la prise électrique et l'équipement, qui mesure directement la consommation réelle en watts. ;
+
+Outils logiciels : des programmes qui estiment (n'observent pas directement) la consommation électrique en se basant sur l'usage des ressources internes (CPU, RAM, disque...). |
+
+ Les 3 types de consommation électrique :
+1. Statique : Alimentée de manière fixe, peu importe l'usage;
+2. Dynamique : Dépend de l'usage des logiciels exécutés; 
+3. Quasi-constante : Reste presque toujours pareille |
+
+Efficacité énergétique : 
+On ne regarde jamais la consommation énergétique seule — il faut toujours la mettre en relation avec le service applicatif rendu. Un équipement qui consomme beaucoup mais rend énormément de services peut être plus "efficace" qu'un équipement qui consomme peu mais ne fait presque rien.| 
+
+Ce que ça montre : la consommation n'est pas constante ! Elle dépend directement de ce que fait la machine à un instant donné. C'est le lien direct entre "usage" et "consommation dynamique" |
+
+« Low Tech » :
+Les basses technologies (ou "technologies appropriées") sont une philosophie qui vise :
+La sobriété énergétique et matérielle — contre le suréquipement et la surconsommation ;
+La durabilité forte — des objets qui durent longtemps ;
+La résilience collective — la capacité d'une société à continuer de fonctionner même en cas de crise | 
+Les low-tech doivent être : utiles, durables, accessibles à tous, et répondre à des besoins essentiels. Elles doivent aussi être robustes et réparables, à l'opposé de l'obsolescence programmée |
+
+Numérique responsable :
+Objectif général : améliorer l'empreinte écologique ET sociale du numérique. C'est un terme parapluie qui regroupe plusieurs sous-concepts (Green IT, IT for Green / IT for Good)  |
+
+Quelle est la différence entre Green IT et IT for Green ?
+Green IT = réduire l'empreinte environnementale du numérique lui-même. ; IT for Green (ou IT for Good) = utiliser le numérique comme outil pour réduire l'impact d'autres secteurs (environnemental et social).  | 
+Le numérique responsable inclut aussi :
+L'accessibilité numérique — s'assurer que tout le monde (y compris personnes en situation de handicap) peut utiliser les outils numériques ;
+Les achats responsables — choisir des fournisseurs/matériaux respectueux de critères environnementaux et sociaux ; |
+
+Écologie numérique — leviers d'action concrets |
+
+Poids environnemental global :
+Le numérique représentait 4% des émissions mondiales de GES. Sur ces 4%, 25% étaient liés aux datacentres.
+Comparaison : l'aviation représentait 2,5% — donc le numérique dans son ensemble polluait déjà plus que l'aviation en 2015 !
+La consommation électrique des datacentres représentait environ 3% de la consommation électrique mondiale. |
+
+Caractéristiques des serveurs
+Les serveurs ont besoin de : peu de consommation électrique (idéalement), un environnement froid ou tiède, et posent des enjeux de bruit. |
+
+Qu'est-ce qu'un "obésiciel" ?
+mot-valise "obésité" + "logiciel") : un logiciel qui utilise des ressources excessives (mémoire, espace disque, puissance de traitement) parce qu'il a plus de fonctionnalités que nécessaire ou trop de fonctionnalités disparates non liées entre elles. |
+
+Nomme les 4 principes d'éco-conception vus dans la phase "Avant" du cycle de vie.
+Simplicité, frugalité et sobriété, pertinence, durabilité. | 
+
+Pourquoi le choix du langage de programmation a-t-il un impact environnemental ?
+Les langages compilés et optimisés comme C, Rust, C++, Ada consomment beaucoup moins d'énergie et de temps d'exécution pour une même tâche que des langages interprétés comme Python ou Ruby, ce qui a un impact direct sur les émissions de CO2. | 
+
+Un service numérique est composé de :
+L'information : les données;
+Des traitements : algorithmes, filtrage, simulation;
+Des échanges d'informations;
+Des interfaces utilisateurs; | 
+Et il repose sur 3 piliers : infrastructures logicielles, infrastructures matérielles, et des personnes (les gens qui le conçoivent, le maintiennent, l'utilisent). |
+
+Training (entraînement) = la phase où on "apprend" au modèle en lui montrant énormément de données (très gourmande en énergie, ponctuelle).
+Inference = la phase où le modèle déjà entraîné répond réellement aux utilisateurs (moins gourmande par requête, mais répétée des milliards de fois). |
+
+E-déchets : 
+Les déchets électroniques (e-déchets) sont les équipements électriques/électroniques en fin de vie : ordinateurs, téléphones, gros électroménagers, équipements médicaux.
+S'ils ne sont pas correctement recyclés, ils peuvent libérer jusqu'à 1000 substances chimiques différentes dans l'environnement, y compris des substances neurotoxiques (qui attaquent le système nerveux). |
+
+« L'obsolescence programmée est la réduction volontaire de la durée de vie d'un produit afin d'en accélérer le renouvellement. »
+Elle peut prendre plusieurs formes :
+Technique ;
+Logicielle;
+Esthétique ; |
+
+Quel pays a interdit l'obsolescence programmée en premier, et quel est le deuxième ?
+La France en premier (2015), le Québec en deuxième au monde. |
+
+Quelle est la différence fondamentale entre Proof of Work et Proof of Stake ?
+PoW : la capacité de "miner" dépend de la puissance de calcul (résoudre un puzzle cryptographique difficile). PoS : la capacité de "valider" dépend de la quantité de jetons détenus (mise en jeu), ce qui évite le coût de calcul énorme du PoW. |
+
+Ordre de grandeur à retenir : Une transaction Bitcoin classique consomme environ 900 000 fois plus d'énergie qu'une transaction Visa ! C'est LE chiffre le plus souvent cité pour critiquer le Bitcoin PoW. |
+
+Que signifie l'expression "logiciels et données zombies" et pourquoi faut-il les éviter ?
+Ce sont des logiciels installés ou des données stockées qui ne sont plus utilisés mais qu'on garde "au cas où". Ils consomment des ressources (stockage, supervision, énergie) pour rien — il faut les supprimer en fin de vie. |
+
+Que fait le Lightning Network pour réduire la consommation d'énergie de Bitcoin ?
+Il permet de traiter les transactions hors-chaîne (jusqu'à 1 million de transactions/seconde), réduisant la consommation par transaction de 814,95 kWh à environ 0,0057 kWh. |||
+
+Qu'est-ce que le droit d'auteur, concrètement ?
+le droit d'auteur n'est pas quelque chose qu'on demande, il existe automatiquement dès qu'une œuvre est créée. | 
+
+« Le droit d'auteur est automatique... Convention de Berne »
+Dès que tu écris un texte, prends une photo, ou codes un programme, tu détiens automatiquement le droit d'auteur sur cette œuvre — pas besoin de l'enregistrer ou de mettre un ©. La Convention de Berne (1886, révisée plusieurs fois) est un traité international signé par presque tous les pays (dont le Canada) qui oblige les pays signataires à reconnaître ce principe automatique. C'est différent des brevets, qui eux doivent être déposés et approuvés; 
+« Il protège une œuvre jusqu'à 50 ans après la mort de l'auteur »
+C'est la durée minimale exigée par Berne (certains pays, comme les États-Unis ou l'UE, vont jusqu'à 70 ans après la mort). Après cette période, l'œuvre tombe dans le domaine public : n'importe qui peut l'utiliser librement, sans autorisation ni paiement. |
+
+Quelle est la différence entre droits moraux et droits économiques en droit d'auteur ?
+Les droits économiques (reproduction, diffusion, adaptation) peuvent être cédés ou vendus à un tiers (un éditeur, un studio). Les droits moraux (paternité, respect de l'œuvre) restent toujours attachés à l'auteur original et ne peuvent jamais être cédés, même si les droits économiques le sont entièrement. |
+
+« L'auteur reste titulaire... peut accorder des licences à un éditeur sans transférer sa propriété » : 
+Une licence n'est pas une vente. C'est une permission d'utiliser l'œuvre selon des conditions précises, pendant que l'auteur garde la propriété. C'est comme louer un appartement : le locataire peut y vivre, mais ne devient jamais propriétaire |
+
+Les licences Creative Commons (CC) : 
+Un système de licences standardisées qui permet à un auteur de dire précisément ce qu'on a le droit de faire avec son œuvre, sans avoir à négocier un contrat à chaque fois. Les trois grandes conditions mentionnées :
+Attribution (BY) : tu dois citer l'auteur original;
+Usage commercial : certaines licences interdisent l'usage à but lucratif (« NC » = non-commercial); 
+Modifications : certaines licences interdisent de modifier l'œuvre (« ND » = no derivatives), d'autres l'autorisent à condition que la version modifiée garde la même licence (« SA » = share-alike). | 
+« Les droits d'utilisation varient selon les pays » |
+
+L'IA générative (comme les modèles qui écrivent du texte ou génèrent des images) s'entraîne en analysant d'énormes quantités d'œuvres existantes — textes, images, code. Les trois reproches principaux formulés par les créateurs :
+Utilisation comme données d'entraînement sans consentement : les œuvres sont souvent aspirées du web sans demander la permission à leurs auteurs; 
+Absence d'attribution et de rémunération : contrairement à une licence CC ou un contrat d'édition, l'auteur original n'est ni nommé ni payé quand son œuvre sert à entraîner un modèle. ;
+Concurrence potentielle : une IA entraînée sur le style d'un illustrateur peut ensuite produire des images similaires qui lui font directement concurrence sur le marché. |
+
+Explique la doctrine du « work made for hire » et pourquoi elle est proposée comme solution pour l'IA. : 
+C'est une doctrine existante qui attribue légalement le droit d'auteur à l'employeur plutôt qu'à l'employé quand une œuvre est créée dans le cadre d'un emploi. Appliquée à l'IA, elle traiterait l'IA comme un simple outil/« employé », et attribuerait l'auteur légal au programmeur ou au propriétaire de l'IA — ce qui évite d'accorder des droits à une entité non humaine, tout en gardant un titulaire humain clair, une durée de protection définie, et une meilleure transparence sur le rôle de l'IA. |
+
+Le rôle du droit d'auteur et pourquoi l'IA pose un défi inédit
+Objectif constitutionnel : favoriser le progrès des sciences et des arts :
+le droit d'auteur n'existe pas pour « protéger les artistes » comme fin en soi. Sa justification historique (aux États-Unis, c'est littéralement écrit dans la Constitution) est utilitariste : en donnant un monopole temporaire aux créateurs, on les incite à créer davantage, ce qui profite finalement à la société entière. C'est un équilibre entre récompenser les créateurs et permettre à la société de bénéficier de leurs œuvres (via le domaine public, les exceptions, etc.). |
+
+Pourquoi l'IA générative pose un défi inédit
+Trois facteurs cumulés qui rendent la situation différente des cas historiques : le déploiement extrêmement rapide (comparé aux décennies qu'ont pris les pianos mécaniques ou les magnétoscopes à se répandre), l'évolution beaucoup plus lente du droit (les lois et la jurisprudence prennent des années à s'adapter), et l'impact direct sur les métiers créatifs eux-mêmes (contrairement aux photocopieuses qui menaçaient un intermédiaire — l'éditeur —, l'IA peut remplacer directement le travail créatif de l'auteur). |
+
+Pourquoi le droit d'auteur classique pose-t-il un problème pour les œuvres générées par IA ?
+Le droit d'auteur exige traditionnellement un auteur humain. Une œuvre générée sans intervention créative humaine suffisante risque de ne pas être protégeable et de tomber automatiquement dans le domaine public — ce qui décourage l'investissement des entreprises d'IA, puisqu'elles ne peuvent pas s'assurer un monopole exclusif sur ce que leur système produit. |
+
+« Les modèles d'IA ne stockent pas les œuvres, mais des représentations statistiques » : Il  apprend des patterns statistiques — des relations entre mots, formes, couleurs — répartis dans des milliards de paramètres numériques. C'est pour ça que les défenseurs de l'IA disent que ce n'est pas une « copie » au sens classique du droit d'auteur |
+
+Le droit d'auteur protège l'expression, pas les idées | 
+
+Les œuvres générées sont-elles illégales ?
+Règle pratique retenue : une œuvre générée par IA n'est problématique légalement que si elle est très similaire à une œuvre existante précise (ce qu'on appelle en droit une « reproduction substantielle »). Par contre, le style d'un artiste, en tant que tel, n'est pas protégé. Enfin, plus la base de données d'entraînement est large et diversifiée, plus le risque que le modèle reproduise accidentellement une œuvre précise diminue statistiquement (l'influence de chaque œuvre individuelle est diluée). |
+
+Quels sont les trois critères principaux du fair use (usage équitable) ? 
+(1) L'usage transformateur — est-ce que le nouvel usage ajoute un sens ou une fonction nouvelle ? (2) La finalité — recherche, innovation, éducation vs usage purement commercial. (3) L'impact sur le marché de l'œuvre originale — est-ce que ce nouvel usage nuit financièrement à l'auteur en se substituant à son œuvre ? |
+
+D'après les décisions judiciaires de 2025, quelle distinction est devenue centrale pour juger de la légalité de l'entraînement d'un modèle d'IA ?
+La provenance des données : entraîner un modèle sur des œuvres légalement acquises peut relever du fair use (usage transformateur), alors qu'utiliser des contenus piratés ou obtenus illégalement est fortement condamné, peu importe l'usage qui en est fait ensuite. De plus, l'entraînement seul ne suffit pas à prouver une violation : il faut démontrer une copie identifiable ou une sortie très similaire à l'œuvre originale. |
+
+Comment se gouvernent les communautés open source ?
+C'est le cœur du lien avec le thème de « gouvernance » du cours : un projet FOSS n'a pas de PDG qui décide tout — alors comment ça fonctionne ?
+Les projets sont développés par un mélange de bénévoles et de développeurs salariés (souvent payés par des entreprises qui ont intérêt à ce que le projet continue).
+La coordination repose sur des mainteneurs (des personnes de confiance qui décident quel code est accepté dans le projet), des comités techniques, ou des fondations, selon les projets.
+Les règles de participation varient énormément d'un projet à l'autre — certains sont très hiérarchiques (un « dictateur bienveillant » qui a le dernier mot), d'autres sont plus démocratiques.
+L'objectif commun de toute cette gouvernance : assurer la qualité du code, la pérennité du projet dans le temps, et la coordination entre des milliers de contributeurs dispersés dans le monde. |
+
+Le rôle des entreprises dans l'open source : 
+Un point souvent mal compris : l'open source n'est pas « anti-entreprise ». Les entreprises y jouent un rôle central :
+Elles financent des projets ou emploient des développeurs qui y contribuent à temps plein (par exemple, Google paie des employés pour contribuer au noyau Linux).
+Elles utilisent le logiciel libre comme fondation gratuite pour construire leurs propres produits (économie d'argent en développement).
+Modèles économiques courants : vendre du support technique, des services autour du logiciel gratuit, ou une double licence (une version gratuite/libre, et une version commerciale avec des fonctionnalités payantes).
+Les entreprises concurrentes peuvent même collaborer ensemble au sein de consortiums neutres (comme la Linux Foundation) sur des projets communs, tout en se faisant concurrence ailleurs — la leçon clé : coopération et concurrence peuvent coexister.  |
+
+Pourquoi créer une fondation ?
+Une fondation à but non lucratif permet de gérer un projet indépendamment d'une seule entreprise — ça rassure les contributeurs et les entreprises partenaires (aucune entreprise ne peut « prendre le contrôle » unilatéralement du projet). |
+
+« Les données sont devenues un actif stratégique » :
+Une donnée n'a pas de valeur toute seule dans un coin — sa valeur émerge quand elle est utilisée, partagée et réutilisée (par exemple, croiser des données de santé avec des données géographiques pour repérer une épidémie). |
+
+Pourquoi c'est important : l'équilibre ouverture/protection ?
+Le partage des données favorise l'innovation et une meilleure prise de décision (plus de données = de meilleurs modèles, de meilleures analyses).;
+Mais le partage crée trois risques concrets : la perte de contrôle (une fois partagée, une donnée peut être copiée à l'infini), la mauvaise utilisation (usage détourné de l'intention initiale), et la dépendance envers certains acteurs (par exemple dépendre entièrement d'un fournisseur cloud américain pour stocker des données sensibles d'un pays).;
+La souveraineté cherche donc un équilibre entre ouverture des données (pour permettre les bénéfices) et protection des intérêts des acteurs concernés. |
+
+Définis la souveraineté des données et nomme ses cinq éléments clés. :
+La souveraineté des données est la capacité à garder le contrôle sur ses données : décider qui peut les utiliser, comment, et sous quelles conditions. Ses cinq éléments clés : actif de données, accords contractuels, infrastructure de données, cycle de vie des données (création, stockage, utilisation, partage, suppression), et confiance. |
+
+Selon le cadre de Gorwa, quelles sont les trois façons dont les plateformes numériques doivent être comprises simultanément ?
+(1) Les plateformes gouvernent les utilisateurs (via algorithmes, interfaces, modération — « le code est la loi »). (2) Les plateformes sont elles-mêmes gouvernées (par les gouvernements, régulateurs, société civile). (3) Les plateformes sont aussi des entreprises soumises aux mécanismes classiques de gouvernance corporative (employés, investisseurs, responsabilité sociale). |
+
+Qu'est-ce que l'expression « le code est la loi » signifie dans le contexte de la gouvernance des plateformes ?
+Ça signifie que les choix techniques de conception d'une plateforme (ce que le code permet ou empêche de faire) agissent comme un mécanisme de régulation aussi contraignant qu'une véritable loi — sauf que ces « règles » sont décidées unilatéralement par l'entreprise qui code la plateforme, sans processus démocratique ni recours judiciaire traditionnel. |
+
+Quels sont les trois grands modèles de régulation des plateformes évoqués en conclusion ?
+L'autorégulation (la plateforme fixe elle-même ses règles), la réglementation publique (l'État impose des lois contraignantes), et la co-régulation (un mélange des deux, souvent présenté comme le compromis le plus réaliste). |||
+
+Le Soi algorithmique :
+notre identité n'est plus façonnée uniquement par la société, la famille et l'introspection — elle est désormais coproduite par des systèmes d'IA qui nous observent, nous catégorisent et nous renvoient une image de nous-mêmes. |
+
+Co-construction de l'identité :
+L'idée que l'IA ne fait pas que refléter passivement qui tu es — elle participe activement à définir qui tu deviens. | 
+Exemple : Exemple concret donné en cours : Spotify Wrapped. Chaque décembre, l'algorithme te dit « voici qui tu es musicalement cette année » |
+
+Introspection externalisée : 
+Le glissement où l'auto-connaissance (savoir qui je suis) n'est plus un travail intérieur, mais un produit fourni par une machine. |
+
+Risque identifié dans le cours : 
+Dépendance et perte de l'auto-conscience émotionnelle :
+Trop de confiance envers les algorithmes peut nuire à la réflexion personnelle et à la mémoire. Il y a aussi un détachement émotionnel possible : utilisée correctement, l'IA peut aussi soutenir l'introspection |
+
+Implications éthiques — 3 questions clés :
+- Problème existentiel ;
+- Authenticité ;
+- Littératie algorithmique |
+
+Quelle est la différence entre « framing », « gatekeeping » et « agenda setting » ?
+Le framing est l'angle de presentation, le gatekeeping est le filtrage de ce qui se passe, l'agenda setting est le choix des sujets qui reçoivent de l'attention. |
+
+Pourquoi Bucher affirme-t-elle que la visibilité sur Facebook est une « récompense » plutôt qu'une punition ? Expliquez le mécanisme.?
+Décrire l'EdgeRank/News Feed : la visibilité est accordée aux contenus qui génèrent de l'engagement (likes, commentaires) ; l'absence d'interaction = quasi-absence du fil. Ceci crée une boucle où interagir devient nécessaire pour exister socialement — d'où la « menace d'invisibilité » plutôt qu'une menace de surveillance. |
+
+La visibilité à l'ère du Web : 
+Avec Internet, la visibilité dépend de l'architecture logicielle — les algorithmes deviennent eux-mêmes des acteurs sociotechniques : PageRank (Google), EdgeRan (Facebook); |
+
+Vision artificielle = interprétation sociale :
+Thèse centrale (basée sur l'article Excavating AI de Kate Crawford et Trevor Paglen, 2021) : classer ou reconnaître une image n'est jamais un acte neutre — c'est toujours une interprétation du monde, chargée de choix humains, de biais et de politique. |
+
+En quoi la catégorisation d'images par l'IA (ex. ImageNet) constitue-t-elle un acte politique plutôt que technique ?
+Toute étiquette impose une lecture du monde ; les catégories utilisées (race, genre, âge, caractère) reflètent des choix culturels et historiques des humains qui ont construit le jeu de données, pas une vérité neutre. Citer Crawford & Paglen : « la collecte et la catégorisation d'images est elle-même une forme de politique ». | 
+
+Former une IA : structure d'un jeu de données :
+L'apprentissage supervisé repose sur des jeux de données massifs composés d'images étiquetées. Chaque image apprend à la machine à distinguer des « classes » (ex. pommes / oranges). Ces ensembles d'entraînement déterminent ce que la machine peut connaître et comment elle perçoit le monde. Le cours identifie trois niveaux de structure : 
+Taxonomie : classification globale (ex. émotions, objets, visages) ;
+Classes : catégories spécifiques (ex. joie, tristesse, surprise) ;
+Images individuelles : chaque image labellisée (ex. « une femme souriante ») |
+
+Le mythe de la neutralité des données :
+On présente souvent ces données comme scientifiques et objectives. En réalité, elles reposent sur des choix humains — donc sur des présupposés culturels, politiques et historiques. Les bases d'images les plus utilisées au monde révèlent des biais systémiques, pas des vérités universelles. |
+
+Informatique affective (Affective Computing) : Discipline interdisciplinaire visant à concevoir des systèmes capables de reconnaître, interpréter, traiter et simuler les émotions humaines. Concept introduit dans les années 1990 par Rosalind Picard (MIT). |
+
+Définition et champ :
+L'informatique affective croise l'informatique, la psychologie, l'interaction homme-machine, la robotique et les sciences cognitives. Elle vise à rendre les systèmes plus sensibles au contexte émotionnel des utilisateurs. L'IA y joue un rôle central, appuyée sur des capteurs et des algorithmes de reconnaissance émotionnelle (visage, voix, gestes). | 
+
+Émotions primaires vs. secondaires :
+Primaires : réflexes biologiques détectables (ex. sursaut de peur). Secondaires : plus complexes, contextuelles et difficiles à capter par un capteur (ex. nostalgie, culpabilité, fierté mêlée d'inquiétude). |
+ 
+Applications pratiques :
+Éducation à distance : adapter l'enseignement selon l'attention et l'engagement détectés chez les élèves.;
+Santé et accompagnement : détecter la détresse, l'anxiété ou la douleur — utile face au manque de personnel soignant. ;
+Véhicules intelligents : surveillance du conducteur (attention visuelle, émotions, détection d'anomalies de conduite) pour alerter en cas de danger et permettre de reprendre le contrôle à temps. |
+
+L'explicabilité (XAI) — c'est-à-dire la capacité du système à expliquer pourquoi il a pris telle décision;
+L'objectif est de :
+Rendre les modèles interprétables (pouvoir comprendre leur fonctionnement interne ou leur logique décisionnelle) ;
+Comprendre les décisions prises par les algorithmes d'apprentissage automatique — c'est-à-dire pouvoir répondre à la question « pourquoi le modèle a-t-il pris cette décision précise pour ce cas précis ? »; | sert à 4 choses :
+favoriser la confiance des utilisateurs ;
+aider à comprendre les échecs du modèle ;
+permettre de détecter les biais dans les données ;
+faciliter l'audit éthique et réglementaire. |
+
+Nommez et distinguez les trois grandes traditions théoriques de l'émotion utilisées en informatique affective.
+Motivationnelle (l'émotion comme moteur d'action, Ekman) ; Évaluative (l'émotion comme jugement influencé par le contexte, Appraisal Theory) ; Expérientielle (l'émotion comme vécu subjectif, James-Lange). Mentionner aussi les théories hybrides (Barrett, Russell). |
+
+Quelles sont les limites des « proxies » capteur utilisés par l'IA pour détecter les émotions humaines, et quelles conséquences éthiques cela entraîne-t-il ? 
+Les proxies (physiologique, audio, comportemental, sémantique) sont des mesures indirectes ; un signal (ex. rythme cardiaque) ne reflète pas toujours l'état émotionnel réel. Conséquence : biais, mauvaise interprétation dans des contextes à fort enjeu (recrutement, santé), nécessité de la XAI et des directives McStay & Pavliscak (niveau individuel, relationnel, sociétal). |
+
+Comparez le rôle des médias traditionnels et celui des algorithmes (PageRank, EdgeRank) dans la construction de la visibilité. :
+Les médias traditionnels contrôlent la visibilité via le framing, le gatekeeping et l'agenda setting, exercés par des humains (éditeurs, journalistes). Les algorithmes automatisent et opacifient ce contrôle : PageRank hiérarchise selon les liens/réputation, EdgeRank selon l'engagement social — mais dans les deux cas, la visibilité est médiée et n'est jamais neutre. |
+
+Expliquez pourquoi les auteurs concluent que « la question n'est plus si la machine voit bien, mais que veut-on qu'elle voie ? »
+Parce que la performance technique (précision de reconnaissance) masque la vraie question : quelles catégories, quelles valeurs et quels pouvoirs sont encodés dans ce que le système est entraîné à repérer. Le débat se déplace du technique vers le politique/éthique. |||
+
+Interface utilisateur (UI) : le point de contact où se produisent les interactions entre les machines et les humains. La conception d'interface utilisateur est le processus de création des interfaces dans des logiciels ou des appareils informatisés, en se concentrant sur l'apparence ou le style (et non sur le fonctionnement interne). |
+
+Trois types d'interfaces :
+Interfaces graphiques (GUI) — celles qu'on utilise le plus (icônes, boutons, fenêtres — comme Windows, un site web, une app mobile). ;
+Interfaces à commande vocale (VUI) — on parle à la machine (Siri, Alexa, Google Assistant). ;
+Interfaces basées sur les gestes — on interagit par mouvements (écran tactile, capteurs de mouvement, réalité augmentée/virtuelle). |
+
+Principes clés d'une bonne UI :
+a) Design « invisible »;
+b) Sans frustration + prédictif + personnalisé;
+c) Prévisibilité et simplicité;
+d) Informer et guider |
+
+L'expérience utilisateur (UX) :
+UX : créer des produits qui offrent des expériences significatives et pertinentes aux utilisateurs. Cela inclut la conception de l'ensemble du processus d'acquisition et d'intégration du produit — pas seulement l'écran, mais tout le parcours. |
+
+2. Que signifie un design « invisible » ? Donne l'exemple du cours. :
+L'utilisateur se concentre sur sa tâche, pas sur l'interface elle-même. Exemple : le Zero Click de Domino's Pizza. |
+
+Relation entre UI et UX :
+La conception d'UI est une partie essentielle de l'UX (un sous-ensemble).
+L'UX représente l'ensemble du spectre de l'expérience utilisateur (plus large que l'UI).
+Concevoir l'UX = imaginer, planifier, modifier les éléments qui affectent l'expérience utilisateur globale. |
+
+4. Interaction homme-machine (IHM / HCI) :
+« Une discipline qui s'intéresse à la conception, à la mise en œuvre et à l'évaluation de systèmes informatiques interactifs destinés à l'usage humain et à l'étude des principaux phénomènes qui les entourent. » |
+
+Q9. Qu'est-ce que l'IHM et en quoi diffère-t-elle de l'UI et de l'UX ?
+L'IHM (Hewett et al., 1992) est la discipline interdisciplinaire (conception, psychologie, sciences cognitives, informatique) qui étudie la conception, la mise en œuvre et l'évaluation des systèmes interactifs. L'UI et l'UX sont des résultats/applications concrètes issues des connaissances de l'IHM. |
+
+UX VS UI ;
+Approche axée sur l'humain VS Approche axée sur l'humain ;
+Conception du produit VS Conception de l'expérience esthétique d'un produit ;
+Application : produits physiques et numériques VS Application : produits numériques uniquement ;
+L'expérience complète VS Éléments visuels qui aident les utilisateurs à interagir avec le produit ;
+Efficacité VS Esthétique |
+
+Utilisabilité : « un attribut de qualité qui évalue la facilité d'utilisation des interfaces utilisateur. » |
+
+L'utilisabilité se décompose en 5 composantes : Facilité d'apprentissage, Efficacité, Mémorabilité, Erreurs, Satisfaction. |
+
+Accessibilité : la mesure dans laquelle un produit ou un service est disponible pour le plus grand nombre d'utilisateurs possible. |
+
+WCAG — Web Content Accessibility Guidelines : Directives pour l'accessibilité du contenu Web. Une série de directives sur l'accessibilité du Web, produites par la Web Accessibility Initiative (WAI) du World Wide Web Consortium (W3C). |
+
+Q2. Quels sont les 4 principes des WCAG et que signifie chaque niveau de conformité (A, AA, AAA) ?
+Les 4 principes : perceptible, utilisable, compréhensible, robuste. Les niveaux A, AA, AAA représentent des degrés croissants d'exigence de conformité — A étant le minimum, AAA le plus strict. |
+
+Conception inclusive : créer des produits qui comprennent et permettent aux personnes de tous horizons et de toutes capacités d'agir — incluant l'accessibilité, l'âge, la situation économique, la situation géographique, la langue, la race, etc. | 
+
+Conception universelle = une seule solution qui marche pour tout le monde d'emblée (ex. : une rampe utilisable par tous, pas juste par les fauteuils roulants) — plus utilisée dans le monde physique/environnemental. |
+
+Accessibilité vs conception universelle vs conception inclusive
+Objectif commun aux trois : réduire les barrières entre les humains et la technologie, créer des expériences inclusives. |
+
+Q6. Définissez un « dark pattern » (UI trompeur) et donnez trois exemples concrets vus en classe. :
+Un UI trompeur favorise les résultats commerciaux au détriment de l'utilisateur en le forçant à une décision qui n'est pas dans son intérêt, via tromperie/manipulation/friction. Exemples : obstruction (désabonnement difficile), nagging (rappels constants), manipulation émotionnelle (« Non merci, je n'aime pas économiser de l'argent »), présélection, urgence artificielle. |
+
+Conséquences possibles pour l'utilisateur : perte financière, perte de confidentialité, perte de contrôle juridique.
+Ces techniques ont plus de chances de réussir auprès des utilisateurs vulnérables : les personnes disposant de peu de temps ou ayant un faible niveau de culture numérique. |
+
+2. Qu'est-ce que le « nagging » ?
+Rappeler constamment à l'utilisateur d'accepter quelque chose, même après un refus déjà exprimé. |
+
+Sécurité utilisable : conception de mesures de sécurité qui répondent aux besoins et comportements des utilisateurs. Il s'agit de trouver un équilibre entre facilité d'utilisation et sécurité. |
+
+Les avertissements (warnings) :
+Un avertissement : une forme de communication conçue pour protéger les personnes contre les dangers. |
+
+3. Quels sont les trois éléments d'un avertissement physique efficace ?
+Communiquer clairement le risque, les conséquences du non-respect, et les instructions pour s'y conformer. |
+
+4. Pourquoi une conception minimaliste peut-elle poser un risque de sécurité ?
+Parce qu'elle peut offrir à un attaquant la possibilité de compromettre le système, malgré (ou à cause de) sa simplicité. |
+
+Études d'utilisateurs : analyser systématiquement les utilisateurs afin de recueillir des informations pour le processus de conception. |
+
+Qu'est-ce que la charge cognitive et quelle est la formule du succès d'une tâche ? Donnez deux stratégies pour la réduire. :
+La charge cognitive est la quantité de ressources mentales nécessaires pour utiliser une interface. Formule : motivation ≥ charge cognitive = tâche réussie. Stratégies : éviter l'encombrement visuel, s'appuyer sur des modèles mentaux existants, déléguer les tâches (2 au choix). |
+
+Quelle est la différence entre données qualitatives et quantitatives dans les études d'utilisateurs ? Donnez deux méthodes pour chaque type. :
+Qualitatif = données descriptives sur les pensées/sentiments (entretiens, groupes de discussion, études sur le terrain, tests en laboratoire). Quantitatif = données numériques mesurables (questionnaires, test du premier clic, cartographie thermique, tests A/B). |
+
+Pourquoi la couleur seule ne devrait-elle jamais transmettre une information critique dans une interface ? Donnez la recommandation WCAG sur le contraste. : 
+Parce que les personnes daltoniennes ou malvoyantes pourraient ne pas percevoir la différence de couleur — il faut ajouter du texte, des icônes ou des motifs. WCAG recommande un ratio de contraste d'au moins 4,5:1 pour texte normal et 3:1 pour texte de grande taille. |
+
+Accessibilité cognitive :
+Les besoins fonctionnels concernés par l'accessibilité cognitive : l'attention, le langage et l'alphabétisation, l'apprentissage, la mémoire et la fonction exécutive. |
+
+Couleur : 
+Palette de couleurs d'UI : une collection de couleurs utilisées dans la conception d'UI — un ensemble de couleurs qui fonctionnent bien ensemble visuellement. |
+Buts d'une palette de couleurs: 
+1. Établir une harmonie visuelle.;
+2. Définir l'identité de la marque.;
+3. Influencer le comportement des utilisateurs. |
+Théorie des couleurs : un cadre qui sous-tend la façon dont nous comprenons et utilisons la couleur. |
+Composant critique de la couleur : HSL — Teinte, Saturation et Luminosité (Hue, Saturation, Lightness en anglais). |||
+
+Désinformation :
+Fausse information diffusée intentionnellement, dans le but de tromper. Il y a une intention de nuire ou de manipuler. |
+
+Mésinformation :
+Fausse information diffusée sans intention de nuire — la personne qui la partage croit sincèrement qu'elle est vraie. La différence clé avec la désinformation est donc l'intention, pas le contenu lui-même. |
+
+Fausses nouvelles (fake news) :
+Contenu présenté sous la forme d'une nouvelle journalistique légitime, mais qui est fabriqué ou trompeur. |
+
+la désinformation, la mésinformation et les fausses nouvelles existent depuis longtemps ; ce qui est nouveau, c'est l'ampleur et la vitesse de diffusion permises par les réseaux sociaux. |
+
+Ne pas être informé :
+Ne pas disposer de suffisamment d'informations sur un sujet. C'est un simple manque, un vide.|
+
+Être mal informé :
+Croire à des informations inexactes ou trompeuses. Ce n'est pas un vide, mais une croyance active et fausse qui occupe la place de la vérité. |
+
+Biais de confirmation (confirmation bias) :
+Tendance à rechercher, interpréter et retenir en priorité les informations qui confirment ce qu'on croit déjà, tout en ignorant ou minimisant ce qui le contredit |
+
+Pourquoi est-il plus difficile de corriger une fausse croyance que de combler un simple manque d'information ? Reliez votre réponse au biais de confirmation. :
+Une fausse croyance occupe déjà une place active dans l'esprit de la personne ; la corriger demande de remettre en question quelque chose qu'elle croit vrai, ce qui provoque une résistance psychologique. Le biais de confirmation aggrave ce problème : les gens recherchent naturellement les informations qui confirment ce qu'ils croient déjà et évitent celles qui les contredisent, ce qui protège la fausse croyance de la correction. |
+
+Nommez trois conséquences négatives possibles de la désinformation mentionnées dans le cours. :
+Parmi les six mentionnées : elle influence les croyances et comportements ; elle peut nuire à la santé, à la démocratie et aux organisations ; elle favorise des perceptions erronées de la réalité ; elle complique la prise de décision fondée sur des faits ; elle réduit la confiance envers les institutions. |
+
+Pourquoi dit-on que la démocratie "repose sur un ensemble commun de faits" ? Reliez cette idée à la polarisation. :
+Le débat démocratique suppose que tous les citoyens discutent à partir des mêmes faits pour arriver à des compromis ou des décisions collectives légitimes. Quand la désinformation fragmente cette base factuelle commune (différents groupes croient à des versions incompatibles de la réalité), le dialogue devient impossible et la polarisation sociale et politique s'accentue, car chaque groupe perçoit l'autre comme vivant dans un monde de "faits alternatifs". |
+
+Selon le cours, quel est le lien entre citoyens informés et participation politique ?
+Les citoyens informés participent davantage à la vie politique, comprennent mieux les enjeux sociaux et sont plus ouverts aux valeurs démocratiques — ce qui fait que la démocratie fonctionne mieux globalement. | 
+
+Logique du raisonnement :
+Le raisonnement de cette section suit une chaîne causale : citoyens informés → participation politique → compréhension des enjeux → ouverture aux valeurs démocratiques → démocratie qui fonctionne bien. La désinformation attaque donc chaque maillon de cette chaîne. |
+
+Raisonnement motivé (motivated reasoning)
+Processus par lequel une personne interprète les faits non pas de façon neutre, mais en fonction d'un objectif ou d'un désir préexistant |
+
+Pourquoi dit-on que "la démocratie repose sur un ensemble commun de faits" ? Que se passe-t-il si ce socle est brisé ?
+Le débat démocratique suppose que les citoyens discutent des mêmes faits pour arriver à des décisions collectives ou des compromis. Si la désinformation crée des versions différentes et incompatibles de la réalité selon les groupes, le dialogue devient impossible, ce qui fragilise le débat public et accentue la polarisation. une démocratie ne peut fonctionner sans un terrain factuel partagé. |
+
+Nommez les trois pistes de solution mentionnées face aux enjeux de la désinformation. :
+L'éducation aux médias, la vérification des faits (fact-checking), et une réglementation adaptée — accompagnées d'un besoin de transparence accrue sur les données et les algorithmes. |
+
+Clickbait :
+Contenu conçu pour susciter la curiosité et inciter au clic, souvent au détriment de la valeur informative réelle du contenu. |
+
+Quels sont les trois objectifs principaux visés par le clickbait ?
+Augmenter le nombre de visites, générer des interactions (likes, partages, commentaires), et accroître les revenus publicitaires |
+
+Expliquez le mécanisme psychologique qui rend le clickbait efficace. :
+Le clickbait crée un sentiment de curiosité en laissant volontairement une information incomplète. Le manque d'information (l'écart informationnel) incite naturellement les gens à cliquer pour connaître la suite et combler ce manque. |
+
+Donnez quatre signes fréquents permettant de reconnaître un titre clickbait. :
+L'exagération (mots comme "Choc", "Incroyable"), le faux suspense, l'information volontairement incomplète, et l'appel direct aux émotions fortes (peur, colère, surprise, curiosité). |
+
+Selon Pennycook et Rand, le partage de fake news est-il principalement causé par la partisanerie politique ou par un manque de réflexion ? Justifiez.
+Principalement par un manque de réflexion (pensée rapide plutôt qu'analytique). Les personnes qui réfléchissent de façon analytique croient moins aux fausses nouvelles. De plus, croire une information et vouloir la partager sont deux choses distinctes : les gens partagent souvent sans porter attention à l'exactitude, davantage motivés par l'engagement social et la rapidité des réseaux que par une conviction politique. |
+
+En vous appuyant sur au moins trois phénomènes vus dans cette séance (clickbait, fake news, bots, deepfakes, influenceurs IA), expliquez pourquoi le cours conclut que "la technologie seule ne peut pas résoudre le problème" de la désinformation.
+Chaque phénomène montre une composante humaine irréductible : le clickbait exploite une vulnérabilité psychologique universelle (la curiosité) ; les fake news se propagent surtout par manque d'attention humaine à l'exactitude, pas par ignorance ; les bots amplifient mais ce sont les humains qui relaient massivement le contenu ; les deepfakes exploitent la confiance humaine envers l'image ; les influenceurs IA misent sur des mécanismes psychosociaux (anthropomorphisme, confiance, authenticité perçue). Dans tous les cas, la solution purement technique (détection algorithmique, retrait de contenu) ne s'attaque pas à la cause profonde : les biais cognitifs, les incitatifs économiques et les comportements sociaux humains. D'où l'insistance du cours sur des solutions combinant éducation (littératie numérique, prebunking) ET outils technologiques. |
+
+Contrairement à une idée reçue, les fake news ne représentent qu'une fraction limitée du contenu total en ligne. L'inquiétude scientifique porte moins sur le "volume" que sur le fait que certains groupes vulnérables ou influents sont plus exposés, ce qui peut avoir un impact disproportionné. |
+
+Croyance générale (belief) :
+Le fait de croire qu'une information est vraie — ceci ne mesure pas si la personne peut réellement distinguer le vrai du faux. |
+
+Discernement (discernment / truth discernment) :
+La capacité à distinguer le vrai du faux — c'est-à-dire la précision du jugement, indépendamment de ce qu'on croit dans un cas particulier. |
+
+Qu'est-ce que le "prebunking" et en quoi diffère-t-il des approches correctives classiques comme le fact-checking ?
+Le prebunking prépare les utilisateurs avant leur exposition à la désinformation (une forme d'inoculation psychologique), alors que le fact-checking intervient après coup pour corriger une fausse information déjà diffusée — souvent trop tard pour empêcher sa propagation initiale. |
+
+Quel est le facteur le plus déterminant selon Pennycook & Rand pour expliquer pourquoi les gens croient aux fake news : le manque de réflexion ou l'appartenance politique ?
+Le manque de réflexion (pensée rapide/intuitive plutôt qu'analytique). Les personnes qui prennent le temps de réfléchir analytiquement croient moins aux fausses nouvelles, indépendamment de leur orientation politique |
+
+Expliquez pourquoi "croire une information" et "vouloir la partager" sont deux choses différentes.
+Une personne peut douter de la véracité d'une information et la partager quand même, motivée par la recherche d'attention, l'engagement social ou simplement l'absence de réflexion sur l'exactitude au moment de partager. Le partage est donc davantage guidé par des dynamiques sociales que par une évaluation de vérité. |
+
+Bot :
+Logiciel capable d'agir automatiquement en ligne. Les bots peuvent être entièrement automatisés ou contrôlés par des humains (partiellement ou totalement). Tous les bots ne sont pas dangereux — certains servent à informer ou aider (ex. : bots météo, bots de service client). |
+
+Botnet :
+Groupe de bots qui fonctionnent ensemble, souvent de façon coordonnée, pour amplifier un message ou une action. |
+
+Décrivez quatres types de bots et expliquez comment les bots amplifient (sans nécessairement créer) la désinformation.
+Types : spambots (contenu indésirable), content polluters (liens nuisibles/publicité), social bots (imitent les humains), cyborgs (mix humain-automatisé). Amplification : les bots diffusent du contenu en quelques secondes, accélèrent la viralité, donnent une impression artificielle de popularité, et utilisent des mentions de personnes influentes — mais ce sont ensuite les humains qui relaient massivement ces contenus, donc les bots amorcent plus qu'ils ne "créent" la désinformation. |
+
+
+Est-ce que la présence de bots dans une campagne politique garantit qu'ils ont influencé les résultats ?
+Non. Le cours précise que les campagnes de bots ne réussissent pas toujours à influencer les résultats — leur présence ne garantit pas leur efficacité |
+
+Quels types d'indicateurs les chercheurs utilisent-ils pour détecter un bot, et pourquoi faut-il en combiner plusieurs ?
+Les données du réseau (abonnements, hashtags, mentions, retweets), les habitudes d'activité (fréquence, horaires), le contenu publié (style, sentiment) et les informations du profil (âge du compte, description). Il faut les combiner car aucun indicateur seul ne permet une détection parfaite. |
+
+Deepfake :
+Contenu généré par l'intelligence artificielle (vidéo, audio ou image) qui permet de créer des scènes ou des paroles fausses mais très réalistes. Il peut imiter des personnes réelles de façon convaincante. |
+
+Expliquez le concept de "liar's dividend" avec vos propres mots.
+C'est l'avantage stratégique que gagnent les acteurs malveillants du simple fait que les deepfakes existent : ils peuvent nier des faits réels et authentiques en prétendant que la preuve (vidéo/audio) est un deepfake fabriqué, exploitant le doute généralisé que cette technologie a créé envers toute preuve visuelle ou audio. |
+
+Le cours présente-t-il uniquement des usages négatifs du deepfake ?
+Non. Le cours présente aussi un "potentiel positif" : création de contenus médiatiques et artistiques, innovation audiovisuelle, usages en divertissement et éducation, réutilisation créative de contenus, et amélioration de certaines formes de communication. |
+
+Influenceur IA :
+Personnage virtuel créé par ordinateur (CGI) et alimenté par l'intelligence artificielle. Conçu pour ressembler et se comporter comme un humain sur les réseaux sociaux. |
+
+Qu'est-ce que la "vallée de l'étrange" et pourquoi est-ce un enjeu pour les influenceurs IA ?
+C'est le malaise ressenti face à un personnage artificiel presque, mais pas parfaitement, réaliste. C'est un enjeu car les créateurs d'influenceurs IA doivent trouver un équilibre entre réalisme et cet effet de gêne, tout en essayant d'instaurer la confiance du public. |
+
+Quels sont les principaux avantages qu'un influenceur IA offre à une marque par rapport à un influenceur humain, et quel est le principal désavantage en termes de perception ? |
+
+Avantages : contrôle total de l'image et des messages, personnalisation complète, absence de vieillissement/contraintes physiques, adaptation rapide aux tendances. Désavantage principal : les influenceurs IA sont moins perçus comme authentiques que les humains, ce qui peut réduire la confiance du public envers eux, en plus de l'effet potentiel de "vallée de l'étrange". |||
+
+Pourquoi les entreprises avec des équipes de sécurité en sous-effectif ont-elles des coûts de brèche plus élevés ?
+Réponse : Parce qu'avec moins de personnel dédié à la sécurité, les vulnérabilités sont détectées plus lentement, les incidents sont moins bien contenus, et la réponse à l'incident prend plus de temps — ce qui augmente directement les dommages et donc le coût (jusqu'à 1,76 M$ de plus). |
+
+La gouvernance, c'est la structure organisationnelle et les processus par lesquels une organisation gère sa sécurité. Le cours la découpe en deux colonnes complémentaires : gestion du risque (analyser) et mise en œuvre (agir). |
+
+Pourquoi « auditer et recommencer » est-il essentiel dans la gestion du risque ?
+Réponse : Parce que les menaces évoluent constamment (nouveaux logiciels malveillants, nouvelles vulnérabilités découvertes), donc une évaluation du risque faite une seule fois devient rapidement obsolète. La gouvernance de la sécurité est un cycle itératif, pas une action ponctuelle. |
+
+la triade CIA (Confidentiality, Integrity, Availability).
+1. Nomme et définis les trois propriétés de la triade CIA en sécurité informatique. :
+Réponse : Confidentialité (ne pas être accessible aux personnes non autorisées), Intégrité (ne pas être modifiable par des personnes non autorisées), Disponibilité (être accessible aux personnes autorisées) |
+
+Mécanismes de sécurité — le modèle AAA(A)
+Si la triade CIA décrit ce qu'on veut protéger (les propriétés), les mécanismes suivants décrivent comment on la protège concrètement.:
+Explique le modèle AAA(A) en sécurité.
+Réponse : Authentification (vérifier une identité), Autorisation (appliquer une politique d'accès), Accounting/Traçabilité (logs de ce qui a été fait), Auditabilité (analyse post-mortem, souvent forensique, s'appuyant sur la traçabilité |
+
+Types d'attaquants :
+Internes : un ou plusieurs utilisateurs déjà dans le système (employés, contractuels);
+Externes : sans accès préalable au réseau |
+
+Objectifs classiques d'une attaque
+Écoute (simple ou élaborée) : intercepter des communications sans se faire remarquer
+Contournement de moyens d'authentification / autorisation : passer les barrières de sécurité
+Déni de service (attaque physique ou réseau) : rendre un service indisponible | 
+
+Que veut dire l'expression « le risque 0 n'existe pas » dans le contexte de la modélisation de l'adversaire ?
+Réponse : Cela signifie qu'aucun système ne peut être rendu parfaitement invulnérable. On accepte toujours un certain niveau de risque résiduel, et l'objectif réaliste de la sécurité est de réduire ce risque et de rendre les attaques plus coûteuses/difficiles pour l'adversaire, pas de les éliminer complètement. |
+
+Définition : un code malveillant qui empêche la victime d'accéder à son système ou à ses données, dans le but de lui extorquer de l'argent. |
+
+Point clé : une bonne préparation (sauvegardes externes régulières) élimine une bonne partie du dilemme — si on peut restaurer ses données sans payer, le rançongiciel perd son levier de pression. |
+
+Pourquoi les hôpitaux et services publics sont-ils des cibles privilégiées pour les rançongiciels ?
+Parce qu'ils combinent souvent une sécurité informatique faible, un service jugé essentiel qui ne peut pas rester interrompu longtemps (vies en jeu, services publics critiques), ce qui crée une forte pression pour payer rapidement — rendant l'attaque plus « rentable » pour les criminels. |
+
+Quel est le dilemme éthique principal face à une attaque de rançongiciel ?
+Réponse : Payer permet potentiellement de récupérer ses données mais encourage le système criminel et n'empêche pas une récidive. Ne pas payer signifie rester bloqué et risquer la divulgation de données sensibles, mais n'encourage pas le crime. Une bonne préparation (sauvegardes) réduit ce dilemme. |
+
+Cryptojacking :
+Définition : miner de la crypto-monnaie à l'insu du propriétaire d'un ordinateur. |
+
+Selon la définition de van Oorschot, quelles sont les deux grandes stratégies de protection des actifs informatiques ?
+Réponse : (1) Empêcher les actions non autorisées (prévention), et (2) les détecter puis récupérer après coup (détection + réponse/recouvrement). La sécurité informatique ne se limite donc pas à bâtir des murs — elle inclut aussi la capacité à réagir après une brèche. |
+
+Nomme trois raisons pour lesquelles la sécurité informatique est difficile à assurer. :
+Réponse (parmi 10 possibles) : l'asymétrie défenseur-attaquant (le défenseur doit tout protéger, l'attaquant n'a besoin que d'une faille), la connectivité universelle (tout est interconnecté via Internet), et les facteurs humains (erreurs, phishing, mots de passe faibles). |
+
+Definition de la securite informatique :
+Nous définissons la sécurité informatique comme la combinaison de l'art, de la science et de la pratique de l'ingénierie visant à protéger les actifs informatiques contre les actions non autorisées et leurs conséquences, soit en empêchant ces actions, soit en les détectant puis en les récupérant. » |
+
+Rançongiciel (Ransomware) : un code malveillant qui empêche la victime d'accéder à son système ou à ses données, dans le but de lui extorquer de l'argent.: |
+
+Actifs	: informations, logiciels, matériels et services informatiques et de communication |
+Politique : spécifie l'intention de conception des règles d'un système |
+Attaques : l'exécution délibérée visant à provoquer une brèche de sécurité |
+Vulnérabilité : des défauts de conception ou d'implémentation, ou des problèmes de déploiement/configuration |
+Adversaire : la source ou l'agent de menace derrière une attaque potentielle — devient « attaquant » une fois la menace activée dans une attaque réelle |
+Menace : combinaison de circonstances et d'entités susceptibles de provoquer des brèches de sécurité |
+Vecteur d'attaque : les méthodes spécifiques ou séquences d'étapes par lesquelles les attaques sont menées |
+Participants : entités légitimes impliquées dans l'exécution d'un protocole (traditionnellement nommées « Alice » et « Bob ») |
+Algorithme : procédure effectuée localement par un participant |
+Protocole : procédure effectuée conjointement par les participants, dont les rôles respectifs sont clairement identifiés |
+
+La chaîne logique à retenir : une vulnérabilité existe → un adversaire l'identifie → une menace se matérialise → l'adversaire devient un attaquant en exécutant un vecteur d'attaque → cela produit une attaque → qui viole la politique de sécurité et compromet un actif. |
+
+Quelle est la différence entre un « adversaire » et un « attaquant » ?
+Réponse : L'adversaire est la source/l'agent de menace potentiel (il pourrait attaquer). Il devient un attaquant seulement au moment où la menace se concrétise réellement, c'est-à-dire quand il exécute effectivement une attaque. |
+
+Attaque externe : lancée sans aucun accès spécial préalable au réseau cible ;
+Attaque interne : provient de parties ayant un avantage de départ — exemple : des employés disposant d'un accès physique |
+
+les attaques selon leur nature technique, indépendamment du contexte (maison, ordinateur, réseau). |
+
+Typologie des attaques :
+Espionnage : capture d'informations (écoute passive, sans altérer les données) |
+Modification : altération d'information (l'attaquant change activement des données) |
+Rejeu (replay) : renvoi d'un message capturé précédemment, pour tromper le système en faisant croire qu'une action légitime se reproduit |
+Déni de service : empêcher les participants légitimes de compléter le protocole |
+Cryptanalyse : profiter d'une faiblesse cryptographique pour déchiffrer un message sans avoir la clé |
+Manipulation de certificat : choix ou altération d'un certificat dédié à l'authentification (ex. faux certificat SSL) |
+Interactions de protocole : exploitation d'une même clé utilisée dans différents protocoles (une faiblesse dans un contexte se propage à un autre) |
+
+Pourquoi le « niveau de financement » d'un adversaire est-il une dimension importante à évaluer ?
+Réponse : Parce qu'il détermine indirectement l'ampleur des capacités disponibles (temps, outils spécialisés, personnel qualifié) et la persistance de l'adversaire — un adversaire bien financé (ex. un État) peut soutenir des attaques beaucoup plus sophistiquées et prolongées qu'un individu isolé. |
+
+Modèle de menace :
+Créer un « modèle de menace » (threat model), c'est structurer formellement la réflexion sur qui pourrait attaquer et comment. |
+
+Pourquoi est-il important de définir explicitement ce qui est « hors champ » dans un modèle de menace ?
+Réponse : Parce qu'un modèle de menace ne peut pas couvrir toutes les menaces possibles de façon réaliste. En définissant clairement les limites, on évite les malentendus sur la portée de la protection offerte, et on peut évaluer honnêtement si une faille découverte plus tard était censée être couverte ou était un risque accepté dès le départ. |
+
+Approches de modélisation des menaces :
+Approche centrée sur les actifs (asset-centric) : on part des biens précieux à protéger (données, systèmes), puis on identifie quelles menaces pourraient les affecter.;
+Approche centrée sur l'attaquant (attacker-centric) : on part du profil de l'adversaire (ses objectifs, capacités, motivations) pour anticiper ses actions probables.;
+Approche centrée sur le logiciel/système (software-centric) : on analyse l'architecture technique du système lui-même (points d'entrée, flux de données) pour repérer où les attaques pourraient se produire, indépendamment de qui attaque. |
+
+Un attack tree est un outil de modélisation qui représente visuellement, sous forme d'arbre, toutes les façons possibles d'atteindre un objectif d'attaque. |
+
+Structure : la racine de l'arbre représente l'objectif final de l'attaquant (ex. « voler les données clients »). Chaque nœud enfant représente une sous-étape ou une méthode alternative pour atteindre ce but. Les feuilles représentent les actions concrètes/atomiques que l'attaquant peut exécuter. |
+
+Que représente un chemin complet, de la racine à une feuille, dans un attack tree ?
+un vecteur d'attaque — c'est-à-dire une séquence complète et concrète d'étapes qu'un attaquant peut suivre pour atteindre l'objectif représenté par la racine de l'arbre. |
+
+Pourquoi le schéma d'analyse de sécurité forme-t-il une boucle plutôt qu'une ligne droite ?
+Réponse : Parce que la sécurité informatique est un processus continu, pas un projet ponctuel. Une fois les contrôles mis en place, il faut les auditer, découvrir de nouvelles vulnérabilités ou menaces émergentes, et recommencer le cycle — cohérent avec le principe de gouvernance « auditer et recommencer » vu plus tôt. | 
+
+liste 10 raisons structurelles qui expliquent pourquoi la sécurité reste un défi permanent, même avec de bons outils.:
+Adversaire intelligent et adaptatif ;
+Pas de règles ;
+Asymétrie défenseur-attaquant ;
+Échelle d'attaque ;
+Connectivité universelle ;
+Facteurs humains ;
+Rythme de l'évolution technologique ;
+Complexité des logiciels ;
+Formation des développeurs ;
+Interopérabilité et rétrocompatibilité |
+
+Explique le concept d'« asymétrie défenseur-attaquant » avec tes propres mots. :
+Le défenseur doit protéger toutes les portes d'entrée possibles d'un système, sans exception, alors que l'attaquant n'a besoin de trouver qu'une seule faille non protégée pour réussir. Cela crée un déséquilibre structurel : la défense est beaucoup plus exigeante que l'attaque. |
+
+Quel est le principe de la « divulgation responsable » d'une vulnérabilité ?
+Réponse : Informer d'abord le fournisseur/l'organisation concernée pour lui laisser le temps de corriger la faille, avant de la rendre publique — plutôt que de divulguer immédiatement l'exploit à tout le monde (ce qui exposerait les utilisateurs à un risque immédiat). |
+
+Le piratage éthique (« ethical hacking ») consiste à pirater un système de manière légale et éthique, généralement dans le but de le rendre plus sécuritaire. |
+
+Tests de pénétration (pentest) : tests ciblés sur les faiblesses du système, effectués sur un composant spécifique.  l'un des aspects du piratage éthique |
+
+Cybersécurité (définition élargie) : le maintien de la confidentialité, de l'intégrité et de la disponibilité des données + l'accès physique aux bâtiments et au matériel informatique + l'accès à distance via Internet. |
+
+Quelle est la différence entre le piratage éthique et un test de pénétration ?
+Réponse : Le piratage éthique est un terme large qui englobe une variété d'attaques simulées réalistes pour découvrir des failles de sécurité en général. Le test de pénétration est un aspect spécifique du piratage éthique, concentré sur la vérification ciblée de la robustesse des systèmes de défense. |
+
+Les « white hat » hackers :
+Embauchés par leurs victimes pour découvrir des vulnérabilités et améliorer la cybersécurité
+Le caractère éthique dépend de deux critères : (1) le but de l'activité de piratage, et (2) si la victime a donné son consentement préalable |
+
+Qu'est-ce qui transforme légalement/éthiquement une intrusion réseau (normalement un crime) en un test de pénétration légitime ?
+Réponse : le consentement préalable de la victime (généralement formalisé dans un contrat/mandat). C'est ce consentement, combiné à un objectif d'amélioration de la sécurité, qui rend l'acte éthique et légal. |
+
+L'ingénierie sociale :
+Définition : la manipulation inter-humaine pour la découverte et l'exploitation des vulnérabilités de sécurité — ici, la « faille » exploitée n'est pas technique, mais psychologique/humaine. |
+
+Pourquoi la tromperie pose-t-elle un problème éthique dans la recherche sur le hameçonnage ? Parce que le consentement libre et éclairé exige normalement d'informer les participants du véritable but de l'étude. Or, mentir sur ce but (tromperie) porte atteinte au principe de respect de la personne — même si, paradoxalement, cette tromperie est nécessaire pour que l'expérimentation sur le phishing ait une quelconque validité. |
+
+Consentement éclairé post-événement : les données sont collectées à l'insu de la victime, mais elles ne sont incluses dans l'analyse finale qu'une fois le consentement obtenu après coup. |
+
+Selon Shoshana Zuboff, qu'est-ce que le « surplus comportemental » ?
+Réponse : C'est la totalité des informations sur nous-mêmes (comportements, habitudes, préférences) qui peuvent être extraites et échangées contre des bénéfices sur de nouveaux marchés (comme la publicité ciblée) — un sous-produit de notre activité en ligne que les entreprises capturent et monétisent. |
+
+Pourquoi le cours précise-t-il que « la prédiction ne concerne pas réellement des individus » dans le contexte du capitalisme de surveillance ?
+Réponse : Parce que le modèle de prédiction fonctionne à l'échelle des populations : il faut un très grand nombre d'utilisateurs laissant des traces comportementales pour qu'un pattern statistique reconnaissable émerge. L'objectif n'est pas de connaître parfaitement une personne en particulier, mais de repérer des tendances collectives exploitables commercialement. |
+
+Explique le concept de « capitalisme de surveillance » selon Shoshana Zuboff. :
+Réponse : Le capitalisme de surveillance revendique unilatéralement l'expérience humaine comme matière première gratuite, traduite en données comportementales (« surplus comportemental »). L'accent est mis sur les populations plutôt que les individus : avec suffisamment d'utilisateurs, des patterns prévisibles émergent statistiquement, permettant de monétiser ces informations (ex. publicité ciblée) sans nécessairement cibler un individu précis. |
+
+Décris la procédure standard en trois étapes pour une étude de recherche impliquant une tromperie envers les participants. :
+Réponse : 1) Le sujet consent d'abord à participer (sans connaître les détails de la tromperie). 2) Les chercheurs retiennent le fait qu'il y a tromperie pendant l'expérience. 3) Une fois l'expérience terminée, les chercheurs informent le sujet de la véritable nature de l'étude (débriefing). |
+
+Quelle est la différence entre un algorithme et un protocole ?
+Réponse : Un algorithme est une procédure effectuée localement par un seul participant. Un protocole est une procédure effectuée conjointement par plusieurs participants, avec des rôles clairement définis pour chacun. |||
+
+Citation de Morozov — technologie et autonomie individuelle :
+Morozov souligne que les technologies "intelligentes" ne se contentent pas d'assister l'humain : elles finissent par décider à sa place ce qui est acceptable ou non, en éliminant des comportements jugés "indésirables" par un tiers (une entreprise, un État, un algorithme). Cela pose un problème d'autonomie individuelle car la personne perd la capacité de faire ses propres choix, même mauvais — la technologie impose une norme de comportement définie ailleurs. | 
+
+Exemple : une application d'assurance auto qui surveille la conduite (vitesse, freinages brusques) et augmente automatiquement les primes en cas de "mauvais" comportement. L'assuré perd la liberté de conduire à sa façon sans surveillance normative constante — le comportement "indésirable" (rouler vite) est décidé par l'assureur, pas par l'individu. | Mini-cas ethiques ;
+1. Vulnérabilité dans l'application mobile :
+Il faut agir immédiatement : la protection des données des utilisateurs prime sur la réputation à court terme. On planifie un correctif rapide (idéalement avec une interruption minimale), on informe les utilisateurs si des données ont pu être exposées, et on ne dissimule jamais la faille — le silence aggrave la responsabilité légale et éthique de l'entreprise. |
+
+2. Rançongiciel sur un serveur critique :
+On ne paie pas la rançon : aucune garantie de récupération, et ça finance le crime tout en signalant l'entreprise comme cible payante. On isole les systèmes infectés, on restaure à partir des sauvegardes même incomplètes (perte partielle acceptée), on notifie les autorités, puis on corrige la politique de sauvegarde. |
+
+3. Surveillance des employés en télétravail :
+La surveillance doit être transparente, proportionnée et limitée au nécessaire. Installer un logiciel sans en informer clairement les employés viole la confiance et potentiellement la loi sur la protection des données au travail. Solution : politique claire, consentement informé, collecte minimale. |
+
+4. Algorithme de recrutement biaisé :
+Le biais vient des données historiques discriminatoires sur lesquelles l'IA a été entraînée. Il faut auditer régulièrement l'algorithme, diversifier les données d'entraînement, garder une supervision humaine sur les décisions finales, et offrir une transparence/explication aux candidats écartés. |
+
+5. Reconnaissance faciale en espace public :
+Un déploiement sans consultation publique pose un risque de surveillance de masse et de biais démographiques connus dans ces systèmes. Il faut un cadre légal strict, une consultation citoyenne préalable, une limitation stricte des usages, et des mécanismes de reddition de comptes avant tout déploiement. |
+
+6. Revente de données de santé "anonymisées" :
+Le consentement via des CGU illisibles n'est pas un vrai consentement éclairé, et les données "anonymisées" restent souvent ré-identifiables. Il faut un opt-in explicite et clair, une minimisation des données collectées, et des audits d'anonymisation réels avant toute revente. |
+
+7. Lanceur d'alerte sur une faille médicale connue :
+Le devoir envers la sécurité des patients (non-malfaisance) l'emporte sur la loyauté envers l'employeur. La bonne démarche est graduelle : d'abord alerter en interne (hiérarchie, comité d'éthique), puis un régulateur externe si rien ne bouge, et le public en dernier recours seulement. | 
+
+8. Véhicule autonome et dilemme du tramway :
+Il n'y a pas de réponse technique unique : c'est un choix de société entre protéger les passagers (logique contractuelle) et minimiser le nombre total de victimes (logique conséquentialiste). La décision doit être encadrée par la loi et débattue démocratiquement, pas laissée aux seuls ingénieurs. |
+
+9. Code open source utilisé sans respecter la licence :
+Intégrer une bibliothèque GPL dans un produit fermé sans redistribuer le code source viole la licence et le droit d'auteur. Solution : auditer les dépendances pour vérifier la conformité des licences, et soit se conformer (redistribution), soit remplacer par une alternative compatible. |
+
+10. Deepfake utilisé en marketing politique :
+Une équipe de campagne diffuse une vidéo truquée (deepfake) d'un adversaire tenant des propos qu'il n'a jamais tenus. C'est une atteinte grave à l'intégrité de l'information et à la réputation d'autrui, en plus de nuire à la confiance démocratique globale. Solution : retrait immédiat, dénonciation publique de la manipulation, et plaidoyer pour une réglementation obligeant l'étiquetage des contenus synthétiques (watermarking). |
+
+11. Chatbot IA donnant des conseils médicaux erronés :
+Une clinique déploie un chatbot pour répondre aux questions de santé des patients, mais il donne parfois des conseils dangereux sans supervision médicale. La priorité est la sécurité du patient (non-malfaisance) : le chatbot doit être limité à des tâches non critiques (prise de rendez-vous, FAQ générales), avec redirection systématique vers un professionnel pour tout enjeu clinique, et un avertissement clair sur ses limites. |
+ 
+12. Discrimination algorithmique dans l'octroi de crédit :
+Une banque utilise un modèle de scoring de crédit qui pénalise systématiquement les résidents de certains quartiers (proxy indirect pour la race/le statut socio-économique). Même sans intention discriminatoire, l'impact est réel (discrimination indirecte). Solution : auditer les variables utilisées pour détecter les proxys sensibles, tester l'algorithme pour l'équité entre groupes, et permettre un recours humain en cas de refus contesté. |
+
+13. Employé forcé de contourner une norme de sécurité pour respecter un délai :
+Un gestionnaire de projet demande de sauter une étape de test de sécurité pour livrer à temps, en assurant que "ça ira". L'employé doit refuser ou documenter formellement son objection (protection professionnelle), rappeler les risques concrets pour les utilisateurs finaux, et escalader au besoin vers un supérieur ou un comité qualité plutôt que de céder silencieusement à la pression. |
+
+14. Utilisation de données d'entraînement protégées par le droit d'auteur pour une IA générative :
+Une entreprise entraîne un modèle d'IA sur des millions d'images/textes protégés, récupérés sans autorisation ni compensation des créateurs. Tension entre innovation technologique et respect de la propriété intellectuelle des créateurs. Solution : privilégier des jeux de données sous licence claire ou avec consentement, offrir une compensation/opt-out aux créateurs, et être transparent sur les sources d'entraînement. |
+
+15. Fuite de données personnelles suite à une négligence interne :
+Un employé envoie accidentellement un fichier contenant des données sensibles de clients à une mauvaise liste de diffusion externe. Il faut notifier rapidement les personnes concernées et l'autorité de protection des données compétente (obligation légale dans plusieurs juridictions), limiter la propagation (rappel du courriel, engagement de confidentialité des destinataires), et revoir les processus internes (formation, contrôles d'accès) pour éviter la récidive. |
+
+16. Priorisation du profit sur l'accessibilité numérique :
+Une entreprise refuse d'investir dans l'accessibilité de son site web (lecteurs d'écran, contrastes) car "ça ne rapporte pas assez de clients". Cela exclut des personnes en situation de handicap d'un service essentiel — enjeu de justice et d'inclusion, souvent aussi une obligation légale (normes WCAG). Solution : intégrer l'accessibilité dès la conception (pas en correctif après coup), car son coût est minime comparé au coût de l'exclusion et du risque légal. |
+
+17. Ré-identification malgré la k-anonymité :
+Un hôpital publie un jeu de données patients rendu "k-anonyme" (k=5) en généralisant l'âge et le code postal. Un chercheur croise ensuite ce jeu avec un registre électoral public et parvient à ré-identifier plusieurs patients. Où est la faute ? La k-anonymité protège contre un adversaire isolé sur ce jeu de données, mais elle ne compose pas : elle ne garantit rien face au croisement avec une source externe (linkage attack). L'hôpital aurait dû anticiper les connaissances auxiliaires disponibles publiquement (ex. registre électoral) et envisager un modèle plus robuste comme la confidentialité différentielle, qui offre une garantie mathématique indépendante des données externes. |
+
+18. Choisir un epsilon (ε) trop généreux pour "sauver" l'utilité des données :
+Une équipe de recherche en santé publique doit publier des statistiques différentiellement privées, mais l'analyste augmente ε pour que les résultats restent "assez précis pour être utiles", sans consulter de comité d'éthique. C'est un arbitrage éthique déguisé en choix technique : un ε élevé ajoute moins de bruit (résultats plus précis) mais augmente le risque réel de ré-identification d'un individu. Ce choix ne devrait pas être laissé à un seul analyste — il engage un compromis confidentialité/utilité qui mérite une validation formelle (comité d'éthique, politique interne documentée), surtout pour des données de santé sensibles. |
+
+19. Partage de données de localisation jugé "normal" par l'entreprise mais choquant pour l'utilisateur :
+Une application de covoiturage partage l'historique de déplacements de ses usagers avec une compagnie d'assurance partenaire, en respectant scrupuleusement sa propre politique de confidentialité (que personne ne lit). Selon la théorie de l'intégrité contextuelle de Nissenbaum, respecter sa propre politique ne suffit pas : la vie privée dépend du respect des attentes contextuelles de l'utilisateur (type de donnée, destinataire, principe de transmission), pas des pratiques du fournisseur. Ce partage viole la norme implicite du contexte "covoiturage" même s'il est techniquement "autorisé" par les CGU — l'entreprise devrait limiter le partage à sa finalité d'origine ou obtenir un consentement explicite et distinct pour ce nouvel usage. |
+
+20. Système d'évaluation des risques criminels à haut risque, classé "boîte noire" :
+Un système d'IA utilisé par un tribunal pour estimer le risque de récidive refuse de divulguer sa logique interne, invoquant le secret commercial. Selon l'EU AI Act, un tel système (impact direct sur les droits d'une personne) serait classé à haut risque en fonction de son usage, pas de sa sophistication — il devrait donc être évalué par un tiers avant déploiement. De plus, l'Article 22 du RGPD interdit qu'une décision à fort impact soit prise exclusivement par la machine sans recours humain possible. Solution : exiger l'explicabilité (XAI) du système, un audit indépendant, et garantir un juge humain dans la boucle décisionnelle. | 
+
+21. IA générative entraînée sur des œuvres piratées |
+Une startup entraîne son modèle de génération d'images sur une base de données constituée en partie d'œuvres protégées obtenues via des sites de piratage, pour réduire ses coûts. Selon les décisions judiciaires récentes, la provenance des données est le critère central : entraîner sur des œuvres piratées est fortement condamné peu importe l'usage fait ensuite, contrairement à un entraînement sur des œuvres légalement acquises qui peut relever du fair use (usage transformateur). Solution : n'utiliser que des données sous licence claire ou légalement acquises, et documenter la provenance de chaque source. | 
+
+22. "Work made for hire" appliqué à une œuvre générée par IA pour éviter tout litige :
+Une agence de publicité génère un visuel avec une IA très proche du style d'un illustrateur connu, puis revendique la propriété exclusive de l'image en invoquant que "l'IA est un simple outil". Le style seul n'est pas protégé par le droit d'auteur — donc ce n'est pas automatiquement illégal — mais si l'image constitue une reproduction substantielle d'une œuvre précise de cet illustrateur, cela devient un problème. La question éthique dépasse le cadre légal strict : même sans violation légale, s'approprier délibérément le style reconnaissable d'un créateur pour le concurrencer commercialement pose un enjeu d'équité envers les créateurs, indépendamment de ce que permet la doctrine du "work made for hire". | 
+
+23. Minage de cryptomonnaie en Proof of Work justifié par les profits, malgré le bilan carbone :
+Une entreprise choisit de continuer à miner en PoW plutôt que de migrer vers une blockchain PoS, car le PoW reste plus rentable à court terme malgré une consommation énergétique ~900 000 fois supérieure par transaction à un système comme Visa. Tension classique entre profit à court terme et soutenabilité environnementale (un des 10 principes de la Déclaration de Montréal). Solution : migrer vers PoS ou des solutions de couche 2 (comme le Lightning Network, qui réduit la consommation par transaction de plusieurs ordres de grandeur), et intégrer le coût carbone réel dans l'analyse de rentabilité plutôt que de l'ignorer comme externalité. |
+
+24. Backdoor de chiffrement exigée par un gouvernement "pour la sécurité nationale" :
+Un État exige qu'une entreprise de messagerie chiffrée intègre une porte dérobée permettant aux autorités de déchiffrer les communications en cas d'enquête. Le débat oppose la sécurité individuelle/vie privée (chiffrement fort pour tous) à la sécurité nationale. Le problème central : une porte dérobée conçue "pour les bons" reste une faille technique qui peut être découverte et exploitée par des acteurs malveillants — affaiblissant le chiffrement pour tout le monde, pas seulement pour les cibles légitimes. Une recommandation défendable : refuser les backdoors universelles et privilégier des mécanismes d'accès légal ciblés (mandat judiciaire + accès à l'appareil physique) plutôt qu'une faille systémique. |
+
+25. Recherche sur le hameçonnage nécessitant de tromper les participants :
+Une équipe universitaire veut mesurer la vulnérabilité réelle des employés au phishing en leur envoyant de fausses attaques sans les prévenir. Cela viole en apparence le principe de respect de la personne (rapport Belmont) puisqu'il n'y a pas de consentement éclairé initial. Mais la tromperie peut être autorisée par un IRB à quatre conditions : (1) risque minimal pour les participants, (2) aucune atteinte à leurs droits/bien-être, (3) la recherche est impossible autrement (un phishing annoncé à l'avance ne mesure rien de réaliste), (4) un débriefing informe les participants après coup. Sans ces garanties, l'étude ne devrait pas être approuvée. | 
+
+26. Avatar IA d'une personne décédée, monétisé par une entreprise :
+Une entreprise propose à des familles endeuillées de "faire revivre" un proche décédé sous forme de chatbot entraîné sur ses messages et ses courriels, moyennant un abonnement mensuel. Trois enjeux se superposent : la fiabilité (le chatbot peut halluciner et déformer la mémoire du défunt), les biais (le discours de l'avatar peut être orienté par l'entreprise à des fins commerciales), et le remplacement de l'expérience humaine du deuil (risque de dépendance à une simulation qui empêche le deuil naturel). Les valeurs en conflit : réconfort immédiat des proches vs dignité et autonomie de la personne décédée (qui n'a jamais consenti) vs intérêt commercial de l'entreprise. Une position défendable : n'autoriser ce type de service qu'avec un consentement explicite donné par la personne de son vivant, jamais décidé unilatéralement par les proches après coup. |
+
+27. Dark pattern de désabonnement volontairement compliqué :
+Un service d'abonnement rend l'inscription instantanée en un clic, mais exige d'appeler un centre d'appels en heures ouvrables pour se désabonner (obstruction). C'est un exemple classique de dark pattern qui privilégie les résultats commerciaux au détriment de l'utilisateur, et qui touche de façon disproportionnée les utilisateurs vulnérables (peu de temps, faible littératie numérique). Solution éthique et de plus en plus légale : le principe de symétrie — le désabonnement doit être au moins aussi simple que l'inscription. |
+
+28. Refus de payer la rançon malgré la pression d'un service public essentiel (hôpital) :
+Un hôpital est visé par un rançongiciel qui bloque l'accès aux dossiers patients ; les criminels exigent un paiement rapide, sachant que la pression est maximale dans un contexte où des vies sont en jeu. Les hôpitaux sont des cibles privilégiées justement pour cette raison : sécurité souvent faible + service critique = forte pression à payer. Malgré cela, le raisonnement reste le même que pour toute organisation : payer ne garantit pas la récupération et finance le crime. La différence ici est que l'urgence médicale peut justifier des mesures exceptionnelles de continuité (procédures papier temporaires, transfert de patients) plutôt que la capitulation — ce qui souligne, encore une fois, l'importance cruciale d'une préparation préalable (sauvegardes hors ligne testées régulièrement) pour ce type d'établissement en particulier. |
+
+29. Publication en preprint d'une faille de sécurité avant divulgation responsable :
+Un chercheur découvre une vulnérabilité critique dans un logiciel médical open source et publie immédiatement un preprint détaillé avec le code d'exploitation, sans contacter les mainteneurs. Cela viole le principe de divulgation responsable : informer d'abord l'organisation concernée pour lui laisser un délai raisonnable de correction, avant publication publique. Même en contexte académique où la publication rapide compte pour la carrière, l'urgence de reconnaissance ne justifie pas d'exposer des patients à un risque immédiat. Solution : contacter les mainteneurs en privé, convenir d'un délai (souvent 90 jours), publier ensuite avec le correctif déjà disponible. :
+
+30. Étude scientifique invoquant un article de blogue comme "source primaire" :
+Un étudiant cite un article de blogue populaire comme preuve scientifique dans un travail, sans remonter à l'étude originale qu'il résume. Le blogue est une source secondaire (souvent non révisée par les pairs) ; il faut remonter à la source primaire (l'article scientifique original) pour vérifier ce qui est réellement affirmé, plutôt que se fier à un résumé potentiellement déformé. Ce n'est pas qu'une question de rigueur académique — c'est aussi un problème de désinformation en chaîne : un résumé imprécis se propage et devient "vérité" par répétition. |
+
+31. Entreprise combinant plusieurs jeux de données "anonymisés" achetés séparément :
+Une entreprise de marketing achète plusieurs jeux de données prétendument anonymisés auprès de fournisseurs différents (localisation, habitudes d'achat, données de santé) et les croise pour construire des profils individuels précis. Chaque jeu pris isolément respectait peut-être les normes d'anonymisation, mais le croisement de jeux de données (linkage attack) est justement le risque principal identifié en cours : la vie privée n'est jamais garantie de façon permanente, car un jeu jugé "sûr" aujourd'hui peut devenir identifiant une fois combiné à un autre. L'entreprise porte une responsabilité même si chaque source individuelle était en apparence conforme — la légalité formelle ne suffit pas si le résultat final permet une ré-identification. |
+
+32. Généraliser une IA affective en salle de classe pour détecter le "désengagement" des élèves :
+Une école installe un système de reconnaissance faciale qui note en continu le niveau d'attention des élèves pour alerter les enseignants. Les capteurs mesurent des proxies indirects (expressions faciales) qui ne reflètent pas toujours l'état émotionnel réel — un élève peut sembler "désengagé" pour des raisons sans rapport avec l'apprentissage (fatigue, trouble neurologique, timidité). Le risque : des décisions pédagogiques ou disciplinaires basées sur une inférence peu fiable, sans transparence pour l'élève ni ses parents. Solution : limiter l'usage à un outil d'aide facultatif pour l'enseignant (jamais une note ou une sanction automatique), avec consentement parental explicite et possibilité de désactivation. |
+
+33. Bots utilisés pour gonfler artificiellement la popularité d'un produit avant son lancement :
+Une entreprise déploie un botnet pour multiplier les mentions positives d'un nouveau produit sur les réseaux sociaux, donnant une fausse impression de popularité organique. C'est une forme de désinformation par amplification artificielle : les bots ne créent pas nécessairement la fausse croyance de toutes pièces, mais ils l'amorcent et donnent une impression de consensus social qui incite ensuite de vrais humains à relayer massivement le contenu (effet d'entraînement). Solution : interdiction claire, traçabilité des comptes automatisés, sanctions pour manipulation d'engagement — plusieurs juridictions considèrent déjà cela comme une pratique commerciale trompeuse. |
+
+34. Consortium d'entreprises concurrentes collaborant sur un projet open source commun :
+Deux entreprises rivales sur le marché du cloud contribuent ensemble au même projet de logiciel libre via une fondation neutre, tout en se faisant concurrence ailleurs sur leurs produits commerciaux. Ce n'est pas un dilemme éthique à résoudre, mais un cas à bien comprendre pour l'examen : la coopération et la concurrence peuvent coexister en FOSS. La fondation (structure à but non lucratif) permet justement cette collaboration en empêchant qu'une seule entreprise "prenne le contrôle" unilatéral du projet — ce qui rassure les deux parties et légitime leur investissement commun. |
+
+35. Score de crédit basé sur des données de réseaux sociaux :
+Une fintech calcule un score de crédit en analysant les publications Facebook des demandeurs (fréquentations, opinions, habitudes de vie), sans lien évident avec la solvabilité réelle. C'est un cas typique d'inférence d'attributs au sens large : déduire des caractéristiques sensibles (mode de vie, opinions, parfois indirectement l'origine ethnique ou le statut socio-économique) à partir de données qui ne sont pas destinées à cet usage. Cela viole aussi le principe de finalité légitime du RGPD (les données Facebook n'ont pas été collectées dans ce but) et risque de créer une discrimination indirecte non détectable sans audit. Solution : limiter le scoring aux données financières pertinentes et auditables, avec transparence sur les variables utilisées. |
+
+36. "Ethics washing" via un comité d'éthique interne sans réel pouvoir :
+Une entreprise d'IA crée un comité d'éthique consultatif, très visible dans ses communications, mais dont les recommandations n'ont jamais force obligatoire et sont systématiquement ignorées quand elles nuisent au calendrier de lancement. C'est un cas typique de blanchiment éthique (ethics washing) : l'entreprise instrumentalise l'apparence de rigueur éthique (comité, chartes, principes affichés) sans qu'aucune substance réelle ne change les décisions. Le test pour distinguer un vrai comité d'éthique d'un comité de façade : a-t-il un pouvoir de veto réel, un budget, et un historique de décisions ayant concrètement changé un produit ? |
+
+37. Application de fitness partageant des données "agrégées" qui restent identifiantes dans un petit quartier :
+Une app de course à pied publie une carte de chaleur agrégée des trajets de ses utilisateurs par quartier. Dans un quartier peu peuplé où une seule personne utilise l'app, la carte révèle involontairement ses trajets précis (domicile, habitudes). C'est l'illustration directe du principe vu en cours : même des données "anonymisées" et "agrégées" peuvent révéler des informations sensibles si le contexte (peu d'utilisateurs dans une zone) permet la désanonymisation. Solution : appliquer un seuil minimal d'utilisateurs par zone avant publication (k-anonymité géographique), ou une randomisation plus forte dans les zones peu denses. |
+
+38. Employé lanceur d'alerte utilisant la tromperie pour prouver un manquement :
+Un employé, convaincu que son entreprise viole illégalement la vie privée des clients, s'introduit dans un système auquel il n'a normalement pas accès pour obtenir des preuves, avant de les divulguer. Même avec une intention louable, l'action pose un problème : contourner l'autorisation viole le principe qui distingue le piratage éthique légitime du piratage illégal — le consentement préalable (même implicite via son rôle) doit encadrer l'accès. La bonne pratique reste la voie graduée : rassembler les preuves dans le cadre légitime de son poste, alerter la hiérarchie ou un comité d'éthique interne, puis un régulateur externe si rien ne bouge — l'obtention de preuves par des moyens illégaux peut invalider la démarche et exposer le lanceur d'alerte lui-même à des poursuites. |
+
+39. IA de recrutement utilisant l'équité de groupe au détriment de cas individuels :
+Une entreprise corrige son algorithme de recrutement pour respecter l'équité de groupe (mêmes taux d'embauche entre hommes et femmes), mais cela conduit parfois à écarter un candidat individuel objectivement mieux qualifié qu'une candidate retenue pour équilibrer les statistiques. C'est l'illustration concrète du conflit entre équité individuelle (mêmes résultats pour profils similaires) et équité de groupe (résultats agrégés comparables) — il n'existe pas de solution qui satisfasse parfaitement les deux à la fois. La position à défendre à l'examen n'est pas "laquelle est la bonne réponse" mais la reconnaissance qu'il s'agit d'un choix de valeurs à assumer et à rendre transparent, pas d'un problème purement technique à "optimiser". |
+
+40. Cookies tiers utilisés pour du profilage publicitaire malgré un bandeau de consentement "accepté par défaut" :
+Un site web affiche un bandeau de cookies où le bouton "Accepter tout" est mis en évidence alors que "Refuser" est caché dans un sous-menu à trois clics. Cela combine deux problèmes vus en cours : un dark pattern (friction asymétrique qui pousse vers l'option profitable à l'entreprise) et un faux consentement au sens du RGPD (le consentement doit être libre et éclairé, ce qui exclut un design conçu pour décourager le refus). Solution : symétrie obligatoire entre "accepter" et "refuser" (même nombre de clics, même visibilité), conforme à l'esprit du RGPD sur le consentement explicite. |
+ 
+

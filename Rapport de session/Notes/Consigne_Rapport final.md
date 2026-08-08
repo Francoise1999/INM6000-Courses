@@ -63,3 +63,14 @@ Critères d'un bon projet
 Doit avoir une **portée clairement définie** (ce qui est pertinent, ce qui est hors sujet) ; doit expliquer les recherches existantes de manière à démontrer une **compréhension réelle** plutôt que de répéter ce qu'elles disent sans les comprendre ; doit être **sélectif** dans les détails inclus pour garder le point principal clair ; doit démontrer un niveau de travail adéquat sur toute la durée du cours. Organisation logique exigée : chaque partie a un but précis, sections et sous-sections bien structurées, figures/tableaux et citations utilisés de façon appropriée. Note : des points seront déduits si la qualité/quantité du travail ne reflète pas le nombre de membres de l'équipe (groupes de 2 ou 3).
 
 📌 Semaine prochaine : **Interfaces responsables et inclusives**
+
+### Critères d'un bon projet
+
+- Clarté de l'analyse, qualité de présentation, et **orthographe** comptent
+- Une **portée clairement définie** : ce qui est pertinent et ce qui est hors sujet
+- Expliquer les recherches existantes de façon à démontrer une **vraie compréhension**, pas juste répéter ce qu'elles disent
+- Être **sélectif** dans les détails inclus, pour garder le point principal clair
+- Démontrer un **niveau de travail adéquat** réparti sur toute la durée du cours
+- Organisation logique avec des **sections/sous-sections** utiles, chaque partie ayant un but précis
+- Figures, tableaux et **citations utilisés de manière appropriée**
+- ⚠️ Des points seront **déduits** si la qualité/quantité du travail ne reflète pas le nombre de membres de l'équipe (groupes de 2-3)
